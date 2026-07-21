@@ -20,6 +20,7 @@ INLINE_SEQ_RE = re.compile(r"\b\d{3}[A-Z]{3}\b")
 # per-request values rendered into the Grails HTML error page
 ERROR_PAGE_DATE_RE = re.compile(r"[A-Z][a-z]{2} [A-Z][a-z]{2} +\d{1,2} \d{2}:\d{2}:\d{2} \w+ \d{4}")
 ERROR_PAGE_ELAPSED_RE = re.compile(r"<b>\d+(\.\d+)?s</b>")
+ERROR_PAGE_HOST_RE = re.compile(r"<b>[0-9a-f]{12} \([^)]*\)</b>")
 
 VOLATILE_KEYS = {
     "buildNumber", "buildDate", "branchName", "ipAddress", "hostname",
@@ -68,6 +69,7 @@ def mask_doc(doc):
     if "text" in doc:
         text = INLINE_SEQ_RE.sub("<seq>", doc["text"])
         text = ERROR_PAGE_DATE_RE.sub("<date>", text)
+        text = ERROR_PAGE_HOST_RE.sub("<b><host></b>", text)
         doc["text"] = ERROR_PAGE_ELAPSED_RE.sub("<b><elapsed></b>", text)
     return doc
 
