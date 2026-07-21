@@ -22,10 +22,14 @@ Normalization / masking rules (documented for reviewers):
      masked to "<ID>". Values of keys named "id" or ending in "Id"/".id"
      that are non-numeric strings are masked too.
   2. Dates/timestamps: string values matching common ISO-8601 /
-     "yyyy-MM-dd", "MM/dd/yyyy", "dd/MMM/yyyy", RFC-1123 and epoch-millis
-     patterns are masked to "<DATE>". Keys that look like dates (used as
+     "yyyy-MM-dd", "MM/dd/yyyy", "dd/MMM/yyyy", RFC-1123, "Month yyyy"
+     (abbreviated or full month names), "FY nn" fiscal-year labels and
+     epoch-millis patterns are masked to "<DATE>". Keys that look like dates (used as
      map keys in dashboard time-series) are masked to "<DATEKEY>" (with a
      stable numeric suffix to keep entries distinct).
+  2b. Random sequence identifiers (identifier template "NNNLLL", e.g.
+     organization codes like "MO-099VCA") are generated at demo-data load
+     time; inline occurrences of \\d{3}[A-Z]{3} are masked to "<SEQ>".
   3. Volatile-by-name keys (masked regardless of value): dateCreated,
      lastUpdated, buildNumber, buildDate, branchName, ipAddress, hostname,
      timezone, minimumExpirationDate, sessionId, requestId, timestamp.
@@ -63,12 +67,17 @@ DATE_VALUE_RES = [
     re.compile(r"^\d{2}/\d{2}/\d{4}([ T].*)?$"),                    # MM/dd/yyyy
     re.compile(r"^\d{2}/[A-Za-z]{3}/\d{4}.*$"),                     # dd/MMM/yyyy
     re.compile(r"^[A-Za-z]{3}, \d{1,2} [A-Za-z]{3} \d{4}.*$"),      # RFC-1123
-    re.compile(r"^[A-Za-z]{3} \d{4}$"),                             # "Jul 2026" series keys
+    re.compile(r"^[A-Za-z]{3,9} \d{4}$"),                           # "Jul 2026" / "April 2026" series keys
+    re.compile(r"^FY ?\d{2,4}$"),                                   # "FY 26" fiscal-year series keys
     re.compile(r"^\d{13}$"),                                        # epoch millis
 ]
 INLINE_DATE_RE = re.compile(
     r"(\d{4}-\d{2}-\d{2}([T ][0-9:.+Z-]+)?|\d{2}/\d{2}/\d{4}|[A-Za-z]{3} \d{1,2}, \d{4})"
 )
+# Random identifiers (openboxes.identifier.default.random.template = "NNNLLL")
+# are generated at demo-data load time: organization codes like "MO-099VCA",
+# shipment/order numbers, and displayNames embedding them.
+INLINE_SEQ_RE = re.compile(r"\b\d{3}[A-Z]{3}\b")
 VOLATILE_KEYS = {
     "dateCreated", "lastUpdated", "buildNumber", "buildDate", "branchName",
     "ipAddress", "hostname", "timezone", "minimumExpirationDate",
@@ -105,7 +114,7 @@ def mask(value, key=None):
             return "<ID>"
         if looks_like_date(value):
             return "<DATE>"
-        return INLINE_DATE_RE.sub("<DATE>", value)
+        return INLINE_SEQ_RE.sub("<SEQ>", INLINE_DATE_RE.sub("<DATE>", value))
     if key in VOLATILE_KEYS:
         return "<VOLATILE>"
     return value
@@ -182,6 +191,13 @@ def main():
             continue
         ran += 1
         path = entry["path"]() if callable(entry["path"]) else entry["path"]
+        if path is None or "/None" in path:
+            failures.append(
+                "%s: could not resolve path — this endpoint depends on an id "
+                "captured by an earlier endpoint (run without --only, or with a "
+                "broader filter that includes the whole flow)" % name
+            )
+            continue
         json_body = entry.get("json")
         if callable(json_body):
             json_body = json_body()

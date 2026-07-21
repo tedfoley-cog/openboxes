@@ -16,6 +16,7 @@ the reasons endpoints are skipped.
 
 import json
 import re
+import time
 import urllib.parse
 
 
@@ -29,7 +30,7 @@ class Context:
         self.ids[token] = value
 
     def get(self, token):
-        return self.ids[token]
+        return self.ids.get(token)
 
     ID_IN_PATH = re.compile(r"[0-9a-f]{16,}")
 
@@ -65,17 +66,22 @@ def build_plan(client, base_url, username, password):
     # set session warehouse (required by session-scoped endpoints)
     client.request("GET", "/api/chooseLocation/%s" % main["id"])
 
-    bins = client.get_json("/api/binLocations")["data"]
+    _warm_up_product_availability(client, main["id"])
+
+    # pick reference records deterministically (DB list order is not stable)
+    bins = sorted(client.get_json("/api/binLocations")["data"], key=lambda b: b["name"])
     ctx.set("binLocationId", bins[0]["id"] if bins else None)
 
     categories = client.get_json("/api/categories")["data"]
     root = next((c for c in categories if c.get("name") == "ROOT"), categories[0])
     ctx.set("rootCategoryId", root["id"])
 
-    organizations = client.get_json("/api/organizations")["data"]
+    organizations = sorted(
+        client.get_json("/api/organizations")["data"], key=lambda o: o["name"])
     ctx.set("organizationId", organizations[0]["id"] if organizations else None)
 
-    location_groups = client.get_json("/api/locationGroups")["data"]
+    location_groups = sorted(
+        client.get_json("/api/locationGroups")["data"], key=lambda g: g["name"])
     ctx.set("locationGroupId", location_groups[0]["id"] if location_groups else None)
 
     # cleanup leftovers from any previous aborted run
@@ -184,8 +190,9 @@ def build_plan(client, base_url, username, password):
        json={})
 
     def capture_location_type(status, body):
-        data = _data(body).get("data") or []
-        ctx.set("locationTypeId", data[0]["id"] if data else None)
+        data = sorted(_data(body).get("data") or [], key=lambda t: t.get("name") or "")
+        depot = next((t for t in data if t.get("name") == "Depot"), data[0] if data else None)
+        ctx.set("locationTypeId", depot["id"] if depot else None)
 
     # capture an id for the generic read
     plan[-2]["capture"] = capture_location_type
@@ -316,6 +323,27 @@ def build_plan(client, base_url, username, password):
     ep("api__logout", "/api/logout")
 
     return plan, ctx
+
+
+def _warm_up_product_availability(client, location_id):
+    """Trigger the product-availability refresh and wait for it to finish.
+
+    Stock-derived endpoints (dashboard numbers, cycle-count candidates) read
+    from the product_availability table, which is populated by a scheduled
+    job — on a freshly seeded database (e.g. in CI) it is still empty, so
+    those endpoints would differ from the committed snapshots.
+    """
+    client.request("GET", "/dashboard/flushCache")
+    deadline = time.time() + 300
+    while time.time() < deadline:
+        status, _, body = client.request(
+            "GET", "/api/dashboard/inventoryByLotAndBin?locationId=%s" % location_id)
+        if status == 200 and (_data(body).get("number") or 0) > 0:
+            return
+        time.sleep(5)
+    raise SystemExit(
+        "product availability was not populated within 5 minutes "
+        "(triggered via /dashboard/flushCache)")
 
 
 def _cleanup(client, ctx):

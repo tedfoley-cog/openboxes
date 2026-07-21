@@ -151,11 +151,11 @@
         "sequences": {}
       },
       {
-        "code": "MO-099VCA",
+        "code": "MO-<SEQ>",
         "dateCreated": "<VOLATILE>",
         "defaultLocation": null,
         "description": null,
-        "displayName": "MO-099VCA - My Organization",
+        "displayName": "MO-<SEQ> - My Organization",
         "id": "<ID>",
         "lastUpdated": "<VOLATILE>",
         "name": "My Organization",

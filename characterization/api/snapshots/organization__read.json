@@ -1,14 +1,14 @@
 {
   "body": {
     "data": {
-      "code": "MO",
+      "code": "AMAZON",
       "dateCreated": "<VOLATILE>",
       "defaultLocation": null,
       "description": null,
-      "displayName": "MO - Main Organization",
-      "id": "1",
+      "displayName": "AMAZON - Amazon.com",
+      "id": "<ID>",
       "lastUpdated": "<VOLATILE>",
-      "name": "Main Organization",
+      "name": "Amazon.com",
       "partyType": {
         "code": "ORG",
         "id": "1",
@@ -18,8 +18,14 @@
       "roles": [
         {
           "endDate": null,
-          "id": "1",
-          "roleType": "ROLE_ORGANIZATION",
+          "id": "<ID>",
+          "roleType": "ROLE_MANUFACTURER",
+          "startDate": null
+        },
+        {
+          "endDate": null,
+          "id": "<ID>",
+          "roleType": "ROLE_SUPPLIER",
           "startDate": null
         }
       ],
@@ -30,7 +36,7 @@
   "name": "organization__read",
   "request": {
     "method": "GET",
-    "path": "/api/organizations/1"
+    "path": "/api/organizations/{id}"
   },
   "status": 200
 }
