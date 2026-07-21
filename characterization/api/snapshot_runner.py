@@ -32,7 +32,8 @@ Normalization / masking rules (documented for reviewers):
      time; inline occurrences of \\d{3}[A-Z]{3} are masked to "<SEQ>".
   3. Volatile-by-name keys (masked regardless of value): dateCreated,
      lastUpdated, buildNumber, buildDate, branchName, ipAddress, hostname,
-     timezone, minimumExpirationDate, sessionId, requestId, timestamp.
+     timezone, minimumExpirationDate, sessionId, requestId, timestamp,
+     expirationDate, dateApproved, dateRequested, dateShipped, dateReceived.
   4. Object keys are emitted sorted; arrays are sorted canonically by
      their masked JSON serialization (DB result ordering is not
      deterministic across loads).
@@ -81,7 +82,7 @@ INLINE_SEQ_RE = re.compile(r"\b\d{3}[A-Z]{3}\b")
 VOLATILE_KEYS = {
     "dateCreated", "lastUpdated", "buildNumber", "buildDate", "branchName",
     "ipAddress", "hostname", "timezone", "minimumExpirationDate",
-    "sessionId", "requestId", "timestamp", "expirationDate", "lastUpdated",
+    "sessionId", "requestId", "timestamp", "expirationDate",
     "dateApproved", "dateRequested", "dateShipped", "dateReceived",
 }
 
