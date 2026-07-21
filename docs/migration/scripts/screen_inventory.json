@@ -1,7 +1,7 @@
 {
  "counts": {
-  "LIVE": 275,
-  "DEAD": 103,
+  "LIVE": 274,
+  "DEAD": 104,
   "TEMPLATE": 231,
   "SUPERSEDED": 7
  },
@@ -3651,8 +3651,8 @@
   {
    "gsp": "grails-app/views/unsupported.gsp",
    "key": "unsupported",
-   "classification": "LIVE",
-   "evidence": "grails-app/views/common/_unsupportedBrowser.gsp:0 (unsupported-browser page)"
+   "classification": "DEAD",
+   "evidence": "no controller action, URL mapping, menu, render, or link reference found"
   },
   {
    "gsp": "grails-app/views/user/_actions.gsp",

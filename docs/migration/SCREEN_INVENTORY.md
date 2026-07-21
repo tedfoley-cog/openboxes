@@ -30,15 +30,15 @@ Classifications:
 
 | Classification | Count |
 |---|---|
-| LIVE | 275 |
+| LIVE | 274 |
 | TEMPLATE | 231 |
 | SUPERSEDED | 7 |
-| DEAD | 103 |
+| DEAD | 104 |
 | **Total** | **616** |
 
-The migration-relevant surface is **275 live screens** (plus 231 supporting templates that are included by them). 103 GSPs have no discoverable references and are candidates for deletion; 7 have already been replaced by React SPA routes.
+The migration-relevant surface is **274 live screens** (plus 231 supporting templates that are included by them). 104 GSPs have no discoverable references and are candidates for deletion; 7 have already been replaced by React SPA routes.
 
-> Note: the pre-audit expectation was ~350–450 live screens of 616. The evidence shows fewer standalone LIVE screens (many GSPs are `_partial` templates rather than full screens); LIVE + TEMPLATE together = 506 GSPs of user-facing surface.
+> Note: the pre-audit expectation was ~350–450 live screens of 616. The evidence shows fewer standalone LIVE screens (many GSPs are `_partial` templates rather than full screens); LIVE + TEMPLATE together = 505 GSPs of user-facing surface.
 
 ## Phase 2 Module-Batch Work Queue (LIVE screens)
 
@@ -131,14 +131,13 @@ Suggested order: high-traffic operational modules first, admin/reference data la
 - **Batch 45** — `migration/materializedViews`, `migration/productAvailability`, `quartz/list`, `role/show`, `user/changePhoto`, `user/create`
 - **Batch 46** — `user/cropPhoto`, `user/edit`, `user/list`, `user/show`
 
-### Core Shell & Misc (19 screens)
+### Core Shell & Misc (18 screens)
 
 *Potentially missing APIs: none — mostly shell/error pages*
 
 - **Batch 47** — `dashboard/chooseLocation`, `dashboard/megamenu`, `error`, `errors/accessDenied`, `errors/dataAccess`, `errors/methodNotAllowed`
 - **Batch 48** — `errors/notFound`, `exception`, `index`, `json/createPerson`, `mobile/chooseLocation`, `mobile/error`
 - **Batch 49** — `mobile/index`, `mobile/login`, `mobile/menu`, `mobile/outboundList`, `mobile/productDetails`, `mobile/productList`
-- **Batch 50** — `unsupported`
 
 ## Full Inventory
 
@@ -247,6 +246,7 @@ Suggested order: high-traffic operational modules first, admin/reference data la
 | `grails-app/views/transactionEntry/create.gsp` | DEAD | no controller action, URL mapping, menu, render, or link reference found | Inventory & Stock |
 | `grails-app/views/transactionEntry/list.gsp` | DEAD | no controller action, URL mapping, menu, render, or link reference found | Inventory & Stock |
 | `grails-app/views/transactionEntry/show.gsp` | DEAD | no controller action, URL mapping, menu, render, or link reference found | Inventory & Stock |
+| `grails-app/views/unsupported.gsp` | DEAD | no controller action, URL mapping, menu, render, or link reference found | Core Shell & Misc |
 | `grails-app/views/admin/cache.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/admin/AdminController.groovy:60 (controller action (convention)) | Admin & Configuration |
 | `grails-app/views/admin/controllerActions.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/admin/AdminController.groovy:35 (controller action (convention)) | Admin & Configuration |
 | `grails-app/views/admin/index.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/admin/AdminController.groovy:33 (controller action (convention)) | Admin & Configuration |
@@ -515,7 +515,6 @@ Suggested order: high-traffic operational modules first, admin/reference data la
 | `grails-app/views/unitOfMeasureConversion/create.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/core/UnitOfMeasureConversionController.groovy:24 (controller action (convention)) | Product Catalog |
 | `grails-app/views/unitOfMeasureConversion/edit.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/core/UnitOfMeasureConversionController.groovy:30 (controller action (convention)) | Product Catalog |
 | `grails-app/views/unitOfMeasureConversion/list.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/core/UnitOfMeasureConversionController.groovy:19 (controller action (convention)) | Product Catalog |
-| `grails-app/views/unsupported.gsp` | LIVE | grails-app/views/common/_unsupportedBrowser.gsp:0 (unsupported-browser page) | Core Shell & Misc |
 | `grails-app/views/user/changePhoto.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/user/UserController.groovy:188 (controller action (convention)) | Admin & Configuration |
 | `grails-app/views/user/create.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/user/UserController.groovy:114 (controller action (convention)) | Admin & Configuration |
 | `grails-app/views/user/cropPhoto.gsp` | LIVE | grails-app/controllers/org/pih/warehouse/user/UserController.groovy:198 (controller action (convention)) | Admin & Configuration |

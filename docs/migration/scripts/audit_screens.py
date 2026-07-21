@@ -223,7 +223,6 @@ SPECIAL_LIVE = {
     "index": ("grails-app/controllers/org/pih/warehouse/UrlMappings.groovy", 0, "root URL mapping"),
     "error": ("grails-app/controllers/org/pih/warehouse/UrlMappings.groovy", 0, "error handler mapping"),
     "exception": ("grails-app/controllers/org/pih/warehouse/UrlMappings.groovy", 0, "exception handler"),
-    "unsupported": ("grails-app/views/common/_unsupportedBrowser.gsp", 0, "unsupported-browser page"),
 }
 
 for p in gsps:
