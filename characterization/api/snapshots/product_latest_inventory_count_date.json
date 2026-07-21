@@ -1,8 +1,11 @@
 {
   "body": {
-    "data": {
-      "<id>": "<date>"
-    }
+    "data": [
+      {
+        "key": "<id>",
+        "value": "<date>"
+      }
+    ]
   },
   "contentType": "application/json",
   "request": {

@@ -77,8 +77,15 @@ def mask_scalar(value):
 def normalize(value, key=None):
     """Recursively mask nondeterministic values and sort lists of objects."""
     if isinstance(value, dict):
-        # Keys themselves can be generated ids (e.g. maps keyed by product id)
-        return {mask_scalar(k): normalize(v, k) for k, v in sorted(value.items())}
+        # Keys themselves can be generated ids (e.g. maps keyed by product id).
+        # Masked keys would collide and collapse entries, so id-keyed maps are
+        # rendered as a sorted list of entries instead.
+        if any(mask_scalar(k) != k for k in value):
+            entries = [
+                {"key": mask_scalar(k), "value": normalize(v, k)} for k, v in value.items()
+            ]
+            return sorted(entries, key=lambda e: json.dumps(e, sort_keys=True, default=str))
+        return {k: normalize(v, k) for k, v in sorted(value.items())}
     if isinstance(value, list):
         normalized = [normalize(v) for v in value]
         try:
