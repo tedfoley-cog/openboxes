@@ -6,7 +6,8 @@ import os
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = json.load(open(os.path.join(HERE, "screen_inventory.json")))
+with open(os.path.join(HERE, "screen_inventory.json")) as _f:
+    DATA = json.load(_f)
 OUT = os.path.join(HERE, "..", "SCREEN_INVENTORY.md")
 
 MODULES = {
