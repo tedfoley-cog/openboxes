@@ -1,0 +1,36 @@
+{
+  "body": {
+    "data": {
+      "code": "MO",
+      "dateCreated": "<VOLATILE>",
+      "defaultLocation": null,
+      "description": null,
+      "displayName": "MO - Main Organization",
+      "id": "1",
+      "lastUpdated": "<VOLATILE>",
+      "name": "Main Organization",
+      "partyType": {
+        "code": "ORG",
+        "id": "1",
+        "name": "Organization",
+        "partyTypeCode": "ORGANIZATION"
+      },
+      "roles": [
+        {
+          "endDate": null,
+          "id": "1",
+          "roleType": "ROLE_ORGANIZATION",
+          "startDate": null
+        }
+      ],
+      "sequences": {}
+    }
+  },
+  "contentType": "application/json",
+  "name": "organization__read",
+  "request": {
+    "method": "GET",
+    "path": "/api/organizations/1"
+  },
+  "status": 200
+}

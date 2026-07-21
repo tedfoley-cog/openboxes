@@ -1,0 +1,21 @@
+{
+  "body": {
+    "data": [
+      {
+        "id": "<ID>",
+        "name": "Adhoc"
+      },
+      {
+        "id": "<ID>",
+        "name": "Stock"
+      }
+    ]
+  },
+  "contentType": "application/json",
+  "name": "api__getRequestTypes",
+  "request": {
+    "method": "GET",
+    "path": "/api/getRequestTypes"
+  },
+  "status": 200
+}

@@ -1,0 +1,243 @@
+{
+  "body": {
+    "data": [
+      {
+        "code": "AMAZON",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "AMAZON - Amazon.com",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Amazon.com",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_MANUFACTURER",
+            "startDate": null
+          },
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "CDW",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "CDW - CDW",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "CDW",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_MANUFACTURER",
+            "startDate": null
+          },
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "GRAING",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "GRAING - Grainger",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Grainger",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_MANUFACTURER",
+            "startDate": null
+          },
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "MID",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "MID - Medical Items Depot",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Medical Items Depot",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_MANUFACTURER",
+            "startDate": null
+          },
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "MO",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "MO - Main Organization",
+        "id": "1",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Main Organization",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "1",
+            "roleType": "ROLE_ORGANIZATION",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "MO-099VCA",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "MO-099VCA - My Organization",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "My Organization",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_BUYER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "SO",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "SO - Supplier Organization",
+        "id": "2",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Supplier Organization",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "2",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      },
+      {
+        "code": "TU",
+        "dateCreated": "<VOLATILE>",
+        "defaultLocation": null,
+        "description": null,
+        "displayName": "TU - Toyota USA",
+        "id": "<ID>",
+        "lastUpdated": "<VOLATILE>",
+        "name": "Toyota USA",
+        "partyType": {
+          "code": "ORG",
+          "id": "1",
+          "name": "Organization",
+          "partyTypeCode": "ORGANIZATION"
+        },
+        "roles": [
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_MANUFACTURER",
+            "startDate": null
+          },
+          {
+            "endDate": null,
+            "id": "<ID>",
+            "roleType": "ROLE_SUPPLIER",
+            "startDate": null
+          }
+        ],
+        "sequences": {}
+      }
+    ]
+  },
+  "contentType": "application/json",
+  "name": "organization__list",
+  "request": {
+    "method": "GET",
+    "path": "/api/organizations"
+  },
+  "status": 200
+}

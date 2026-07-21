@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "",
+    "number": 57.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__itemsInventoried",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/itemsInventoried?locationId=1"
+  },
+  "status": 200
+}

@@ -1,0 +1,43 @@
+{
+  "body": {
+    "data": [
+      {
+        "id": "<ID>",
+        "label": "Invoiced",
+        "value": "INVOICED",
+        "variant": "PRIMARY"
+      },
+      {
+        "id": "<ID>",
+        "label": "Paid",
+        "value": "PAID",
+        "variant": "PRIMARY"
+      },
+      {
+        "id": "<ID>",
+        "label": "Pending",
+        "value": "PENDING",
+        "variant": "WARNING"
+      },
+      {
+        "id": "<ID>",
+        "label": "Posted",
+        "value": "POSTED",
+        "variant": "SUCCESS"
+      },
+      {
+        "id": "<ID>",
+        "label": "Submitted for Approval",
+        "value": "SUBMITTED",
+        "variant": "PRIMARY"
+      }
+    ]
+  },
+  "contentType": "application/json",
+  "name": "invoice__statusOptions",
+  "request": {
+    "method": "GET",
+    "path": "/api/invoiceStatuses"
+  },
+  "status": 200
+}

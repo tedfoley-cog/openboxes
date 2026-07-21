@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "",
+    "number": 121972.39,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__inventoryValue",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/inventoryValue?locationId=1"
+  },
+  "status": 200
+}

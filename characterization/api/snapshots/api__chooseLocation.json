@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": "User Miss Administrator is now logged into Main Warehouse"
+  },
+  "contentType": "text/html",
+  "name": "api__chooseLocation",
+  "request": {
+    "method": "GET",
+    "path": "/api/chooseLocation/1"
+  },
+  "status": 200
+}

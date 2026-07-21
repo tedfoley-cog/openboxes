@@ -1,0 +1,17 @@
+{
+  "body": {
+    "data": {
+      "description": "renamed by characterization suite",
+      "id": "<ID>",
+      "locationTypeCode": "INTERNAL",
+      "name": "ZZ Characterization Location Type"
+    }
+  },
+  "contentType": "application/json",
+  "name": "generic__locationType_update",
+  "request": {
+    "method": "PUT",
+    "path": "/api/generic/locationType/{id}"
+  },
+  "status": 200
+}

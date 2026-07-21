@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "/openboxes/inventory/listExpiredStock?status=expired",
+    "number": 13.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__expiredProductsInStock",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/expiredProductsInStock?locationId=1"
+  },
+  "status": 200
+}

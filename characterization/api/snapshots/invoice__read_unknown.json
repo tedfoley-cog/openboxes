@@ -1,0 +1,14 @@
+{
+  "body": {
+    "cause": "java.lang.IllegalArgumentException",
+    "errorCode": 500,
+    "errorMessage": "No Invoice found for invoice ID doesnotexist0000"
+  },
+  "contentType": "application/json",
+  "name": "invoice__read_unknown",
+  "request": {
+    "method": "GET",
+    "path": "/api/invoices/doesnotexist0000"
+  },
+  "status": 500
+}

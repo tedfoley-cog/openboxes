@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": ""
+  },
+  "contentType": "",
+  "name": "locationGroup__delete",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/locationGroups/{id}"
+  },
+  "status": 204
+}

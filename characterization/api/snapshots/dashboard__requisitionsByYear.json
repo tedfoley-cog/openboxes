@@ -1,0 +1,37 @@
+{
+  "body": {
+    "data": {
+      "colorNumber": null,
+      "datasets": [
+        {
+          "data": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "label": "Requisition count by year",
+          "links": null,
+          "type": null,
+          "yAxisID": null
+        }
+      ],
+      "labels": [
+        "FY 23",
+        "FY 24",
+        "FY 25",
+        "FY 26",
+        "FY 27"
+      ]
+    },
+    "link": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__requisitionsByYear",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/requisitionsByYear?locationId=1"
+  },
+  "status": 200
+}

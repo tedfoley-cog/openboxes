@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": "\"Order Number\",\"Order Item ID\",\"Product Code\",\"Product name\",\"Lot Number\",\"Expiry\",\"Quantity to Ship\",\"UOM\",\"Pack level 1\",\"Pack level 2\",\"Recipient\",\"Budget Code\",\"Supplier Code\"\n\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\""
+  },
+  "contentType": "text/csv",
+  "name": "combinedShipmentItem__exportTemplate",
+  "request": {
+    "method": "GET",
+    "path": "/api/combinedShipmentItems/exportTemplate?blank=true"
+  },
+  "status": 200
+}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "errorCode": 404,
+    "errorMessage": "Resource not found"
+  },
+  "contentType": "application/json",
+  "name": "location__downloadBinLocationTemplate",
+  "request": {
+    "method": "GET",
+    "path": "/api/locations/binLocations/template"
+  },
+  "status": 404
+}

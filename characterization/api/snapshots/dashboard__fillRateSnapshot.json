@@ -1,0 +1,58 @@
+{
+  "body": {
+    "data": {
+      "colorNumber": {
+        "color": "error",
+        "link": null,
+        "order": null,
+        "subtitle": "Fill Rate Last Month",
+        "value": "0%",
+        "value2": "-90 %"
+      },
+      "datasets": [
+        {
+          "data": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "label": "Average Fill Rate",
+          "links": null,
+          "type": "line",
+          "yAxisID": null
+        }
+      ],
+      "labels": [
+        "<DATE>",
+        "April 2026",
+        "August 2025",
+        "December 2025",
+        "February 2026",
+        "January 2026",
+        "July 2025",
+        "June 2026",
+        "March 2026",
+        "November 2025",
+        "October 2025",
+        "September 2025"
+      ]
+    },
+    "link": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__fillRateSnapshot",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/fillRateSnapshot?locationId=1&destinationLocation={id}"
+  },
+  "status": 200
+}

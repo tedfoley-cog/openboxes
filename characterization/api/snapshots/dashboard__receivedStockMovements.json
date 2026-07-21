@@ -1,0 +1,39 @@
+{
+  "body": {
+    "data": {
+      "colorNumber": null,
+      "datasets": [
+        {
+          "data": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "label": null,
+          "links": null,
+          "type": null,
+          "yAxisID": null
+        }
+      ],
+      "labels": [
+        "<DATE>",
+        "<DATE>",
+        "<DATE>",
+        "<DATE>",
+        "<DATE>",
+        "<DATE>"
+      ]
+    },
+    "link": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__receivedStockMovements",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/receivedStockMovements?locationId=1"
+  },
+  "status": 200
+}

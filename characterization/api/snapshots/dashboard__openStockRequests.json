@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "/openboxes/stockMovement/list?direction=OUTBOUND&sourceType=ELECTRONIC",
+    "number": 0.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__openStockRequests",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/openStockRequests?locationId=1"
+  },
+  "status": 200
+}

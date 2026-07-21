@@ -1,0 +1,17 @@
+{
+  "body": {
+    "data": {
+      "firstValue": 0,
+      "name": "inventoryShrinkage",
+      "secondValue": 0,
+      "type": "DOUBLE"
+    }
+  },
+  "contentType": "application/json",
+  "name": "indicator__inventoryShrinkage",
+  "request": {
+    "method": "GET",
+    "path": "/api/reports/indicators/inventoryShrinkage?facility=1"
+  },
+  "status": 200
+}

@@ -1,0 +1,526 @@
+{
+  "body": {
+    "data": [
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "ARVS"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF1",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Lamivudine 150mg + zidovudine 300mg tablet",
+          "productCode": "TZ835"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 7600,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "ARVS"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF1",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Lamivudine 150mg tablet",
+          "productCode": "CM871"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 7296,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "ARVS"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF1",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Lamivudine 30mg + nevirapine 50mg + zidovudine 60mg tablet",
+          "productCode": "MC017"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 3420,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "Cancer"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "COLD ROOM",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Bleomycin injection, 15mg",
+          "productCode": "GM080"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 467,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Tertiary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "Cancer"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "COLD ROOM",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Vincristine injection, 1mL",
+          "productCode": "EK670"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 768,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Tertiary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "Pain"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF1",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Morphine 10mg immediate release tablet",
+          "productCode": "QX039"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 100000,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Tertiary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "Pain"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF1",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Morphine injection, 10mg/mL in 1mL ampoule",
+          "productCode": "TS894"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 2000,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Tertiary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "TB"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF2",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Isoniazid 300mg + rifapentine 300mg tablet",
+          "productCode": "QX419"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 19600,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "TB"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF2",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Isoniazid 300mg tablet",
+          "productCode": "XM026"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 34300,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      },
+      {
+        "abcClass": null,
+        "category": {
+          "id": "<ID>",
+          "name": "TB"
+        },
+        "cycleCountRequest": null,
+        "dateLastCount": "<DATE>",
+        "dateNextCount": "<DATE>",
+        "daysUntilNextCount": 365,
+        "hasStockOnHandOrNegativeStock": true,
+        "internalLocations": "RM1-RACK1-SHELF2",
+        "inventoryItemCount": 2,
+        "negativeItemCount": 0,
+        "product": {
+          "id": "<ID>",
+          "name": "Isoniazid 50mg + rifampicin 75mg tablet",
+          "productCode": "RV624"
+        },
+        "productCatalogs": [
+          {
+            "code": "BOS",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Boston Office Products"
+          },
+          {
+            "code": "CED",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Cedar Rapids Office Products"
+          },
+          {
+            "code": "CHIC",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Chicago Office Products"
+          },
+          {
+            "code": "PORT",
+            "description": "List of products that is standard for this office",
+            "id": "<ID>",
+            "name": "Portland Office Products"
+          }
+        ],
+        "quantityAllocated": 0,
+        "quantityOnHand": 9800,
+        "sortOrder": 2,
+        "status": "null",
+        "tags": [
+          {
+            "id": "<ID>",
+            "tag": "Primary Care"
+          }
+        ]
+      }
+    ],
+    "totalCount": 48
+  },
+  "contentType": "application/json",
+  "name": "cycleCount__candidates",
+  "request": {
+    "method": "GET",
+    "path": "/api/facilities/1/cycle-counts/candidates?max=10&offset=0"
+  },
+  "status": 200
+}

@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": ""
+  },
+  "contentType": "",
+  "name": "generic__locationType_delete",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/generic/locationType/{id}"
+  },
+  "status": 204
+}

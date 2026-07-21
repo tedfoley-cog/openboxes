@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "/openboxes/stockMovement/list?direction=OUTBOUND&receiptStatusCode=PENDING&origin=1&createdBy=1",
+    "number": 0.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__inProgressShipments",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/inProgressShipments?locationId=1"
+  },
+  "status": 200
+}

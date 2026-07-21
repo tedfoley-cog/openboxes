@@ -1,0 +1,13 @@
+{
+  "body": {
+    "data": [],
+    "totalCount": 0
+  },
+  "contentType": "application/json",
+  "name": "inventoryTransactionSummary__get",
+  "request": {
+    "method": "GET",
+    "path": "/api/reports/inventory-transactions-summary?facility=1&max=10&offset=0"
+  },
+  "status": 200
+}

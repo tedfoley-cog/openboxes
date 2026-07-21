@@ -1,0 +1,14 @@
+{
+  "body": {
+    "cause": "org.apache.commons.lang.NotImplementedException",
+    "errorCode": 500,
+    "errorMessage": "Action null not implemented"
+  },
+  "contentType": "application/json",
+  "name": "noop__list",
+  "request": {
+    "method": "GET",
+    "path": "/api/noops"
+  },
+  "status": 500
+}

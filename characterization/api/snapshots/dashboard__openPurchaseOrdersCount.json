@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "",
+    "number": 0.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__openPurchaseOrdersCount",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/openPurchaseOrdersCount?locationId=1"
+  },
+  "status": 200
+}

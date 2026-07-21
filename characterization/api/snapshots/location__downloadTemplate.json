@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": "\ufeffid,name,active,locationNumber,locationType,locationGroup,parentLocation,organization,streetAddress,streetAddress2,city,stateOrProvince,postalCode,country,description\n"
+  },
+  "contentType": "text/csv",
+  "name": "location__downloadTemplate",
+  "request": {
+    "method": "GET",
+    "path": "/api/locations/template"
+  },
+  "status": 200
+}

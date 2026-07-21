@@ -1,0 +1,13 @@
+{
+  "body": {
+    "errorCode": 404,
+    "errorMessage": "No row with the given identifier exists: [class org.pih.warehouse.api.StockMovement#doesnotexist0000]"
+  },
+  "contentType": "application/json",
+  "name": "packList__exportPackTemplate_unknown",
+  "request": {
+    "method": "GET",
+    "path": "/api/stockMovements/packlistTemplate/doesnotexist0000"
+  },
+  "status": 404
+}

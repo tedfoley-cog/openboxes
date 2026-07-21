@@ -1,0 +1,12 @@
+{
+  "body": {
+    "data": "wget https://raw.githubusercontent.com/openboxes/openboxes/develop/reset-database.sh | sh"
+  },
+  "contentType": "application/json",
+  "name": "api__resettingInstance_command",
+  "request": {
+    "method": "GET",
+    "path": "/api/resettingInstance/command"
+  },
+  "status": 200
+}

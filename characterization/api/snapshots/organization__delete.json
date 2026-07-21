@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": ""
+  },
+  "contentType": "",
+  "name": "organization__delete",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/generic/organization/{id}"
+  },
+  "status": 204
+}

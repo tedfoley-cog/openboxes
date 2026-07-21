@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "/openboxes/report/showBinLocationReport?status=inStock",
+    "number": 0.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__receivingBin",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/receivingBin?locationId=1"
+  },
+  "status": 200
+}

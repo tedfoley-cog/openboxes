@@ -1,0 +1,12 @@
+{
+  "body": {
+    "data": null
+  },
+  "contentType": "application/json",
+  "name": "combineShipment__read_unknown",
+  "request": {
+    "method": "GET",
+    "path": "/api/combineShipments/doesnotexist0000"
+  },
+  "status": 200
+}

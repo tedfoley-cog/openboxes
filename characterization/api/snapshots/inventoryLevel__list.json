@@ -1,0 +1,1521 @@
+{
+  "body": {
+    "data": [
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 10,
+        "minQuantity": 1,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 10,
+        "minQuantity": 1,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100,
+        "minQuantity": 10,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 1000,
+        "minQuantity": 100,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 1000,
+        "minQuantity": 100,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 10000,
+        "minQuantity": 1000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 10000,
+        "minQuantity": 1000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 10000,
+        "minQuantity": 1000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 100000,
+        "minQuantity": 10000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 15,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 15,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20,
+        "minQuantity": 2,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20,
+        "minQuantity": 2,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 200,
+        "minQuantity": 20,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 200,
+        "minQuantity": 20,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 200,
+        "minQuantity": 20,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 2000,
+        "minQuantity": 200,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 2000,
+        "minQuantity": 200,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 2000,
+        "minQuantity": 200,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20000,
+        "minQuantity": 2000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20000,
+        "minQuantity": 2000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20000,
+        "minQuantity": 2000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 20000,
+        "minQuantity": 2000,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 250,
+        "minQuantity": 25,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 4800,
+        "minQuantity": 480,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 4800,
+        "minQuantity": 480,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 50,
+        "minQuantity": 5,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 6,
+        "minQuantity": 2,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 6,
+        "minQuantity": 2,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 76000,
+        "minQuantity": 7600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 76000,
+        "minQuantity": 7600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 76000,
+        "minQuantity": 7600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 76000,
+        "minQuantity": 7600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 96000,
+        "minQuantity": 9600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 96000,
+        "minQuantity": 9600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 96000,
+        "minQuantity": 9600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      },
+      {
+        "abcClass": null,
+        "binLocation": null,
+        "comments": null,
+        "dateCreated": "<VOLATILE>",
+        "demandTimePeriodDays": null,
+        "expectedLeadTimeDays": null,
+        "forecastPeriodDays": 30.0,
+        "forecastQuantity": null,
+        "id": "<ID>",
+        "internalLocation": null,
+        "inventory": {
+          "id": "1"
+        },
+        "lastUpdated": "<VOLATILE>",
+        "maxQuantity": 96000,
+        "minQuantity": 9600,
+        "preferred": false,
+        "preferredBinLocation": {
+          "id": "<ID>"
+        },
+        "product": {
+          "id": "<ID>"
+        },
+        "reorderQuantity": null,
+        "replenishmentLocation": null,
+        "replenishmentPeriodDays": null,
+        "status": null
+      }
+    ]
+  },
+  "contentType": "application/json",
+  "name": "inventoryLevel__list",
+  "request": {
+    "method": "GET",
+    "path": "/api/facilities/1/inventory-levels"
+  },
+  "status": 200
+}

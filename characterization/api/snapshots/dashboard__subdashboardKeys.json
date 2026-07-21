@@ -1,0 +1,16 @@
+{
+  "body": [
+    "fillRate",
+    "inventory",
+    "personal",
+    "transaction",
+    "warehouse"
+  ],
+  "contentType": "application/json",
+  "name": "dashboard__subdashboardKeys",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/mainDashboard/subdashboardKeys"
+  },
+  "status": 200
+}

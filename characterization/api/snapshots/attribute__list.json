@@ -1,0 +1,12 @@
+{
+  "body": {
+    "data": []
+  },
+  "contentType": "application/json",
+  "name": "attribute__list",
+  "request": {
+    "method": "GET",
+    "path": "/api/attributes"
+  },
+  "status": 200
+}

@@ -1,0 +1,14 @@
+{
+  "body": {
+    "link": "/openboxes/order/list?orderType=PUTAWAY_ORDER&status=PENDING&orderedBy=1",
+    "number": 0.0,
+    "tooltipData": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__inProgressPutaways",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/inProgressPutaways?locationId=1"
+  },
+  "status": 200
+}

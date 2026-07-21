@@ -1,0 +1,12 @@
+{
+  "body": {
+    "text": "Logout was successful"
+  },
+  "contentType": "text/html",
+  "name": "api__logout",
+  "request": {
+    "method": "GET",
+    "path": "/api/logout"
+  },
+  "status": 200
+}

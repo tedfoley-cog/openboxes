@@ -1,0 +1,13 @@
+{
+  "body": {
+    "data": [],
+    "totalCount": 0
+  },
+  "contentType": "application/json",
+  "name": "cycleCount__pendingRequests",
+  "request": {
+    "method": "GET",
+    "path": "/api/facilities/1/cycle-counts/requests/pending?max=10&offset=0"
+  },
+  "status": 200
+}

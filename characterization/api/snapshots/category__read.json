@@ -1,0 +1,82 @@
+{
+  "body": {
+    "categories": [
+      {
+        "categories": [],
+        "dateCreated": "<VOLATILE>",
+        "deleted": false,
+        "description": null,
+        "id": "<ID>",
+        "isRoot": false,
+        "lastUpdated": "<VOLATILE>",
+        "name": "Equipment",
+        "sortOrder": 0,
+        "version": 0
+      },
+      {
+        "categories": [],
+        "dateCreated": "<VOLATILE>",
+        "deleted": false,
+        "description": null,
+        "id": "<ID>",
+        "isRoot": false,
+        "lastUpdated": "<VOLATILE>",
+        "name": "Medicines",
+        "sortOrder": 0,
+        "version": 0
+      },
+      {
+        "categories": [],
+        "dateCreated": "<VOLATILE>",
+        "deleted": false,
+        "description": null,
+        "id": "<ID>",
+        "isRoot": false,
+        "lastUpdated": "<VOLATILE>",
+        "name": "Other",
+        "sortOrder": 0,
+        "version": 0
+      },
+      {
+        "categories": [],
+        "dateCreated": "<VOLATILE>",
+        "deleted": false,
+        "description": null,
+        "id": "<ID>",
+        "isRoot": false,
+        "lastUpdated": "<VOLATILE>",
+        "name": "Perishables",
+        "sortOrder": 0,
+        "version": 0
+      },
+      {
+        "categories": [],
+        "dateCreated": "<VOLATILE>",
+        "deleted": false,
+        "description": null,
+        "id": "<ID>",
+        "isRoot": false,
+        "lastUpdated": "<VOLATILE>",
+        "name": "Supplies",
+        "sortOrder": 0,
+        "version": 0
+      }
+    ],
+    "dateCreated": "<VOLATILE>",
+    "deleted": false,
+    "description": null,
+    "id": "<ID>",
+    "isRoot": true,
+    "lastUpdated": "<VOLATILE>",
+    "name": "ROOT",
+    "sortOrder": 0,
+    "version": 0
+  },
+  "contentType": "application/json",
+  "name": "category__read",
+  "request": {
+    "method": "GET",
+    "path": "/api/categories/{id}"
+  },
+  "status": 200
+}

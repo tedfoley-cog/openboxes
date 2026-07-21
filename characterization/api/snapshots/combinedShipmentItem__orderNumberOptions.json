@@ -1,0 +1,12 @@
+{
+  "body": {
+    "data": []
+  },
+  "contentType": "application/json",
+  "name": "combinedShipmentItem__orderNumberOptions",
+  "request": {
+    "method": "GET",
+    "path": "/api/orderNumberOptions"
+  },
+  "status": 200
+}

@@ -1,0 +1,47 @@
+{
+  "body": {
+    "data": {
+      "numbersIndicator": {
+        "first": {
+          "color": null,
+          "link": null,
+          "order": null,
+          "subtitle": "By air",
+          "value": 0,
+          "value2": null
+        },
+        "fourth": null,
+        "second": {
+          "color": null,
+          "link": null,
+          "order": null,
+          "subtitle": "By sea",
+          "value": 0,
+          "value2": null
+        },
+        "third": {
+          "color": null,
+          "link": null,
+          "order": null,
+          "subtitle": "By land",
+          "value": 0,
+          "value2": null
+        }
+      },
+      "tableData": {
+        "body": [],
+        "name": "Name",
+        "number": "Shipment",
+        "value": null
+      }
+    },
+    "link": null
+  },
+  "contentType": "application/json",
+  "name": "dashboard__delayedShipments",
+  "request": {
+    "method": "GET",
+    "path": "/api/dashboard/delayedShipments?locationId=1"
+  },
+  "status": 200
+}
