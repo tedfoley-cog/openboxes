@@ -34,10 +34,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__inventorySummary",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/inventorySummary?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/inventorySummary"
   },
   "status": 200
 }

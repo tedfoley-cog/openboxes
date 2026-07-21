@@ -9,10 +9,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__discrepancy",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/discrepancy?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/discrepancy"
   },
   "status": 200
 }

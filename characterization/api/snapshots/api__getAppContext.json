@@ -3,21 +3,21 @@
     "data": {
       "activeLanguage": "en",
       "activeLanguageTag": "en",
-      "appVersion": "0.9.8",
-      "branchName": "<VOLATILE>",
+      "appVersion": "<masked>",
+      "branchName": "<masked>",
       "browserConnectionTimeout": 8000,
-      "buildDate": "<VOLATILE>",
-      "buildNumber": "<VOLATILE>",
+      "buildDate": "<masked>",
+      "buildNumber": "<masked>",
       "currencyCode": "USD",
       "currentLocationRoles": [],
       "cycleCountMaxSelectedProducts": 50,
       "displayDateDefaultValue": "-",
       "displayDateFormat": "MMM DD, yyyy",
-      "environment": "production",
-      "grailsVersion": "3.3.16",
+      "environment": "<masked>",
+      "grailsVersion": "<masked>",
       "highestRole": "Superuser",
-      "hostname": "<VOLATILE>",
-      "ipAddress": "<VOLATILE>",
+      "hostname": "<masked>",
+      "ipAddress": "<masked>",
       "isAutosaveEnabled": false,
       "isHelpScoutEnabled": true,
       "isImpersonated": false,
@@ -29,7 +29,7 @@
       "isUserRequestApprover": false,
       "localizationModeEnabled": false,
       "localizationModeLocale": "ach",
-      "localizedHelpScoutKey": "44ee4f01-5334-4b93-ad25-03037903eb80",
+      "localizedHelpScoutKey": "<id>",
       "location": {
         "active": true,
         "address": {
@@ -47,19 +47,19 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "1",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": null,
         "locationType": {
           "description": "Depot",
-          "id": "2",
+          "id": "<masked>",
           "locationTypeCode": "DEPOT",
           "name": "Depot"
         },
         "manager": {
           "email": "admin@admin.com",
           "firstName": "Miss",
-          "id": "1",
+          "id": "<masked>",
           "lastName": "Administrator",
           "name": "Miss Administrator",
           "roles": [
@@ -73,33 +73,33 @@
         "name": "Main Warehouse",
         "organization": {
           "code": "MO",
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "defaultLocation": null,
           "description": null,
           "displayName": "MO - Main Organization",
-          "id": "1",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "name": "Main Organization",
           "partyType": {
             "code": "ORG",
-            "id": "1",
+            "id": "<masked>",
             "name": "Organization",
             "partyTypeCode": "ORGANIZATION"
           },
           "roles": [
             {
               "endDate": null,
-              "id": "1",
+              "id": "<masked>",
               "roleType": "ROLE_ORGANIZATION",
               "startDate": null
             }
           ],
           "sequences": {}
         },
-        "organizationCode": "MO",
+        "organizationCode": "<masked>",
         "organizationName": "Main Organization",
         "parentLocation": null,
-        "sortOrder": 0,
+        "sortOrder": "<masked>",
         "supportedActivities": [
           "ADJUST_INVENTORY",
           "ENABLE_FULFILLER_APPROVAL_NOTIFICATIONS",
@@ -147,7 +147,7 @@
           "linkReactIcon": "flush-cache"
         }
       ],
-      "minimumExpirationDate": "<VOLATILE>",
+      "minimumExpirationDate": "<masked>",
       "notificationAutohideDelay": 8000,
       "pageSize": 10,
       "supportedActivities": [
@@ -172,7 +172,7 @@
         },
         {
           "code": "ar",
-          "name": "\u0639\u0631\u0628\u0649"
+          "name": "عربى"
         },
         {
           "code": "de",
@@ -184,11 +184,11 @@
         },
         {
           "code": "es",
-          "name": "Espan\u0303ol (Espan\u0303a)"
+          "name": "Español (España)"
         },
         {
           "code": "es_MX",
-          "name": "Espa\u00f1ol (M\u00e9xico)"
+          "name": "Español (México)"
         },
         {
           "code": "fi",
@@ -196,11 +196,11 @@
         },
         {
           "code": "fr",
-          "name": "Fran\u00e7ais"
+          "name": "Français"
         },
         {
           "code": "ht",
-          "name": "Krey\u00f2l"
+          "name": "Kreyòl"
         },
         {
           "code": "it",
@@ -208,18 +208,18 @@
         },
         {
           "code": "pt",
-          "name": "Portugu\u00eas"
+          "name": "Português"
         },
         {
           "code": "zh",
           "name": "Chinese"
         }
       ],
-      "timezone": "<VOLATILE>",
+      "timezone": null,
       "user": {
         "email": "admin@admin.com",
         "firstName": "Miss",
-        "id": "1",
+        "id": "<masked>",
         "lastName": "Administrator",
         "name": "Miss Administrator",
         "roles": [
@@ -233,9 +233,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "api__getAppContext",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/getAppContext"
   },
   "status": 200

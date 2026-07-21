@@ -1,12 +1,10 @@
 {
-  "body": {
-    "text": ""
-  },
   "contentType": "",
-  "name": "category__delete_created",
   "request": {
     "method": "DELETE",
-    "path": "/api/categories/{id}"
+    "params": {},
+    "path": "/api/categories/<id>"
   },
-  "status": 204
+  "status": 204,
+  "text": ""
 }

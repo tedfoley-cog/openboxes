@@ -43,10 +43,13 @@
     "link": "/openboxes/inventory/listExpiringStock"
   },
   "contentType": "application/json",
-  "name": "dashboard__expirationSummary",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/expirationSummary?locationId=1&querySize=3"
+    "params": {
+      "locationId": "1",
+      "querySize": "3"
+    },
+    "path": "/api/dashboard/expirationSummary"
   },
   "status": 200
 }

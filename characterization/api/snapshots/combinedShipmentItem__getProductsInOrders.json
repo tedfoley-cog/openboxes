@@ -3,10 +3,12 @@
     "data": []
   },
   "contentType": "application/json",
-  "name": "combinedShipmentItem__getProductsInOrders",
   "request": {
     "method": "GET",
-    "path": "/api/combinedShipmentItems/getProductsInOrders?orderIds="
+    "params": {
+      "orderIds": ""
+    },
+    "path": "/api/combinedShipmentItems/getProductsInOrders"
   },
   "status": 200
 }

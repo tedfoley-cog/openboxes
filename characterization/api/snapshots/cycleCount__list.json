@@ -3,9 +3,9 @@
     "data": []
   },
   "contentType": "application/json",
-  "name": "cycleCount__list",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/facilities/1/cycle-counts"
   },
   "status": 200

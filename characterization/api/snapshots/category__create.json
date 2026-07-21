@@ -1,20 +1,20 @@
 {
   "body": {
     "categories": null,
-    "dateCreated": "<VOLATILE>",
+    "dateCreated": null,
     "deleted": false,
     "description": null,
-    "id": "<ID>",
+    "id": "<masked>",
     "isRoot": false,
-    "lastUpdated": "<VOLATILE>",
+    "lastUpdated": null,
     "name": "ZZ Characterization Category",
-    "sortOrder": 0,
+    "sortOrder": "<masked>",
     "version": 0
   },
   "contentType": "application/json",
-  "name": "category__create",
   "request": {
     "method": "POST",
+    "params": {},
     "path": "/api/categories"
   },
   "status": 200

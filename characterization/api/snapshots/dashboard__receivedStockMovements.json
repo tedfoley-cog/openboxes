@@ -19,21 +19,23 @@
         }
       ],
       "labels": [
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>"
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>"
       ]
     },
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__receivedStockMovements",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/receivedStockMovements?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/receivedStockMovements"
   },
   "status": 200
 }

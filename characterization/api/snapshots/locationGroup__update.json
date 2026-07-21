@@ -1,15 +1,15 @@
 {
   "body": {
     "data": {
-      "id": "<ID>",
+      "id": "<masked>",
       "name": "ZZ Characterization Location Group (renamed)"
     }
   },
   "contentType": "application/json",
-  "name": "locationGroup__update",
   "request": {
     "method": "PUT",
-    "path": "/api/locationGroups/{id}"
+    "params": {},
+    "path": "/api/locationGroups/<id>"
   },
   "status": 200
 }

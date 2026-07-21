@@ -2,15 +2,15 @@
   "body": {
     "data": {
       "description": null,
-      "id": "<ID>",
+      "id": "<masked>",
       "locationTypeCode": "INTERNAL",
       "name": "ZZ Characterization Location Type"
     }
   },
   "contentType": "application/json",
-  "name": "generic__locationType_create",
   "request": {
     "method": "POST",
+    "params": {},
     "path": "/api/generic/locationType/"
   },
   "status": 201

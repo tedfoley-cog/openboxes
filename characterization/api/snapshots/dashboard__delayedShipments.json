@@ -38,10 +38,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__delayedShipments",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/delayedShipments?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/delayedShipments"
   },
   "status": 200
 }

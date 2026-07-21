@@ -6,9 +6,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "loadData__listOfDemoData",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/loadData/listOfDemoData"
   },
   "status": 200

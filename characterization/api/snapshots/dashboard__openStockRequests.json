@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__openStockRequests",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/openStockRequests?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/openStockRequests"
   },
   "status": 200
 }

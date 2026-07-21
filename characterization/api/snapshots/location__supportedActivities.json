@@ -34,9 +34,9 @@
     ]
   },
   "contentType": "application/json",
-  "name": "location__supportedActivities",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/locations/supportedActivities"
   },
   "status": 200

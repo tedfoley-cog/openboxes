@@ -8,10 +8,12 @@
     }
   },
   "contentType": "application/json",
-  "name": "indicator__inventoryAccuracy",
   "request": {
     "method": "GET",
-    "path": "/api/reports/indicators/inventoryAccuracy?facility=1"
+    "params": {
+      "facility": "1"
+    },
+    "path": "/api/reports/indicators/inventoryAccuracy"
   },
   "status": 200
 }

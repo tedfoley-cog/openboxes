@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__defaultBin",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/defaultBin?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/defaultBin"
   },
   "status": 200
 }

@@ -3,7 +3,7 @@
     "data": {
       "first": {
         "color": null,
-        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdAfter=<DATE>",
+        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdAfter=07/17/2026",
         "order": null,
         "subtitle": "Created < 4 days ago",
         "value": 0,
@@ -12,7 +12,7 @@
       "fourth": null,
       "second": {
         "color": null,
-        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdAfter=<DATE>&createdBefore=<DATE>",
+        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdAfter=07/14/2026&createdBefore=07/17/2026",
         "order": null,
         "subtitle": "Created > 4 days ago",
         "value": 0,
@@ -20,7 +20,7 @@
       },
       "third": {
         "color": null,
-        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdBefore=<DATE>",
+        "link": "/openboxes/stockMovement/list?direction=OUTBOUND&requisitionStatusCode=CREATED&requisitionStatusCode=EDITING&requisitionStatusCode=VERIFYING&requisitionStatusCode=PICKING&requisitionStatusCode=PICKED&requisitionStatusCode=CHECKING&createdBefore=07/14/2026",
         "order": null,
         "subtitle": "Created > 7 days ago",
         "value": 0,
@@ -30,10 +30,12 @@
     "link": "/openboxes/stockMovement/list?direction=OUTBOUND&receiptStatusCode=PENDING"
   },
   "contentType": "application/json",
-  "name": "dashboard__outgoingStock",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/outgoingStock?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/outgoingStock"
   },
   "status": 200
 }

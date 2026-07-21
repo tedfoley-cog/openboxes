@@ -7,9 +7,9 @@
     "warehouse"
   ],
   "contentType": "application/json",
-  "name": "dashboard__subdashboardKeys",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/dashboard/mainDashboard/subdashboardKeys"
   },
   "status": 200

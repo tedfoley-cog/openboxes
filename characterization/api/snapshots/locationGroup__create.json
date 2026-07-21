@@ -1,13 +1,13 @@
 {
   "body": {
     "data": {
-      "id": "<ID>"
+      "id": "<masked>"
     }
   },
   "contentType": "application/json",
-  "name": "locationGroup__create",
   "request": {
     "method": "POST",
+    "params": {},
     "path": "/api/locationGroups"
   },
   "status": 200

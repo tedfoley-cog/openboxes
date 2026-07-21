@@ -1,15 +1,15 @@
 {
   "body": {
     "data": {
-      "id": "<ID>",
+      "id": "<masked>",
       "name": "MidWest"
     }
   },
   "contentType": "application/json",
-  "name": "locationGroup__read",
   "request": {
     "method": "GET",
-    "path": "/api/locationGroups/{id}"
+    "params": {},
+    "path": "/api/locationGroups/<id>"
   },
   "status": 200
 }

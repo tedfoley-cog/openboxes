@@ -3,9 +3,9 @@
     "data": null
   },
   "contentType": "application/json",
-  "name": "combineShipment__read_unknown",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/combineShipments/doesnotexist0000"
   },
   "status": 200

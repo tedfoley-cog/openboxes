@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__inProgressPutaways",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/inProgressPutaways?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/inProgressPutaways"
   },
   "status": 200
 }

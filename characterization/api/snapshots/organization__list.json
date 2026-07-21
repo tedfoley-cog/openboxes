@@ -3,29 +3,29 @@
     "data": [
       {
         "code": "AMAZON",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "AMAZON - Amazon.com",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Amazon.com",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_MANUFACTURER",
             "startDate": null
           },
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -34,29 +34,29 @@
       },
       {
         "code": "CDW",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "CDW - CDW",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "CDW",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_MANUFACTURER",
             "startDate": null
           },
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -65,29 +65,29 @@
       },
       {
         "code": "GRAING",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "GRAING - Grainger",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Grainger",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_MANUFACTURER",
             "startDate": null
           },
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -96,29 +96,29 @@
       },
       {
         "code": "MID",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "MID - Medical Items Depot",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Medical Items Depot",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_MANUFACTURER",
             "startDate": null
           },
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -127,23 +127,23 @@
       },
       {
         "code": "MO",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "MO - Main Organization",
-        "id": "1",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Main Organization",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "1",
+            "id": "<masked>",
             "roleType": "ROLE_ORGANIZATION",
             "startDate": null
           }
@@ -151,24 +151,24 @@
         "sequences": {}
       },
       {
-        "code": "MO-<SEQ>",
-        "dateCreated": "<VOLATILE>",
+        "code": "MO-<seq>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
-        "displayName": "MO-<SEQ> - My Organization",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "displayName": "MO-<seq> - My Organization",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "My Organization",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_BUYER",
             "startDate": null
           }
@@ -177,23 +177,23 @@
       },
       {
         "code": "SO",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "SO - Supplier Organization",
-        "id": "2",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Supplier Organization",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "2",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -202,29 +202,29 @@
       },
       {
         "code": "TU",
-        "dateCreated": "<VOLATILE>",
+        "dateCreated": "<masked>",
         "defaultLocation": null,
         "description": null,
         "displayName": "TU - Toyota USA",
-        "id": "<ID>",
-        "lastUpdated": "<VOLATILE>",
+        "id": "<masked>",
+        "lastUpdated": "<masked>",
         "name": "Toyota USA",
         "partyType": {
           "code": "ORG",
-          "id": "1",
+          "id": "<masked>",
           "name": "Organization",
           "partyTypeCode": "ORGANIZATION"
         },
         "roles": [
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_MANUFACTURER",
             "startDate": null
           },
           {
             "endDate": null,
-            "id": "<ID>",
+            "id": "<masked>",
             "roleType": "ROLE_SUPPLIER",
             "startDate": null
           }
@@ -234,9 +234,9 @@
     ]
   },
   "contentType": "application/json",
-  "name": "organization__list",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/organizations"
   },
   "status": 200

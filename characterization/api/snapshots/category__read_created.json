@@ -1,21 +1,21 @@
 {
   "body": {
     "categories": [],
-    "dateCreated": "<VOLATILE>",
+    "dateCreated": "<masked>",
     "deleted": false,
     "description": null,
-    "id": "<ID>",
+    "id": "<masked>",
     "isRoot": false,
-    "lastUpdated": "<VOLATILE>",
+    "lastUpdated": "<masked>",
     "name": "ZZ Characterization Category",
-    "sortOrder": 0,
+    "sortOrder": "<masked>",
     "version": 0
   },
   "contentType": "application/json",
-  "name": "category__read_created",
   "request": {
     "method": "GET",
-    "path": "/api/categories/{id}"
+    "params": {},
+    "path": "/api/categories/<id>"
   },
   "status": 200
 }

@@ -20,10 +20,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__stockOutLastMonth",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/stockOutLastMonth?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/stockOutLastMonth"
   },
   "status": 200
 }

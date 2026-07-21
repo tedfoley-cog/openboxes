@@ -11,11 +11,11 @@
         "widgets": [
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "fillRate"
           },
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "fillRateSnapshot"
           }
         ]
       },
@@ -24,35 +24,35 @@
         "widgets": [
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "delayedShipments"
           },
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "receivingBin"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "defaultBin"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "productsInventoried"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "negativeInventory"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "expiredStock"
           },
           {
             "order": 5.0,
-            "widgetId": "<ID>"
+            "widgetId": "openStockRequests"
           },
           {
             "order": 6.0,
-            "widgetId": "<ID>"
+            "widgetId": "requestsPendingApproval"
           }
         ]
       },
@@ -61,43 +61,43 @@
         "widgets": [
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "inventoryByLotAndBin"
           },
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "inventorySummary"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "expirationSummary"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "receivingBin"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "inProgressShipments"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "incomingStock"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "inProgressPutaways"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "outgoingStock"
           },
           {
             "order": 5.0,
-            "widgetId": "<ID>"
+            "widgetId": "delayedShipments"
           },
           {
             "order": 6.0,
-            "widgetId": "<ID>"
+            "widgetId": "discrepancy"
           }
         ]
       },
@@ -106,31 +106,31 @@
         "widgets": [
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "fillRateSnapshot"
           },
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "receivedStockMovements"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "sentStockMovements"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "lossCausedByExpiry"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "percentageAdHoc"
           },
           {
             "order": 5.0,
-            "widgetId": "<ID>"
+            "widgetId": "fillRate"
           },
           {
             "order": 6.0,
-            "widgetId": "<ID>"
+            "widgetId": "stockOutLastMonth"
           }
         ]
       },
@@ -139,43 +139,43 @@
         "widgets": [
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "inventoryByLotAndBin"
           },
           {
             "order": 1.0,
-            "widgetId": "<ID>"
+            "widgetId": "inventorySummary"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "expirationSummary"
           },
           {
             "order": 2.0,
-            "widgetId": "<ID>"
+            "widgetId": "receivingBin"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "inProgressShipments"
           },
           {
             "order": 3.0,
-            "widgetId": "<ID>"
+            "widgetId": "incomingStock"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "inProgressPutaways"
           },
           {
             "order": 4.0,
-            "widgetId": "<ID>"
+            "widgetId": "outgoingStock"
           },
           {
             "order": 5.0,
-            "widgetId": "<ID>"
+            "widgetId": "delayedShipments"
           },
           {
             "order": 6.0,
-            "widgetId": "<ID>"
+            "widgetId": "discrepancy"
           }
         ]
       }
@@ -660,9 +660,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "dashboard__config",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/dashboard/mainDashboard/config"
   },
   "status": 200

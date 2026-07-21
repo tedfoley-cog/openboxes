@@ -1,12 +1,10 @@
 {
-  "body": {
-    "text": "Authentication was successful"
-  },
   "contentType": "text/html",
-  "name": "api__login",
   "request": {
     "method": "POST",
+    "params": {},
     "path": "/api/login"
   },
-  "status": 200
+  "status": 200,
+  "text": "Authentication was successful"
 }

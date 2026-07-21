@@ -8,9 +8,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "api__supportLinks",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/supportLinks"
   },
   "status": 200

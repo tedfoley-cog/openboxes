@@ -2,29 +2,29 @@
   "body": {
     "data": {
       "code": "AMAZON",
-      "dateCreated": "<VOLATILE>",
+      "dateCreated": "<masked>",
       "defaultLocation": null,
       "description": null,
       "displayName": "AMAZON - Amazon.com",
-      "id": "<ID>",
-      "lastUpdated": "<VOLATILE>",
+      "id": "<masked>",
+      "lastUpdated": "<masked>",
       "name": "Amazon.com",
       "partyType": {
         "code": "ORG",
-        "id": "1",
+        "id": "<masked>",
         "name": "Organization",
         "partyTypeCode": "ORGANIZATION"
       },
       "roles": [
         {
           "endDate": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "roleType": "ROLE_MANUFACTURER",
           "startDate": null
         },
         {
           "endDate": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "roleType": "ROLE_SUPPLIER",
           "startDate": null
         }
@@ -33,10 +33,10 @@
     }
   },
   "contentType": "application/json",
-  "name": "organization__read",
   "request": {
     "method": "GET",
-    "path": "/api/organizations/{id}"
+    "params": {},
+    "path": "/api/organizations/<id>"
   },
   "status": 200
 }

@@ -3,9 +3,9 @@
     "data": []
   },
   "contentType": "application/json",
-  "name": "combinedShipmentItem__orderNumberOptions",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/orderNumberOptions"
   },
   "status": 200

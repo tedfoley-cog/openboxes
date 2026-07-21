@@ -47,10 +47,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__productsInventoried",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/productsInventoried?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/productsInventoried"
   },
   "status": 200
 }

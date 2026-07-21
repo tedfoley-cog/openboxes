@@ -18,20 +18,22 @@
         }
       ],
       "labels": [
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>"
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>"
       ]
     },
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__requisitionsByYear",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/requisitionsByYear?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/requisitionsByYear"
   },
   "status": 200
 }

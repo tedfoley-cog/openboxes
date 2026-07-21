@@ -17,12 +17,12 @@
       "hasCentralPurchasingEnabled": false,
       "hasPackingSupport": false,
       "hasPartialReceivingSupport": false,
-      "id": "<ID>",
+      "id": "<masked>",
       "locationGroup": null,
       "locationNumber": "MW-COLD",
       "locationType": {
         "description": "Default bin location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "BIN_LOCATION",
         "name": "Bin Location"
       },
@@ -48,19 +48,19 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "1",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": null,
         "locationType": {
           "description": "Depot",
-          "id": "2",
+          "id": "<masked>",
           "locationTypeCode": "DEPOT",
           "name": "Depot"
         },
         "manager": {
           "email": "admin@admin.com",
           "firstName": "Miss",
-          "id": "1",
+          "id": "<masked>",
           "lastName": "Administrator",
           "name": "Miss Administrator",
           "roles": [
@@ -74,33 +74,33 @@
         "name": "Main Warehouse",
         "organization": {
           "code": "MO",
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "defaultLocation": null,
           "description": null,
           "displayName": "MO - Main Organization",
-          "id": "1",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "name": "Main Organization",
           "partyType": {
             "code": "ORG",
-            "id": "1",
+            "id": "<masked>",
             "name": "Organization",
             "partyTypeCode": "ORGANIZATION"
           },
           "roles": [
             {
               "endDate": null,
-              "id": "1",
+              "id": "<masked>",
               "roleType": "ROLE_ORGANIZATION",
               "startDate": null
             }
           ],
           "sequences": {}
         },
-        "organizationCode": "MO",
+        "organizationCode": "<masked>",
         "organizationName": "Main Organization",
         "parentLocation": null,
-        "sortOrder": 0,
+        "sortOrder": "<masked>",
         "supportedActivities": [
           "ADJUST_INVENTORY",
           "ENABLE_FULFILLER_APPROVAL_NOTIFICATIONS",
@@ -129,10 +129,10 @@
     }
   },
   "contentType": "application/json",
-  "name": "internalLocation__read",
   "request": {
     "method": "GET",
-    "path": "/api/internalLocations/{id}"
+    "params": {},
+    "path": "/api/internalLocations/<id>"
   },
   "status": 200
 }

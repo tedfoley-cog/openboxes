@@ -32,10 +32,12 @@
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__backdatedInboundShipments",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/backdatedInboundShipments?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/backdatedInboundShipments"
   },
   "status": 200
 }

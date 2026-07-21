@@ -30,10 +30,12 @@
     "link": "/openboxes/stockMovement/list?direction=INBOUND"
   },
   "contentType": "application/json",
-  "name": "dashboard__incomingStock",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/incomingStock?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/incomingStock"
   },
   "status": 200
 }

@@ -6,9 +6,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "api__chooseLocale",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/chooseLocale/en"
   },
   "status": 200

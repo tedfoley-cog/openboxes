@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__productWithNegativeInventory",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/productWithNegativeInventory?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/productWithNegativeInventory"
   },
   "status": 200
 }

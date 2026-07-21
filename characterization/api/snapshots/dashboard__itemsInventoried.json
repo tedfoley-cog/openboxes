@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__itemsInventoried",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/itemsInventoried?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/itemsInventoried"
   },
   "status": 200
 }

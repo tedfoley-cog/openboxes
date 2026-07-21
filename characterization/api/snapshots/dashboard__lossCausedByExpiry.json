@@ -61,21 +61,23 @@
         }
       ],
       "labels": [
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>"
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>"
       ]
     },
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__lossCausedByExpiry",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/lossCausedByExpiry?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/lossCausedByExpiry"
   },
   "status": 200
 }

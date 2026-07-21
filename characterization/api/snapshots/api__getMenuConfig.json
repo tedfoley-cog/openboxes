@@ -4,11 +4,11 @@
       "menuConfig": [
         {
           "href": "/openboxes/dashboard/index",
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Dashboard"
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Configuration",
           "subsections": [
             {
@@ -182,7 +182,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Inbound",
           "subsections": [
             {
@@ -222,7 +222,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Inventory",
           "subsections": [
             {
@@ -283,7 +283,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Outbound",
           "subsections": [
             {
@@ -314,7 +314,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Products",
           "subsections": [
             {
@@ -403,7 +403,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Purchasing",
           "subsections": [
             {
@@ -434,7 +434,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Reporting",
           "subsections": [
             {
@@ -548,7 +548,7 @@
           ]
         },
         {
-          "id": "<ID>",
+          "id": "<masked>",
           "label": "Stocklists",
           "menuItems": [
             {
@@ -594,9 +594,9 @@
     }
   },
   "contentType": "application/json",
-  "name": "api__getMenuConfig",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/getMenuConfig"
   },
   "status": 200

@@ -16,10 +16,12 @@
     "link": "/openboxes/stockMovement/list?direction=OUTBOUND"
   },
   "contentType": "application/json",
-  "name": "dashboard__percentageAdHoc",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/percentageAdHoc?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/percentageAdHoc"
   },
   "status": 200
 }

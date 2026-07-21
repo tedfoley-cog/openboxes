@@ -1,13 +1,13 @@
 {
   "body": {
     "data": {
-      "id": "<ID>"
+      "id": "<masked>"
     }
   },
   "contentType": "application/json",
-  "name": "organization__create",
   "request": {
     "method": "POST",
+    "params": {},
     "path": "/api/organizations"
   },
   "status": 200

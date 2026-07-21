@@ -5,10 +5,12 @@
     "message": "Save"
   },
   "contentType": "application/json",
-  "name": "localization__read",
   "request": {
     "method": "GET",
-    "path": "/api/localizations/default.button.save.label?lang=en"
+    "params": {
+      "lang": "en"
+    },
+    "path": "/api/localizations/default.button.save.label"
   },
   "status": 200
 }

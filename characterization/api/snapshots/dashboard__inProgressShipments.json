@@ -5,10 +5,12 @@
     "tooltipData": null
   },
   "contentType": "application/json",
-  "name": "dashboard__inProgressShipments",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/inProgressShipments?locationId=1"
+    "params": {
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/inProgressShipments"
   },
   "status": 200
 }

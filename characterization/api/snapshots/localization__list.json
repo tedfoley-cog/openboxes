@@ -84,10 +84,13 @@
     ]
   },
   "contentType": "application/json",
-  "name": "localization__list",
   "request": {
     "method": "GET",
-    "path": "/api/localizations?languageCode=en&prefix=default.button"
+    "params": {
+      "languageCode": "en",
+      "prefix": "default.button"
+    },
+    "path": "/api/localizations"
   },
   "status": 200
 }

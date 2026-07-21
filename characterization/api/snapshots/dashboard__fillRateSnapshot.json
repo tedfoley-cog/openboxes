@@ -32,27 +32,30 @@
         }
       ],
       "labels": [
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>",
-        "<DATE>"
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>",
+        "<date>"
       ]
     },
     "link": null
   },
   "contentType": "application/json",
-  "name": "dashboard__fillRateSnapshot",
   "request": {
     "method": "GET",
-    "path": "/api/dashboard/fillRateSnapshot?locationId=1&destinationLocation={id}"
+    "params": {
+      "destinationLocation": "<id>",
+      "locationId": "1"
+    },
+    "path": "/api/dashboard/fillRateSnapshot"
   },
   "status": 200
 }

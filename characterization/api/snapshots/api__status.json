@@ -7,9 +7,9 @@
     "status": "OK"
   },
   "contentType": "application/json",
-  "name": "api__status",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/status"
   },
   "status": 200

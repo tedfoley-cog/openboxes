@@ -12,7 +12,7 @@ Legend: ✅ snapshotted · ➖ skipped/not directly routable.
 
 | Controller | Endpoints (actions) | Snapshotted | Notes |
 |---|---|---|---|
-| ApiController | login, logout, status, chooseLocation, chooseLocale, getMenuConfig, getAppContext, getRequestTypes, getSupportLinks, getResettingInstanceCommand | ✅ all 10 | Routed via `/api/$action/$id?` plus explicit `/api/supportLinks`, `/api/resettingInstance/command`. `logout` exercised last in the plan. |
+| ApiController | login, logout, status, chooseLocation, chooseLocale, getMenuConfig, getAppContext, getRequestTypes, getSupportLinks, getResettingInstanceCommand | ✅ all 10 | Routed via `/api/$action/$id?` plus explicit `/api/supportLinks`, `/api/resettingInstance/command`. `logout` exercised in the flows module (session re-authenticated after). |
 | AttributeApiController | list | ✅ 1 (2 snapshots) | Default list + `entityType=PRODUCT` variant. |
 | BaseApiController | — | ➖ | Abstract base class (`extends BaseController`); declares no actions and has no routes. |
 | BaseDomainApiController | list, read, create, update, delete | ➖ (covered indirectly) | No direct routes; every action `forward`s to GenericApiController. Behaviour exercised through concrete subclasses (Location, LocationGroup, Organization, LoadData) and the `generic__*` snapshots. |
@@ -43,9 +43,11 @@ Legend: ✅ snapshotted · ➖ skipped/not directly routable.
 
 Demo-data ids are generated at load time and DB result ordering is not
 stable, so responses are normalized before comparison (ids, dates,
-volatile keys masked; keys and arrays canonically sorted). The full rules
-are documented in `characterization/api/snapshot_runner.py` and the suite
-README.
+volatile keys masked; keys and arrays canonically sorted). The shared rules
+live in `characterization/api/obx.py`; A–L-specific masks (dashboard
+month/FY time-series labels, generated `NNNLLL` sequence codes, build/host
+metadata, error-page timestamps) in `characterization/api/a_l.py`. See the
+suite README.
 
 Write flows use dedicated `ZZ Characterization *` records that are created
 and removed within a run (with pre-run cleanup of leftovers), so re-runs
@@ -54,9 +56,11 @@ against the same database stay deterministic.
 ## Commands
 
 ```bash
-characterization/api/run.sh            # verify (fails on any diff)
-characterization/api/run.sh --update   # intentionally re-baseline
+./characterization/api/run.sh                     # verify (fails on any diff)
+UPDATE_SNAPSHOTS=1 ./characterization/api/run.sh   # intentionally re-baseline
+./characterization/api/run.sh -k category          # filter (pytest -k)
 ```
 
-CI: `.github/workflows/api-snapshot-tests.yml` (boots docker compose,
-loads demo data, runs the suite on every PR).
+CI: `.github/workflows/characterization-tests.yml` (boots docker compose,
+loads demo data, runs the combined A–L + M–Z suite on every PR via
+`test-pull-request.yml`).

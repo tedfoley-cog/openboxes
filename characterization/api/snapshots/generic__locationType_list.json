@@ -3,70 +3,70 @@
     "data": [
       {
         "description": "Default bin location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "BIN_LOCATION",
         "name": "Bin Location"
       },
       {
         "description": "Default hold location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Hold"
       },
       {
         "description": "Default receiving location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Cross-docking"
       },
       {
         "description": "Default receiving location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Receiving"
       },
       {
         "description": "Default zone location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "ZONE",
         "name": "Zone"
       },
       {
         "description": "Depot",
-        "id": "2",
+        "id": "<masked>",
         "locationTypeCode": "DEPOT",
         "name": "Depot"
       },
       {
         "description": "Dispensary",
-        "id": "3",
+        "id": "<masked>",
         "locationTypeCode": "DISPENSARY",
         "name": "Dispensary"
       },
       {
         "description": "Pharmacy",
-        "id": "6",
+        "id": "<masked>",
         "locationTypeCode": "DISPENSARY",
         "name": "Pharmacy"
       },
       {
         "description": "Supplier",
-        "id": "4",
+        "id": "<masked>",
         "locationTypeCode": "SUPPLIER",
         "name": "Supplier"
       },
       {
         "description": "Ward",
-        "id": "5",
+        "id": "<masked>",
         "locationTypeCode": "WARD",
         "name": "Ward"
       }
     ]
   },
   "contentType": "application/json",
-  "name": "generic__locationType_list",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/generic/locationType/"
   },
   "status": 200

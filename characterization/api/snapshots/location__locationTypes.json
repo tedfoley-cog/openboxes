@@ -3,7 +3,7 @@
     "data": [
       {
         "description": "Default bin location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "BIN_LOCATION",
         "name": "Bin Location",
         "supportedActivities": [
@@ -13,7 +13,7 @@
       },
       {
         "description": "Default hold location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Hold",
         "supportedActivities": [
@@ -23,7 +23,7 @@
       },
       {
         "description": "Default receiving location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Cross-docking",
         "supportedActivities": [
@@ -34,7 +34,7 @@
       },
       {
         "description": "Default receiving location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "INTERNAL",
         "name": "Receiving",
         "supportedActivities": [
@@ -45,14 +45,14 @@
       },
       {
         "description": "Default zone location type",
-        "id": "<ID>",
+        "id": "<masked>",
         "locationTypeCode": "ZONE",
         "name": "Zone",
         "supportedActivities": []
       },
       {
         "description": "Depot",
-        "id": "2",
+        "id": "<masked>",
         "locationTypeCode": "DEPOT",
         "name": "Depot",
         "supportedActivities": [
@@ -73,7 +73,7 @@
       },
       {
         "description": "Dispensary",
-        "id": "3",
+        "id": "<masked>",
         "locationTypeCode": "DISPENSARY",
         "name": "Dispensary",
         "supportedActivities": [
@@ -84,7 +84,7 @@
       },
       {
         "description": "Pharmacy",
-        "id": "6",
+        "id": "<masked>",
         "locationTypeCode": "DISPENSARY",
         "name": "Pharmacy",
         "supportedActivities": [
@@ -93,7 +93,7 @@
       },
       {
         "description": "Supplier",
-        "id": "4",
+        "id": "<masked>",
         "locationTypeCode": "SUPPLIER",
         "name": "Supplier",
         "supportedActivities": [
@@ -104,7 +104,7 @@
       },
       {
         "description": "Ward",
-        "id": "5",
+        "id": "<masked>",
         "locationTypeCode": "WARD",
         "name": "Ward",
         "supportedActivities": [
@@ -114,9 +114,9 @@
     ]
   },
   "contentType": "application/json",
-  "name": "location__locationTypes",
   "request": {
     "method": "GET",
+    "params": {},
     "path": "/api/locations/locationTypes"
   },
   "status": 200

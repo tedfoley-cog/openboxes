@@ -3,10 +3,12 @@
     "data": []
   },
   "contentType": "application/json",
-  "name": "attribute__list_product_type",
   "request": {
     "method": "GET",
-    "path": "/api/attributes?entityType=PRODUCT"
+    "params": {
+      "entityType": "PRODUCT"
+    },
+    "path": "/api/attributes"
   },
   "status": 200
 }

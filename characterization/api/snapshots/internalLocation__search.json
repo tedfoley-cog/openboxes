@@ -18,12 +18,12 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "<ID>",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": "BOS-1-1",
         "locationType": {
           "description": "Default bin location type",
-          "id": "<ID>",
+          "id": "<masked>",
           "locationTypeCode": "BIN_LOCATION",
           "name": "Bin Location"
         },
@@ -49,46 +49,46 @@
           "hasCentralPurchasingEnabled": false,
           "hasPackingSupport": false,
           "hasPartialReceivingSupport": false,
-          "id": "<ID>",
+          "id": "<masked>",
           "locationGroup": {
-            "id": "<ID>",
+            "id": "<masked>",
             "name": "NorthEast"
           },
           "locationNumber": "BOSW",
           "locationType": {
             "description": "Depot",
-            "id": "2",
+            "id": "<masked>",
             "locationTypeCode": "DEPOT",
             "name": "Depot"
           },
           "manager": null,
           "name": "Boston Warehouse",
           "organization": {
-            "code": "MO-<SEQ>",
-            "dateCreated": "<VOLATILE>",
+            "code": "MO-<seq>",
+            "dateCreated": "<masked>",
             "defaultLocation": null,
             "description": null,
-            "displayName": "MO-<SEQ> - My Organization",
-            "id": "<ID>",
-            "lastUpdated": "<VOLATILE>",
+            "displayName": "MO-<seq> - My Organization",
+            "id": "<masked>",
+            "lastUpdated": "<masked>",
             "name": "My Organization",
             "partyType": {
               "code": "ORG",
-              "id": "1",
+              "id": "<masked>",
               "name": "Organization",
               "partyTypeCode": "ORGANIZATION"
             },
             "roles": [
               {
                 "endDate": null,
-                "id": "<ID>",
+                "id": "<masked>",
                 "roleType": "ROLE_BUYER",
                 "startDate": null
               }
             ],
             "sequences": {}
           },
-          "organizationCode": "MO-<SEQ>",
+          "organizationCode": "<masked>",
           "organizationName": "My Organization",
           "parentLocation": null,
           "sortOrder": null,
@@ -135,12 +135,12 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "<ID>",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": "BOS-COLD",
         "locationType": {
           "description": "Default bin location type",
-          "id": "<ID>",
+          "id": "<masked>",
           "locationTypeCode": "BIN_LOCATION",
           "name": "Bin Location"
         },
@@ -166,46 +166,46 @@
           "hasCentralPurchasingEnabled": false,
           "hasPackingSupport": false,
           "hasPartialReceivingSupport": false,
-          "id": "<ID>",
+          "id": "<masked>",
           "locationGroup": {
-            "id": "<ID>",
+            "id": "<masked>",
             "name": "NorthEast"
           },
           "locationNumber": "BOSW",
           "locationType": {
             "description": "Depot",
-            "id": "2",
+            "id": "<masked>",
             "locationTypeCode": "DEPOT",
             "name": "Depot"
           },
           "manager": null,
           "name": "Boston Warehouse",
           "organization": {
-            "code": "MO-<SEQ>",
-            "dateCreated": "<VOLATILE>",
+            "code": "MO-<seq>",
+            "dateCreated": "<masked>",
             "defaultLocation": null,
             "description": null,
-            "displayName": "MO-<SEQ> - My Organization",
-            "id": "<ID>",
-            "lastUpdated": "<VOLATILE>",
+            "displayName": "MO-<seq> - My Organization",
+            "id": "<masked>",
+            "lastUpdated": "<masked>",
             "name": "My Organization",
             "partyType": {
               "code": "ORG",
-              "id": "1",
+              "id": "<masked>",
               "name": "Organization",
               "partyTypeCode": "ORGANIZATION"
             },
             "roles": [
               {
                 "endDate": null,
-                "id": "<ID>",
+                "id": "<masked>",
                 "roleType": "ROLE_BUYER",
                 "startDate": null
               }
             ],
             "sequences": {}
           },
-          "organizationCode": "MO-<SEQ>",
+          "organizationCode": "<masked>",
           "organizationName": "My Organization",
           "parentLocation": null,
           "sortOrder": null,
@@ -252,12 +252,12 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "<ID>",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": "CHI-1-1-1",
         "locationType": {
           "description": "Default bin location type",
-          "id": "<ID>",
+          "id": "<masked>",
           "locationTypeCode": "BIN_LOCATION",
           "name": "Bin Location"
         },
@@ -283,46 +283,46 @@
           "hasCentralPurchasingEnabled": false,
           "hasPackingSupport": false,
           "hasPartialReceivingSupport": false,
-          "id": "<ID>",
+          "id": "<masked>",
           "locationGroup": {
-            "id": "<ID>",
+            "id": "<masked>",
             "name": "MidWest"
           },
           "locationNumber": "CHIW",
           "locationType": {
             "description": "Depot",
-            "id": "2",
+            "id": "<masked>",
             "locationTypeCode": "DEPOT",
             "name": "Depot"
           },
           "manager": null,
           "name": "Chicago Warehouse",
           "organization": {
-            "code": "MO-<SEQ>",
-            "dateCreated": "<VOLATILE>",
+            "code": "MO-<seq>",
+            "dateCreated": "<masked>",
             "defaultLocation": null,
             "description": null,
-            "displayName": "MO-<SEQ> - My Organization",
-            "id": "<ID>",
-            "lastUpdated": "<VOLATILE>",
+            "displayName": "MO-<seq> - My Organization",
+            "id": "<masked>",
+            "lastUpdated": "<masked>",
             "name": "My Organization",
             "partyType": {
               "code": "ORG",
-              "id": "1",
+              "id": "<masked>",
               "name": "Organization",
               "partyTypeCode": "ORGANIZATION"
             },
             "roles": [
               {
                 "endDate": null,
-                "id": "<ID>",
+                "id": "<masked>",
                 "roleType": "ROLE_BUYER",
                 "startDate": null
               }
             ],
             "sequences": {}
           },
-          "organizationCode": "MO-<SEQ>",
+          "organizationCode": "<masked>",
           "organizationName": "My Organization",
           "parentLocation": null,
           "sortOrder": null,
@@ -369,12 +369,12 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "<ID>",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": "CHI-COLD",
         "locationType": {
           "description": "Default bin location type",
-          "id": "<ID>",
+          "id": "<masked>",
           "locationTypeCode": "BIN_LOCATION",
           "name": "Bin Location"
         },
@@ -400,46 +400,46 @@
           "hasCentralPurchasingEnabled": false,
           "hasPackingSupport": false,
           "hasPartialReceivingSupport": false,
-          "id": "<ID>",
+          "id": "<masked>",
           "locationGroup": {
-            "id": "<ID>",
+            "id": "<masked>",
             "name": "MidWest"
           },
           "locationNumber": "CHIW",
           "locationType": {
             "description": "Depot",
-            "id": "2",
+            "id": "<masked>",
             "locationTypeCode": "DEPOT",
             "name": "Depot"
           },
           "manager": null,
           "name": "Chicago Warehouse",
           "organization": {
-            "code": "MO-<SEQ>",
-            "dateCreated": "<VOLATILE>",
+            "code": "MO-<seq>",
+            "dateCreated": "<masked>",
             "defaultLocation": null,
             "description": null,
-            "displayName": "MO-<SEQ> - My Organization",
-            "id": "<ID>",
-            "lastUpdated": "<VOLATILE>",
+            "displayName": "MO-<seq> - My Organization",
+            "id": "<masked>",
+            "lastUpdated": "<masked>",
             "name": "My Organization",
             "partyType": {
               "code": "ORG",
-              "id": "1",
+              "id": "<masked>",
               "name": "Organization",
               "partyTypeCode": "ORGANIZATION"
             },
             "roles": [
               {
                 "endDate": null,
-                "id": "<ID>",
+                "id": "<masked>",
                 "roleType": "ROLE_BUYER",
                 "startDate": null
               }
             ],
             "sequences": {}
           },
-          "organizationCode": "MO-<SEQ>",
+          "organizationCode": "<masked>",
           "organizationName": "My Organization",
           "parentLocation": null,
           "sortOrder": null,
@@ -486,12 +486,12 @@
         "hasCentralPurchasingEnabled": false,
         "hasPackingSupport": false,
         "hasPartialReceivingSupport": false,
-        "id": "<ID>",
+        "id": "<masked>",
         "locationGroup": null,
         "locationNumber": "MW-COLD",
         "locationType": {
           "description": "Default bin location type",
-          "id": "<ID>",
+          "id": "<masked>",
           "locationTypeCode": "BIN_LOCATION",
           "name": "Bin Location"
         },
@@ -517,19 +517,19 @@
           "hasCentralPurchasingEnabled": false,
           "hasPackingSupport": false,
           "hasPartialReceivingSupport": false,
-          "id": "1",
+          "id": "<masked>",
           "locationGroup": null,
           "locationNumber": null,
           "locationType": {
             "description": "Depot",
-            "id": "2",
+            "id": "<masked>",
             "locationTypeCode": "DEPOT",
             "name": "Depot"
           },
           "manager": {
             "email": "admin@admin.com",
             "firstName": "Miss",
-            "id": "1",
+            "id": "<masked>",
             "lastName": "Administrator",
             "name": "Miss Administrator",
             "roles": [
@@ -543,33 +543,33 @@
           "name": "Main Warehouse",
           "organization": {
             "code": "MO",
-            "dateCreated": "<VOLATILE>",
+            "dateCreated": "<masked>",
             "defaultLocation": null,
             "description": null,
             "displayName": "MO - Main Organization",
-            "id": "1",
-            "lastUpdated": "<VOLATILE>",
+            "id": "<masked>",
+            "lastUpdated": "<masked>",
             "name": "Main Organization",
             "partyType": {
               "code": "ORG",
-              "id": "1",
+              "id": "<masked>",
               "name": "Organization",
               "partyTypeCode": "ORGANIZATION"
             },
             "roles": [
               {
                 "endDate": null,
-                "id": "1",
+                "id": "<masked>",
                 "roleType": "ROLE_ORGANIZATION",
                 "startDate": null
               }
             ],
             "sequences": {}
           },
-          "organizationCode": "MO",
+          "organizationCode": "<masked>",
           "organizationName": "Main Organization",
           "parentLocation": null,
-          "sortOrder": 0,
+          "sortOrder": "<masked>",
           "supportedActivities": [
             "ADJUST_INVENTORY",
             "ENABLE_FULFILLER_APPROVAL_NOTIFICATIONS",
@@ -600,10 +600,12 @@
     "totalCount": 40
   },
   "contentType": "application/json",
-  "name": "internalLocation__search",
   "request": {
     "method": "GET",
-    "path": "/api/internalLocations/search?max=5"
+    "params": {
+      "max": "5"
+    },
+    "path": "/api/internalLocations/search"
   },
   "status": 200
 }

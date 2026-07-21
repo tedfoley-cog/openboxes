@@ -9,25 +9,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -40,14 +40,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Beaker, Graduated, Borosilicate glass, 100mL",
           "pricePerUnit": 1.5,
@@ -59,62 +59,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -128,25 +128,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -159,14 +159,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Chair, Office, Rolling",
           "pricePerUnit": 25.0,
@@ -178,29 +178,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "New Employee Package",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -214,25 +214,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 1000,
           "minQuantity": 100,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -245,7 +245,7 @@
           "active": true,
           "category": "Cancer",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -257,8 +257,8 @@
               "label": "Cold chain"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Bleomycin injection, 15mg",
           "pricePerUnit": 11.2,
@@ -270,62 +270,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -339,25 +339,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 10000,
           "minQuantity": 1000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -370,7 +370,7 @@
           "active": true,
           "category": "Pain",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -382,8 +382,8 @@
               "label": "Controlled substance"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Morphine injection, 10mg/mL in 1mL ampoule",
           "pricePerUnit": 1.25,
@@ -395,62 +395,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -464,25 +464,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20000,
           "minQuantity": 2000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -495,14 +495,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Tube, Blood collection, K2 EDTA, Lavender top, Plastic, 4mL",
           "pricePerUnit": 0.068,
@@ -514,62 +514,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -583,25 +583,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20000,
           "minQuantity": 2000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -614,14 +614,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Tube, Blood collection, K2 EDTA, Whole blood, Lavender, 2mL (pediatric)",
           "pricePerUnit": 0.068,
@@ -633,62 +633,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -702,25 +702,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20000,
           "minQuantity": 2000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -733,14 +733,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Tube, Blood collection, Serum, Red, Plastic, 3mL (pediatric)",
           "pricePerUnit": 0.0692,
@@ -752,62 +752,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -821,25 +821,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -852,14 +852,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Beaker, Graduated, Borosilicate glass, 400mL",
           "pricePerUnit": 4.05,
@@ -871,62 +871,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -940,25 +940,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -971,14 +971,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Coat, Laboratory, Medium, Unisex",
           "pricePerUnit": 20.0,
@@ -990,62 +990,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -1059,25 +1059,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1090,14 +1090,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer cartridge, HP 122A/Q3962A, Yellow",
           "pricePerUnit": 179.99,
@@ -1117,25 +1117,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 250,
           "minQuantity": 25,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1148,14 +1148,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Chair, Plastic",
           "pricePerUnit": 100.0,
@@ -1175,25 +1175,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 1000,
           "minQuantity": 100,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1206,7 +1206,7 @@
           "active": true,
           "category": "Cancer",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -1218,8 +1218,8 @@
               "label": "Cold chain"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Vincristine injection, 1mL",
           "pricePerUnit": 15.0,
@@ -1231,62 +1231,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -1300,25 +1300,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1331,14 +1331,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer cartridge, HP 122A/Q3963A, Magenta",
           "pricePerUnit": 179.99,
@@ -1358,25 +1358,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1389,14 +1389,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Coat, Laboratory, Large, Unisex",
           "pricePerUnit": 20.0,
@@ -1408,62 +1408,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -1477,25 +1477,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1508,14 +1508,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer cartridge, HP 122A/Q3960A, Black",
           "pricePerUnit": 179.99,
@@ -1535,25 +1535,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 200,
           "minQuantity": 20,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1566,14 +1566,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Case, Tablet, Samsung Galaxy, 10.5in",
           "pricePerUnit": 10.95,
@@ -1593,25 +1593,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20000,
           "minQuantity": 2000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1624,14 +1624,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Tube, Blood collection, Serum, Red, Plastic, 4mL",
           "pricePerUnit": 0.0845,
@@ -1643,62 +1643,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -1712,25 +1712,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 2000,
           "minQuantity": 200,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1743,14 +1743,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Binder clips, 19mm",
           "pricePerUnit": 1.0,
@@ -1770,25 +1770,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1801,14 +1801,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer cartridge, HP 122A/Q3961A, Cyan",
           "pricePerUnit": 179.99,
@@ -1828,25 +1828,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 2000,
           "minQuantity": 200,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1859,14 +1859,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Binder clips, 25mm",
           "pricePerUnit": 1.0,
@@ -1886,25 +1886,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1917,14 +1917,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Adapter, USB-C male to HDMI + VGA female",
           "pricePerUnit": 25.99,
@@ -1944,25 +1944,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 2000,
           "minQuantity": 200,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -1975,14 +1975,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Binder clips, 32mm",
           "pricePerUnit": 1.0,
@@ -2002,25 +2002,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2033,14 +2033,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Coat, Laboratory, Small, Unisex",
           "pricePerUnit": 20.0,
@@ -2052,62 +2052,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2121,25 +2121,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 76000,
           "minQuantity": 7600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2152,14 +2152,14 @@
           "active": true,
           "category": "ARVS",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Lamivudine 150mg + nevirapine 200mg + zidovudine 300mg tablet",
           "pricePerUnit": 0.29,
@@ -2171,41 +2171,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2219,25 +2219,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 76000,
           "minQuantity": 7600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2250,14 +2250,14 @@
           "active": true,
           "category": "ARVS",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Lamivudine 30mg + nevirapine 50mg + zidovudine 60mg tablet",
           "pricePerUnit": 0.29,
@@ -2269,41 +2269,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2317,25 +2317,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 76000,
           "minQuantity": 7600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2348,14 +2348,14 @@
           "active": true,
           "category": "ARVS",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Lamivudine 150mg tablet",
           "pricePerUnit": 0.29,
@@ -2367,41 +2367,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2415,25 +2415,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 76000,
           "minQuantity": 7600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2446,14 +2446,14 @@
           "active": true,
           "category": "ARVS",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Lamivudine 150mg + zidovudine 300mg tablet",
           "pricePerUnit": 0.29,
@@ -2465,41 +2465,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2513,25 +2513,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2544,7 +2544,7 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -2556,8 +2556,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Ethanol (ethyl alcohol), 95%, reagent grade, 16oz",
           "pricePerUnit": 4.71,
@@ -2569,62 +2569,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2638,25 +2638,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100000,
           "minQuantity": 10000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2669,7 +2669,7 @@
           "active": true,
           "category": "Pain",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -2681,8 +2681,8 @@
               "label": "Controlled substance"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Morphine 10mg immediate release tablet",
           "pricePerUnit": 0.25,
@@ -2694,62 +2694,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2763,25 +2763,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20,
           "minQuantity": 2,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2794,14 +2794,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Stool, rolling",
           "pricePerUnit": 145.96,
@@ -2821,25 +2821,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2852,14 +2852,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Cellphone, Unlocked, 8GB, BLU 5.2",
           "pricePerUnit": 78.61,
@@ -2871,29 +2871,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "New Employee Package",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -2907,25 +2907,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 10,
           "minQuantity": 1,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2938,14 +2938,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "File cabinet, Lateral, 5-drawer",
           "pricePerUnit": 55.0,
@@ -2965,25 +2965,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 96000,
           "minQuantity": 9600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -2996,14 +2996,14 @@
           "active": true,
           "category": "TB",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Isoniazid 50mg + pyrazinamide 150mg + rifampicin 75mg tablet",
           "pricePerUnit": 0.38,
@@ -3015,41 +3015,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3063,25 +3063,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 96000,
           "minQuantity": 9600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3094,14 +3094,14 @@
           "active": true,
           "category": "TB",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Isoniazid 300mg + rifapentine 300mg tablet",
           "pricePerUnit": 0.38,
@@ -3113,41 +3113,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3161,25 +3161,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 96000,
           "minQuantity": 9600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3192,14 +3192,14 @@
           "active": true,
           "category": "TB",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Isoniazid 300mg tablet",
           "pricePerUnit": 0.38,
@@ -3211,41 +3211,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3259,25 +3259,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 96000,
           "minQuantity": 9600,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3290,14 +3290,14 @@
           "active": true,
           "category": "TB",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": true,
           "name": "Isoniazid 50mg + rifampicin 75mg tablet",
           "pricePerUnit": 0.38,
@@ -3309,41 +3309,41 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Primary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3357,25 +3357,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 200,
           "minQuantity": 20,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3388,14 +3388,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Staples 23/17 pack of 1000",
           "pricePerUnit": 3.0,
@@ -3407,29 +3407,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Mail Room",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3443,25 +3443,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3474,7 +3474,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -3486,8 +3486,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Charger, Laptop, Lenovo, TP60/SL500",
           "pricePerUnit": 58.55,
@@ -3499,29 +3499,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "New Employee Package",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3535,25 +3535,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3566,14 +3566,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Charger, for Lenovo Thinkpad T400 series Laptop",
           "pricePerUnit": 58.55,
@@ -3593,25 +3593,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 6,
           "minQuantity": 2,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3624,7 +3624,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -3636,8 +3636,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Computer, Desktop, ThinkCentre M920z",
           "pricePerUnit": 1115.25,
@@ -3657,25 +3657,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 200,
           "minQuantity": 20,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3688,14 +3688,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Staples 23/13 pack of 1000",
           "pricePerUnit": 3.0,
@@ -3707,29 +3707,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Mail Room",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -3743,25 +3743,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 6,
           "minQuantity": 2,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3774,7 +3774,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -3786,8 +3786,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Computer, Desktop, Dell Optiplex 390 SFF",
           "pricePerUnit": 934.0,
@@ -3807,25 +3807,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 10,
           "minQuantity": 1,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3838,14 +3838,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "File cabinet, Lateral, 6-drawer",
           "pricePerUnit": 55.0,
@@ -3865,25 +3865,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 100,
           "minQuantity": 10,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3896,14 +3896,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Adapter, USB-C Male to HDMI Female",
           "pricePerUnit": 59.99,
@@ -3923,25 +3923,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 15,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -3954,7 +3954,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -3966,8 +3966,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Laptop, E490, ThinkPad",
           "pricePerUnit": 779.0,
@@ -3979,29 +3979,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "New Employee Package",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -4015,25 +4015,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 50,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4046,14 +4046,14 @@
           "active": true,
           "category": "Lab",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Beaker, Graduated, Borosilicate glass, 250mL",
           "pricePerUnit": 2.35,
@@ -4065,62 +4065,62 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Tertiary Care",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -4134,25 +4134,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 4800,
           "minQuantity": 480,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4165,7 +4165,7 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -4177,8 +4177,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Batteries, Non Rechargeable, AAA",
           "pricePerUnit": 1.5,
@@ -4198,25 +4198,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 4800,
           "minQuantity": 480,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4229,7 +4229,7 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -4241,8 +4241,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Batteries, Non Rechargeable, AA",
           "pricePerUnit": 1.5,
@@ -4262,25 +4262,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 10000,
           "minQuantity": 1000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4293,14 +4293,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Envelope, A3, White",
           "pricePerUnit": 0.01,
@@ -4312,29 +4312,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Mail Room",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -4348,25 +4348,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 15,
           "minQuantity": 5,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4379,7 +4379,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -4391,8 +4391,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Laptop, Dell Inspiron, T8TJG",
           "pricePerUnit": 879.43,
@@ -4412,25 +4412,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 10000,
           "minQuantity": 1000,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4443,14 +4443,14 @@
           "active": true,
           "category": "Office Supplies",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Envelope, A3, Manila",
           "pricePerUnit": 0.01,
@@ -4462,29 +4462,29 @@
         "tags": [
           {
             "createdBy": {
-              "id": "1"
+              "id": "<masked>"
             },
-            "dateCreated": "<VOLATILE>",
-            "id": "<ID>",
+            "dateCreated": "<masked>",
+            "id": "<masked>",
             "isActive": true,
-            "lastUpdated": "<VOLATILE>",
+            "lastUpdated": "<masked>",
             "products": [
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               },
               {
-                "id": "<ID>"
+                "id": "<masked>"
               }
             ],
             "tag": "Mail Room",
             "updatedBy": {
-              "id": "1"
+              "id": "<masked>"
             }
           }
         ],
@@ -4498,25 +4498,25 @@
           "abcClass": null,
           "binLocation": null,
           "comments": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "demandTimePeriodDays": null,
           "expectedLeadTimeDays": null,
           "forecastPeriodDays": 30.0,
           "forecastQuantity": null,
-          "id": "<ID>",
+          "id": "<masked>",
           "internalLocation": null,
           "inventory": {
-            "id": "1"
+            "id": "<masked>"
           },
-          "lastUpdated": "<VOLATILE>",
+          "lastUpdated": "<masked>",
           "maxQuantity": 20,
           "minQuantity": 2,
           "preferred": false,
           "preferredBinLocation": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "product": {
-            "id": "<ID>"
+            "id": "<masked>"
           },
           "reorderQuantity": null,
           "replenishmentLocation": null,
@@ -4529,7 +4529,7 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
@@ -4541,8 +4541,8 @@
               "label": "Hazardous material"
             }
           ],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Battery, for canon LP-E6N",
           "pricePerUnit": 61.0,
@@ -4565,14 +4565,14 @@
           "active": true,
           "category": "Furniture and Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Desk, Office, Wooden or metal",
           "pricePerUnit": 250.0,
@@ -4595,14 +4595,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer, Multi-function, Scanner, HP MFP 426A",
           "pricePerUnit": 795.3,
@@ -4625,14 +4625,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Printer, Multifunction, Color, HP Inkjet PageWide Pro 477dw",
           "pricePerUnit": 1229.0,
@@ -4655,14 +4655,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Camera, 600EXII-RT, Canon",
           "pricePerUnit": 475.0,
@@ -4685,14 +4685,14 @@
           "active": true,
           "category": "IT Equipment",
           "color": null,
-          "dateCreated": "<VOLATILE>",
+          "dateCreated": "<masked>",
           "description": "",
           "displayNames": {
             "default": null
           },
           "handlingIcons": [],
-          "id": "<ID>",
-          "lastUpdated": "<VOLATILE>",
+          "id": "<masked>",
+          "lastUpdated": "<masked>",
           "lotAndExpiryControl": false,
           "name": "Camera, Canon, EOS 80D, with 18-55mm lens, with accessories",
           "pricePerUnit": 1199.0,
@@ -4707,10 +4707,13 @@
     ]
   },
   "contentType": "application/json",
-  "name": "inventory__reorderReport",
   "request": {
     "method": "GET",
-    "path": "/api/facilities/1/inventories/reorderReport?max=10&offset=0"
+    "params": {
+      "max": "10",
+      "offset": "0"
+    },
+    "path": "/api/facilities/1/inventories/reorderReport"
   },
   "status": 200
 }
