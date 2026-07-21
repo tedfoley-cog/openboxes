@@ -35,14 +35,13 @@ test('creates a requisition (outbound stock movement) with a line item', async (
   const stockMovementId = page.url().match(/createOutbound\/([a-zA-Z0-9]+)/)![1];
 
   // --- Step 2: Add items ---
-  const qtyInput = page.locator('input[id^="lineItems"][id$="quantityRequested"]').first();
-  await qtyInput.waitFor();
+  await page.locator('input[id^="lineItems"][id$="quantityRequested"]').first().waitFor();
   const row = page
     .locator('tr, div[class*="rt-tr"], div[role="row"]')
     .filter({ has: page.locator('input[id^="lineItems"][id$="quantityRequested"]') })
     .last();
   await selectInside(page, row, PRODUCTS.lamivudine.name);
-  await qtyInput.fill(String(QTY));
+  await row.locator('input[id^="lineItems"][id$="quantityRequested"]').fill(String(QTY));
   await captureStep(page, FLOW, 'add-items-filled');
   await page.click('button:has-text("Save")');
   await page.waitForLoadState('networkidle');
