@@ -19,13 +19,13 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 0 — Baseline & harness (blocks everything else)
 | # | Task | Child session | PR | Status |
 |---|------|---------------|----|--------|
-| 0.1 | App running via Docker (MySQL + seed data); fix fork CI | — | — | pending |
+| 0.1 | App running via Docker (MySQL + seed data); fix fork CI | [22d3def4](https://app.devin.ai/sessions/22d3def4f9f84c8c9d3c3b463021aa7c) | — | in progress |
 | 0.2a | Playwright characterization: login, receive stock, create requisition | — | — | pending |
 | 0.2b | Playwright characterization: stock movement, ship, putaway | — | — | pending |
 | 0.2c | Playwright characterization: cycle count, invoice | — | — | pending |
 | 0.3a | API snapshot tests: controllers A–L (~26) | — | — | pending |
 | 0.3b | API snapshot tests: controllers M–Z (~26) | — | — | pending |
-| 0.4 | Dead-screen audit: live-screen inventory of 616 GSPs | — | — | pending |
+| 0.4 | Dead-screen audit: live-screen inventory of 616 GSPs | [9f0386f7](https://app.devin.ai/sessions/9f0386f72a764fafad375b6a5e2837e6) | — | in progress |
 
 ## Phase 1 — Backend platform (sequential waves; app must boot after each)
 | # | Task | Status |
