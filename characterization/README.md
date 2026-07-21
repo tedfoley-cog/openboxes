@@ -11,6 +11,8 @@ oracle for the modernization program: any rewrite must keep these green.
 | `tests/login.spec.ts` | Login / logout (+ invalid credentials) | authenticated JSON API session, location choice, session destroyed on logout |
 | `tests/receive-stock.spec.ts` | Inbound stock movement → send shipment → partial receiving | stock movement status `DISPATCHED` → `RECEIVED`, quantity on hand +25 for the received lot |
 | `tests/create-requisition.spec.ts` | Create requisition (outbound stock movement) with a line item | requisition persisted with identifier + `CREATED` status, line item product/quantity, appears in outbound list |
+| `tests/cycle-count.spec.ts` | Cycle count with a discrepancy (count → recount → root cause) | quantity on hand adjusted by the counted discrepancy (−3), count recorded against the product (`dateLastCount`) |
+| `tests/invoice.spec.ts` | Create + process an invoice from a shipped purchase order | invoice persisted with generated number + `PENDING` status, invoice item tied to the PO (quantity/unit price), appears in invoice list, `SUBMITTED` with `dateSubmitted` after submit |
 
 ## Running locally (one command)
 
@@ -37,8 +39,17 @@ Point the suite at another instance with `OPENBOXES_BASE_URL`
   (see `docs/migration/RUNNING_LOCALLY.md`).
 - `admin` / `password` exists (install migrations) and can log into the
   **Main Warehouse** depot (location id `1`).
-- Demo data provides: supplier **Main Supplier**, depot **Boston Warehouse**,
-  and product **Lamivudine 150mg tablet** (lot & expiry controlled).
+- Demo data provides: supplier **Main Supplier** (organization
+  **Supplier Organization**), depot **Boston Warehouse**, and products
+  **Lamivudine 150mg tablet** (lot & expiry controlled) and
+  **Morphine 10mg immediate release tablet**.
+- `admin` does **not** have `ROLE_INVOICE`; the invoice flow uses the demo
+  `superuser` user (password `superuser`). Demo users are seeded inactive, so
+  the invoice spec activates `superuser` through the admin user screen on
+  first run (idempotent).
+- The demo database contains no purchase orders or invoices; the invoice spec
+  creates its own PO and ships it (via the same endpoints the UI uses) so an
+  invoice item candidate exists.
 - Product **codes** are randomly generated at demo-import time, so tests
   reference products by **name**, never by code.
 
@@ -49,6 +60,11 @@ Point the suite at another instance with `OPENBOXES_BASE_URL`
   be re-run against the same database without resets.
 - Inventory assertions are **deltas** (before/after quantity on hand), not
   absolute totals.
+- The cycle-count flow cancels any leftover in-progress count for its product
+  before starting, and uses a **different product** from the receiving flow: a
+  cycle count writes an inventory-baseline transaction that supersedes any
+  receipt recorded in the same minute (receipt transaction dates are truncated
+  to the minute).
 
 ## Screenshots
 
@@ -61,6 +77,8 @@ baselines by copying `screenshots/output/` over `screenshots/baseline/`.
 
 - `fixtures/constants.ts` – seeded-data constants, date helpers.
 - `fixtures/auth.ts` – GSP login/logout + location choice.
+- `fixtures/api.ts` – authenticated API sessions, demo-user activation,
+  lookups, and purchase-order/shipment setup for flows that need one.
 - `fixtures/react-select.ts` – helpers for the React wizards' comboboxes.
 - `fixtures/screenshots.ts` – per-step screenshot capture.
 
