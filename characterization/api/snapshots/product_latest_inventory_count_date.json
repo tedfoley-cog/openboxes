@@ -1,0 +1,16 @@
+{
+  "body": {
+    "data": {
+      "2c9280829f86c6fd019f86c8907200c3": "<date>"
+    }
+  },
+  "contentType": "application/json",
+  "request": {
+    "method": "GET",
+    "params": {
+      "productIds": "<id>"
+    },
+    "path": "/api/products/getLatestInventoryCountDate"
+  },
+  "status": 200
+}
