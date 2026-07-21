@@ -62,7 +62,10 @@ test('puts away received stock from the receiving bin into a bin location', asyn
   const binSelect = page.locator('[data-testid="select-bin"]').first();
   await binSelect.waitFor();
   await binSelect.click();
-  await page.locator(`.react-select__option:has-text("${TARGET_BIN}")`).first().click();
+  await page.locator('.react-select__option')
+    .filter({ hasText: new RegExp(`^${TARGET_BIN}$`) })
+    .first()
+    .click();
   await captureStep(page, FLOW, 'bin-assigned');
   await page.locator('[data-testid="next-button"]').first().click();
 
