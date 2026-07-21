@@ -333,17 +333,19 @@ def _warm_up_product_availability(client, location_id):
     job — on a freshly seeded database (e.g. in CI) it is still empty, so
     those endpoints would differ from the committed snapshots.
     """
-    client.request("GET", "/dashboard/flushCache")
-    deadline = time.time() + 300
+    # synchronous full refresh (ReportController.refreshProductAvailability)
+    client.request("GET", "/report/refreshProductAvailability")
+    deadline = time.time() + 600
     while time.time() < deadline:
         status, _, body = client.request(
             "GET", "/api/dashboard/inventoryByLotAndBin?locationId=%s" % location_id)
         if status == 200 and (_data(body).get("number") or 0) > 0:
             return
-        time.sleep(5)
+        client.request("GET", "/dashboard/flushCache")
+        time.sleep(10)
     raise SystemExit(
-        "product availability was not populated within 5 minutes "
-        "(triggered via /dashboard/flushCache)")
+        "product availability was not populated within 10 minutes "
+        "(triggered via /report/refreshProductAvailability)")
 
 
 def _cleanup(client, ctx):
