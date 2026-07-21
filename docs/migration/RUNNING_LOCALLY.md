@@ -74,7 +74,9 @@ demo CSVs referenced in `grails-app/conf/runtime.groovy`
 Run it once against a fresh database; re-running may create duplicates.
 
 Demo users created (all with password `password`): `admin`, `superuser`,
-`purchaser`, `accountant`, `browser`.
+`purchaser`, `accountant`, `browser`. Note that the demo users other than
+`admin` are imported **inactive** ("account under review" on login) — activate
+them as admin via *gear icon → Users → select user → Activate* before use.
 
 Demo depots with inventory: Main Warehouse, Boston Warehouse,
 Chicago Warehouse (plus Central Warehouse (NYC)).
