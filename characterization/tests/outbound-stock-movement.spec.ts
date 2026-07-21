@@ -45,23 +45,26 @@ test('creates and processes an outbound stock movement through picking', async (
   await captureStep(page, FLOW, 'pick-step');
 
   // --- Outcome assertions on real data ---
-  const picked = await fetchStockMovement(page, stockMovementId);
-  expect(['PICKING', 'PICKED']).toContain(picked.statusCode);
+  // Picklist generation runs server-side after entering the step, so poll
+  // until the requisition status and picklist quantities settle.
+  await expect
+    .poll(async () => (await fetchStockMovement(page, stockMovementId)).statusCode, { timeout: 60_000 })
+    .toMatch(/^(PICKING|PICKED)$/);
 
-  const itemsRes = await page.request.get(
-    url(`/api/stockMovements/${stockMovementId}/stockMovementItems?stepNumber=4&refreshPicklistItems=false`),
-  );
-  expect(itemsRes.status()).toBe(200);
-  const pickPageItems = (await itemsRes.json()).data;
-  expect(pickPageItems).toHaveLength(1);
-  expect(pickPageItems[0].productName ?? pickPageItems[0].product?.name).toContain(
-    PRODUCTS.lamivudine.name,
-  );
-  const picklistItems = pickPageItems[0].picklistItems;
-  expect(picklistItems.length).toBeGreaterThan(0);
-  const totalPicked = picklistItems.reduce(
-    (sum: number, i: { quantityPicked: number }) => sum + i.quantityPicked,
-    0,
-  );
-  expect(totalPicked).toBe(QTY);
+  await expect
+    .poll(async () => {
+      const itemsRes = await page.request.get(
+        url(`/api/stockMovements/${stockMovementId}/stockMovementItems?stepNumber=4&refreshPicklistItems=false`),
+      );
+      if (itemsRes.status() !== 200) return null;
+      const pickPageItems = (await itemsRes.json()).data;
+      if (pickPageItems?.length !== 1) return null;
+      const name = pickPageItems[0].productName ?? pickPageItems[0].product?.name ?? '';
+      const totalPicked = (pickPageItems[0].picklistItems ?? []).reduce(
+        (sum: number, i: { quantityPicked: number }) => sum + i.quantityPicked,
+        0,
+      );
+      return `${name.includes(PRODUCTS.lamivudine.name)}:${totalPicked}`;
+    }, { timeout: 60_000 })
+    .toBe(`true:${QTY}`);
 });
