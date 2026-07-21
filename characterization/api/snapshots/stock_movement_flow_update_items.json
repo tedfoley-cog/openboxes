@@ -44,7 +44,7 @@
           "name": "Dispensary"
         },
         "name": "Boston Office",
-        "organizationCode": "MO-275VGG",
+        "organizationCode": "<masked>",
         "organizationName": "My Organization",
         "supportedActivities": []
       },
@@ -144,7 +144,7 @@
           "name": "Depot"
         },
         "name": "Main Warehouse",
-        "organizationCode": "MO",
+        "organizationCode": "<masked>",
         "organizationName": "Main Organization",
         "supportedActivities": []
       },

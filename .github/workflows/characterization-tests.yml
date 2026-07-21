@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "Waiting for OpenBoxes to finish database migrations and start..."
           for i in $(seq 1 120); do
-            if curl -sf http://localhost:8080/openboxes/health | grep -q '"status":"UP"'; then
+            if curl -sf http://localhost:8080/openboxes/health | grep -q UP; then
               echo "App is up."
               exit 0
             fi

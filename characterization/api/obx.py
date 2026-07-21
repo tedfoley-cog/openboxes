@@ -16,7 +16,7 @@ import requests
 BASE_URL = os.environ.get("OB_BASE_URL", "http://localhost:8080/openboxes")
 USERNAME = os.environ.get("OB_USERNAME", "admin")
 PASSWORD = os.environ.get("OB_PASSWORD", "password")
-UPDATE_SNAPSHOTS = os.environ.get("UPDATE_SNAPSHOTS", "") not in ("", "0", "false")
+UPDATE_SNAPSHOTS = os.environ.get("UPDATE_SNAPSHOTS", "").lower() not in ("", "0", "false")
 
 SNAPSHOT_DIR = Path(__file__).parent / "snapshots"
 
@@ -53,6 +53,8 @@ MASKED_KEYS = {
     "invoiceNumber",
     "transactionNumber",
     "sortOrder",
+    # organization codes carry a generated suffix (e.g. "MO-275VGG")
+    "organizationCode",
 }
 
 
@@ -72,7 +74,8 @@ def mask_scalar(value):
 def normalize(value, key=None):
     """Recursively mask nondeterministic values and sort lists of objects."""
     if isinstance(value, dict):
-        return {k: normalize(v, k) for k, v in sorted(value.items())}
+        # Keys themselves can be generated ids (e.g. maps keyed by product id)
+        return {mask_scalar(k): normalize(v, k) for k, v in sorted(value.items())}
     if isinstance(value, list):
         normalized = [normalize(v) for v in value]
         try:

@@ -12,8 +12,12 @@ from obx import check_snapshot, record_response
 PRODUCT_CODE = "AX738"
 
 
-def step(client, name, method, path, json=None, params=None):
+def step(client, name, method, path, json=None, params=None, capture=None):
     resp = client.request(method, path, json=json, params=params)
+    # Capture created-record ids before the snapshot assertion so cleanup
+    # fixtures can still delete the record if the snapshot check fails.
+    if capture is not None:
+        capture(resp)
     doc = record_response(name, method, path, resp, params)
     check_snapshot(name, doc)
     return resp
@@ -36,9 +40,8 @@ class TestStocklistFlow:
             "origin": {"id": client.location_id("Main Warehouse")},
             "destination": {"id": client.location_id("Boston Office")},
             "requestedBy": {"id": "1"},
-        })
+        }, capture=lambda r: flow.update(stocklist_id=r.json()["data"]["requisition.id"]))
         assert resp.status_code == 201
-        flow["stocklist_id"] = resp.json()["data"]["requisition.id"]
 
     def test_02_read(self, client, flow):
         step(client, "stocklist_flow_read", "GET", f"/api/stocklists/{flow['stocklist_id']}")
@@ -51,9 +54,9 @@ class TestStocklistFlow:
             "/api/stocklistItems",
             json={"stocklistId": flow["stocklist_id"], "maxQuantity": 25},
             params={"product.id": client.product_id(PRODUCT_CODE)},
+            capture=lambda r: flow.update(item_id=r.json()["data"]["requisitionItem.id"]),
         )
         assert resp.status_code == 201
-        flow["item_id"] = resp.json()["data"]["requisitionItem.id"]
 
     def test_04_list_items(self, client, flow):
         step(
@@ -113,9 +116,8 @@ class TestStockMovementFlow:
             "destination": {"id": client.location_id("Boston Office")},
             "requestedBy": {"id": "1"},
             "dateRequested": "07/01/2026",
-        })
+        }, capture=lambda r: flow.update(id=r.json()["data"]["id"]))
         assert resp.status_code == 201
-        flow["id"] = resp.json()["data"]["id"]
 
     def test_02_read(self, client, flow):
         step(client, "stock_movement_flow_read", "GET", f"/api/stockMovements/{flow['id']}")
@@ -124,7 +126,7 @@ class TestStockMovementFlow:
         step(client, "stock_movement_flow_status", "GET", f"/api/stockMovements/{flow['id']}/status")
 
     def test_04_update_items(self, client, flow):
-        resp = step(
+        step(
             client,
             "stock_movement_flow_update_items",
             "POST",
@@ -137,8 +139,8 @@ class TestStockMovementFlow:
                     "sortOrder": 100,
                 }],
             },
+            capture=lambda r: flow.update(item_id=r.json()["data"]["lineItems"][0]["id"]),
         )
-        flow["item_id"] = resp.json()["data"]["lineItems"][0]["id"]
 
     def test_04b_item_read(self, client, flow):
         step(client, "stock_movement_flow_item_read", "GET", f"/api/stockMovementItems/{flow['item_id']}")
@@ -189,9 +191,8 @@ class TestProductSupplierFlow:
             "code": "CHARTEST-PS",
             "name": "Characterization Test Product Source",
             "active": True,
-        })
+        }, capture=lambda r: flow.update(id=r.json()["data"]["id"]))
         assert resp.status_code == 201
-        flow["id"] = resp.json()["data"]["id"]
 
     def test_02_read(self, client, flow):
         step(client, "product_supplier_flow_read", "GET", f"/api/productSuppliers/{flow['id']}")
