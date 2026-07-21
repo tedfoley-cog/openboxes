@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
-# Run the API characterization snapshot suite against a running,
-# demo-data-seeded OpenBoxes instance (see docs/migration/RUNNING_LOCALLY.md).
+#
+# Runs the API characterization (snapshot) suite against a running, seeded
+# OpenBoxes instance (see docs/migration/RUNNING_LOCALLY.md).
 #
 # Usage:
-#   ./run.sh                # verify: fails on any snapshot diff
-#   ./run.sh --update       # intentionally re-baseline the snapshots
+#   ./run.sh                  # run the suite, fail on any snapshot diff
+#   UPDATE_SNAPSHOTS=1 ./run.sh   # re-baseline: rewrite all snapshots
 #
-# Environment overrides: OPENBOXES_URL, OPENBOXES_USERNAME, OPENBOXES_PASSWORD
+# Environment:
+#   OB_BASE_URL  (default http://localhost:8080/openboxes)
+#   OB_USERNAME  (default admin)
+#   OB_PASSWORD  (default password)
+
 set -euo pipefail
 cd "$(dirname "$0")"
-exec python3 snapshot_runner.py "$@"
+
+if [ ! -d .venv ]; then
+    python3 -m venv .venv
+fi
+.venv/bin/pip install --quiet -r requirements.txt
+exec .venv/bin/python -m pytest -v "$@"
