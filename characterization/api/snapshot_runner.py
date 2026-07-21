@@ -94,8 +94,8 @@ def mask(value, key=None):
     if isinstance(value, dict):
         out = {}
         for k in sorted(value.keys()):
-            mk = "<DATEKEY>" if looks_like_date(k) else k
-            if mk == "<DATEKEY>":
+            mk = k
+            if looks_like_date(k):
                 # keep distinct entries distinct and ordering stable
                 mk = "<DATEKEY:%d>" % sorted(
                     kk for kk in value.keys() if looks_like_date(kk)
@@ -156,7 +156,13 @@ class Client:
 
     def get_json(self, path):
         status, ctype, body = self.request("GET", path)
-        return json.loads(body.decode("utf-8", errors="replace"))
+        text = body.decode("utf-8", errors="replace")
+        try:
+            return json.loads(text)
+        except ValueError:
+            raise SystemExit(
+                "Expected JSON from GET %s but got HTTP %s (%s): %.500s"
+                % (path, status, ctype, text))
 
 
 def snapshot_record(name, method, path, status, content_type, body):
