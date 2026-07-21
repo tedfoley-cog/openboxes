@@ -40,9 +40,10 @@ if [ -z "$LOGIN_REDIRECT" ] || printf '%s' "$LOGIN_REDIRECT" | grep -q '/auth/lo
 fi
 
 echo "Loading demo data (this takes a minute or two)..."
-# Unauthenticated requests are 302-redirected to the login page, which curl
-# --fail does not treat as an error, so assert on the final status code.
-DEMO_STATUS="$(curl --fail --silent --show-error --output /dev/null \
+# Unauthenticated requests are 302-redirected to the login page rather than
+# rejected with an error code, so assert on the final status code (no --fail
+# here so 4xx/5xx also reach the check below).
+DEMO_STATUS="$(curl --silent --show-error --output /dev/null \
     --cookie "$COOKIE_JAR" \
     --max-time 600 \
     --write-out '%{http_code}' \
