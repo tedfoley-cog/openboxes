@@ -55,6 +55,9 @@ MASKED_KEYS = {
     "sortOrder",
     # organization codes carry a generated suffix (e.g. "MO-275VGG")
     "organizationCode",
+    # derived from a timestamp comparison (requisition vs item dateCreated),
+    # so it flips depending on whether they land in the same second
+    "manuallyAdded",
 }
 
 

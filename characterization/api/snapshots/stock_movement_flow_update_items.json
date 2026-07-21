@@ -80,7 +80,7 @@
             "quantity": 50
           },
           "lotNumber": "",
-          "manuallyAdded": true,
+          "manuallyAdded": "<masked>",
           "orderId": null,
           "orderItemId": null,
           "orderNumber": null,
