@@ -362,7 +362,7 @@ counts = defaultdict(int)
 for r in out:
     counts[r["classification"]] += 1
 dest = os.path.join(os.path.dirname(os.path.abspath(__file__)), "screen_inventory.json")
-with open(dest, "w") as f:
+with open(dest, "w", encoding="utf-8") as f:
     json.dump({"counts": dict(counts), "screens": out}, f, indent=1)
 print(json.dumps(dict(counts), indent=1))
 print("wrote", dest)

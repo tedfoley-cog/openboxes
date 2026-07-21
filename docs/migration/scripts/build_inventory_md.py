@@ -132,6 +132,6 @@ for s in sorted(screens, key=lambda s: (s["classification"], s["key"])):
     lines.append(f"| `{s['gsp']}` | {s['classification']} | {ev} | {module_of(s['key'])} |")
 lines.append("")
 
-with open(OUT, "w") as f:
+with open(OUT, "w", encoding="utf-8") as f:
     f.write("\n".join(lines))
 print("wrote", os.path.abspath(OUT), f"({batch_no} batches)")
