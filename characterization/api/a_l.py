@@ -70,7 +70,13 @@ def mask_doc(doc):
         text = INLINE_SEQ_RE.sub("<seq>", doc["text"])
         text = ERROR_PAGE_DATE_RE.sub("<date>", text)
         text = ERROR_PAGE_HOST_RE.sub("<b><host></b>", text)
-        doc["text"] = ERROR_PAGE_ELAPSED_RE.sub("<b><elapsed></b>", text)
+        text = ERROR_PAGE_ELAPSED_RE.sub("<b><elapsed></b>", text)
+        # re-sort: obx.normalize_text sorts lines before these masks run,
+        # so masked lines may no longer be in canonical order
+        lines = text.split("\n")
+        if len(lines) > 2:
+            lines = [lines[0]] + sorted(lines[1:])
+        doc["text"] = "\n".join(lines)
     return doc
 
 
