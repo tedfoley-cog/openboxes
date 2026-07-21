@@ -20,11 +20,11 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | # | Task | Child session | PR | Status |
 |---|------|---------------|----|--------|
 | 0.1 | App running via Docker (MySQL + seed data); fix fork CI | [22d3def4](https://app.devin.ai/sessions/22d3def4f9f84c8c9d3c3b463021aa7c) | [#1](https://github.com/tedfoley-cog/openboxes/pull/1) | merged |
-| 0.2a | Playwright characterization: login, receive stock, create requisition | [35b80cc2](https://app.devin.ai/sessions/35b80cc2487e4b1ea48bff2163e88af9) | — | in progress |
-| 0.2b | Playwright characterization: stock movement, ship, putaway | — | — | pending |
-| 0.2c | Playwright characterization: cycle count, invoice | — | — | pending |
-| 0.3a | API snapshot tests: controllers A–L (26) | [ec2aa633](https://app.devin.ai/sessions/ec2aa63314ab4e77a7886a95bb63259f) | — | in progress |
-| 0.3b | API snapshot tests: controllers M–Z (26) | [f12d5fcf](https://app.devin.ai/sessions/f12d5fcf1acc40b0987f1ddfe2a1ff4e) | — | in progress |
+| 0.2a | Playwright characterization: login, receive stock, create requisition | [35b80cc2](https://app.devin.ai/sessions/35b80cc2487e4b1ea48bff2163e88af9) | [#5](https://github.com/tedfoley-cog/openboxes/pull/5) | merged |
+| 0.2b | Playwright characterization: stock movement, ship, putaway | [40deec22](https://app.devin.ai/sessions/40deec2248d343a381a6727faf8f5d12) | — | in progress |
+| 0.2c | Playwright characterization: cycle count, invoice | [02b704e7](https://app.devin.ai/sessions/02b704e7b0df44cdab4b79e796574441) | — | in progress |
+| 0.3a | API snapshot tests: controllers A–L (26) | [ec2aa633](https://app.devin.ai/sessions/ec2aa63314ab4e77a7886a95bb63259f) | [#3](https://github.com/tedfoley-cog/openboxes/pull/3) | rebasing onto merged 0.3b harness |
+| 0.3b | API snapshot tests: controllers M–Z (26) | [f12d5fcf](https://app.devin.ai/sessions/f12d5fcf1acc40b0987f1ddfe2a1ff4e) | [#4](https://github.com/tedfoley-cog/openboxes/pull/4) | merged (85 snapshots, M–Z) |
 | 0.4 | Dead-screen audit: live-screen inventory of 616 GSPs | [9f0386f7](https://app.devin.ai/sessions/9f0386f72a764fafad375b6a5e2837e6) | [#2](https://github.com/tedfoley-cog/openboxes/pull/2) | merged (LIVE=274, TEMPLATE=231, SUPERSEDED=7, DEAD=104; 49-batch Phase 2 queue in docs/migration/SCREEN_INVENTORY.md) |
 
 ## Phase 1 — Backend platform (sequential waves; app must boot after each)
@@ -58,3 +58,4 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Log
 - 2026-07-21: Coordinator initialized; tracking branch created; Phase 0 wave 1 spawned.
 - 2026-07-21: PR #1 (Docker baseline + fork CI) and PR #2 (dead-screen audit) merged; wave 2 spawned (0.2a, 0.3a, 0.3b). 0.2b/0.2c queued behind 0.2a harness.
+- 2026-07-21: PR #5 (0.2a Playwright flows) and PR #4 (0.3b API snapshots M–Z) merged. 0.3a PR #3 conflicted with #4's harness — child instructed to rebase/unify. 0.2b + 0.2c spawned.
