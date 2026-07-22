@@ -55,6 +55,10 @@ const RequisitionTemplateShow = () => {
           message: translate('react.requisitionTemplate.notFound.label', 'Stock list template not found'),
         });
         window.location.assign(REQUISITION_TEMPLATE_URL.list());
+      } else {
+        notification(NotificationType.ERROR)({
+          message: translate('react.requisitionTemplate.fetchError.label', 'Unable to load stock list template'),
+        });
       }
     } finally {
       dispatch(hideSpinner());
@@ -76,10 +80,14 @@ const RequisitionTemplateShow = () => {
       notification(NotificationType.SUCCESS)({
         message: translate('react.requisitionTemplate.updated.label', 'Stock list has been updated'),
       });
+      fetchTemplate();
+    } catch (error) {
+      notification(NotificationType.ERROR)({
+        message: translate('react.requisitionTemplate.updateError.label', 'Unable to update stock list'),
+      });
     } finally {
       dispatch(hideSpinner());
     }
-    fetchTemplate();
   };
 
   const items = template?.requisitionItems ?? [];
