@@ -213,7 +213,7 @@ const RequisitionCreateStock = () => {
                 </thead>
                 <tbody>
                   {items.map((item, index) => (
-                    <tr key={item.productId}>
+                    <tr key={item.templateItemId}>
                       <td>{item.productCode}</td>
                       <td>{item.productName}</td>
                       <td>{item.maxQuantity}</td>
