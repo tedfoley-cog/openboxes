@@ -15,6 +15,16 @@ import { debouncePeopleFetch } from 'utils/option-utils';
 import Select from 'utils/Select';
 import Translate, { translateWithDefaultMessage } from 'utils/Translate';
 
+const approvedQuantity = (item) => {
+  if (item.isChanged && item.modificationItem) {
+    return item.modificationItem.quantityApproved;
+  }
+  if (item.isSubstituted && item.substitutionItem) {
+    return item.substitutionItem.quantityApproved;
+  }
+  return item.quantityApproved;
+};
+
 const RequisitionReview = () => {
   const { requisitionId } = useParams();
   const [requisition, setRequisition] = useState(null);
@@ -211,9 +221,7 @@ const RequisitionReview = () => {
                 </td>
                 <td className="text-right">{item.quantity}</td>
                 <td className="text-right">
-                  {item.isChanged && item.modificationItem
-                    ? item.modificationItem.quantityApproved
-                    : item.quantityApproved}
+                  {approvedQuantity(item)}
                 </td>
                 <td className="text-right">
                   {requisition.quantityOnHandMap?.[item.product?.id] ?? 0}

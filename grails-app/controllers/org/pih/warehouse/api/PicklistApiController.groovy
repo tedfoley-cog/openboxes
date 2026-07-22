@@ -24,10 +24,10 @@ class PicklistApiController extends BaseDomainApiController {
     def save() {
         def jsonRequest = request.JSON
         def picklist = picklistService.save(jsonRequest)
-        if (picklist.hasErrors()) {
+        if (!picklist || picklist.hasErrors()) {
             response.status = 400
             render([errorCode: 400, errorMessage: "Validation errors",
-                    errors: picklist.errors.allErrors.collect { it.toString() }] as JSON)
+                    errors: picklist?.errors?.allErrors?.collect { it.toString() } ?: []] as JSON)
             return
         }
         render([data: picklist.toJson()] as JSON)
