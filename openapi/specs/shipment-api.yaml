@@ -123,8 +123,8 @@ paths:
                         nullable: true
                       isSuperuser:
                         type: boolean
-        '403':
-          $ref: '#/components/responses/Forbidden'
+        '400':
+          $ref: '#/components/responses/ValidationError'
     post:
       operationId: createShipment
       summary: Create a shipment (wizard details step)
@@ -623,8 +623,6 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/NamedReference'
-        '403':
-          $ref: '#/components/responses/Forbidden'
 
   /api/shipments/bulkAction:
     post:
@@ -736,8 +734,6 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/NamedReference'
-        '403':
-          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -789,8 +785,6 @@ paths:
                                 containerDetails:
                                   type: object
                                   nullable: true
-        '403':
-          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 

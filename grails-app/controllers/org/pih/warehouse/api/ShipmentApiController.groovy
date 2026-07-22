@@ -500,6 +500,10 @@ class ShipmentApiController {
             shipmentService.validatePicklist(shipment)
             Date actualShippingDate = jsonObject.actualShippingDate ?
                     Date.parse("yyyy-MM-dd HH:mm", jsonObject.actualShippingDate as String) : new Date()
+            if (actualShippingDate > new Date()) {
+                renderError(g.message(code: 'shipping.specifyValidShipmentDate.message') as String)
+                return
+            }
             boolean debitStockOnSend = jsonObject.containsKey("debitStockOnSend") ?
                     jsonObject.debitStockOnSend as Boolean : true
             shipmentService.sendShipment(shipment, jsonObject.comments as String, userInstance,
@@ -545,15 +549,16 @@ class ShipmentApiController {
      * shipments out of it, with the same filter set.
      */
     def list() {
-        if (!requireManager()) {
-            return
-        }
         Integer max = Math.min(params.max ? params.int('max') : 100, 10000)
         boolean incoming = params?.type?.toUpperCase() == "INCOMING"
         Location origin = incoming ? (params.origin ? Location.get(params.origin) : null) : Location.get(session.warehouse.id)
         Location destination = incoming ? Location.get(session.warehouse.id) : (params.destination ? Location.get(params.destination) : null)
         ShipmentType shipmentType = params.shipmentType ? ShipmentType.get(params.shipmentType) : null
-        ShipmentStatusCode statusCode = params.status ? Enum.valueOf(ShipmentStatusCode.class, params.status) : null
+        ShipmentStatusCode statusCode = params.status ? ShipmentStatusCode.values().find { it.name() == params.status } : null
+        if (params.status && !statusCode) {
+            renderError("Invalid status: ${params.status}")
+            return
+        }
         Date lastUpdatedFrom = parseDate(params.lastUpdatedFrom)
         Date lastUpdatedTo = parseDate(params.lastUpdatedTo)
 
@@ -574,9 +579,6 @@ class ShipmentApiController {
      * _filters.gsp selects).
      */
     def listOptions() {
-        if (!requireManager()) {
-            return
-        }
         render([data: [
                 shipmentTypes: ShipmentType.list().sort { it.sortOrder }.collect { [id: it.id, name: it.name] },
                 statusCodes  : ShipmentStatusCode.values().collect { it.name() },
@@ -635,9 +637,6 @@ class ShipmentApiController {
      * contents/receipt/documents/comments/events/transactions/tracking tabs.
      */
     def showDetails() {
-        if (!requireManager()) {
-            return
-        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -727,9 +726,6 @@ class ShipmentApiController {
      * items grouped by container with container dimensions.
      */
     def packingList() {
-        if (!requireManager()) {
-            return
-        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
