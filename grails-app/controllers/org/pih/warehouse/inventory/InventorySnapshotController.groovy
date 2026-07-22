@@ -34,7 +34,9 @@ class InventorySnapshotController {
 
     def show() {}
 
-    def edit() {}
+    def edit() {
+        render(view: "/common/react")
+    }
 
     def update() {
         try {

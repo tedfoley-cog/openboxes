@@ -54,6 +54,15 @@ def batch4_endpoints(client):
 
 
 @pytest.fixture(scope="session")
+def batch5_endpoints(client):
+    # The api-snapshot job runs against the pinned released image, which
+    # predates the Batch 5 inventory-level CRUD and transaction-log
+    # endpoints. Skip their tests there; they run against source builds.
+    if client.request("GET", "/api/inventoryLevels").status_code == 404:
+        pytest.skip("Batch 5 inventory-level endpoints not present in target build")
+
+
+@pytest.fixture(scope="session")
 def batch8_endpoints(client):
     # The api-snapshot job runs against the pinned released image, which
     # predates the Batch 8 product screen endpoints (mergeLogs, batchEdit,

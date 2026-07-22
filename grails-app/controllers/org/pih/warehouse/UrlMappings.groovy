@@ -1448,6 +1448,11 @@ class UrlMappings {
             action = [GET: "getAssociations"]
         }
 
+        "/api/stockCard/$id/transactionLog" {
+            controller = "stockCardApi"
+            action = [GET: "getTransactionLog"]
+        }
+
         /**
          * Inventory item (lot number) API endpoints
          */
@@ -1480,6 +1485,16 @@ class UrlMappings {
         "/api/facilities/$facilityId/products/$productId/inventoryLevel"(parseRequest: true) {
             controller = "inventoryLevelApi"
             action = [GET: "read", PUT: "update"]
+        }
+
+        "/api/inventoryLevels"(parseRequest: true) {
+            controller = "inventoryLevelApi"
+            action = [GET: "search", POST: "create"]
+        }
+
+        "/api/inventoryLevels/$id"(parseRequest: true) {
+            controller = "inventoryLevelApi"
+            action = [GET: "getById", PUT: "updateById", DELETE: "deleteById"]
         }
 
         "/api/facilities/$facilityId/inventories/productGroupSummary" {
