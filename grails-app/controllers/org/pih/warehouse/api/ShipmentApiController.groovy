@@ -579,7 +579,7 @@ class ShipmentApiController {
         }
         render([data: [
                 shipmentTypes: ShipmentType.list().sort { it.sortOrder }.collect { [id: it.id, name: it.name] },
-                statusCodes  : ShipmentStatusCode.list().collect { it.name() },
+                statusCodes  : ShipmentStatusCode.values().collect { it.name() },
                 locations    : Location.list().sort { it?.name?.toLowerCase() }.collect { [id: it.id, name: it.name] },
         ]] as JSON)
     }
@@ -864,8 +864,8 @@ class ShipmentApiController {
             return
         }
         Receipt receiptInstance = shipment.receipt
-        shipment.receipt = null
-        receiptInstance.delete()
+        shipment.removeFromReceipts(receiptInstance)
+        receiptInstance.delete(flush: true)
         render([data: [id: shipment.id]] as JSON)
     }
 
@@ -1193,14 +1193,15 @@ class ShipmentApiController {
     }
 
     private Map getItemDetails(ShipmentItem shipmentItem) {
+        Product product = shipmentItem.inventoryItem?.product ?: shipmentItem.product
         [
                 id           : shipmentItem.id,
                 quantity     : shipmentItem.quantity,
-                product      : shipmentItem.inventoryItem?.product ? [
-                        id           : shipmentItem.inventoryItem.product.id,
-                        productCode  : shipmentItem.inventoryItem.product.productCode,
-                        name         : shipmentItem.inventoryItem.product.name,
-                        unitOfMeasure: shipmentItem.inventoryItem.product.unitOfMeasure,
+                product      : product ? [
+                        id           : product.id,
+                        productCode  : product.productCode,
+                        name         : product.name,
+                        unitOfMeasure: product.unitOfMeasure,
                 ] : null,
                 inventoryItem: shipmentItem.inventoryItem ? [
                         id            : shipmentItem.inventoryItem.id,

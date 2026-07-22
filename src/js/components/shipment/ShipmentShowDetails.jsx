@@ -395,7 +395,9 @@ const ShipmentShowDetails = () => {
                   id="shipment-show-event-type"
                   className="form-control"
                   value={newEvent.eventTypeId}
-                  onChange={(event) => setNewEvent({ ...newEvent, eventTypeId: event.target.value })}
+                  onChange={(event) => setNewEvent({
+                    ...newEvent, eventTypeId: event.target.value,
+                  })}
                   required
                 >
                   <option value="">{translate('react.default.selectOne.label', 'Select one')}</option>

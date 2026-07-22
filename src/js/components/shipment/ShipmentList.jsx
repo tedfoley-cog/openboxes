@@ -314,8 +314,12 @@ const ShipmentList = () => {
               <td className="text-right">{shipment.shipmentItemCount}</td>
               <td>{shipment.origin}</td>
               <td>{shipment.destination}</td>
-              <td>{shipment.hasShipped ? shipment.actualShippingDate : shipment.expectedShippingDate}</td>
-              <td>{shipment.wasReceived ? shipment.actualDeliveryDate : shipment.expectedDeliveryDate}</td>
+              <td>
+                {shipment.hasShipped ? shipment.actualShippingDate : shipment.expectedShippingDate}
+              </td>
+              <td>
+                {shipment.wasReceived ? shipment.actualDeliveryDate : shipment.expectedDeliveryDate}
+              </td>
               <td>{shipment.lastUpdated}</td>
             </tr>
           ))}
