@@ -14,7 +14,9 @@ def test_list_filtered(client):
     resp = check(client, spec, "GET", "/api/persons",
                  params={"name": "Smith", "max": "2", "sort": "firstName",
                          "order": "asc"})
-    assert all("Smith" in p["name"] for p in resp.json()["data"])
+    data = resp.json()["data"]
+    assert data, "demo dataset should have persons matching 'Smith'"
+    assert all(p["lastName"] == "Smith" for p in data)
 
 
 def test_list_by_status(client):
