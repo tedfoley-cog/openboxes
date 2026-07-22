@@ -238,7 +238,9 @@ const StockTransferPrint = () => {
                 {itemsByGroup.map((group, index) => renderGroupTable(
                   group.items,
                   translate(group.labelId, group.defaultMessage),
-                  enablePageBreak && !showZoneName && index < itemsByGroup.length - 1 ? 'always' : 'avoid',
+                  enablePageBreak && !showZoneName
+                    && (group.key === 'other' || index < itemsByGroup.length - 1)
+                    ? 'always' : 'avoid',
                 ))}
               </div>
             );
