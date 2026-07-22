@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
+import Alert from 'react-s-alert';
 import {
   Tab, TabList, TabPanel, Tabs,
 } from 'react-tabs';
@@ -27,6 +28,18 @@ const formatCurrency = (value, currencyCode) => {
 
 const formatDate = (value) => (value ? new Date(value).toLocaleString() : '');
 
+const isSafeUri = (uri) => /^(https?|ftp):\/\//i.test(uri);
+
+const DocumentLink = ({ document }) => {
+  if (!document.fileUri) {
+    return <a href={DOCUMENT_URL.download(document.id)}>{document.filename}</a>;
+  }
+  if (isSafeUri(document.fileUri)) {
+    return <a href={document.fileUri} target="_blank" rel="noopener noreferrer">{document.fileUri}</a>;
+  }
+  return <span>{document.fileUri}</span>;
+};
+
 const InvoiceShow = () => {
   useTranslation('invoice', 'default');
 
@@ -51,7 +64,19 @@ const InvoiceShow = () => {
   }, [invoiceId]);
 
   const deleteDocument = async (documentId) => {
-    await invoiceApi.deleteDocument(invoiceId, documentId);
+    // eslint-disable-next-line no-alert
+    if (!window.confirm(translate(
+      'react.invoice.document.delete.confirm.label',
+      'Deleting the document will remove it from the invoice. Are you sure?',
+    ))) {
+      return;
+    }
+    try {
+      await invoiceApi.deleteDocument(invoiceId, documentId);
+    } catch (error) {
+      Alert.error(error?.response?.data?.errorMessage ?? error.message);
+      return;
+    }
     fetchInvoice();
   };
 
@@ -272,11 +297,7 @@ const InvoiceShow = () => {
                   <tr key={document.id}>
                     <td>{document.name}</td>
                     <td>
-                      {document.fileUri ? (
-                        <a href={document.fileUri} target="_blank" rel="noopener noreferrer">{document.fileUri}</a>
-                      ) : (
-                        <a href={DOCUMENT_URL.download(document.id)}>{document.filename}</a>
-                      )}
+                      <DocumentLink document={document} />
                     </td>
                     <td>{document.documentType?.name}</td>
                     <td>{document.fileUri ? '' : document.size}</td>

@@ -86,7 +86,9 @@ class InvoiceApiController {
         invoice.invoiceItems?.each { InvoiceItem invoiceItem ->
             Order order = invoiceItem.order
             order?.documents?.each { Document document ->
-                if (!orderDocs.find { it.id == document.id }) {
+                boolean alreadyIncluded = orderDocs.find { it.id == document.id } ||
+                        invoice.documents?.find { it.id == document.id }
+                if (!alreadyIncluded) {
                     orderDocs.add(document)
                 }
             }

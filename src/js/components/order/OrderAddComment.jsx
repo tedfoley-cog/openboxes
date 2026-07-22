@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -26,7 +26,10 @@ const OrderAddComment = () => {
 
   useTranslation('order', 'default');
 
-  const debouncedUsersFetch = debounceUsersFetch(debounceTime, debounceMinSearchLength);
+  const debouncedUsersFetch = useMemo(
+    () => debounceUsersFetch(debounceTime, debounceMinSearchLength),
+    [debounceTime, debounceMinSearchLength],
+  );
 
   useEffect(() => {
     orderApi.getOrder(orderId)
