@@ -72,7 +72,6 @@ class GlAccountApiController {
         render([data: toJson(glAccount)] as JSON)
     }
 
-    @Transactional
     def delete() {
         GlAccount glAccount = GlAccount.get(params.id)
         if (!glAccount) {

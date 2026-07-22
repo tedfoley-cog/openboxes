@@ -64,7 +64,6 @@ class BudgetCodeApiController {
         render([data: toJson(budgetCode)] as JSON)
     }
 
-    @Transactional
     def delete() {
         BudgetCode budgetCode = BudgetCode.get(params.id)
         if (!budgetCode) {
