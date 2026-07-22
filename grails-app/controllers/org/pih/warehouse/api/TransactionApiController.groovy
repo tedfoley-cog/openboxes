@@ -108,7 +108,7 @@ class TransactionApiController {
             }
 
             if (transactionType.transactionCode == TransactionCode.DEBIT && !isAdjustment) {
-                Integer onHandQuantity = inventoryService.getQuantity(location, inventoryItem.product, inventoryItem.lotNumber)
+                Integer onHandQuantity = inventoryService.getQuantity(location.inventory, inventoryItem)
                 if (quantity > onHandQuantity) {
                     throw new IllegalArgumentException("Quantity for lot number ${inventoryItem.lotNumber ?: 'default'} cannot be greater than on-hand quantity")
                 }
