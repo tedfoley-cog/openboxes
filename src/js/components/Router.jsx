@@ -268,6 +268,26 @@ const AsyncExpirationHistoryReport = Loadable({
   loading: Loading,
 });
 
+const AsyncLocationGroupList = Loadable({
+  loader: () => import('components/locationGroup/LocationGroupList'),
+  loading: Loading,
+});
+
+const AsyncLocationGroupForm = Loadable({
+  loader: () => import('components/locationGroup/LocationGroupForm'),
+  loading: Loading,
+});
+
+const AsyncLocationGroupShow = Loadable({
+  loader: () => import('components/locationGroup/LocationGroupShow'),
+  loading: Loading,
+});
+
+const AsyncLocationTypeForm = Loadable({
+  loader: () => import('components/locationType/LocationTypeForm'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -310,6 +330,36 @@ const AsyncCategoryTree = Loadable({
 
 const AsyncCategoryForm = Loadable({
   loader: () => import('components/category/CategoryForm'),
+  loading: Loading,
+});
+
+const AsyncProductForm = Loadable({
+  loader: () => import('components/product/ProductForm'),
+  loading: Loading,
+});
+
+const AsyncProductAddDocument = Loadable({
+  loader: () => import('components/product/ProductAddDocument'),
+  loading: Loading,
+});
+
+const AsyncProductBatchEdit = Loadable({
+  loader: () => import('components/product/ProductBatchEdit'),
+  loading: Loading,
+});
+
+const AsyncProductBatchEditProperties = Loadable({
+  loader: () => import('components/product/ProductBatchEditProperties'),
+  loading: Loading,
+});
+
+const AsyncProductImportCsv = Loadable({
+  loader: () => import('components/product/ProductImportCsv'),
+  loading: Loading,
+});
+
+const AsyncProductMergeLogs = Loadable({
+  loader: () => import('components/product/ProductMergeLogs'),
   loading: Loading,
 });
 
@@ -500,7 +550,19 @@ const Router = () => {
             <MainLayoutRoute path="**/purchaseOrder/list" component={AsyncPurchaseOrderList} />
             <MainLayoutRoute path="**/requisitionTemplate/list" component={AsyncStockList} />
             <MainLayoutRoute path="**/product/list" component={AsyncProductsList} />
+            <MainLayoutRoute path="**/product/edit/:id" component={AsyncProductForm} />
+            <MainLayoutRoute path="**/product/addDocument/:id" component={AsyncProductAddDocument} />
+            <MainLayoutRoute path="**/product/batchEdit" component={AsyncProductBatchEdit} />
+            <MainLayoutRoute path="**/product/batchEditProperties" component={AsyncProductBatchEditProperties} />
+            <MainLayoutRoute path="**/product/importAsCsv" component={AsyncProductImportCsv} />
+            <MainLayoutRoute path="**/product/productMergeLogs" component={AsyncProductMergeLogs} />
             <MainLayoutRoute path="**/stockTransfer/list" component={AsyncStockTransferList} />
+            <MainLayoutRoute path="**/locationGroup/list" component={AsyncLocationGroupList} />
+            <MainLayoutRoute path="**/locationGroup/create" component={AsyncLocationGroupForm} />
+            <MainLayoutRoute path="**/locationGroup/edit/:locationGroupId" component={AsyncLocationGroupForm} />
+            <MainLayoutRoute path="**/locationGroup/show/:locationGroupId" component={AsyncLocationGroupShow} />
+            <MainLayoutRoute path="**/locationType/create" component={AsyncLocationTypeForm} />
+            <MainLayoutRoute path="**/locationType/edit/:locationTypeId" component={AsyncLocationTypeForm} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />

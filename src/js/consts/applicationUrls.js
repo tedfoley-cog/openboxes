@@ -27,6 +27,10 @@ const PRODUCT_URL = {
   create: () => `${PRODUCT_URL.base}/create`,
   edit: (id) => `${PRODUCT_URL.base}/edit/${id}`,
   importCSV: () => `${PRODUCT_URL.base}/importAsCsv`,
+  addDocument: (id) => `${PRODUCT_URL.base}/addDocument/${id}`,
+  batchEdit: () => `${PRODUCT_URL.base}/batchEdit`,
+  batchEditProperties: () => `${PRODUCT_URL.base}/batchEditProperties`,
+  mergeLogs: () => `${PRODUCT_URL.base}/productMergeLogs`,
 };
 
 const LOCATION_URL = {
@@ -187,6 +191,21 @@ const GL_ACCOUNT_URL = {
   edit: (id) => `${GL_ACCOUNT_URL.base}/edit/${id}`,
 };
 
+const LOCATION_GROUP_URL = {
+  base: `${CONTEXT_PATH}/locationGroup`,
+  list: () => `${LOCATION_GROUP_URL.base}/list`,
+  create: () => `${LOCATION_GROUP_URL.base}/create`,
+  edit: (id) => `${LOCATION_GROUP_URL.base}/edit/${id}`,
+  show: (id) => `${LOCATION_GROUP_URL.base}/show/${id}`,
+};
+
+const LOCATION_TYPE_URL = {
+  base: `${CONTEXT_PATH}/locationType`,
+  list: () => `${LOCATION_TYPE_URL.base}/list`,
+  create: () => `${LOCATION_TYPE_URL.base}/create`,
+  edit: (id) => `${LOCATION_TYPE_URL.base}/edit/${id}`,
+};
+
 const CATEGORY_URL = {
   base: `${CONTEXT_PATH}/category`,
   tree: (id) => (id ? `${CATEGORY_URL.base}/tree?id=${id}` : `${CATEGORY_URL.base}/tree`),
@@ -268,6 +287,8 @@ export {
   INVENTORY_URL,
   INVOICE_URL,
   LOCATION_CONFIGURATION_URL,
+  LOCATION_GROUP_URL,
+  LOCATION_TYPE_URL,
   LOCATION_URL,
   ORDER_URL,
   PICKLIST_URL,
