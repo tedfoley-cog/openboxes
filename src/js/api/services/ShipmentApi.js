@@ -13,10 +13,12 @@ import {
   SHIPMENT_EVENT_BY_ID,
   SHIPMENT_EVENT_OPTIONS,
   SHIPMENT_EVENTS,
+  SHIPMENT_GOODS_RECEIPT_NOTE_PRINT,
   SHIPMENT_ITEM_BY_ID,
   SHIPMENT_ITEM_PICK,
   SHIPMENT_ITEM_SPLIT,
   SHIPMENT_ITEMS,
+  SHIPMENT_OUTBOUND_RETURN_PRINT,
   SHIPMENT_PACKING,
   SHIPMENT_PICKLIST,
   SHIPMENT_SEND,
@@ -66,4 +68,8 @@ export default {
       .join('&'),
   }),
   addToShipment: (payload) => apiClient.post(SHIPMENT_ADD_TO_SHIPMENT, payload),
+  getOutboundReturnPrintData: (id, config) =>
+    apiClient.get(SHIPMENT_OUTBOUND_RETURN_PRINT(id), config),
+  getGoodsReceiptNotePrintData: (id, config) =>
+    apiClient.get(SHIPMENT_GOODS_RECEIPT_NOTE_PRINT(id), config),
 };
