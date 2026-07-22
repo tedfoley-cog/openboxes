@@ -11,6 +11,7 @@ package org.pih.warehouse.api
 
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import grails.validation.ValidationException
 import org.pih.warehouse.core.Constants
 import org.pih.warehouse.core.Document
 import org.pih.warehouse.core.DocumentCode
@@ -18,9 +19,15 @@ import org.pih.warehouse.core.DocumentType
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.core.Person
 import org.pih.warehouse.core.User
+import org.pih.warehouse.inventory.InventoryItem
+import org.pih.warehouse.inventory.InventoryService
+import org.pih.warehouse.picklist.Picklist
+import org.pih.warehouse.picklist.PicklistItem
+import org.pih.warehouse.product.Product
 import org.pih.warehouse.requisition.CommodityClass
 import org.pih.warehouse.requisition.Requisition
 import org.pih.warehouse.requisition.RequisitionIdentifierService
+import org.pih.warehouse.requisition.RequisitionItem
 import org.pih.warehouse.requisition.RequisitionStatus
 import org.pih.warehouse.requisition.RequisitionType
 import org.springframework.web.multipart.MultipartFile
@@ -31,6 +38,68 @@ class RequisitionApiController extends BaseApiController {
 
     def requisitionService
     RequisitionIdentifierService requisitionIdentifierService
+    InventoryService inventoryService
+
+    /**
+     * Mirrors the legacy RequisitionController.list action: requisitions are
+     * always scoped to the session warehouse as origin, filterable by the
+     * same criteria as the legacy filter form, plus the status-count
+     * statistics used for the status button bar.
+     */
+    def list() {
+        User user = User.get(session?.user?.id)
+        Location origin = Location.get(session?.warehouse?.id)
+
+        Requisition criteria = new Requisition()
+        criteria.origin = origin
+        if (params.status) {
+            criteria.status = RequisitionStatus.values().find { it.name() == params.status }
+        }
+        if (params.type) {
+            criteria.type = RequisitionType.values().find { it.name() == params.type }
+        }
+        if (params.commodityClass) {
+            criteria.commodityClass = CommodityClass.values().find { it.name() == params.commodityClass }
+        }
+        if (params.destinationId) {
+            criteria.destination = Location.get(params.destinationId)
+        }
+        if (params.requestedById) {
+            criteria.requestedBy = Person.get(params.requestedById)
+        }
+        if (params.createdById) {
+            criteria.createdBy = User.get(params.createdById)
+        }
+        if (params.updatedById) {
+            criteria.updatedBy = User.get(params.updatedById)
+        }
+
+        def requisitions = requisitionService.getRequisitions(criteria, params)
+        def statistics = requisitionService.getRequisitionStatistics(null, origin, user)
+
+        render([data: requisitions.collect { Requisition requisition ->
+            [
+                    id                  : requisition.id,
+                    requestNumber       : requisition.requestNumber,
+                    name                : requisition.name,
+                    status              : requisition.status?.name(),
+                    type                : requisition.type?.name(),
+                    requisitionItemCount: requisition.requisitionItems?.size() ?: 0,
+                    requestedBy         : requisition.requestedBy?.name,
+                    dateRequested       : requisition.dateRequested?.format("yyyy-MM-dd"),
+                    dateIssued          : requisition.dateIssued?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+                    dateCreated         : requisition.dateCreated?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+                    dateChecked         : requisition.dateChecked?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+                    dateVerified        : requisition.dateVerified?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+                    datePicked          : requisition.picklist?.datePicked?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+                    lastUpdated         : requisition.lastUpdated?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
+            ]
+        },
+                totalCount: requisitions.totalCount ?: 0,
+                statistics: statistics.collectEntries { key, value ->
+                    [(key instanceof RequisitionStatus ? key.name() : key.toString()): value ?: 0]
+                }] as JSON)
+    }
 
     def documentTypes() {
         List<DocumentType> documentTypeList = DocumentType.list().sort { it.name }
@@ -79,6 +148,19 @@ class RequisitionApiController extends BaseApiController {
         }
         requisition.name = jsonObject.name ?: generateName(requisition)
         requisition.requestNumber = requisitionIdentifierService.generate(requisition)
+        jsonObject.requisitionItems?.eachWithIndex { itemData, index ->
+            RequisitionItem requisitionItem = new RequisitionItem()
+            RequisitionItem templateItem = itemData.templateItemId ?
+                    RequisitionItem.get(itemData.templateItemId) : null
+            requisitionItem.product = Product.get(itemData.productId)
+            requisitionItem.quantity = itemData.quantity as Integer
+            requisitionItem.orderIndex = itemData.orderIndex != null ? itemData.orderIndex as Integer : index
+            if (templateItem) {
+                requisitionItem.inventoryItem = templateItem.inventoryItem
+                requisitionItem.productPackage = templateItem.productPackage
+            }
+            requisition.addToRequisitionItems(requisitionItem)
+        }
         requisition = requisitionService.saveRequisition(requisition)
         if (requisition.hasErrors()) {
             response.status = 400
@@ -122,7 +204,8 @@ class RequisitionApiController extends BaseApiController {
 
     /**
      * Mirrors the legacy RequisitionController.saveDetails action (used by the
-     * confirm screen to record who checked the requisition and when).
+     * confirm screen to record who checked the requisition and when, and by
+     * the review screen to record who verified it and when).
      */
     def saveDetails() {
         Requisition requisition = Requisition.get(params.id)
@@ -139,12 +222,420 @@ class RequisitionApiController extends BaseApiController {
             requisition.dateChecked = jsonObject.dateChecked ?
                     Date.parse("yyyy-MM-dd", jsonObject.dateChecked as String) : null
         }
+        if (jsonObject.containsKey("verifiedById")) {
+            requisition.verifiedBy = jsonObject.verifiedById ? Person.get(jsonObject.verifiedById) : null
+        }
+        if (jsonObject.containsKey("dateVerified")) {
+            requisition.dateVerified = jsonObject.dateVerified ?
+                    Date.parse("yyyy-MM-dd", jsonObject.dateVerified as String) : null
+        }
         requisition.save(flush: true)
         render([data: [
-                id         : requisition.id,
-                checkedBy  : requisition.checkedBy ? [id: requisition.checkedBy.id, name: requisition.checkedBy.name] : null,
-                dateChecked: requisition.dateChecked?.format("yyyy-MM-dd"),
+                id          : requisition.id,
+                checkedBy   : requisition.checkedBy ? [id: requisition.checkedBy.id, name: requisition.checkedBy.name] : null,
+                dateChecked : requisition.dateChecked?.format("yyyy-MM-dd"),
+                verifiedBy  : requisition.verifiedBy ? [id: requisition.verifiedBy.id, name: requisition.verifiedBy.name] : null,
+                dateVerified: requisition.dateVerified?.format("yyyy-MM-dd"),
         ]] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.review action: transitions the
+     * requisition to VERIFYING when it has not reached that status yet, then
+     * returns the details needed for the review screen (including quantity
+     * on hand for each product at the current location).
+     */
+    def review() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        if (requisition.status < RequisitionStatus.VERIFYING) {
+            requisition.status = RequisitionStatus.VERIFYING
+            requisition.save(flush: true)
+        }
+        render([data: getDetails(requisition) + [quantityOnHandMap: getQuantityOnHandMap(requisition)]] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.process action: returns the
+     * requisition, its picklist, and the inventory items with quantity for
+     * every requested product at the current location.
+     */
+    def process() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        Location location = Location.get(session.warehouse.id)
+        Picklist picklist = Picklist.findByRequisition(requisition)
+        def productInventoryItemsMap = [:]
+        def productInventoryItems = inventoryService.getInventoryItemsWithQuantity(
+                requisition.requisitionItems?.collect { it.product }, location.inventory)
+        productInventoryItems.keySet().each { product ->
+            productInventoryItemsMap[product.id] = productInventoryItems[product].collect { it.toJson() }
+        }
+        render([data: getDetails(requisition) + [
+                productInventoryItemsMap: productInventoryItemsMap,
+                picklist                : picklist ? [
+                        id           : picklist.id,
+                        picklistItems: picklist.picklistItems?.collect { picklistItem ->
+                            [
+                                    id               : picklistItem.id,
+                                    quantity         : picklistItem.quantity ?: 0,
+                                    lotNumber        : picklistItem.inventoryItem?.lotNumber,
+                                    inventoryItem    : picklistItem.inventoryItem ? [id: picklistItem.inventoryItem.id] : null,
+                                    requisitionItem  : picklistItem.requisitionItem ? [id: picklistItem.requisitionItem.id] : null,
+                            ]
+                        } ?: [],
+                ] : null,
+        ]] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.complete action (transfer
+     * screen "Finish" button): issues the requisition.
+     */
+    def issue() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        def jsonObject = request.JSON
+        try {
+            User issuedBy = jsonObject.issuedById ? User.get(jsonObject.issuedById) : null
+            Person deliveredBy = jsonObject.deliveredById ? Person.get(jsonObject.deliveredById) : null
+            String comments = jsonObject.comments
+            requisitionService.issueRequisition(requisition, issuedBy, deliveredBy, comments)
+        } catch (ValidationException e) {
+            response.status = 400
+            render([errorCode: 400, errorMessage: "Validation errors",
+                    errors: e.errors.allErrors.collect { g.message(error: it) }] as JSON)
+            return
+        }
+        render([data: [
+                id           : requisition.id,
+                requestNumber: requisition.requestNumber,
+                status       : requisition.status?.name(),
+        ]] as JSON)
+    }
+
+    /**
+     * Data backing the migrated requisition print draft screen (legacy
+     * requisition/printDraft GSP).
+     */
+    def printDraft() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        Location location = Location.get(session.warehouse.id)
+        Picklist picklist = Picklist.findByRequisition(requisition)
+        render([data: [
+                id              : requisition.id,
+                requestNumber   : requisition.requestNumber,
+                name            : requisition.name,
+                status          : requisition.status?.name(),
+                origin          : requisition.origin ? [id: requisition.origin.id, name: requisition.origin.name] : null,
+                destination     : requisition.destination ? [id: requisition.destination.id, name: requisition.destination.name] : null,
+                dateRequested   : requisition.dateRequested?.format("yyyy-MM-dd"),
+                requestedBy     : requisition.requestedBy ? [id: requisition.requestedBy.id, name: requisition.requestedBy.name] : null,
+                hasPicklist     : picklist ? true : false,
+                requisitionItems: requisition.requisitionItems?.collect { requisitionItem ->
+                    [
+                            id             : requisitionItem.id,
+                            quantity       : requisitionItem.quantity ?: 0,
+                            product        : [
+                                    id           : requisitionItem.product?.id,
+                                    productCode  : requisitionItem.product?.productCode,
+                                    name         : requisitionItem.product?.name,
+                                    unitOfMeasure: requisitionItem.product?.unitOfMeasure,
+                            ],
+                            binLocation    : requisitionItem.product?.getInventoryLevel(location?.id)?.binLocation,
+                            picklistItems  : requisitionItem.retrievePicklistItems()?.collect { picklistItem ->
+                                [
+                                        id            : picklistItem.id,
+                                        quantity      : picklistItem.quantity ?: 0,
+                                        lotNumber     : picklistItem.inventoryItem?.lotNumber,
+                                        expirationDate: picklistItem.inventoryItem?.expirationDate?.format("yyyy-MM-dd"),
+                                ]
+                            } ?: [],
+                    ]
+                } ?: [],
+        ]] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.edit action: transitions the
+     * requisition to EDITING when it has not reached that status yet, then
+     * returns the details needed for the edit screen.
+     */
+    def edit() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        if (requisition.status < RequisitionStatus.EDITING) {
+            requisition.status = RequisitionStatus.EDITING
+            requisition.save(flush: true)
+        }
+        render([data: getDetails(requisition)] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.saveHeader action.
+     */
+    def updateHeader() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        def jsonObject = request.JSON
+        if (jsonObject.containsKey("requestNumber")) requisition.requestNumber = jsonObject.requestNumber
+        if (jsonObject.containsKey("name")) requisition.name = jsonObject.name
+        if (jsonObject.containsKey("status") && jsonObject.status) {
+            requisition.status = jsonObject.status as RequisitionStatus
+        }
+        if (jsonObject.containsKey("type") && jsonObject.type) {
+            requisition.type = jsonObject.type as RequisitionType
+        }
+        if (jsonObject.containsKey("commodityClass")) {
+            requisition.commodityClass = jsonObject.commodityClass ?
+                    jsonObject.commodityClass as CommodityClass : null
+        }
+        if (jsonObject.containsKey("originId") && jsonObject.originId) {
+            requisition.origin = Location.get(jsonObject.originId)
+        }
+        if (jsonObject.containsKey("destinationId")) {
+            requisition.destination = jsonObject.destinationId ? Location.get(jsonObject.destinationId) : null
+        }
+        if (jsonObject.containsKey("requestedById")) {
+            requisition.requestedBy = jsonObject.requestedById ? Person.get(jsonObject.requestedById) : null
+        }
+        if (jsonObject.containsKey("verifiedById")) {
+            requisition.verifiedBy = jsonObject.verifiedById ? Person.get(jsonObject.verifiedById) : null
+        }
+        if (jsonObject.containsKey("checkedById")) {
+            requisition.checkedBy = jsonObject.checkedById ? Person.get(jsonObject.checkedById) : null
+        }
+        if (jsonObject.containsKey("deliveredById")) {
+            requisition.deliveredBy = jsonObject.deliveredById ? Person.get(jsonObject.deliveredById) : null
+        }
+        if (jsonObject.containsKey("receivedById")) {
+            requisition.receivedBy = jsonObject.receivedById ? Person.get(jsonObject.receivedById) : null
+        }
+        if (jsonObject.containsKey("pickerId") && requisition.picklist) {
+            requisition.picklist.picker = jsonObject.pickerId ? Person.get(jsonObject.pickerId) : null
+            requisition.picklist.save(flush: true)
+        }
+        if (jsonObject.containsKey("dateRequested")) {
+            requisition.dateRequested = jsonObject.dateRequested ?
+                    Date.parse("yyyy-MM-dd", jsonObject.dateRequested as String) : null
+        }
+        if (jsonObject.containsKey("requestedDeliveryDate")) {
+            requisition.requestedDeliveryDate = jsonObject.requestedDeliveryDate ?
+                    Date.parse("yyyy-MM-dd", jsonObject.requestedDeliveryDate as String) : null
+        }
+        if (jsonObject.containsKey("description")) requisition.description = jsonObject.description
+        requisition = requisitionService.saveRequisition(requisition)
+        if (requisition.hasErrors()) {
+            response.status = 400
+            render([errorCode: 400, errorMessage: "Validation errors",
+                    errors: requisition.errors.allErrors.collect { g.message(error: it) }] as JSON)
+            return
+        }
+        render([data: getDetails(requisition)] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.saveRequisitionItems action
+     * (knockout edit screen): syncs the posted items with the requisition,
+     * removing any persisted item that is not present in the payload.
+     */
+    def saveItems() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        def jsonObject = request.JSON
+        def itemsData = jsonObject.requisitionItems ?: []
+        List<RequisitionItem> keptItems = []
+        itemsData.eachWithIndex { itemData, index ->
+            RequisitionItem requisitionItem = itemData.id ?
+                    requisition.requisitionItems?.find { it.id == itemData.id } : null
+            if (!requisitionItem) {
+                requisitionItem = new RequisitionItem()
+                requisition.addToRequisitionItems(requisitionItem)
+            }
+            requisitionItem.product = Product.get(itemData.productId)
+            requisitionItem.quantity = itemData.quantity as Integer
+            requisitionItem.orderIndex = itemData.orderIndex != null ? itemData.orderIndex as Integer : index
+            keptItems << requisitionItem
+        }
+        def itemsToDelete = requisition.requisitionItems?.findAll { !keptItems.contains(it) } ?: []
+        itemsToDelete.each { requisition.removeFromRequisitionItems(it) }
+        requisition.save(flush: true)
+        if (requisition.hasErrors()) {
+            response.status = 400
+            render([errorCode: 400, errorMessage: "Validation errors",
+                    errors: requisition.errors.allErrors.collect { g.message(error: it) }] as JSON)
+            return
+        }
+        render([data: getDetails(requisition)] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.pick action: requires a
+     * verifiedBy, transitions the requisition to PICKING (approving pending
+     * items), lazily creates the picklist, and returns the details plus the
+     * available bin locations for each requisition item's product.
+     */
+    def pick() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        if (!requisition.verifiedBy) {
+            response.status = 400
+            render([errorCode: 400,
+                    errorMessage: g.message(code: 'requisition.verifiedBy.invalid.message',
+                            default: 'Requisition must be verified before picking')] as JSON)
+            return
+        }
+        if (requisition.status < RequisitionStatus.PICKING) {
+            requisition.status = RequisitionStatus.PICKING
+            requisition.requisitionItems.each { requisitionItem ->
+                if (requisitionItem.isPending()) {
+                    requisitionItem.approveQuantity()
+                }
+            }
+            requisition.save(flush: true)
+        }
+        Picklist picklist = Picklist.findByRequisition(requisition)
+        if (!picklist) {
+            picklist = new Picklist(requisition: requisition)
+            if (!picklist.save(flush: true)) {
+                throw new ValidationException("Unable to create new picklist", picklist.errors)
+            }
+        }
+        Location location = Location.get(session.warehouse.id)
+        def availableItems = [:]
+        requisition.requisitionItems?.collect { it.product }?.unique()?.each { Product product ->
+            availableItems[product.id] = inventoryService.getAvailableBinLocations(location, product).collect {
+                [
+                        inventoryItemId  : it.inventoryItem?.id,
+                        lotNumber        : it.inventoryItem?.lotNumber,
+                        expirationDate   : it.inventoryItem?.expirationDate?.format("yyyy-MM-dd"),
+                        binLocation      : it.binLocation ? [id: it.binLocation.id, name: it.binLocation.name] : null,
+                        quantityAvailable: it.quantityAvailable ?: 0,
+                ]
+            }
+        }
+        render([data: getDetails(requisition) + [
+                picklist: [
+                        id        : picklist.id,
+                        picker    : picklist.picker ? [id: picklist.picker.id, name: picklist.picker.name] : null,
+                        datePicked: picklist.datePicked?.format("yyyy-MM-dd"),
+                ],
+                availableItems: availableItems,
+        ]] as JSON)
+    }
+
+    /**
+     * Mirrors the picklist branch of the legacy RequisitionController.saveDetails
+     * action (picked by / date picked form on the pick screen).
+     */
+    def updatePicklist() {
+        Requisition requisition = Requisition.get(params.id)
+        Picklist picklist = requisition ? Picklist.findByRequisition(requisition) : null
+        if (!picklist) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Picklist for requisition ${params.id} not found"] as JSON)
+            return
+        }
+        def jsonObject = request.JSON
+        if (jsonObject.containsKey("pickerId")) {
+            picklist.picker = jsonObject.pickerId ? Person.get(jsonObject.pickerId) : null
+        }
+        if (jsonObject.containsKey("datePicked")) {
+            picklist.datePicked = jsonObject.datePicked ?
+                    Date.parse("yyyy-MM-dd", jsonObject.datePicked as String) : null
+        }
+        picklist.save(flush: true)
+        render([data: [
+                id        : picklist.id,
+                picker    : picklist.picker ? [id: picklist.picker.id, name: picklist.picker.name] : null,
+                datePicked: picklist.datePicked?.format("yyyy-MM-dd"),
+        ]] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy RequisitionController.addToPicklistItems action:
+     * creates/updates picklist items for a requisition item (quantity <= 0
+     * removes the picklist item).
+     */
+    def updatePicklistItems() {
+        Requisition requisition = Requisition.get(params.id)
+        if (!requisition) {
+            response.status = 404
+            render([errorCode: 404, errorMessage: "Requisition ${params.id} not found"] as JSON)
+            return
+        }
+        Picklist picklist = Picklist.findByRequisition(requisition)
+        if (!picklist) {
+            picklist = new Picklist(requisition: requisition)
+            if (!picklist.save(flush: true)) {
+                throw new ValidationException("Unable to create new picklist", picklist.errors)
+            }
+        }
+        def jsonObject = request.JSON
+        RequisitionItem requisitionItem = RequisitionItem.get(jsonObject.requisitionItemId)
+        if (!requisitionItem || requisitionItem.requisition != requisition) {
+            response.status = 400
+            render([errorCode: 400, errorMessage: "Requisition item not found on requisition ${params.id}"] as JSON)
+            return
+        }
+        jsonObject.picklistItems?.each { itemData ->
+            PicklistItem existingPicklistItem = itemData.id ? PicklistItem.get(itemData.id) : null
+            if (existingPicklistItem && existingPicklistItem.picklist != picklist) {
+                existingPicklistItem = null
+            }
+            Integer quantity = (itemData.quantity ?: 0) as Integer
+            if (quantity > 0) {
+                if (existingPicklistItem) {
+                    existingPicklistItem.quantity = quantity
+                    existingPicklistItem.save(flush: true)
+                } else {
+                    PicklistItem picklistItem = new PicklistItem(
+                            requisitionItem: requisitionItem,
+                            inventoryItem: InventoryItem.get(itemData.inventoryItemId),
+                            binLocation: itemData.binLocationId ? Location.get(itemData.binLocationId) : null,
+                            quantity: quantity)
+                    picklist.addToPicklistItems(picklistItem)
+                    picklist.save(flush: true)
+                }
+            } else if (existingPicklistItem) {
+                picklist.removeFromPicklistItems(existingPicklistItem)
+                existingPicklistItem.delete()
+            }
+        }
+        render([data: getDetails(requisition)] as JSON)
     }
 
     /**
@@ -234,10 +725,11 @@ class RequisitionApiController extends BaseApiController {
                 dateCreated          : requisition.dateCreated?.format(Constants.DEFAULT_DATE_TIME_FORMAT),
                 dateVerified         : requisition.dateVerified?.format("yyyy-MM-dd"),
                 dateChecked          : requisition.dateChecked?.format("yyyy-MM-dd"),
-                requisitionItems     : requisition.requisitionItems?.collect { requisitionItem ->
+                requisitionItems     : requisition.requisitionItems?.sort()?.collect { requisitionItem ->
                     [
                             id               : requisitionItem.id,
                             status           : requisitionItem.status?.name(),
+                            orderIndex       : requisitionItem.orderIndex,
                             product          : [
                                     id           : requisitionItem.product?.id,
                                     productCode  : requisitionItem.product?.productCode,
@@ -245,16 +737,51 @@ class RequisitionApiController extends BaseApiController {
                                     unitOfMeasure: requisitionItem.product?.unitOfMeasure,
                             ],
                             quantity         : requisitionItem.quantity ?: 0,
+                            quantityApproved : requisitionItem.quantityApproved ?: 0,
                             quantityCanceled : requisitionItem.quantityCanceled ?: 0,
                             quantityPicked   : requisitionItem.calculateQuantityPicked() ?: 0,
                             quantityRemaining: requisitionItem.calculateQuantityRemaining() ?: 0,
                             cancelReasonCode : requisitionItem.cancelReasonCode,
                             cancelComments   : requisitionItem.cancelComments,
+                            isOriginal       : requisitionItem.parentRequisitionItem ? false : true,
+                            isSubstitution   : requisitionItem.isSubstitution() ? true : false,
+                            isSubstituted    : requisitionItem.isSubstituted() ? true : false,
+                            isChanged        : requisitionItem.isChanged() ? true : false,
+                            isCanceled       : requisitionItem.isCanceled() ? true : false,
+                            isPending        : requisitionItem.isPending() ? true : false,
+                            isApproved       : requisitionItem.isApproved() ? true : false,
+                            canEdit          : (requisitionItem.canChangeQuantity() || requisitionItem.canChooseSubstitute()
+                                    || requisitionItem.canApproveQuantity()) ? true : false,
+                            canUndoChanges   : requisitionItem.canUndoChanges() ? true : false,
+                            parentRequisitionItem: requisitionItem.parentRequisitionItem ? [id: requisitionItem.parentRequisitionItem.id] : null,
+                            substitutionItem : requisitionItem.isSubstituted() ? [
+                                    id              : requisitionItem.substitutionItem?.id,
+                                    quantity        : requisitionItem.substitutionItem?.quantity ?: 0,
+                                    quantityApproved: requisitionItem.substitutionItem?.quantityApproved ?: 0,
+                                    product         : [
+                                            id           : requisitionItem.substitutionItem?.product?.id,
+                                            productCode  : requisitionItem.substitutionItem?.product?.productCode,
+                                            name         : requisitionItem.substitutionItem?.product?.name,
+                                            unitOfMeasure: requisitionItem.substitutionItem?.product?.unitOfMeasure,
+                                    ],
+                            ] : null,
+                            modificationItem : requisitionItem.isChanged() && requisitionItem.modificationItem ? [
+                                    id              : requisitionItem.modificationItem.id,
+                                    quantity        : requisitionItem.modificationItem.quantity ?: 0,
+                                    quantityApproved: requisitionItem.modificationItem.quantityApproved ?: 0,
+                                    product         : [
+                                            id           : requisitionItem.modificationItem.product?.id,
+                                            productCode  : requisitionItem.modificationItem.product?.productCode,
+                                            name         : requisitionItem.modificationItem.product?.name,
+                                            unitOfMeasure: requisitionItem.modificationItem.product?.unitOfMeasure,
+                                    ],
+                            ] : null,
                             picklistItems    : requisitionItem.retrievePicklistItems()?.collect { picklistItem ->
                                 [
-                                        id            : picklistItem.id,
-                                        quantity      : picklistItem.quantity ?: 0,
-                                        lotNumber     : picklistItem.inventoryItem?.lotNumber,
+                                        id             : picklistItem.id,
+                                        quantity       : picklistItem.quantity ?: 0,
+                                        inventoryItemId: picklistItem.inventoryItem?.id,
+                                        lotNumber      : picklistItem.inventoryItem?.lotNumber,
                                         binLocation   : picklistItem.binLocation ? [id: picklistItem.binLocation.id, name: picklistItem.binLocation.name] : null,
                                         isSubstitution: picklistItem.inventoryItem?.product != picklistItem.requisitionItem?.product,
                                         product       : [
@@ -286,5 +813,20 @@ class RequisitionApiController extends BaseApiController {
                 requisition?.dateRequested?.format("MMM dd yyyy"),
         ]
         return requisitionName.findAll { it }.join(" - ")
+    }
+
+    /**
+     * Quantity on hand per product id at the current location (mirrors the
+     * quantityOnHandMap the legacy review screen built server-side).
+     */
+    private Map getQuantityOnHandMap(Requisition requisition) {
+        Location location = Location.get(session.warehouse.id)
+        def products = requisition.requisitionItems?.collect { it.product } ?: []
+        def quantityProductMap = inventoryService.getQuantityByProductMap(location.inventory, products)
+        def quantityOnHandMap = [:]
+        requisition.requisitionItems?.each { requisitionItem ->
+            quantityOnHandMap[requisitionItem?.product?.id] = quantityProductMap[requisitionItem?.product] ?: 0
+        }
+        return quantityOnHandMap
     }
 }

@@ -72,6 +72,18 @@ export const INVOICE_DOCUMENT_BY_ID = (id, documentId) => `${INVOICE_DOCUMENTS(i
 export const ORDER_API = `${API}/orders`;
 export const ORDER_BY_ID = (id) => `${ORDER_API}/${id}`;
 export const ORDER_COMMENTS = (id) => `${ORDER_BY_ID(id)}/comments`;
+export const ORDER_PENDING_ITEMS = `${ORDER_API}/pendingItems`;
+export const ORDER_DOCUMENT_TYPES = `${ORDER_API}/documentTypes`;
+export const ORDER_DOCUMENTS = (id) => `${ORDER_BY_ID(id)}/documents`;
+export const ORDER_ITEM_OPTIONS = (id) => `${ORDER_BY_ID(id)}/orderItemOptions`;
+export const ORDER_ADJUSTMENTS = (id) => `${ORDER_BY_ID(id)}/adjustments`;
+export const ORDER_ADJUSTMENT_BY_ID = (id, adjustmentId) => `${ORDER_ADJUSTMENTS(id)}/${adjustmentId}`;
+export const ORDER_SUMMARIES = `${API}/orderSummaries`;
+export const ORDER_ITEM_SUMMARIES = `${API}/orderItemSummaries`;
+export const ORDER_ADJUSTMENT_TYPE_OPTIONS = `${API}/orderAdjustmentTypeOptions`;
+export const BUDGET_CODE_OPTIONS = `${API}/budgetCodeOptions`;
+export const ORDER_STATUS_OPTIONS = `${API}/orderStatusOptions`;
+export const ORDER_SUMMARY_STATUS_OPTIONS = `${API}/orderSummaryStatusOptions`;
 
 // INVOICE ITEM
 export const INVOICE_ITEM_API = `${API}/invoiceItems`;
@@ -94,6 +106,11 @@ export const PRODUCT_DOCUMENT_BY_ID = (id, documentId) => `${PRODUCT_API}/${id}/
 export const PRODUCT_MERGE_LOGS = `${PRODUCT_API}/mergeLogs`;
 export const PRODUCT_BATCH_EDIT = `${PRODUCT_API}/batchEdit`;
 export const PRODUCT_VALIDATE_IMPORT = `${PRODUCT_API}/validateImport`;
+export const PRODUCT_SCREEN_SEARCH = `${PRODUCT_API}/productSearch`;
+export const PRODUCT_UPN_DATABASE = `${PRODUCT_API}/upnDatabase`;
+export const PRODUCT_ASSOCIATION_API = `${API}/productAssociations`;
+export const PRODUCT_ASSOCIATION_BY_ID = (id) => `${PRODUCT_ASSOCIATION_API}/${id}`;
+export const PRODUCT_ASSOCIATION_TYPE_CODE_OPTIONS = `${API}/productAssociationTypeCodeOptions`;
 export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
 export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
 export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
@@ -233,6 +250,25 @@ export const REQUISITION_CONFIRM = (id) => `${REQUISITION_BY_ID(id)}/confirm`;
 export const REQUISITION_DETAILS = (id) => `${REQUISITION_BY_ID(id)}/details`;
 export const REQUISITION_DOCUMENTS = (id) => `${REQUISITION_BY_ID(id)}/documents`;
 export const REQUISITION_DOCUMENT_TYPES = `${REQUISITION_API}/documentTypes`;
+export const REQUISITION_REVIEW = (id) => `${REQUISITION_BY_ID(id)}/review`;
+export const REQUISITION_PROCESS = (id) => `${REQUISITION_BY_ID(id)}/process`;
+export const REQUISITION_ISSUE = (id) => `${REQUISITION_BY_ID(id)}/issue`;
+export const REQUISITION_PRINT_DRAFT = (id) => `${REQUISITION_BY_ID(id)}/printDraft`;
+export const PICKLIST_SAVE = `${API}/picklists`;
+
+// REQUISITION ITEM (classic requisition flow)
+export const REQUISITION_ITEM_API = `${API}/requisitionItems`;
+export const REQUISITION_ITEM_BY_ID = (id) => `${REQUISITION_ITEM_API}/${id}`;
+export const REQUISITION_ITEM_CHANGE_QUANTITY = (id) => `${REQUISITION_ITEM_BY_ID(id)}/changeQuantity`;
+export const REQUISITION_ITEM_SUBSTITUTE = (id) => `${REQUISITION_ITEM_BY_ID(id)}/substitute`;
+export const REQUISITION_ITEM_CANCEL = (id) => `${REQUISITION_ITEM_BY_ID(id)}/cancel`;
+export const REQUISITION_ITEM_UNDO_CHANGES = (id) => `${REQUISITION_ITEM_BY_ID(id)}/undoChanges`;
+export const REQUISITION_EDIT = (id) => `${REQUISITION_BY_ID(id)}/edit`;
+export const REQUISITION_HEADER = (id) => `${REQUISITION_BY_ID(id)}/header`;
+export const REQUISITION_ITEMS = (id) => `${REQUISITION_BY_ID(id)}/items`;
+export const REQUISITION_PICK = (id) => `${REQUISITION_BY_ID(id)}/pick`;
+export const REQUISITION_PICKLIST = (id) => `${REQUISITION_BY_ID(id)}/picklist`;
+export const REQUISITION_PICKLIST_ITEMS = (id) => `${REQUISITION_BY_ID(id)}/picklistItems`;
 
 // FULL OUTBOUND IMPORT FEATURE
 export const FULFILLMENT_API = `${API}/fulfillments`;
@@ -326,6 +362,13 @@ export const TRANSACTION_TYPE_OPTIONS = `${TRANSACTION_API}/types`;
 export const TRANSACTION_LOCATION_OPTIONS = `${TRANSACTION_API}/locationOptions`;
 export const TRANSACTION_BY_ID = (id) => `${TRANSACTION_API}/${id}`;
 export const TRANSACTION_ENTRY_BY_ID = (id, entryId) => `${TRANSACTION_API}/${id}/entries/${entryId}`;
+export const TRANSACTION_ENTRY_API_BY_ID = (id) => `${API}/transactionEntries/${id}`;
+
+// INVENTORY SNAPSHOT
+export const INVENTORY_SNAPSHOT_API = `${API}/inventorySnapshots`;
+
+// REPLENISHMENT
+export const REPLENISHMENT_PRINT = (id) => `${API}/replenishments/${id}/print`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
 export const INVENTORY_BROWSE = `${API}/inventories/browse`;
 export const INVENTORY_TRANSACTION_CANDIDATES = `${API}/inventories/transactionCandidates`;
