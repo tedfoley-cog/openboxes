@@ -8,9 +8,7 @@ import { useSelector } from 'react-redux';
 import { INVENTORY_SUMMARY } from 'api/urls';
 import DataTable from 'components/DataTable';
 import { INVENTORY_ITEM_URL, INVENTORY_URL } from 'consts/applicationUrls';
-import RoleType from 'consts/roleType';
 import useTranslation from 'hooks/useTranslation';
-import useUserHasPermissions from 'hooks/useUserHasPermissions';
 import apiClient from 'utils/apiClient';
 import { fetchProductsCategories } from 'utils/option-utils';
 import Select from 'utils/Select';
@@ -33,7 +31,9 @@ const InventorySummaryList = ({ lowStock }) => {
     translate: translateWithDefaultMessage(getTranslate(state.localize)),
   }));
 
-  const hasRoleFinance = useUserHasPermissions({ minRequiredRole: RoleType.ROLE_FINANCE });
+  // The API nulls pricing fields for non-finance users, so column visibility
+  // follows the data rather than duplicating the server-side role check
+  const hasRoleFinance = useMemo(() => data.some((row) => row.unitPrice != null), [data]);
 
   const fetchData = async (categoriesToFilter = selectedCategories) => {
     setLoading(true);
