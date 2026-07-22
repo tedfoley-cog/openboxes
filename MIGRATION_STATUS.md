@@ -32,7 +32,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 |---|------|--------|
 | 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — [#9](https://github.com/tedfoley-cog/openboxes/pull/9) merged |
 | 1.1b | Dependency cleanup / Grails 4 de-risk audit | [d11e6110](https://app.devin.ai/sessions/d11e611086ee4de4840215ef5cb2f7e4) — [#19](https://github.com/tedfoley-cog/openboxes/pull/19) merged (audit in docs/migration/DEPENDENCY_AUDIT.md) |
-| 1.2 | Grails 3→4 | [f3400cd2](https://app.devin.ai/sessions/f3400cd2cb624535ab89390e465486dd) — in progress |
+| 1.2 | Grails 3→4 | [f3400cd2](https://app.devin.ai/sessions/f3400cd2cb624535ab89390e465486dd) — [#27](https://github.com/tedfoley-cog/openboxes/pull/27) merged (Grails 4.1.4, GORM 7, Hibernate 5.4, Gradle 6.9.4) |
 | 1.3 | Grails 4→5 (3–5 children) | pending |
 | 1.4 | Grails 5→6 / Java 21 / javax→jakarta (4–6 children) | pending |
 | 1.5 | Re-verify Quartz jobs, Liquibase, mail/reporting (3–4 children) | pending |
@@ -40,7 +40,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 2 — UI: GSP → React (parallel module waves; needs Phase 0)
 | # | Task | Status |
 |---|------|--------|
-| 2.x | Module batches: 49 total per SCREEN_INVENTORY.md | wave 1: B7 [#24](https://github.com/tedfoley-cog/openboxes/pull/24) merged, B14 [#25](https://github.com/tedfoley-cog/openboxes/pull/25) merged, B31 [#22](https://github.com/tedfoley-cog/openboxes/pull/22) merged; B2 [#23](https://github.com/tedfoley-cog/openboxes/pull/23) merged, B26 [#20](https://github.com/tedfoley-cog/openboxes/pull/20) merged; B1 [0655a5d4](https://app.devin.ai/sessions/0655a5d4852645f8beb786e14aecad22) in progress. Wave 2 running: B3 [3a2ca7ca](https://app.devin.ai/sessions/3a2ca7cab80344dd9303f0b3aa49d598), B4 [51ab3365](https://app.devin.ai/sessions/51ab3365a4ce42d181fb3cd96d128a5d), B8 [d9fa378d](https://app.devin.ai/sessions/d9fa378d53fb4133bdd41c499d82eee3), B15 [87925267](https://app.devin.ai/sessions/87925267faf5429a9ee050525c58c83e), B27 [b671b207](https://app.devin.ai/sessions/b671b207fda346bc94528cccc161aaaa), B32 [3dda0a78](https://app.devin.ai/sessions/3dda0a7886ac41f192d0ea20e655824c) |
+| 2.x | Module batches: 49 total per SCREEN_INVENTORY.md | wave 1: B7 [#24](https://github.com/tedfoley-cog/openboxes/pull/24) merged, B14 [#25](https://github.com/tedfoley-cog/openboxes/pull/25) merged, B31 [#22](https://github.com/tedfoley-cog/openboxes/pull/22) merged; B2 [#23](https://github.com/tedfoley-cog/openboxes/pull/23) merged, B26 [#20](https://github.com/tedfoley-cog/openboxes/pull/20) merged; B1 [#21](https://github.com/tedfoley-cog/openboxes/pull/21) merged. Wave 2 running: B3 [3a2ca7ca](https://app.devin.ai/sessions/3a2ca7cab80344dd9303f0b3aa49d598), B4 [51ab3365](https://app.devin.ai/sessions/51ab3365a4ce42d181fb3cd96d128a5d), B8 [d9fa378d](https://app.devin.ai/sessions/d9fa378d53fb4133bdd41c499d82eee3), B15 [87925267](https://app.devin.ai/sessions/87925267faf5429a9ee050525c58c83e), B27 [b671b207](https://app.devin.ai/sessions/b671b207fda346bc94528cccc161aaaa), B32 [3dda0a78](https://app.devin.ai/sessions/3dda0a7886ac41f192d0ea20e655824c) |
 | 2.R | React 16.8→18 + Redux/router modernization of existing SPA | [1674abb2](https://app.devin.ai/sessions/1674abb277894ead9017aaf991b0597a) — [#18](https://github.com/tedfoley-cog/openboxes/pull/18) merged (React 18.3.1, react-redux 8; router v6 deferred) |
 
 ## Phase 3 — API formalization (parallel with Phase 2)
@@ -66,6 +66,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #21 (B1) and #27 (Grails 3→4) merged. B3 #30 resolving conflicts post-Grails-4 merge.
 - 2026-07-22: PRs #23 (B2), #20 (B26) merged. Phase 2 wave 2 spawned (B3,B4,B8,B15,B27,B32).
 - 2026-07-22: PRs #26 (contract re-run-safety), #22/#24/#25 (Phase 2 batches B31/B7/B14) merged. Grails 3→4 (P1.2) in progress.
 - 2026-07-21: Coordinator initialized; tracking branch created; Phase 0 wave 1 spawned.
