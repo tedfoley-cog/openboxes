@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 
 import { getTranslate } from 'react-localize-redux';
 import { useSelector } from 'react-redux';
@@ -61,8 +63,20 @@ const StockCardPage = () => {
     translate: translateWithDefaultMessage(getTranslate(state.localize)),
   }));
 
+  const fetchedLocationId = useRef(currentLocation?.id);
+
   useEffect(() => {
-    if (!productId || tabData[activeTab]) {
+    if (!productId) {
+      return;
+    }
+    // Tab data is cached per location, so drop the cache when the location changes
+    let cachedTabData = tabData;
+    if (fetchedLocationId.current !== currentLocation?.id) {
+      fetchedLocationId.current = currentLocation?.id;
+      cachedTabData = {};
+      setTabData({});
+    }
+    if (cachedTabData[activeTab]) {
       return;
     }
     setLoading(true);
@@ -75,11 +89,6 @@ const StockCardPage = () => {
       })
       .finally(() => setLoading(false));
   }, [productId, activeTab, currentLocation?.id]);
-
-  // Refetch everything when the location changes
-  useEffect(() => {
-    setTabData({});
-  }, [currentLocation?.id]);
 
   const data = tabData[activeTab];
 
