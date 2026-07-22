@@ -41,6 +41,8 @@ const ShowTransactionPage = () => {
 
   useEffect(() => {
     setLoading(true);
+    setNotFound(false);
+    setTransaction(null);
     apiClient.get(TRANSACTION_BY_ID(id))
       .then((response) => setTransaction(response.data.data))
       .catch(() => setNotFound(true))
