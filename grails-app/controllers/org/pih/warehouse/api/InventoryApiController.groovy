@@ -135,7 +135,7 @@ class InventoryApiController {
                 productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
 
         // Same as the legacy screens: only items with an availability record are listed
-        List data = quantityMap.collect { InventoryItem inventoryItem, Integer quantity ->
+        List data = quantityMap.collect { inventoryItem, quantity ->
             [
                     inventoryItem: [
                             id            : inventoryItem.id,
