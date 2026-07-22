@@ -193,7 +193,6 @@ components:
       required:
         - id
         - active
-        - code
         - name
       properties:
         id:
@@ -202,7 +201,10 @@ components:
           type: boolean
         code:
           type: string
-          description: Product source code (generated when not provided).
+          nullable: true
+          description: >
+            Product source code (generated on create when not provided, but
+            nullable in the domain).
         name:
           type: string
         description:

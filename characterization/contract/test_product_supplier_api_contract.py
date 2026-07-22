@@ -37,10 +37,10 @@ def test_read_unknown(client):
     assert resp.status_code == 404
 
 
-def test_create_read_update_delete(client):
+def test_create_read_update_delete(client, supplier_id):
     body = {
         "product": {"id": client.product_id(PRODUCT_CODE)},
-        "supplier": {"id": "1"},
+        "supplier": {"id": supplier_id},
         "code": TEST_CODE,
         "name": TEST_NAME,
         "active": True,

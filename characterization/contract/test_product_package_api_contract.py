@@ -17,7 +17,7 @@ PRODUCT_CODE = "AX738"
 
 
 @pytest.fixture(scope="module")
-def product_supplier(client):
+def product_supplier(client, supplier_id):
     data = client.get_json("/api/productSuppliers",
                            params={"searchTerm": TEST_CODE})["data"]
     for ps in data:
@@ -25,7 +25,7 @@ def product_supplier(client):
             client.request("DELETE", f"/api/productSuppliers/{ps['id']}")
     resp = client.request("POST", "/api/productSuppliers", json={
         "product": {"id": client.product_id(PRODUCT_CODE)},
-        "supplier": {"id": "1"},
+        "supplier": {"id": supplier_id},
         "code": TEST_CODE,
         "name": "ZZ Contract Product Source (packages)",
         "active": True,
