@@ -37,18 +37,26 @@ const StockListTemplateEdit = () => {
 
   const isPull = template?.replenishmentTypeCode === 'PULL';
 
-  const loadTemplate = () => requisitionTemplateApi.getTemplate(templateId)
+  // keepLocalEdits preserves unsaved quantity/package edits on rows that
+  // still exist after an add/remove reload
+  const loadTemplate = (keepLocalEdits = false) => requisitionTemplateApi.getTemplate(templateId)
     .then(({ data }) => {
       const fetched = data?.data;
       setTemplate(fetched);
-      setItems((fetched?.requisitionItems ?? []).map((item) => ({
-        id: item.id,
-        product: item.product,
-        quantity: item.quantity ?? '',
-        productPackageId: item.productPackageId ?? null,
-        monthlyDemand: item.monthlyDemand,
-        totalCost: item.totalCost,
-      })));
+      setItems((previous) => (fetched?.requisitionItems ?? []).map((item) => {
+        const existing = keepLocalEdits
+          ? previous.find((previousItem) => previousItem.id === item.id)
+          : null;
+        return {
+          id: item.id,
+          product: item.product,
+          quantity: existing ? existing.quantity : (item.quantity ?? ''),
+          productPackageId: existing
+            ? existing.productPackageId : (item.productPackageId ?? null),
+          monthlyDemand: item.monthlyDemand,
+          totalCost: item.totalCost,
+        };
+      }));
     })
     .catch((err) => {
       setError(err?.response?.data?.errorMessage || 'An error occurred while loading the stock list');
@@ -69,7 +77,7 @@ const StockListTemplateEdit = () => {
         orderIndex: items.length,
       });
       setNewProduct(null);
-      await loadTemplate();
+      await loadTemplate(true);
     } catch (err) {
       const message = err?.response?.data?.errorMessage;
       if (message) {
@@ -81,7 +89,7 @@ const StockListTemplateEdit = () => {
   const removeItem = async (itemId) => {
     try {
       await requisitionTemplateApi.removeTemplateItem(templateId, itemId);
-      await loadTemplate();
+      await loadTemplate(true);
     } catch (err) {
       const message = err?.response?.data?.errorMessage;
       if (message) {
