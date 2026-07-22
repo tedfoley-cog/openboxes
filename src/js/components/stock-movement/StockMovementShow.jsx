@@ -32,6 +32,7 @@ const StockMovementShow = () => {
 
   useEffect(() => {
     setTabData({});
+    setActiveTab(null);
     stockMovementApi.getDetails(stockMovementId)
       .then(({ data }) => {
         const fetchedDetails = data?.data;
