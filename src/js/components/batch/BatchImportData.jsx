@@ -292,9 +292,8 @@ const BatchImportData = () => {
                   {preview.rows.map((row, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <tr key={index}>
-                      {Object.values(row).map((value, cellIndex) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <td key={cellIndex}>{value === null || value === undefined ? '' : String(value)}</td>
+                      {(columns || []).map((column) => (
+                        <td key={column}>{row[column] === null || row[column] === undefined ? '' : String(row[column])}</td>
                       ))}
                     </tr>
                   ))}

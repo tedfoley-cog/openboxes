@@ -9,6 +9,9 @@
  **/
 package org.pih.warehouse.api
 
+import java.time.LocalDate
+import java.time.ZoneId
+
 import grails.converters.JSON
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException
 import org.pih.warehouse.core.Location
@@ -29,6 +32,18 @@ class BatchApiController {
     def messageSource
 
     def importData(ImportDataCommand command) {
+        if (!session.warehouse) {
+            response.status = 400
+            render([errorCode: 400, errorMessage: warehouse.message(code: 'dashboard.chooseLocation.label', default: 'Please choose a location')] as JSON)
+            return
+        }
+        if (!command.date && params.date) {
+            try {
+                command.date = Date.from(LocalDate.parse(params.date as String).atStartOfDay(ZoneId.systemDefault()).toInstant())
+            } catch (Exception ignored) {
+                log.warn("Unable to parse date '${params.date}'")
+            }
+        }
         def localFile = session.localFile
         if (request instanceof StandardMultipartHttpServletRequest) {
             def uploadFile = command.importFile
