@@ -21,7 +21,7 @@ coupled to the Grails/GORM upgrade — input to the Grails 4 wave).
 
 | Dependency | Version | Evidence | Grails 4 risk |
 |---|---|---|---|
-| `io.micronaut:micronaut-http-client` (testCompile) | 1.2.11 | Its only consumer, `ApiControllerFunctionalSpec.groovy`, no longer exists in the tree (`rg micronaut` matches only build.gradle). | None (removed) |
+| `io.micronaut:micronaut-http-client` (testCompile) | 1.2.11 | Its only consumer, `ApiControllerFunctionalSpec.groovy`, no longer exists in the tree (`rg micronaut` matches only build.gradle). It transitively supplied `jackson-datatype-jsr310` to the test classpath, which rest-assured API specs rely on for `java.time` (de)serialization — now declared explicitly as a direct testCompile dependency. | None (removed) |
 | `org.jadira.usertype:usertype.jodatime` | 2.0.1 | Provides Hibernate user types for persisting Joda-Time fields in domain classes. No domain class uses `org.joda.time` types (`rg "org.joda" grails-app/domain` → no matches); Joda is only used transiently in services/controllers via `joda-time:joda-time`, which stays. Boot + characterization verified green without it. | None (removed) |
 
 ## Updated (patch/minor, Grails 3.3.16 + Java 11 compatible)
