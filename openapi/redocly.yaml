@@ -12,8 +12,9 @@ rules:
   # as HTML error pages or 200-with-null bodies); don't require 4xx.
   operation-4xx-response: off
   # Some legacy endpoints have no reachable 2xx: POST /api/stockAdjustments
-  # always 500s (MissingPropertyException) and a few stock movement actions
-  # respond 302 redirects; the specs pin that behavior.
+  # always 500s (MissingPropertyException), NoopApiController's actions all
+  # throw NotImplementedException (500 only), and a few stock movement
+  # actions respond 302 redirects; the specs pin that behavior.
   operation-2xx-response: off
   # The legacy UrlMappings freely mix literal and $id segments under the
   # same prefix (e.g. /api/stockMovements/createPickList/{id} vs
