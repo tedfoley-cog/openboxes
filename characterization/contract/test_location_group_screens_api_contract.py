@@ -79,7 +79,8 @@ def test_create_details_update_roundtrip(client):
               path=f"/api/locationGroups/{group_id}",
               json={"name": f"{TEST_NAME} (renamed)",
                     "version": details["version"],
-                    "address": {"city": "Contractville",
+                    "address": {"address": "1 Contract St",
+                                "city": "Contractville",
                                 "description": "contract test"}})
         resp = check(client, spec, "GET", "/api/locationGroups/{id}/details",
                      path=f"/api/locationGroups/{group_id}/details")

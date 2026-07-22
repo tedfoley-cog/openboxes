@@ -111,7 +111,7 @@ paths:
       summary: Location group details for the React form/show screens
       description: >
         Added in Phase 2 (Batch 32). Unknown ids raise
-        IllegalArgumentException (500), matching the read endpoint.
+        ObjectNotFoundException, rendered as 404.
       parameters:
         - $ref: '#/components/parameters/locationGroupId'
       responses:
@@ -125,8 +125,8 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/LocationGroupDetails'
-        '500':
-          $ref: '#/components/responses/UnknownLocationGroupError'
+        '404':
+          $ref: '../components/common.yaml#/components/responses/NotFound'
   /api/locationGroups/{id}:
     get:
       operationId: readLocationGroup
