@@ -46,6 +46,18 @@ class UrlMappings {
             controller = { "categoryApi" }
             action = [GET: "list", POST: "save"]
         }
+        "/api/categories/tree"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [GET: "tree"]
+        }
+        "/api/categories/assigningParentToProduct"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [PUT: "updateAssigningParentToProduct"]
+        }
+        "/api/categories/$id/details"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [GET: "details"]
+        }
         "/api/categories/$id"(parseRequest: true) {
             controller = { "categoryApi" }
             action = [GET: "read", POST: "save", PUT: "save", DELETE: "delete"]
@@ -198,6 +210,36 @@ class UrlMappings {
         "/api/locations/importCsv" {
             controller = { "locationApi" }
             action = [POST: "importCsv"]
+        }
+
+        "/api/locations/search" {
+            controller = { "locationApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/locations/$id/details" {
+            controller = { "locationApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/locations/$id/binLocations" {
+            controller = { "locationApi" }
+            action = [GET: "binLocations"]
+        }
+
+        "/api/locations/$id/zoneLocations" {
+            controller = { "locationApi" }
+            action = [GET: "zoneLocations"]
+        }
+
+        "/api/locations/$id/contents" {
+            controller = { "locationApi" }
+            action = [GET: "contents"]
+        }
+
+        "/api/locations/$id/logo" {
+            controller = { "locationApi" }
+            action = [DELETE: "deleteLogo"]
         }
 
         "/api/locations/$id/$action" {
@@ -407,6 +449,53 @@ class UrlMappings {
         "/api/picklists/$id/items" {
             controller = "picklistApi"
             action = [DELETE: "clearPicklist"]
+        }
+
+        "/api/picklists/print/$id" {
+            controller = "picklistApi"
+            action = [GET: "print"]
+        }
+
+        "/api/picklists/returnPrint/$id" {
+            controller = "picklistApi"
+            action = [GET: "returnPrint"]
+        }
+
+        // Requisition API (classic requisition flow screens migrated to React)
+
+        "/api/requisitions"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "create"]
+        }
+
+        "/api/requisitions/templates" {
+            controller = "requisitionApi"
+            action = [GET: "templates"]
+        }
+
+        "/api/requisitions/$id" {
+            controller = "requisitionApi"
+            action = [GET: "read"]
+        }
+
+        "/api/requisitions/$id/confirm"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "confirm"]
+        }
+
+        "/api/requisitions/$id/details"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "saveDetails"]
+        }
+
+        "/api/requisitions/$id/documents" {
+            controller = "requisitionApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/requisitions/documentTypes" {
+            controller = "requisitionApi"
+            action = [GET: "documentTypes"]
         }
 
         // Partial Receiving API
