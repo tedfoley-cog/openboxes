@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { hideSpinner, showSpinner } from 'actions';
 import eventTypeApi from 'api/services/EventTypeApi';
@@ -24,6 +24,7 @@ const EventTypeForm = () => {
   useTranslation('eventType', 'default');
 
   const { eventTypeId } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const translate = useTranslate();
 
@@ -58,7 +59,7 @@ const EventTypeForm = () => {
       };
     } catch (error) {
       // Like the legacy edit action: not-found redirects back to the list.
-      window.location = EVENT_TYPE_URL.list();
+      history.push(EVENT_TYPE_URL.list());
       return {
         name: '', description: '', sortOrder: '', eventCode: null,
       };
@@ -78,10 +79,8 @@ const EventTypeForm = () => {
       },
   });
 
-  // The event type list/show screens are still legacy GSPs (Batch 43), so
-  // navigate with a full page load rather than a client-side route change.
   const goToList = () => {
-    window.location = EVENT_TYPE_URL.list();
+    history.push(EVENT_TYPE_URL.list());
   };
 
   const onSubmit = async (values) => {

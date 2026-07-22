@@ -3,9 +3,10 @@ info:
   title: OpenBoxes - EventTypeApiController
   description: >
     Event type list/read/create/update/delete endpoints handled by
-    org.pih.warehouse.api.EventTypeApiController, routed via the standard
-    "/api/${resource}s" and "/api/${resource}s/$id" REST mappings. Added in
-    Phase 2 (Batch 42) to back the React eventType create/edit screens.
+    org.pih.warehouse.api.EventTypeApiController, routed via the explicit
+    "/api/eventTypes" and "/api/eventTypes/$id" mappings. List/read/delete
+    back the React eventType list/show screens (Batch 43); create/update
+    back the React eventType create/edit screens (Batch 42).
   version: 0.1.0
 servers:
   - url: http://localhost:8080/openboxes
@@ -16,24 +17,27 @@ paths:
   /api/eventTypes:
     get:
       operationId: listEventTypes
-      summary: List event types
-      description: >
-        Paged list mirroring the legacy eventType/list screen; max is capped
-        at 100 (default 10).
+      summary: List event types, optionally filtered
       parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Case-insensitive prefix filter (ilike "q%") on name.
         - name: sort
           in: query
           required: false
           schema:
             type: string
-          description: EventType property to sort by (e.g. name, sortOrder).
+            enum: [id, name, description, sortOrder, eventCode]
+          description: Sort property; defaults to sortOrder.
         - name: order
           in: query
           required: false
           schema:
             type: string
             enum: [asc, desc]
-          description: Sort direction, only applied when sort is provided.
         - $ref: '../components/common.yaml#/components/parameters/max'
         - $ref: '../components/common.yaml#/components/parameters/offset'
       responses:
@@ -81,8 +85,8 @@ paths:
         schema:
           $ref: '../components/common.yaml#/components/schemas/Id'
         description: >
-          Event type id. Unknown ids raise ObjectNotFoundException, rendered
-          as HTTP 404 by ErrorsController.handleNotFound.
+          Event type id. Unknown ids raise ObjectNotFoundException,
+          rendered as HTTP 404 by ErrorsController.handleNotFound.
     get:
       operationId: readEventType
       summary: Read a single event type
@@ -104,7 +108,7 @@ paths:
       summary: Update an event type
       description: >
         Partial update; only keys present in the body are bound. Also mapped
-        for POST via the standard "/api/${resource}s/$id" REST mapping.
+        for POST via the "/api/eventTypes/$id" mapping.
       requestBody:
         required: true
         content:
@@ -139,7 +143,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
+                $ref: '../components/common.yaml#/components/schemas/ValidationErrorResponse'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
         '500':
@@ -148,14 +152,14 @@ components:
   schemas:
     EventType:
       type: object
-      description: >
-        Event type rendering emitted by EventTypeApiController.toJson().
-      required: [id, name, eventCode]
+      description: Event type rendering emitted by EventTypeApiController.toJson().
+      required: [id, active]
       properties:
         id:
           $ref: '../components/common.yaml#/components/schemas/Id'
         name:
           type: string
+          nullable: true
         description:
           type: string
           nullable: true
@@ -163,12 +167,23 @@ components:
           type: integer
           nullable: true
         eventCode:
-          $ref: '#/components/schemas/EventCode'
+          type: string
+          nullable: true
+          description: EventCode enum name (e.g. CREATED, SHIPPED, CUSTOM).
+        active:
+          type: boolean
+        optionValue:
+          type: string
+          nullable: true
+          description: Description when present, otherwise the name.
         dateCreated:
           type: string
           nullable: true
         lastUpdated:
           type: string
+          nullable: true
+        version:
+          type: integer
           nullable: true
       additionalProperties: true
     EventTypeInput:

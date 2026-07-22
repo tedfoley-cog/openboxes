@@ -22,9 +22,17 @@ import org.pih.warehouse.core.EventType
 class EventTypeApiController {
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        def eventTypes = EventType.list(params)
-        render([data: eventTypes.collect { toJson(it) }, totalCount: EventType.count()] as JSON)
+        Integer max = Math.min(params.max ? params.int('max') : 10, 100)
+        Integer offset = params.offset ? params.int('offset') : 0
+        String sort = params.sort in ['id', 'name', 'description', 'sortOrder', 'eventCode'] ? params.sort : 'sortOrder'
+        String sortOrder = params.order == 'desc' ? 'desc' : 'asc'
+        def results = EventType.createCriteria().list(max: max, offset: offset) {
+            if (params.q) {
+                ilike("name", "${params.q}%")
+            }
+            order(sort, sortOrder)
+        }
+        render([data: results.collect { toJson(it) }, totalCount: results.totalCount] as JSON)
     }
 
     def read() {
@@ -69,7 +77,7 @@ class EventTypeApiController {
             eventType.delete(flush: true)
         } catch (DataIntegrityViolationException ignored) {
             transactionStatus.setRollbackOnly()
-            String message = "${warehouse.message(code: 'default.not.deleted.message', args: [warehouse.message(code: 'eventType.label', default: 'EventType'), params.id])}"
+            String message = "${warehouse.message(code: 'default.not.deleted.message', args: [warehouse.message(code: 'eventType.label', default: 'Event Type'), params.id])}"
             response.status = HttpStatus.BAD_REQUEST.value()
             render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)
             return
@@ -104,8 +112,11 @@ class EventTypeApiController {
                 description: eventType.description,
                 sortOrder  : eventType.sortOrder,
                 eventCode  : eventType.eventCode?.name(),
+                active     : eventType.active,
+                optionValue: eventType.optionValue,
                 dateCreated: eventType.dateCreated,
                 lastUpdated: eventType.lastUpdated,
+                version    : eventType.version,
         ]
     }
 }

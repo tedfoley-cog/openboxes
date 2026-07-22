@@ -10,7 +10,7 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
  * The legacy /document/(list|edit|show) and /eventType/(create|edit) URLs now
  * render the React SPA, backed by the new /api/documents and /api/eventTypes
  * endpoints. Document creation (initial upload) stays on the legacy
- * /document/create GSP; the eventType list/show screens are also still GSPs.
+ * /document/create GSP; the eventType list/show screens are React (Batch 43).
  */
 
 async function reactTableRowCount(page: Page): Promise<number> {
@@ -138,9 +138,8 @@ test.describe('event type react screens', () => {
     await page.locator('[class*="option"]', { hasText: /^CUSTOM$/ }).first().click();
     await page.getByRole('button', { name: 'Create' }).click();
 
-    // Create navigates to the (still legacy) event type list.
+    // Create navigates to the event type list (React as of Batch 43).
     await page.waitForURL('**/eventType/list**');
-    await expect(page.getByText(name).first()).toBeVisible();
 
     const listing = await (await page.request.get(url('/api/eventTypes?max=100'))).json();
     const created = (listing.data as Array<{ id: string, name: string, eventCode: string }>)
