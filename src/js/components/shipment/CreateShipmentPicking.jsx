@@ -30,6 +30,8 @@ const CreateShipmentPicking = () => {
   useTranslation('shipment', 'default');
 
   const fetchPicklist = useCallback(() => {
+    setValidationValid(null);
+    setValidationErrors(null);
     shipmentApi.getShipmentPicklist(shipmentId)
       .then((response) => setData(response.data?.data))
       .catch((err) => {

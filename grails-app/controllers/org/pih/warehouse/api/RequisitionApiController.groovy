@@ -388,7 +388,7 @@ class RequisitionApiController extends BaseApiController {
         }
         Picklist picklist = Picklist.findByRequisition(requisition)
         def shipment = requisition.shipment
-        def requisitionItems = requisition.requisitionItems.sort { it.product.name }
+        def requisitionItems = requisition.requisitionItems.sort { it.product?.name }
         def canceledItems = requisitionItems.findAll { it.isCanceled() }
         def activeItems = requisitionItems.findAll { !it.isCanceled() && !it.isChanged() }
 
