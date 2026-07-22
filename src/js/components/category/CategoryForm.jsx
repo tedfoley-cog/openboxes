@@ -44,7 +44,17 @@ const CategoryForm = () => {
           const response = await categoryApi.getCategoryDetails(id);
           setCategory({ ...emptyCategory, ...response.data?.data });
         } else {
-          setCategory(emptyCategory);
+          // Like the legacy create screen, default the parent to the root
+          // category so a new category is not accidentally created parentless.
+          const treeResponse = await categoryApi.getCategoryTree();
+          const rootCategory = (treeResponse.data?.data ?? [])
+            .find((c) => c.isRoot) ?? treeResponse.data?.data?.[0];
+          setCategory({
+            ...emptyCategory,
+            parentCategory: rootCategory
+              ? { id: rootCategory.id, name: rootCategory.name }
+              : null,
+          });
         }
       } catch (error) {
         // Like the legacy edit action: not-found redirects back to the tree.
