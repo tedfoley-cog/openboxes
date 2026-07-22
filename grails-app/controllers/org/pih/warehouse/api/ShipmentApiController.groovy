@@ -749,7 +749,9 @@ class ShipmentApiController {
             render([errorCode: 404, errorMessage: "Event ${params.eventId} not found"] as JSON)
             return
         }
-        if (jsonObject.containsKey("eventTypeId") && !event.id) {
+        // the event type is only editable while the event has none (the legacy
+        // GSP only rendered the select in that case)
+        if (jsonObject.containsKey("eventTypeId") && !event.eventType) {
             event.eventType = jsonObject.eventTypeId ? EventType.get(jsonObject.eventTypeId) : null
         }
         if (jsonObject.containsKey("eventDate")) {
