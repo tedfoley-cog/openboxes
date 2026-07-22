@@ -11,6 +11,7 @@ package org.pih.warehouse.api
 
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import org.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.springframework.http.HttpStatus
 
 import org.pih.warehouse.core.Location
@@ -55,7 +56,7 @@ class ReceiveOrderApiController {
                 dateOrdered: order.dateOrdered,
                 origin     : order.origin ? [id: order.origin.id, name: order.origin.name] : null,
                 destination: order.destination ? [id: order.destination.id, name: order.destination.name] : null,
-                orderedBy  : order.orderedBy ? [id: order.orderedBy.id, name: order.orderedBy.name] : null,
+                orderedBy  : serializePerson(order.orderedBy),
                 orderItems : (order.listOrderItems() ?: []).collect { OrderItem orderItem ->
                     [
                             id                   : orderItem.id,
@@ -115,13 +116,16 @@ class ReceiveOrderApiController {
         orderCommand.orderItems = orderItemCommands
 
         List<String> errorMessages = []
-        if (!orderCommand.validate() || orderCommand.hasErrors()) {
+        // Validate only the fields the receive order flow collects; the
+        // shipment/shipmentItem properties are populated later by
+        // OrderService.saveOrderShipment and must not fail validation here.
+        if (!orderCommand.validate(["shipmentType", "recipient", "shippedOn", "deliveredOn"])) {
             errorMessages += orderCommand.errors.allErrors.collect {
                 messageSource.getMessage(it, request?.locale)
             }
         }
         orderItemCommands.each { OrderItemCommand orderItemCommand ->
-            if (orderItemCommand.quantityReceived && !orderItemCommand.validate()) {
+            if (orderItemCommand.quantityReceived && !orderItemCommand.validate(["productReceived"])) {
                 errorMessages += orderItemCommand.errors.allErrors.collect {
                     messageSource.getMessage(it, request?.locale)
                 }
@@ -146,6 +150,16 @@ class ReceiveOrderApiController {
             return
         }
         render([data: [orderId: order.id, shipmentId: orderCommand.shipment?.id]] as JSON)
+    }
+
+    private static Map serializePerson(Person person) {
+        if (!person) {
+            return null
+        }
+        // orderedBy may be a Hibernate proxy of a Person subclass (e.g. User);
+        // unwrap it before property access to avoid reflection errors
+        Person unwrapped = (Person) GrailsHibernateUtil.unwrapIfProxy(person)
+        return [id: unwrapped.id, name: unwrapped.name]
     }
 
     private void renderSaveError(List<String> errorMessages) {

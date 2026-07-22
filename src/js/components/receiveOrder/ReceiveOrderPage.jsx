@@ -302,14 +302,13 @@ const ReceiveOrderPage = () => {
                   onChange={() => {}}
                 />
               </div>
-              <div className="col-lg-4 col-md-6 px-2 pt-2">
+              <div className="col-lg-4 col-md-6 px-2 pt-2" data-testid="receive-order-shipment-type">
                 <SelectField
                   title={{ id: 'react.receiveOrder.shipmentType.label', defaultMessage: 'Shipment type' }}
                   required
                   options={shipmentTypes}
                   defaultValue={shipmentType}
                   onChange={setShipmentType}
-                  data-testid="receive-order-shipment-type"
                 />
               </div>
               <div className="col-lg-4 col-md-6 px-2 pt-2">
@@ -320,7 +319,7 @@ const ReceiveOrderPage = () => {
                   onChange={() => {}}
                 />
               </div>
-              <div className="col-lg-4 col-md-6 px-2 pt-2">
+              <div className="col-lg-4 col-md-6 px-2 pt-2" data-testid="receive-order-recipient">
                 <SelectField
                   key={`recipient-${recipient?.id ?? ''}`}
                   title={{ id: 'react.receiveOrder.recipient.label', defaultMessage: 'Recipient' }}
@@ -330,7 +329,6 @@ const ReceiveOrderPage = () => {
                   defaultValue={recipient}
                   onChange={setRecipient}
                   placeholder={translate('react.receiveOrder.searchPeople.label', 'Search people...')}
-                  data-testid="receive-order-recipient"
                 />
               </div>
               <div className="col-lg-4 col-md-6 px-2 pt-2">
@@ -341,22 +339,20 @@ const ReceiveOrderPage = () => {
                   onChange={() => {}}
                 />
               </div>
-              <div className="col-lg-4 col-md-6 px-2 pt-2">
+              <div className="col-lg-4 col-md-6 px-2 pt-2" data-testid="receive-order-shipped-on">
                 <DateField
                   title={{ id: 'react.receiveOrder.shippedOn.label', defaultMessage: 'Shipped on' }}
                   required
                   value={shippedOn}
                   onChange={setShippedOn}
-                  data-testid="receive-order-shipped-on"
                 />
               </div>
-              <div className="col-lg-4 col-md-6 px-2 pt-2">
+              <div className="col-lg-4 col-md-6 px-2 pt-2" data-testid="receive-order-delivered-on">
                 <DateField
                   title={{ id: 'react.receiveOrder.deliveredOn.label', defaultMessage: 'Delivered on' }}
                   required
                   value={deliveredOn}
                   onChange={setDeliveredOn}
-                  data-testid="receive-order-delivered-on"
                 />
               </div>
             </div>
@@ -423,7 +419,7 @@ const ReceiveOrderPage = () => {
                         </td>
                       ) : (
                         <>
-                          <td className="border-left" style={{ width: '90px' }}>
+                          <td className="border-left" style={{ width: '90px' }} data-testid="receive-order-quantity-input">
                             <TextInput
                               type="number"
                               value={row.quantityReceived}
@@ -432,10 +428,9 @@ const ReceiveOrderPage = () => {
                                 { quantityReceived: quantity ?? '' },
                               )}
                               ariaLabel={{ id: 'react.receiveOrder.received.label', defaultMessage: 'Received' }}
-                              data-testid="receive-order-quantity-input"
                             />
                           </td>
-                          <td style={{ minWidth: '220px' }}>
+                          <td style={{ minWidth: '220px' }} data-testid="receive-order-product-select">
                             <SelectField
                               async
                               productSelect
@@ -447,15 +442,13 @@ const ReceiveOrderPage = () => {
                               )}
                               ariaLabel="Product received"
                               hideErrorMessageWrapper
-                              data-testid="receive-order-product-select"
                             />
                           </td>
-                          <td style={{ width: '140px' }}>
+                          <td style={{ width: '140px' }} data-testid="receive-order-lot-input">
                             <TextInput
                               value={row.lotNumber}
                               onChange={(e) => updateRow(row.key, { lotNumber: e.target.value })}
                               ariaLabel={{ id: 'react.receiveOrder.lotNumber.label', defaultMessage: 'Lot number' }}
-                              data-testid="receive-order-lot-input"
                             />
                           </td>
                           <td style={{ minWidth: '150px' }}>
