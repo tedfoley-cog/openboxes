@@ -41,6 +41,53 @@ def test_expiration_history_report_missing_dates(client):
     check(client, spec, "GET", "/api/inventories/expirationHistoryReport")
 
 
+def test_inventory_summary(client):
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET",
+                 "/api/facilities/{facilityId}/inventories/summary",
+                 path=f"/api/facilities/{main}/inventories/summary")
+    body = resp.json()
+    assert body["data"], "seeded Main Warehouse should have inventory rows"
+    assert body["totalCount"] == len(body["data"])
+
+
+def test_inventory_summary_low_stock(client):
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET",
+                 "/api/facilities/{facilityId}/inventories/summary",
+                 path=f"/api/facilities/{main}/inventories/summary",
+                 params={"status": "lowStock"})
+    all_rows = client.get_json(
+        f"/api/facilities/{main}/inventories/summary")["data"]
+    assert len(resp.json()["data"]) <= len(all_rows)
+
+
+def test_expired_stock(client):
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET",
+                 "/api/facilities/{facilityId}/inventories/expiredStock",
+                 path=f"/api/facilities/{main}/inventories/expiredStock")
+    data = resp.json()["data"]
+    assert data["totalCount"] == len(data["items"])
+
+
+def test_expiring_stock(client):
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET",
+                 "/api/facilities/{facilityId}/inventories/expiringStock",
+                 path=f"/api/facilities/{main}/inventories/expiringStock")
+    data = resp.json()["data"]
+    assert data["totalCount"] == len(data["items"])
+
+
+def test_expiring_stock_status_filter(client):
+    main = client.location_id("Main Warehouse")
+    check(client, spec, "GET",
+          "/api/facilities/{facilityId}/inventories/expiringStock",
+          path=f"/api/facilities/{main}/inventories/expiringStock",
+          params={"status": "within30Days"})
+
+
 def test_import_csv_empty_body(client):
     # A successful import would mutate the seeded inventory, so only the
     # empty-body error branch is exercised (IllegalArgumentException -> 500).
