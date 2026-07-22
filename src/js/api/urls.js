@@ -76,11 +76,19 @@ export const ORDER_PENDING_ITEMS = `${ORDER_API}/pendingItems`;
 export const ORDER_DOCUMENT_TYPES = `${ORDER_API}/documentTypes`;
 export const ORDER_DOCUMENTS = (id) => `${ORDER_BY_ID(id)}/documents`;
 export const ORDER_ITEM_OPTIONS = (id) => `${ORDER_BY_ID(id)}/orderItemOptions`;
+export const ORDER_DETAILS = (id) => `${ORDER_BY_ID(id)}/details`;
+export const ORDER_ITEMS = (id) => `${ORDER_BY_ID(id)}/items`;
+export const ORDER_SHIPMENTS = (id) => `${ORDER_BY_ID(id)}/shipments`;
+export const ORDER_INVOICES = (id) => `${ORDER_BY_ID(id)}/invoices`;
+export const ORDER_PRINT = (id) => `${ORDER_BY_ID(id)}/print`;
 export const ORDER_ADJUSTMENTS = (id) => `${ORDER_BY_ID(id)}/adjustments`;
 export const ORDER_ADJUSTMENT_BY_ID = (id, adjustmentId) => `${ORDER_ADJUSTMENTS(id)}/${adjustmentId}`;
 export const ORDER_SUMMARIES = `${API}/orderSummaries`;
 export const ORDER_ITEM_SUMMARIES = `${API}/orderItemSummaries`;
 export const ORDER_ADJUSTMENT_TYPE_OPTIONS = `${API}/orderAdjustmentTypeOptions`;
+export const ORDER_ADJUSTMENT_TYPE_API = `${API}/orderAdjustmentTypes`;
+export const ORDER_ADJUSTMENT_TYPE_BY_ID = (id) => `${ORDER_ADJUSTMENT_TYPE_API}/${id}`;
+export const ORDER_ADJUSTMENT_TYPE_CODE_OPTIONS = `${API}/orderAdjustmentTypeCodeOptions`;
 export const BUDGET_CODE_OPTIONS = `${API}/budgetCodeOptions`;
 export const ORDER_STATUS_OPTIONS = `${API}/orderStatusOptions`;
 export const ORDER_SUMMARY_STATUS_OPTIONS = `${API}/orderSummaryStatusOptions`;
@@ -111,6 +119,11 @@ export const PRODUCT_UPN_DATABASE = `${PRODUCT_API}/upnDatabase`;
 export const PRODUCT_ASSOCIATION_API = `${API}/productAssociations`;
 export const PRODUCT_ASSOCIATION_BY_ID = (id) => `${PRODUCT_ASSOCIATION_API}/${id}`;
 export const PRODUCT_ASSOCIATION_TYPE_CODE_OPTIONS = `${API}/productAssociationTypeCodeOptions`;
+export const PRODUCT_CATALOG_API = `${API}/productCatalogs`;
+export const PRODUCT_CATALOG_BY_ID = (id) => `${PRODUCT_CATALOG_API}/${id}`;
+export const PRODUCT_CATALOG_ITEMS = (id) => `${PRODUCT_CATALOG_API}/${id}/items`;
+export const PRODUCT_CATALOG_ITEM_BY_ID = (id, itemId) => `${PRODUCT_CATALOG_API}/${id}/items/${itemId}`;
+export const PRODUCT_CATALOG_IMPORT_ITEMS = (id) => `${PRODUCT_CATALOG_API}/${id}/importItems`;
 export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
 export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
 export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
@@ -142,12 +155,21 @@ export const BUDGET_CODE_BY_ID = (id) => `${BUDGET_CODE_API}/${id}`;
 
 // PRODUCT GROUP
 export const PRODUCT_GROUP_OPTION = `${API}/productGroupOptions`;
+export const PRODUCT_GROUP_API = `${API}/productGroups`;
+export const PRODUCT_GROUP_BY_ID = (id) => `${PRODUCT_GROUP_API}/${id}`;
+export const PRODUCT_GROUP_PRODUCTS = (id) => `${PRODUCT_GROUP_API}/${id}/products`;
+export const PRODUCT_GROUP_PRODUCT_BY_ID = (id, productId) => `${PRODUCT_GROUP_PRODUCTS(id)}/${productId}`;
+export const PRODUCT_TYPE_API = `${API}/productTypes`;
+export const PRODUCT_TYPE_BY_ID = (id) => `${PRODUCT_TYPE_API}/${id}`;
+export const PRODUCT_ACTIVITY_CODE_OPTIONS = `${API}/productActivityCodeOptions`;
+export const PRODUCT_FIELD_OPTIONS = `${API}/productFieldOptions`;
 
 // SHIPMENT TYPES
 export const SHIPMENT_TYPES = `${GENERIC_API}/shipmentType`;
 
 // PAYMENT TERMS
 export const PAYMENT_TERMS_OPTION = `${API}/paymentTermOptions`;
+export const PAYMENT_TERM_API = `${API}/paymentTerms`;
 
 // USERS
 export const USERS_OPTIONS = `${API}/users`;
@@ -215,12 +237,24 @@ export const ORGANIZATION_DETAILS = (id) => `${ORGANIZATION_API}/${id}/details`;
 export const PARTY_TYPE_OPTIONS = `${API}/partyTypeOptions`;
 export const ORGANIZATION_ROLE_TYPE_OPTIONS = `${API}/organizationRoleTypeOptions`;
 
+// PARTIES
+export const PARTY_API = `${API}/parties`;
+export const PARTY_BY_ID = (id) => `${PARTY_API}/${id}`;
+export const PARTY_SEARCH_API = `${PARTY_API}/search`;
+export const PARTY_DETAILS = (id) => `${PARTY_API}/${id}/details`;
+export const PARTY_ROLE_API = `${API}/partyRoles`;
+export const PARTY_ROLE_BY_ID = (id) => `${PARTY_ROLE_API}/${id}`;
+export const PARTY_ROLE_DETAILS = (id) => `${PARTY_ROLE_API}/${id}/details`;
+export const PARTY_OPTIONS = `${API}/partyOptions`;
+export const ROLE_TYPE_OPTIONS = `${API}/roleTypeOptions`;
+
 // PRODUCT SUPPLIER
 export const PRODUCT_SUPPLIER_API = `${API}/productSuppliers`;
 export const PRODUCT_SUPPLIER_BY_ID = (id) => `${PRODUCT_SUPPLIER_API}/${id}`;
 export const PRODUCT_SUPPLIER_PREFERENCES_API = `${API}/productSupplierPreferences`;
 export const PRODUCT_SUPPLIER_PREFERENCES_BY_ID = (id) => `${PRODUCT_SUPPLIER_PREFERENCES_API}/${id}`;
 export const PRODUCT_SUPPLIER_EXPORT = `${PRODUCT_SUPPLIER_API}/export`;
+export const PRODUCT_SUPPLIER_DETAILS = (id) => `${PRODUCT_SUPPLIER_API}/${id}/details`;
 
 // UNIT OF MEASURE
 export const UNIT_OF_MEASURE_API = `${API}/unitOfMeasures`;
@@ -293,6 +327,18 @@ export const SHIPMENT_VALIDATE_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/validat
 export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPicklist`;
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
+
+// REQUISITION TEMPLATE (stock list template screens)
+export const REQUISITION_TEMPLATE_API = `${API}/requisitionTemplates`;
+export const REQUISITION_TEMPLATE_BY_ID = (id) => `${REQUISITION_TEMPLATE_API}/${id}`;
+export const REQUISITION_TEMPLATE_HEADER = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/header`;
+export const REQUISITION_TEMPLATE_ITEMS = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/items`;
+export const REQUISITION_TEMPLATE_ITEM = (id, itemId) => `${REQUISITION_TEMPLATE_BY_ID(id)}/items/${itemId}`;
+export const REQUISITION_TEMPLATE_UPDATE_ITEMS = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/updateItems`;
+export const REQUISITION_TEMPLATE_IMPORT_DATA = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/importData`;
+export const REQUISITION_TEMPLATE_IMPORT = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/import`;
+export const REQUISITION_TEMPLATE_ADD_PRODUCT_CODES = (id) => `${REQUISITION_TEMPLATE_BY_ID(id)}/addProductCodes`;
+export const STOCKLIST_SEND_MAIL = (id) => `${STOCKLIST_API}/sendMail/${id}`;
 
 // FULL OUTBOUND IMPORT FEATURE
 export const FULFILLMENT_API = `${API}/fulfillments`;

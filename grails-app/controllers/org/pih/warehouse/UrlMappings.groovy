@@ -143,6 +143,46 @@ class UrlMappings {
             action = [GET: "organizationRoleTypeOptions"]
         }
 
+        // Role type options for the party role form
+        "/api/roleTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "roleTypeOptions"]
+        }
+
+        // Party options for the party role form
+        "/api/partyOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "partyOptions"]
+        }
+
+        // Party endpoints for the React party screens; explicit mappings
+        // because the generic "/api/${resource}s" pattern cannot derive
+        // "partyApi" from the irregular plural "parties".
+        "/api/parties"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [POST: "create"]
+        }
+
+        "/api/parties/search"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/parties/$id/details"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/parties/$id"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [POST: "update", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/partyRoles/$id/details"(parseRequest: true) {
+            controller = { "partyRoleApi" }
+            action = [GET: "details"]
+        }
+
         "/api/organizations/search"(parseRequest: true) {
             controller = { "organizationApi" }
             action = [GET: "search"]
@@ -151,6 +191,47 @@ class UrlMappings {
         "/api/organizations/$id/details"(parseRequest: true) {
             controller = { "organizationApi" }
             action = [GET: "details"]
+        }
+
+        "/api/productGroups"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/productGroups/$id"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productGroups/$id/products"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [POST: "addProduct"]
+        }
+
+        "/api/productGroups/$id/products/$productId"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [DELETE: "removeProduct"]
+        }
+
+        "/api/productTypes"(parseRequest: true) {
+            controller = { "productTypeApi" }
+            action = [POST: "create"]
+        }
+
+        "/api/productTypes/$id"(parseRequest: true) {
+            controller = { "productTypeApi" }
+            action = [DELETE: "delete"]
+        }
+
+        // Product activity / field options for the productType create screen
+        "/api/productActivityCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productActivityCodeOptions"]
+        }
+
+        "/api/productFieldOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productFieldOptions"]
         }
 
         "/api/locationTypes"(parseRequest: true) {
@@ -211,6 +292,31 @@ class UrlMappings {
         "/api/productAssociations/$id"(parseRequest: true) {
             controller = { "productAssociationApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productCatalogs"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/productCatalogs/$id"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productCatalogs/$id/items"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [POST: "addItem"]
+        }
+
+        "/api/productCatalogs/$id/items/$itemId"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [DELETE: "removeItem"]
+        }
+
+        "/api/productCatalogs/$id/importItems" {
+            controller = { "productCatalogApi" }
+            action = [POST: "importItems"]
         }
 
         "/api/stockMovements/shipmentStatusCodes" {
@@ -763,7 +869,59 @@ class UrlMappings {
             action = [POST: "send"]
         }
 
+        // Requisition Template API (requisitionTemplate screens migrated to React)
+
+        "/api/requisitionTemplates"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "create"]
+        }
+
+        "/api/requisitionTemplates/$id" {
+            controller = "requisitionTemplateApi"
+            action = [GET: "read"]
+        }
+
+        "/api/requisitionTemplates/$id/header"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "updateHeader"]
+        }
+
+        "/api/requisitionTemplates/$id/items"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "addItem"]
+        }
+
+        "/api/requisitionTemplates/$id/items/$itemId" {
+            controller = "requisitionTemplateApi"
+            action = [DELETE: "removeItem"]
+        }
+
+        "/api/requisitionTemplates/$id/updateItems"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "updateItems"]
+        }
+
+        "/api/requisitionTemplates/$id/importData"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "importData"]
+        }
+
+        "/api/requisitionTemplates/$id/import"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "doImport"]
+        }
+
+        "/api/requisitionTemplates/$id/addProductCodes"(parseRequest: true) {
+            controller = "requisitionTemplateApi"
+            action = [POST: "addProductCodes"]
+        }
+
         // Requisition Item API (requisitionItem/change screen migrated to React)
+
+        "/api/requisitionItems" {
+            controller = "requisitionItemApi"
+            action = [GET: "list"]
+        }
 
         "/api/requisitionItems/$id" {
             controller = "requisitionItemApi"
@@ -941,7 +1099,7 @@ class UrlMappings {
         // Order API (comments for the migrated add comment screen)
         "/api/orders/$id/comments"(parseRequest: true) {
             controller = "orderApi"
-            action = [POST: "createComment"]
+            action = [GET: "listComments", POST: "createComment"]
         }
 
         // Order API (migrated order list / documents / adjustments screens)
@@ -957,7 +1115,7 @@ class UrlMappings {
 
         "/api/orders/$id/documents"(parseRequest: false) {
             controller = "orderApi"
-            action = [POST: "uploadDocument"]
+            action = [GET: "listDocuments", POST: "uploadDocument"]
         }
 
         "/api/orders/$id/orderItemOptions"(parseRequest: true) {
@@ -967,12 +1125,60 @@ class UrlMappings {
 
         "/api/orders/$id/adjustments"(parseRequest: true) {
             controller = "orderApi"
-            action = [POST: "createAdjustment"]
+            action = [GET: "listAdjustments", POST: "createAdjustment"]
         }
 
         "/api/orders/$id/adjustments/$adjustmentId"(parseRequest: true) {
             controller = "orderApi"
             action = [GET: "readAdjustment", PUT: "updateAdjustment"]
+        }
+
+        // Order API (migrated order show / print screens)
+        "/api/orders/$id/details"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "details"]
+        }
+
+        "/api/orders/$id/items"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "items"]
+        }
+
+        "/api/orders/$id/shipments"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "shipments"]
+        }
+
+        "/api/orders/$id/invoices"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "invoices"]
+        }
+
+        "/api/orders/$id/print"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "printData"]
+        }
+
+        // Order adjustment type API (migrated orderAdjustmentType screens)
+        "/api/orderAdjustmentTypes"(parseRequest: true) {
+            controller = "orderAdjustmentTypeApi"
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/orderAdjustmentTypes/$id"(parseRequest: true) {
+            controller = "orderAdjustmentTypeApi"
+            action = [GET: "read", PUT: "update"]
+        }
+
+        "/api/orderAdjustmentTypeCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "orderAdjustmentTypeCodeOptions"]
+        }
+
+        // Payment term API (migrated paymentTerm create screen)
+        "/api/paymentTerms"(parseRequest: true) {
+            controller = "paymentTermApi"
+            action = [POST: "create"]
         }
 
         "/api/orderSummaries"(parseRequest: true) {
@@ -1488,6 +1694,11 @@ class UrlMappings {
         "/api/productSuppliers/export" {
             controller = { "productSupplierApi" }
             action = [GET: "export"]
+        }
+
+        "/api/productSuppliers/$id/details" {
+            controller = { "productSupplierApi" }
+            action = [GET: "details"]
         }
 
         // Load Data

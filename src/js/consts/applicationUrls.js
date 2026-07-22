@@ -43,6 +43,24 @@ const PRODUCT_ASSOCIATION_URL = {
   create: () => `${PRODUCT_ASSOCIATION_URL.base}/create`,
   edit: (id) => `${PRODUCT_ASSOCIATION_URL.base}/edit/${id}`,
   exportXls: () => `${PRODUCT_ASSOCIATION_URL.base}/list?format=xls`,
+  show: (id) => `${PRODUCT_ASSOCIATION_URL.base}/show/${id}`,
+};
+
+const PRODUCT_CATALOG_URL = {
+  base: `${CONTEXT_PATH}/productCatalog`,
+  list: () => `${PRODUCT_CATALOG_URL.base}/list`,
+  create: () => `${PRODUCT_CATALOG_URL.base}/create`,
+  edit: (id) => `${PRODUCT_CATALOG_URL.base}/edit/${id}`,
+  show: (id) => `${PRODUCT_CATALOG_URL.base}/show/${id}`,
+  export: (id) => `${PRODUCT_CATALOG_URL.base}/exportProductCatalog/${id}`,
+};
+
+const PRODUCT_GROUP_URL = {
+  base: `${CONTEXT_PATH}/productGroup`,
+  list: () => `${PRODUCT_GROUP_URL.base}/list`,
+  create: () => `${PRODUCT_GROUP_URL.base}/create`,
+  edit: (id) => `${PRODUCT_GROUP_URL.base}/edit/${id}`,
+  show: (id) => `${PRODUCT_GROUP_URL.base}/show/${id}`,
 };
 
 const LOCATION_URL = {
@@ -124,6 +142,20 @@ const ORDER_URL = {
   orderSummaryList: () => `${ORDER_URL.base}/orderSummaryList`,
   orderItemSummary: () => `${ORDER_URL.base}/orderItemSummary`,
   orderItemDetails: () => `${ORDER_URL.base}/orderItemDetails`,
+};
+
+const ORDER_ADJUSTMENT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/orderAdjustmentType`,
+  list: () => `${ORDER_ADJUSTMENT_TYPE_URL.base}/list`,
+  create: () => `${ORDER_ADJUSTMENT_TYPE_URL.base}/create`,
+  edit: (id) => `${ORDER_ADJUSTMENT_TYPE_URL.base}/edit/${id}`,
+};
+
+const PAYMENT_TERM_URL = {
+  base: `${CONTEXT_PATH}/paymentTerm`,
+  list: () => `${PAYMENT_TERM_URL.base}/list`,
+  create: () => `${PAYMENT_TERM_URL.base}/create`,
+  edit: (id) => `${PAYMENT_TERM_URL.base}/edit/${id}`,
 };
 
 const PURCHASE_ORDER_URL = {
@@ -209,12 +241,19 @@ const REQUISITION_TEMPLATE_URL = {
   edit: (id) => `${REQUISITION_TEMPLATE_URL.base}/edit/${id}`,
   batch: (id) => `${REQUISITION_TEMPLATE_URL.base}/batch/${id}`,
   editHeader: (id) => `${REQUISITION_TEMPLATE_URL.base}/editHeader/${id}`,
+  list: () => `${REQUISITION_TEMPLATE_URL.base}/list`,
+  sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
+  export: (id) => `${REQUISITION_TEMPLATE_URL.base}/export/${id}`,
+  clone: (id) => `${REQUISITION_TEMPLATE_URL.base}/clone/${id}`,
+  publish: (id) => `${REQUISITION_TEMPLATE_URL.base}/publish/${id}`,
+  unpublish: (id) => `${REQUISITION_TEMPLATE_URL.base}/unpublish/${id}`,
 };
 
 const STOCKLIST_URL = {
   base: `${CONTEXT_PATH}/stocklist`,
   pdf: (id) => `${STOCKLIST_URL.base}/renderPdf/${id}`,
   csv: (id) => `${STOCKLIST_URL.base}/generateCsv/${id}`,
+  html: (id) => `${STOCKLIST_URL.base}/renderHtml/${id}`,
 };
 
 const REPLENISHMENT_URL = {
@@ -278,6 +317,30 @@ const ORGANIZATION_URL = {
   }),
 };
 
+const PARTY_URL = {
+  base: `${CONTEXT_PATH}/party`,
+  list: () => `${PARTY_URL.base}/list`,
+  create: () => `${PARTY_URL.base}/create`,
+  edit: (id) => `${PARTY_URL.base}/edit/${id}`,
+  show: (id) => `${PARTY_URL.base}/show/${id}`,
+};
+
+const PARTY_ROLE_URL = {
+  base: `${CONTEXT_PATH}/partyRole`,
+  list: () => `${PARTY_ROLE_URL.base}/list`,
+  create: (partyId) => stringifyUrl({
+    url: `${PARTY_ROLE_URL.base}/create`,
+    query: partyId ? { partyId } : {},
+  }),
+  edit: (id) => `${PARTY_ROLE_URL.base}/edit/${id}`,
+  show: (id) => `${PARTY_ROLE_URL.base}/show/${id}`,
+};
+
+const PARTY_TYPE_URL = {
+  base: `${CONTEXT_PATH}/partyType`,
+  show: (id) => `${PARTY_TYPE_URL.base}/show/${id}`,
+};
+
 const CATEGORY_URL = {
   base: `${CONTEXT_PATH}/category`,
   tree: (id) => (id ? `${CATEGORY_URL.base}/tree?id=${id}` : `${CATEGORY_URL.base}/tree`),
@@ -298,7 +361,14 @@ const PRODUCT_SUPPLIER_URL = {
   list: () => `${PRODUCT_SUPPLIER_URL.base}/list`,
   create: () => `${PRODUCT_SUPPLIER_URL.base}/create`,
   edit: (id) => `${PRODUCT_SUPPLIER_URL.base}/create/${id}`,
+  show: (id) => `${PRODUCT_SUPPLIER_URL.base}/show/${id}`,
   export: () => `${PRODUCT_SUPPLIER_URL.base}/export?format=xls`,
+};
+
+const PRODUCT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/productType`,
+  list: () => `${PRODUCT_TYPE_URL.base}/list`,
+  create: () => `${PRODUCT_TYPE_URL.base}/create`,
 };
 
 const REQUISITION_URL = {
@@ -342,6 +412,11 @@ const REQUISITION_URL = {
 const REQUISITION_ITEM_URL = {
   base: `${CONTEXT_PATH}/requisitionItem`,
   change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
+  list: () => `${REQUISITION_ITEM_URL.base}/list`,
+  export: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_ITEM_URL.base}/export`,
+    query: { ...params },
+  }),
 };
 
 const CREATE_SHIPMENT_URL = {
@@ -414,12 +489,20 @@ export {
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
   LOCATION_URL,
+  ORDER_ADJUSTMENT_TYPE_URL,
   ORDER_URL,
   ORGANIZATION_URL,
+  PARTY_ROLE_URL,
+  PARTY_TYPE_URL,
+  PARTY_URL,
+  PAYMENT_TERM_URL,
   PICKLIST_URL,
   PRODUCT_ASSOCIATION_URL,
+  PRODUCT_CATALOG_URL,
   PRODUCT_CONFIGURATION_URL,
+  PRODUCT_GROUP_URL,
   PRODUCT_SUPPLIER_URL,
+  PRODUCT_TYPE_URL,
   PRODUCT_URL,
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,

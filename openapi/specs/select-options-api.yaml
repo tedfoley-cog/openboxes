@@ -12,7 +12,9 @@ info:
     "/api/productAssociationTypeCodeOptions" and
     "/api/stockMovements/shipmentStatusCodes", "/api/glAccountTypeOptions",
     "/api/locationTypeCodeOptions", "/api/partyTypeOptions",
-    "/api/organizationRoleTypeOptions").
+    "/api/organizationRoleTypeOptions", "/api/roleTypeOptions",
+    "/api/partyOptions", "/api/productActivityCodeOptions",
+    "/api/productFieldOptions").
     All endpoints are GET-only and
     render an option list under a "data" envelope; the option shape varies
     slightly per endpoint (some include "value" and/or "variant").
@@ -63,6 +65,35 @@ paths:
                           type: string
                         label:
                           type: string
+  /api/orderAdjustmentTypeCodeOptions:
+    get:
+      operationId: orderAdjustmentTypeCodeOptions
+      summary: Order adjustment type code (enum) options
+      description: >
+        Returns the OrderAdjustmentTypeCode enum values as {id, value, label}
+        triples, all equal to the enum name. Added in Phase 2 (Batch 29) for
+        the React orderAdjustmentType form.
+      responses:
+        '200':
+          description: Option list.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, value, label]
+                      properties:
+                        id:
+                          type: string
+                        value:
+                          type: string
+                        label:
+                          type: string
   /api/locationTypeCodeOptions:
     get:
       operationId: listLocationTypeCodeOptions
@@ -71,6 +102,30 @@ paths:
         Returns every LocationTypeCode enum value as {id, label} pairs (both
         the enum name). Added in Phase 2 (Batch 32) for the React
         locationType form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/productActivityCodeOptions:
+    get:
+      operationId: listProductActivityCodeOptions
+      summary: Product activity code options
+      description: >
+        Returns every ProductActivityCode enum value as {id, label} pairs
+        (id is the enum name, label is the enum.ProductActivityCode.* message
+        or the enum name when no message exists). Added in Phase 2 (Batch 11)
+        for the React productType create form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/productFieldOptions:
+    get:
+      operationId: listProductFieldOptions
+      summary: Product field options
+      description: >
+        Returns every ProductField enum value as {id, label} pairs (id is
+        the enum name, label is the enum.ProductField.* message or the enum
+        name when no message exists). Added in Phase 2 (Batch 11) for the
+        React productType create form.
       responses:
         '200':
           $ref: '#/components/responses/IdLabelOptionsOk'
@@ -97,6 +152,47 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/roleTypeOptions:
+    get:
+      operationId: listRoleTypeOptions
+      summary: Role type options
+      description: >
+        Returns all RoleType enum values as {id, label} pairs (both the enum
+        name). Added in Phase 2 (Batch 34) for the React party role form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/partyOptions:
+    get:
+      operationId: listPartyOptions
+      summary: Party options
+      description: >
+        Returns all Party records as {id, label, partyType} triples (label is
+        the party id, matching the legacy Party.toString(); partyType is the
+        party type name). Added in Phase 2 (Batch 34) for the React party
+        role form.
+      responses:
+        '200':
+          description: Option list.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, label]
+                      properties:
+                        id:
+                          $ref: '../components/common.yaml#/components/schemas/Id'
+                        label:
+                          type: string
+                        partyType:
+                          type: string
+                          nullable: true
   /api/glAccountOptions:
     get:
       operationId: glAccountOptions

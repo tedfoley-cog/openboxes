@@ -16,6 +16,7 @@ import org.pih.warehouse.core.GlAccountType
 import org.pih.warehouse.core.GlAccountTypeCode
 import org.pih.warehouse.core.BudgetCode
 import org.pih.warehouse.core.LocationTypeCode
+import org.pih.warehouse.core.Party
 import org.pih.warehouse.core.PartyType
 import org.pih.warehouse.core.PaymentTerm
 import org.pih.warehouse.core.PreferenceType
@@ -27,9 +28,11 @@ import org.pih.warehouse.core.UserService
 import org.pih.warehouse.data.ProductSupplierService
 import org.pih.warehouse.glAccount.GlAccountService
 import org.pih.warehouse.order.OrderAdjustmentType
+import org.pih.warehouse.order.OrderAdjustmentTypeCode
 import org.pih.warehouse.order.OrderStatus
 import org.pih.warehouse.order.OrderSummaryStatus
 import org.pih.warehouse.product.Category
+import org.pih.warehouse.product.ProductActivityCode
 import org.pih.warehouse.product.ProductAssociationTypeCode
 import org.pih.warehouse.product.ProductCatalog
 import org.pih.warehouse.product.ProductField
@@ -78,9 +81,37 @@ class SelectOptionsApiController {
         render([data: partyTypes] as JSON)
     }
 
+    def roleTypeOptions() {
+        List options = RoleType.values().collect {
+            [id: it.name(), label: it.name()]
+        }
+        render([data: options] as JSON)
+    }
+
+    def partyOptions() {
+        List options = Party.list().collect {
+            [id: it.id, label: it.id, partyType: it.partyType?.name]
+        }
+        render([data: options] as JSON)
+    }
+
     def organizationRoleTypeOptions() {
         List options = RoleType.listOrganizationRoleTypes().collect {
             [id: it.name(), label: it.name()]
+        }
+        render([data: options] as JSON)
+    }
+
+    def productActivityCodeOptions() {
+        List options = ProductActivityCode.values().collect {
+            [id: it.name(), label: g.message(code: "enum.ProductActivityCode.${it.name()}", default: it.name())]
+        }
+        render([data: options] as JSON)
+    }
+
+    def productFieldOptions() {
+        List options = ProductField.values().collect {
+            [id: it.name(), label: g.message(code: "enum.ProductField.${it.name()}", default: it.name())]
         }
         render([data: options] as JSON)
     }
@@ -210,6 +241,13 @@ class SelectOptionsApiController {
                     [id: it.id, label: it.name]
                 }
         render([data: documentTypes] as JSON)
+    }
+
+    def orderAdjustmentTypeCodeOptions() {
+        List<Map> options = OrderAdjustmentTypeCode.values().collect {
+            [id: it.name(), value: it.name(), label: it.name()]
+        }
+        render([data: options] as JSON)
     }
 
     def orderAdjustmentTypeOptions() {

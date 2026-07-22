@@ -168,6 +168,31 @@ const AsyncProductSupplierList = Loadable({
   loading: Loading,
 });
 
+const AsyncProductSupplierShow = Loadable({
+  loader: () => import('components/productSupplier/show/ProductSupplierShow'),
+  loading: Loading,
+});
+
+const AsyncProductGroupList = Loadable({
+  loader: () => import('components/productGroup/ProductGroupList'),
+  loading: Loading,
+});
+
+const AsyncProductGroupForm = Loadable({
+  loader: () => import('components/productGroup/ProductGroupForm'),
+  loading: Loading,
+});
+
+const AsyncProductGroupShow = Loadable({
+  loader: () => import('components/productGroup/ProductGroupShow'),
+  loading: Loading,
+});
+
+const AsyncProductTypeForm = Loadable({
+  loader: () => import('components/productType/ProductTypeForm'),
+  loading: Loading,
+});
+
 const AsyncProductSupplierCreatePage = Loadable({
   loader: () => import('components/productSupplier/create/ProductSupplierForm'),
   loading: Loading,
@@ -313,6 +338,26 @@ const AsyncOrganizationShow = Loadable({
   loading: Loading,
 });
 
+const AsyncPartyList = Loadable({
+  loader: () => import('components/party/PartyList'),
+  loading: Loading,
+});
+
+const AsyncPartyForm = Loadable({
+  loader: () => import('components/party/PartyForm'),
+  loading: Loading,
+});
+
+const AsyncPartyShow = Loadable({
+  loader: () => import('components/party/PartyShow'),
+  loading: Loading,
+});
+
+const AsyncPartyRoleForm = Loadable({
+  loader: () => import('components/partyRole/PartyRoleForm'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -385,6 +430,31 @@ const AsyncOrderSummaryList = Loadable({
 
 const AsyncOrderItemSummaryList = Loadable({
   loader: () => import('components/order/OrderItemSummaryList'),
+  loading: Loading,
+});
+
+const AsyncOrderShow = Loadable({
+  loader: () => import('components/order/OrderShow'),
+  loading: Loading,
+});
+
+const AsyncOrderPrint = Loadable({
+  loader: () => import('components/order/OrderPrint'),
+  loading: Loading,
+});
+
+const AsyncOrderAdjustmentTypeList = Loadable({
+  loader: () => import('components/orderAdjustmentType/OrderAdjustmentTypeList'),
+  loading: Loading,
+});
+
+const AsyncOrderAdjustmentTypeForm = Loadable({
+  loader: () => import('components/orderAdjustmentType/OrderAdjustmentTypeForm'),
+  loading: Loading,
+});
+
+const AsyncPaymentTermForm = Loadable({
+  loader: () => import('components/paymentTerm/PaymentTermForm'),
   loading: Loading,
 });
 
@@ -465,6 +535,31 @@ const AsyncProductAssociationList = Loadable({
 
 const AsyncProductAssociationForm = Loadable({
   loader: () => import('components/productAssociation/ProductAssociationForm'),
+  loading: Loading,
+});
+
+const AsyncProductAssociationShow = Loadable({
+  loader: () => import('components/productAssociation/ProductAssociationShow'),
+  loading: Loading,
+});
+
+const AsyncProductCatalogList = Loadable({
+  loader: () => import('components/productCatalog/ProductCatalogList'),
+  loading: Loading,
+});
+
+const AsyncProductCatalogForm = Loadable({
+  loader: () => import('components/productCatalog/ProductCatalogForm'),
+  loading: Loading,
+});
+
+const AsyncProductCatalogShow = Loadable({
+  loader: () => import('components/productCatalog/ProductCatalogShow'),
+  loading: Loading,
+});
+
+const AsyncProductGroupCreate = Loadable({
+  loader: () => import('components/productGroup/ProductGroupCreate'),
   loading: Loading,
 });
 
@@ -663,6 +758,36 @@ const AsyncRequisitionItemChange = Loadable({
   loading: Loading,
 });
 
+const AsyncRequisitionItemList = Loadable({
+  loader: () => import('components/requisition/RequisitionItemList'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateCreate = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateCreate'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateEdit = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateEdit'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateEditHeader = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateEditHeader'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateBatch = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateBatch'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateSendMail = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateSendMail'),
+  loading: Loading,
+});
+
 const AsyncPicklistPrint = Loadable({
   loader: () => import('components/requisition/PicklistPrint'),
   loading: Loading,
@@ -817,6 +942,12 @@ const Router = () => {
             <MainLayoutRoute path="**/order/orderSummaryList" component={AsyncOrderSummaryList} />
             <MainLayoutRoute path="**/order/orderItemSummary" component={AsyncOrderItemSummaryList} />
             <MainLayoutRoute path="**/order/orderItemDetails" component={OrderItemDetailsList} />
+            <MainLayoutRoute path="**/order/show/:orderId" component={AsyncOrderShow} />
+            <MainLayoutRoute path="**/order/print/:orderId" component={AsyncOrderPrint} />
+            <MainLayoutRoute path="**/orderAdjustmentType/list" component={AsyncOrderAdjustmentTypeList} />
+            <MainLayoutRoute path="**/orderAdjustmentType/create" component={AsyncOrderAdjustmentTypeForm} />
+            <MainLayoutRoute path="**/orderAdjustmentType/edit/:orderAdjustmentTypeId" component={AsyncOrderAdjustmentTypeForm} />
+            <MainLayoutRoute path="**/paymentTerm/create" component={AsyncPaymentTermForm} />
             <MainLayoutRoute path="**/stockTransfer/create/:stockTransferId?" component={AsyncStockTransfer} />
             <MainLayoutRoute path="**/stockTransfer/createOutboundReturn/:outboundReturnId?" component={AsyncOutboundReturns} />
             <MainLayoutRoute path="**/stockTransfer/createInboundReturn/:inboundReturnId?" component={AsyncInboundReturns} />
@@ -848,6 +979,7 @@ const Router = () => {
             <MainLayoutRoute path="**/requisition/transfer/:requisitionId" component={AsyncRequisitionTransfer} />
             <MainLayoutRoute path="**/requisition/printDraft/:requisitionId" component={AsyncRequisitionPrintDraft} />
             <MainLayoutRoute path="**/requisitionItem/change/:requisitionItemId" component={AsyncRequisitionItemChange} />
+            <MainLayoutRoute path="**/requisitionItem/list" component={AsyncRequisitionItemList} />
             <MainLayoutRoute path="**/picklist/print/:requisitionId" component={AsyncPicklistPrint} />
             <MainLayoutRoute path="**/picklist/returnPrint/:orderId" component={AsyncPicklistReturnPrint} />
             <MainLayoutRoute path="**/createShipmentWorkflow/details/:shipmentId" component={AsyncCreateShipmentDetails} />
@@ -859,6 +991,11 @@ const Router = () => {
             <MainLayoutRoute path="**/deliveryNote/print/:requisitionId" component={AsyncDeliveryNotePrint} />
             <MainLayoutRoute path="**/purchaseOrder/list" component={AsyncPurchaseOrderList} />
             <MainLayoutRoute path="**/requisitionTemplate/list" component={AsyncStockList} />
+            <MainLayoutRoute path="**/requisitionTemplate/create" component={AsyncStockListTemplateCreate} />
+            <MainLayoutRoute path="**/requisitionTemplate/edit/:templateId" component={AsyncStockListTemplateEdit} />
+            <MainLayoutRoute path="**/requisitionTemplate/editHeader/:templateId" component={AsyncStockListTemplateEditHeader} />
+            <MainLayoutRoute path="**/requisitionTemplate/batch/:templateId" component={AsyncStockListTemplateBatch} />
+            <MainLayoutRoute path="**/requisitionTemplate/sendMail/:templateId" component={AsyncStockListTemplateSendMail} />
             <MainLayoutRoute path="**/product/list" component={AsyncProductsList} />
             <MainLayoutRoute path="**/product/edit/:id" component={AsyncProductForm} />
             <MainLayoutRoute path="**/product/addDocument/:id" component={AsyncProductAddDocument} />
@@ -872,6 +1009,12 @@ const Router = () => {
             <MainLayoutRoute path="**/productAssociation/list" component={AsyncProductAssociationList} />
             <MainLayoutRoute path="**/productAssociation/create" component={AsyncProductAssociationForm} />
             <MainLayoutRoute path="**/productAssociation/edit/:id" component={AsyncProductAssociationForm} />
+            <MainLayoutRoute path="**/productAssociation/show/:id" component={AsyncProductAssociationShow} />
+            <MainLayoutRoute path="**/productCatalog/list" component={AsyncProductCatalogList} />
+            <MainLayoutRoute path="**/productCatalog/create" component={AsyncProductCatalogForm} />
+            <MainLayoutRoute path="**/productCatalog/edit/:id" component={AsyncProductCatalogForm} />
+            <MainLayoutRoute path="**/productCatalog/show/:id" component={AsyncProductCatalogShow} />
+            <MainLayoutRoute path="**/productGroup/create" component={AsyncProductGroupCreate} />
             <MainLayoutRoute path="**/stockTransfer/list" component={AsyncStockTransferList} />
             <MainLayoutRoute path="**/locationGroup/list" component={AsyncLocationGroupList} />
             <MainLayoutRoute path="**/locationGroup/create" component={AsyncLocationGroupForm} />
@@ -885,6 +1028,12 @@ const Router = () => {
             <MainLayoutRoute path="**/organization/create" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/edit/:organizationId" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/show/:organizationId" component={AsyncOrganizationShow} />
+            <MainLayoutRoute path="**/party/list" component={AsyncPartyList} />
+            <MainLayoutRoute path="**/party/create" component={AsyncPartyForm} />
+            <MainLayoutRoute path="**/party/edit/:partyId" component={AsyncPartyForm} />
+            <MainLayoutRoute path="**/party/show/:partyId" component={AsyncPartyShow} />
+            <MainLayoutRoute path="**/partyRole/create" component={AsyncPartyRoleForm} />
+            <MainLayoutRoute path="**/partyRole/edit/:partyRoleId" component={AsyncPartyRoleForm} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />
@@ -909,6 +1058,12 @@ const Router = () => {
             <MainLayoutRoute path="**/location/uploadLogo/:locationId" component={AsyncLocationUploadLogo} />
             <MainLayoutRoute path="**/productSupplier/list" component={AsyncProductSupplierList} />
             <MainLayoutRoute path="**/productSupplier/create/:productSupplierId?" component={AsyncProductSupplierCreatePage} />
+            <MainLayoutRoute path="**/productSupplier/edit/:productSupplierId" component={AsyncProductSupplierCreatePage} />
+            <MainLayoutRoute path="**/productSupplier/show/:productSupplierId" component={AsyncProductSupplierShow} />
+            <MainLayoutRoute path="**/productGroup/list" component={AsyncProductGroupList} />
+            <MainLayoutRoute path="**/productGroup/edit/:productGroupId" component={AsyncProductGroupForm} />
+            <MainLayoutRoute path="**/productGroup/show/:productGroupId" component={AsyncProductGroupShow} />
+            <MainLayoutRoute path="**/productType/create" component={AsyncProductTypeForm} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
             <MainLayoutRoute path="**/" component={Dashboard} />
           </Switch>
