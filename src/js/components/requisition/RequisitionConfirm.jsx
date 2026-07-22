@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { getTranslate } from 'react-localize-redux';
 import { useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ const RequisitionConfirm = () => {
 
   useTranslation('requisition', 'default');
 
-  const debouncedPeopleFetch = debouncePeopleFetch(500, 2);
+  const debouncedPeopleFetch = useMemo(() => debouncePeopleFetch(500, 2), []);
 
   useEffect(() => {
     requisitionApi.confirmRequisition(requisitionId)

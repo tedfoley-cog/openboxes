@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import queryString from 'query-string';
 import { useSelector } from 'react-redux';
@@ -37,8 +37,8 @@ const RequisitionCreate = () => {
 
   useTranslation('requisition', 'default');
 
-  const debouncedPeopleFetch = debouncePeopleFetch(500, 2);
-  const debouncedLocationsFetch = debounceLocationsFetch(500, 2, null, true);
+  const debouncedPeopleFetch = useMemo(() => debouncePeopleFetch(500, 2), []);
+  const debouncedLocationsFetch = useMemo(() => debounceLocationsFetch(500, 2, null, true), []);
 
   const submit = async (event) => {
     event.preventDefault();
