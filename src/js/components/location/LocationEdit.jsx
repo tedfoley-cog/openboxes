@@ -34,7 +34,9 @@ function validate(values) {
   if (!values.name) {
     errors.name = 'react.default.error.requiredField.label';
   }
-  if (!values.organization) {
+  const organizationRequired = ['DEPOT', 'SUPPLIER']
+    .includes(values.locationType?.locationTypeCode);
+  if (organizationRequired && !values.organization) {
     errors.organization = 'react.default.error.requiredField.label';
   }
   if (!values.locationType) {
@@ -77,7 +79,6 @@ const DETAILS_FIELDS = {
     defaultMessage: 'Organization',
     attributes: {
       async: true,
-      required: true,
       showValueTooltip: true,
       openOnClick: false,
       autoload: false,
@@ -85,8 +86,9 @@ const DETAILS_FIELDS = {
       options: [],
       filterOptions: (options) => options,
     },
-    getDynamicAttr: ({ debouncedOrganizationsFetch }) => ({
+    getDynamicAttr: ({ debouncedOrganizationsFetch, organizationRequired }) => ({
       loadOptions: debouncedOrganizationsFetch,
+      required: organizationRequired,
     }),
   },
   locationGroup: {
@@ -442,6 +444,8 @@ const LocationEdit = () => {
                     debouncedLocationGroupsFetch,
                     debouncedOrganizationsFetch,
                     debouncedPeopleFetch,
+                    organizationRequired: ['DEPOT', 'SUPPLIER']
+                      .includes(values.locationType?.locationTypeCode),
                   }),
                 )}
                 {(isInternalLocation || isZoneLocation) && _.map(
