@@ -126,7 +126,7 @@ const CreateTransaction = () => {
           {translate('react.recordTransaction.title.label', 'Record transaction')}
           {transactionType ? ` — ${transactionType.name}` : ''}
         </h1>
-        {!productIds.length && (
+        {!productIds.length && !inventoryItemIds.length && (
           <div className="alert alert-warning">
             {translate('react.recordTransaction.noProducts.label', 'You must select at least one product or inventory item')}
           </div>

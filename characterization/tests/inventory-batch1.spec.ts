@@ -25,16 +25,20 @@ test.describe('inventory & stock batch 1 (React screens)', () => {
   test('inventory browser lists seeded products with quantity on hand', async ({ page }) => {
     await page.goto(url('/inventory/browse'));
     await expect(page.getByTestId('inventory-browse-table')).toBeVisible();
+    // With no filters the legacy screen defaults to the ROOT category, which
+    // has no direct products in the seeded dataset, so the list is empty.
+    await expect(page.getByTestId('inventory-browse-total')).toContainText(': 0');
+    await captureStep(page, 'inventory-batch1', 'browse');
+
+    // Selecting a seeded category and searching narrows the results to the
+    // seeded product.
+    await page.selectOption('#inventory-browse-category', { label: 'ARVS' });
+    await page.fill('#inventory-browse-search', PRODUCTS.lamivudine.name);
+    await page.click('button[type="submit"]');
     await expect(page.getByTestId('inventory-browse-total')).not.toContainText(': 0');
     const rows = page.getByTestId('inventory-browse-table').locator('tbody tr');
     expect(await rows.count()).toBeGreaterThan(0);
-    await captureStep(page, 'inventory-batch1', 'browse');
-
-    // Search narrows the results to the seeded product.
-    await page.fill('#inventory-browse-search', PRODUCTS.lamivudine.name);
-    await page.click('button[type="submit"]');
-    await expect(page.getByTestId('inventory-browse-table').locator('tbody tr').first())
-      .toContainText(PRODUCTS.lamivudine.name);
+    await expect(rows.first()).toContainText(PRODUCTS.lamivudine.name);
     await captureStep(page, 'inventory-batch1', 'browse-search');
   });
 

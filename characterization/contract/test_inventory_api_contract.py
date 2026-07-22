@@ -56,19 +56,42 @@ def test_expiration_history_report_missing_dates(client):
 PRODUCT_CODE = "AX738"
 
 
-def test_browse(client, batch1):
+def category_id(client, name):
+    matches = [c for c in client.get_json("/api/categories")["data"]
+               if c.get("name") == name]
+    assert matches, f"Category not found in seeded data: {name}"
+    return matches[0]["id"]
+
+
+def test_browse_default_is_root_category(client, batch1):
+    # Like the legacy screen, browsing without filters defaults to the ROOT
+    # category, which has no direct products in the seeded dataset.
     main = client.location_id("Main Warehouse")
     resp = check(client, spec, "GET", "/api/inventories/browse",
                  params={"locationId": main, "max": 5})
     body = resp.json()
-    assert body["data"], "seeded Main Warehouse should have browse rows"
+    assert body["totalCount"] == 0
+
+
+def test_browse_category(client, batch1):
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET", "/api/inventories/browse",
+                 params={"locationId": main,
+                         "categoryId": category_id(client, "ARVS"),
+                         "max": 5})
+    body = resp.json()
+    assert body["data"], "seeded ARVS category should have browse rows"
     assert body["totalCount"] >= len(body["data"])
 
 
 def test_browse_search(client, batch1):
+    # PRODUCT_CODE is seeded under IT Equipment; the search is scoped to a
+    # category because the default ROOT category matches nothing.
     main = client.location_id("Main Warehouse")
     resp = check(client, spec, "GET", "/api/inventories/browse",
-                 params={"locationId": main, "searchTerms": PRODUCT_CODE})
+                 params={"locationId": main,
+                         "categoryId": category_id(client, "IT Equipment"),
+                         "searchTerms": PRODUCT_CODE})
     codes = [row["productCode"] for row in resp.json()["data"]]
     assert PRODUCT_CODE in codes
 
