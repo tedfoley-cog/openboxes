@@ -891,7 +891,7 @@ task writePom(dependsOn: 'generatePomFileForMavenPublication') {
 // Running "./gradlew jacocoTestReport" will execute all unit and integration tests, then generate a code
 // coverage report under the "/build/reports/jacoco" folder.
 jacoco {
-    // Jacoco 0.8.7+ is required for the agent to instrument classes on Java 11.
+    // Jacoco 0.8.7+ is required for the agent to instrument classes on Java 11+ (bytecode target stays 11).
     // The agent jar shades its own ASM, so this doesn't conflict with asmVersion.
     toolVersion = '0.8.7'
 }
