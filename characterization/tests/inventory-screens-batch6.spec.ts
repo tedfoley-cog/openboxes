@@ -30,7 +30,14 @@ test.describe('inventory React screens (batch 6)', () => {
   });
 
   test('inventory snapshot list renders and matches the API row count', async ({ page }) => {
-    const snapshots = await apiGet(page, '/api/inventorySnapshots');
+    // The React screen defaults its date filter to tomorrow (legacy behavior),
+    // so query the API with the same date.
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    const date = `${mm}/${dd}/${tomorrow.getFullYear()}`;
+    const snapshots = await apiGet(page, `/api/inventorySnapshots?date=${encodeURIComponent(date)}`);
 
     await page.goto(url('/inventorySnapshot/list'));
     await expect(page.locator('h5:has-text("Current Stock")')).toBeVisible();
