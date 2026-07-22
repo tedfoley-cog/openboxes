@@ -26,6 +26,34 @@ def test_list(client):
     assert resp.json()["data"], "seeded dataset should have categories"
 
 
+def test_tree(client, batch7_api):
+    resp = check(client, spec, "GET", "/api/categories/tree")
+    names = [c.get("name") for c in resp.json()["data"]]
+    assert "ROOT" in names, "seeded ROOT category should be a root of the tree"
+
+
+def test_details(client, batch7_api):
+    root = next(c for c in client.get_json("/api/categories")["data"]
+                if c.get("name") == "ROOT")
+    resp = check(client, spec, "GET", "/api/categories/{id}/details",
+                 path=f"/api/categories/{root['id']}/details")
+    assert resp.json()["data"]["name"] == "ROOT"
+
+
+def test_details_unknown(client, batch7_api):
+    check(client, spec, "GET", "/api/categories/{id}/details",
+          path="/api/categories/doesnotexist0000/details")
+
+
+def test_assigning_parent_to_product(client, batch7_api):
+    resp = check(client, spec, "PUT", "/api/categories/assigningParentToProduct",
+                 json={"enabled": True})
+    assert resp.json()["data"]["assigningParentToProductEnabled"] is True
+    resp = check(client, spec, "PUT", "/api/categories/assigningParentToProduct",
+                 json={"enabled": False})
+    assert resp.json()["data"]["assigningParentToProductEnabled"] is False
+
+
 def test_read(client):
     root = next(c for c in client.get_json("/api/categories")["data"]
                 if c.get("name") == "ROOT")
