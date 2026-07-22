@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import migrationApi from 'api/services/MigrationApi';
 import MigrationTabs from 'components/migration/MigrationTabs';
@@ -13,6 +13,7 @@ const MigrationDataQuality = () => {
   const [openedList, setOpenedList] = useState(null);
   const [rows, setRows] = useState([]);
   const [loadingRows, setLoadingRows] = useState(false);
+  const openedListRef = useRef(null);
 
   useEffect(() => {
     migrationApi.getDataQuality()
@@ -21,10 +22,12 @@ const MigrationDataQuality = () => {
 
   const fetchRows = async (listName) => {
     if (openedList === listName) {
+      openedListRef.current = null;
       setOpenedList(null);
       setRows([]);
       return;
     }
+    openedListRef.current = listName;
     setOpenedList(listName);
     setRows([]);
     setLoadingRows(true);
@@ -35,9 +38,13 @@ const MigrationDataQuality = () => {
         stockMovementsWithoutShipmentItems: migrationApi.getStockMovementsWithoutShipmentItems,
       };
       const response = await fetchers[listName]();
-      setRows(response?.data?.data ?? []);
+      if (openedListRef.current === listName) {
+        setRows(response?.data?.data ?? []);
+      }
     } finally {
-      setLoadingRows(false);
+      if (openedListRef.current === listName) {
+        setLoadingRows(false);
+      }
     }
   };
 
