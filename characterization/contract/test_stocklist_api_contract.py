@@ -19,7 +19,9 @@ def _delete_test_stocklists(client):
         data = client.get_json(
             "/api/stocklists", params={"isPublished": published})["data"]
         for sl in data:
-            if (sl.get("name") or "").startswith(TEST_NAME):
+            # Match anywhere in the name: clone() prefixes "Copy of ", so
+            # clones are named e.g. "Copy of ZZ Contract Stocklist v3".
+            if TEST_NAME in (sl.get("name") or ""):
                 client.request("DELETE", f"/api/stocklists/{sl['id']}")
 
 
