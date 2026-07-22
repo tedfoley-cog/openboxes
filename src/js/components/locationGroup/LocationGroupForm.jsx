@@ -61,7 +61,7 @@ const LocationGroupForm = () => {
         name: values.name,
         version: values.version,
         address: {
-          id: values.addressId,
+          ...(values.addressId ? { id: values.addressId } : {}),
           address: values.address,
           address2: values.address2,
           city: values.city,

@@ -57,6 +57,7 @@ test.describe('location group react screens', () => {
     await page.getByRole('link', { name }).click();
     await page.waitForURL('**/locationGroup/edit/**');
     await expect(page.getByLabel('Name')).toHaveValue(name);
+    await page.getByLabel('Street address', { exact: true }).fill('1 Playwright St');
     await page.getByLabel('City').fill('Playwright City');
     await page.getByLabel('Description').fill('created by characterization');
     await captureStep(page, 'location-group', 'react-edit');
@@ -94,7 +95,12 @@ test.describe('location type react screens', () => {
     await expect(page.getByText('Create Location Type').first()).toBeVisible();
     await captureStep(page, 'location-type', 'react-create');
 
-    await page.getByLabel('Location Type Code').click();
+    // SelectField (v2) does not associate its label with the react-select
+    // input, so locate the wrapper by its label text instead of getByLabel.
+    const codeField = page
+      .locator('.select-wrapper-container', { hasText: 'Location Type Code' })
+      .first();
+    await codeField.locator('input').first().click({ force: true });
     await page.getByText('INTERNAL', { exact: true }).click();
     await page.getByLabel('Name', { exact: true }).fill(name);
     await page.getByLabel('Description').fill('created by characterization');

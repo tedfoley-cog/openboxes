@@ -68,7 +68,7 @@ const LocationGroupList = () => {
       headerClassName: 'header',
       sortable: false,
       Cell: (row) => (
-        <TableCell {...row} link={LOCATION_GROUP_URL.show(row.original.id)} />
+        <TableCell {...row} value={`${row.value ?? 0}`} link={LOCATION_GROUP_URL.show(row.original.id)} />
       ),
     },
   ], []);
