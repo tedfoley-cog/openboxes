@@ -41,20 +41,28 @@ const EventTypeForm = () => {
   }, []);
 
   const getEventType = async () => {
-    const response = await eventTypeApi.getEventType(eventTypeId);
-    const eventType = response?.data?.data;
-    return {
-      name: eventType?.name ?? '',
-      description: eventType?.description ?? '',
-      sortOrder: eventType?.sortOrder ?? '',
-      eventCode: eventType?.eventCode
-        ? {
-          id: eventType.eventCode,
-          value: eventType.eventCode,
-          label: eventType.eventCode,
-        }
-        : null,
-    };
+    try {
+      const response = await eventTypeApi.getEventType(eventTypeId);
+      const eventType = response?.data?.data;
+      return {
+        name: eventType?.name ?? '',
+        description: eventType?.description ?? '',
+        sortOrder: eventType?.sortOrder ?? '',
+        eventCode: eventType?.eventCode
+          ? {
+            id: eventType.eventCode,
+            value: eventType.eventCode,
+            label: eventType.eventCode,
+          }
+          : null,
+      };
+    } catch (error) {
+      // Like the legacy edit action: not-found redirects back to the list.
+      window.location = EVENT_TYPE_URL.list();
+      return {
+        name: '', description: '', sortOrder: '', eventCode: null,
+      };
+    }
   };
 
   const {
