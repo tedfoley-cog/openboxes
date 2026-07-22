@@ -29,6 +29,18 @@ def test_inventory_accuracy(client):
     assert resp.json()["data"]["name"] == "inventoryAccuracy"
 
 
+def test_products_inventoried_missing_facility(client):
+    # Missing facility is not validated; the queries match nothing and the
+    # tile renders with zero values.
+    resp = check(client, spec, "GET", "/api/reports/indicators/productsInventoried")
+    assert resp.json()["data"]["value"] == 0
+
+
+def test_inventory_accuracy_missing_facility(client):
+    resp = check(client, spec, "GET", "/api/reports/indicators/inventoryAccuracy")
+    assert resp.json()["data"]["firstValue"] == 0
+
+
 def test_inventory_shrinkage(client):
     main = client.location_id("Main Warehouse")
     resp = check(client, spec, "GET", "/api/reports/indicators/inventoryShrinkage",

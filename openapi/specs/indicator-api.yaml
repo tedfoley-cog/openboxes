@@ -84,13 +84,13 @@ components:
     facility:
       name: facility
       in: query
-      required: true
+      required: false
       schema:
         $ref: '../components/common.yaml#/components/schemas/Id'
       description: >
         Facility (warehouse) id the indicator is computed for. Not validated
-        by the command object, but the queries fail with a 500 when it is
-        missing or unresolvable.
+        by the command object; when missing or unresolvable the queries match
+        nothing and the tile renders with zero values.
     startDate:
       name: startDate
       in: query

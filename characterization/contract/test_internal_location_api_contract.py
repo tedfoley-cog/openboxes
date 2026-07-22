@@ -36,7 +36,7 @@ def test_list_receiving(client):
 def test_read(client):
     main = client.location_id("Main Warehouse")
     bins = client.get_json("/api/internalLocations", params={"location.id": main})["data"]
-    bin_id = sorted(bins, key=lambda b: b["name"])[0]["id"]
+    bin_id = sorted(bins, key=lambda b: b["name"] or "")[0]["id"]
     resp = check(client, spec, "GET", "/api/internalLocations/{id}",
                  path=f"/api/internalLocations/{bin_id}")
     assert resp.json()["data"]["id"] == bin_id
