@@ -46,11 +46,14 @@ test.describe('batch 29 order & finance react screens', () => {
     await expect(page.getByTestId('order-show-header')).toContainText(details.orderNumber);
     await captureStep(page, 'order-show', 'react-summary');
 
-    const activeItems = (items.orderItems as Array<{ canceled: boolean }>)
-      .filter((item) => !item.canceled);
+    // Legacy summary shows canceled items on purchase orders, only active ones otherwise
+    const orderItems = items.orderItems as Array<{ canceled: boolean }>;
+    const summaryItems = items.isPurchaseOrder
+      ? orderItems
+      : orderItems.filter((item) => !item.canceled);
     const summaryRows = page.locator('[data-testid="order-show-summary-table"] tbody tr');
-    if (activeItems.length) {
-      await expect(summaryRows).toHaveCount(activeItems.length);
+    if (summaryItems.length) {
+      await expect(summaryRows).toHaveCount(summaryItems.length);
     }
 
     await page.getByTestId('order-show-tab-adjustments').click();

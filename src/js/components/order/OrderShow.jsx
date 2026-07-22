@@ -18,6 +18,8 @@ const formatCurrency = (value, currencyCode) => {
 
 const formatDate = (value) => (value ? new Date(value).toLocaleDateString() : '');
 
+const isSafeUrl = (value) => /^https?:\/\//i.test(value);
+
 const showError = (err) => {
   const message = err?.response?.data?.errorMessage;
   if (message) {
@@ -57,6 +59,14 @@ const OrderShow = () => {
     if (!orderId) {
       return;
     }
+    setOrder(null);
+    setItems(null);
+    setAdjustments(null);
+    setShipments(null);
+    setInvoices(null);
+    setDocuments(null);
+    setComments(null);
+    setLoadError(null);
     orderApi.getOrderDetails(orderId)
       .then(({ data }) => setOrder(data?.data))
       .catch((err) => {
@@ -221,7 +231,7 @@ const OrderShow = () => {
     {
       key: 'download',
       header: <Translate id="react.order.show.column.download.label" defaultMessage="Download" />,
-      render: (row) => (row.fileUri
+      render: (row) => (row.fileUri && isSafeUrl(row.fileUri)
         ? <a href={row.fileUri} target="_blank" rel="noopener noreferrer">{row.fileUri}</a>
         : <a href={`${CONTEXT_PATH}/document/download/${row.id}`}>{translate('react.default.button.download.label', 'Download')}</a>),
     },

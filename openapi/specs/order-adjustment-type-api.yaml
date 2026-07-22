@@ -180,7 +180,7 @@ components:
       additionalProperties: true
     OrderAdjustmentTypeRequest:
       type: object
-      required: [name]
+      required: [name, code]
       properties:
         name:
           type: string
@@ -189,7 +189,6 @@ components:
           nullable: true
         code:
           type: string
-          nullable: true
         glAccount:
           type: object
           nullable: true
