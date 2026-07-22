@@ -53,7 +53,22 @@ export default {
   getRequisitionPrintDraft: (id) => apiClient.get(REQUISITION_PRINT_DRAFT(id)),
   savePicklist: (payload) => apiClient.post(PICKLIST_SAVE, payload),
   getRequisitionItem: (id) => apiClient.get(REQUISITION_ITEM_BY_ID(id)),
-  getCanceledRequisitionItems: (params) => apiClient.get(REQUISITION_ITEM_API, { params }),
+  getCanceledRequisitionItems: (params) => apiClient.get(REQUISITION_ITEM_API, {
+    params,
+    // Grails params.list() expects repeated keys (no [] suffix) for arrays
+    paramsSerializer: (parameters) => {
+      const searchParams = new URLSearchParams();
+      Object.entries(parameters).forEach(([key, value]) => {
+        if (value === null || value === undefined) return;
+        if (Array.isArray(value)) {
+          value.forEach((item) => searchParams.append(key, item));
+          return;
+        }
+        searchParams.append(key, value);
+      });
+      return searchParams.toString();
+    },
+  }),
   changeRequisitionItemQuantity: (id, payload) =>
     apiClient.post(REQUISITION_ITEM_CHANGE_QUANTITY(id), payload),
   substituteRequisitionItem: (id, payload) =>
