@@ -86,6 +86,7 @@ class ProductCatalogApiController {
         }
         bindCatalogData(productCatalog, payload)
         if (productCatalog.hasErrors() || !productCatalog.save(flush: true)) {
+            transactionStatus.setRollbackOnly()
             renderErrors(productCatalog)
             return
         }
