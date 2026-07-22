@@ -30,8 +30,8 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 1 — Backend platform (sequential waves; app must boot after each)
 | # | Task | Status |
 |---|------|--------|
-| 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — in progress |
-| 1.1b | Dependency cleanup / Grails 4 de-risk audit | queued behind 1.1a |
+| 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — [#9](https://github.com/tedfoley-cog/openboxes/pull/9) merged |
+| 1.1b | Dependency cleanup / Grails 4 de-risk audit | [d11e6110](https://app.devin.ai/sessions/d11e611086ee4de4840215ef5cb2f7e4) — in progress |
 | 1.2 | Grails 3→4 (3–5 children) | pending |
 | 1.3 | Grails 4→5 (3–5 children) | pending |
 | 1.4 | Grails 5→6 / Java 21 / javax→jakarta (4–6 children) | pending |
@@ -40,21 +40,21 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 2 — UI: GSP → React (parallel module waves; needs Phase 0)
 | # | Task | Status |
 |---|------|--------|
-| 2.x | Module batches (3–6 live screens each): inventory browser, product catalog, locations/orgs, requisitions, shipments, orders, admin/config, reporting | pending (scoped after 0.4 audit) |
-| 2.R | React 16.8→18 + Redux/router modernization of existing SPA | [1674abb2](https://app.devin.ai/sessions/1674abb277894ead9017aaf991b0597a) — in progress (lands before module batches) |
+| 2.x | Module batches: 49 total per SCREEN_INVENTORY.md | wave 1 running: B1 [0655a5d4](https://app.devin.ai/sessions/0655a5d4852645f8beb786e14aecad22), B2 [2c8733a6](https://app.devin.ai/sessions/2c8733a676d74864a3de97b0b992dc5d), B7 [28bee35b](https://app.devin.ai/sessions/28bee35b4b9841a0833af50909081c67), B14 [2f748489](https://app.devin.ai/sessions/2f74848940e74b1e8b7dfa86f8521598), B26 [0ab21723](https://app.devin.ai/sessions/0ab217233630420398ccee4410d83c76), B31 [3c983315](https://app.devin.ai/sessions/3c9833158dd24b728713614ac53c0b6e) |
+| 2.R | React 16.8→18 + Redux/router modernization of existing SPA | [1674abb2](https://app.devin.ai/sessions/1674abb277894ead9017aaf991b0597a) — [#18](https://github.com/tedfoley-cog/openboxes/pull/18) merged (React 18.3.1, react-redux 8; router v6 deferred) |
 
 ## Phase 3 — API formalization (parallel with Phase 2)
 | # | Task | Status |
 |---|------|--------|
 | 3.1 | OpenAPI harness + specs: Api, Attribute, BinLocation, Category, CombineShipment, CombinedShipmentItem | [893ec63d](https://app.devin.ai/sessions/893ec63d5d5744ad9ffc28c4539856f7) — [#8](https://github.com/tedfoley-cog/openboxes/pull/8) merged (harness + 6 specs, contract suite 28/28) |
-| 3.2 | Base, BaseDomain, CycleCount, Dashboard, Fulfillment, Generic | [016e8528](https://app.devin.ai/sessions/016e8528fa6246f1bb58ef003407f4af) — in progress |
-| 3.3 | HelpScout, Indicator, InternalLocation, Inventory, InventoryLevel, InventoryTransactionSummary | [3bf3df8f](https://app.devin.ai/sessions/3bf3df8f6f2a4cd98ee684297991a1d2) — in progress |
-| 3.4 | Invoice, LoadData, Localization, Location, LocationGroup, Noop | [2c36091e](https://app.devin.ai/sessions/2c36091e7182440e822171e141f1e874) — in progress |
-| 3.5 | Organization, PackList, PartialReceiving, Person, Picklist, PrepaymentInvoice | [e07843a8](https://app.devin.ai/sessions/e07843a8d87d44919fa71b89a58888bc) — in progress |
-| 3.6 | PrepaymentInvoiceItem, Product, ProductClassification, ProductPackage, ProductSupplier, ProductSupplierAttribute | [7b9334a7](https://app.devin.ai/sessions/7b9334a78d01402fb40b345350092d1c) — in progress |
-| 3.7 | ProductSupplierPreference, ProductsConfiguration, PurchaseOrder, Putaway, PutawayItem, ReasonCode | [3592a490](https://app.devin.ai/sessions/3592a49054e14f71b143ac843c0e8c51) — in progress |
+| 3.2 | Base, BaseDomain, CycleCount, Dashboard, Fulfillment, Generic | [016e8528](https://app.devin.ai/sessions/016e8528fa6246f1bb58ef003407f4af) — [#15](https://github.com/tedfoley-cog/openboxes/pull/15) resolving conflicts |
+| 3.3 | HelpScout, Indicator, InternalLocation, Inventory, InventoryLevel, InventoryTransactionSummary | [3bf3df8f](https://app.devin.ai/sessions/3bf3df8f6f2a4cd98ee684297991a1d2) — [#10](https://github.com/tedfoley-cog/openboxes/pull/10) merged |
+| 3.4 | Invoice, LoadData, Localization, Location, LocationGroup, Noop | [2c36091e](https://app.devin.ai/sessions/2c36091e7182440e822171e141f1e874) — [#14](https://github.com/tedfoley-cog/openboxes/pull/14) resolving conflicts |
+| 3.5 | Organization, PackList, PartialReceiving, Person, Picklist, PrepaymentInvoice | [e07843a8](https://app.devin.ai/sessions/e07843a8d87d44919fa71b89a58888bc) — [#12](https://github.com/tedfoley-cog/openboxes/pull/12) merged |
+| 3.6 | PrepaymentInvoiceItem, Product, ProductClassification, ProductPackage, ProductSupplier, ProductSupplierAttribute | [7b9334a7](https://app.devin.ai/sessions/7b9334a78d01402fb40b345350092d1c) — [#11](https://github.com/tedfoley-cog/openboxes/pull/11) merged |
+| 3.7 | ProductSupplierPreference, ProductsConfiguration, PurchaseOrder, Putaway, PutawayItem, ReasonCode | [3592a490](https://app.devin.ai/sessions/3592a49054e14f71b143ac843c0e8c51) — [#16](https://github.com/tedfoley-cog/openboxes/pull/16) merged |
 | 3.8 | RecordStock, Replenishment, SelectOptions, StockAdjustment, StockMovement, StockMovementItem | [9b23fb73](https://app.devin.ai/sessions/9b23fb7380d44cb1b702689d20b11d4d) — in progress |
-| 3.9 | StockTransfer, Stocklist, StocklistItem, UnitOfMeasure | [ac15c4c2](https://app.devin.ai/sessions/ac15c4c2986a4235a4aaf68c4448a88d) — in progress |
+| 3.9 | StockTransfer, Stocklist, StocklistItem, UnitOfMeasure | [ac15c4c2](https://app.devin.ai/sessions/ac15c4c2986a4235a4aaf68c4448a88d) — [#13](https://github.com/tedfoley-cog/openboxes/pull/13) merged |
 
 ## Phase 4 — Validation & cutover
 | # | Task | Status |
@@ -68,4 +68,5 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 - 2026-07-21: Coordinator initialized; tracking branch created; Phase 0 wave 1 spawned.
 - 2026-07-21: PR #1 (Docker baseline + fork CI) and PR #2 (dead-screen audit) merged; wave 2 spawned (0.2a, 0.3a, 0.3b). 0.2b/0.2c queued behind 0.2a harness.
 - 2026-07-21: PR #5 (0.2a Playwright flows) and PR #4 (0.3b API snapshots M–Z) merged. 0.3a PR #3 conflicted with #4's harness — child instructed to rebase/unify. 0.2b + 0.2c spawned.
+- 2026-07-22: PR #9 (Java 11) + PR #18 (React 18) merged. Phase 3 PRs #10–13, #16 merged; #14/#15 resolving conflicts; 3.8 still running. Note from 1.1a: 18/191 API snapshots drift between pinned release image and source builds — re-baselined for source builds. Wave: 1.1b + Phase 2 batches B1,B2,B7,B14,B26,B31 spawned.
 - 2026-07-22: PRs #3, #6, #7 merged — **Phase 0 complete**. Parity oracle in place: 9 Playwright golden-path flows + 191 API snapshots across all 52 controllers, all wired into CI. Phase 1 wave 1 (Java 8→11) starting; Phase 2/3 waves to interleave.
