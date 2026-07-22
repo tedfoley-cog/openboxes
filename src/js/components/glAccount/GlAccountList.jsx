@@ -9,6 +9,7 @@ import DateCell from 'components/DataTable/DateCell';
 import Button from 'components/form-elements/Button';
 import { GL_ACCOUNT_URL } from 'consts/applicationUrls';
 import useTableData from 'hooks/list-pages/useTableData';
+import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import StatusIndicator from 'utils/StatusIndicator';
 import Translate from 'utils/Translate';
@@ -17,6 +18,8 @@ const FILTER_PARAMS = { initialized: true };
 
 const GlAccountList = () => {
   useTranslation('glAccount', 'reactTable', 'default');
+
+  const translate = useTranslate();
 
   const isUserAdmin = useSelector((state) => state.session.isUserAdmin);
 
@@ -134,7 +137,7 @@ const GlAccountList = () => {
           pages={tableData.pages}
           totalData={tableData.totalCount}
           onFetchData={onFetchHandler}
-          noDataText="No GL accounts match the given criteria"
+          noDataText={translate('react.glAccount.empty.label', 'No GL accounts match the given criteria')}
         />
       </div>
     </div>
