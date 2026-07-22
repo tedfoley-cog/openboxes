@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import DataTable, { TableCell } from 'components/DataTable';
 import Button from 'components/form-elements/Button';
@@ -20,6 +21,8 @@ const LocationListTable = ({ filterParams }) => {
     onFetchHandler,
     loading,
   } = useLocationListTableData(filterParams);
+
+  const history = useHistory();
 
   const { locale } = useSelector((state) => ({
     locale: state.session.activeLanguage,
@@ -132,7 +135,7 @@ const LocationListTable = ({ filterParams }) => {
           label="react.location.addLocation.label"
           variant="primary"
           onClick={() => {
-            window.location = LOCATION_URL.create();
+            history.push(LOCATION_URL.create());
           }}
         />
       </ListTableTitleWrapper>
