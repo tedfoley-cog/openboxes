@@ -81,6 +81,7 @@ export const ORDER_ITEMS = (id) => `${ORDER_BY_ID(id)}/items`;
 export const ORDER_SHIPMENTS = (id) => `${ORDER_BY_ID(id)}/shipments`;
 export const ORDER_INVOICES = (id) => `${ORDER_BY_ID(id)}/invoices`;
 export const ORDER_PRINT = (id) => `${ORDER_BY_ID(id)}/print`;
+export const ORDER_RECEIVE = (id) => `${ORDER_BY_ID(id)}/receiveOrder`;
 export const ORDER_ADJUSTMENTS = (id) => `${ORDER_BY_ID(id)}/adjustments`;
 export const ORDER_ADJUSTMENT_BY_ID = (id, adjustmentId) => `${ORDER_ADJUSTMENTS(id)}/${adjustmentId}`;
 export const ORDER_SUMMARIES = `${API}/orderSummaries`;
@@ -164,6 +165,12 @@ export const PRODUCT_TYPE_API = `${API}/productTypes`;
 export const PRODUCT_TYPE_BY_ID = (id) => `${PRODUCT_TYPE_API}/${id}`;
 export const PRODUCT_ACTIVITY_CODE_OPTIONS = `${API}/productActivityCodeOptions`;
 export const PRODUCT_FIELD_OPTIONS = `${API}/productFieldOptions`;
+
+// TAGS
+export const TAG_API = `${API}/tags`;
+export const TAG_BY_ID = (id) => `${TAG_API}/${id}`;
+export const TAG_PRODUCTS = (id) => `${TAG_API}/${id}/products`;
+export const TAG_PRODUCT_BY_ID = (id, productId) => `${TAG_PRODUCTS(id)}/${productId}`;
 
 // SHIPMENT TYPES
 export const SHIPMENT_TYPES = `${GENERIC_API}/shipmentType`;
@@ -264,10 +271,6 @@ export const PRODUCT_SUPPLIER_PREFERENCES_BY_ID = (id) => `${PRODUCT_SUPPLIER_PR
 export const PRODUCT_SUPPLIER_EXPORT = `${PRODUCT_SUPPLIER_API}/export`;
 export const PRODUCT_SUPPLIER_DETAILS = (id) => `${PRODUCT_SUPPLIER_API}/${id}/details`;
 
-// TAG
-export const TAG_API = `${API}/tags`;
-export const TAG_BY_ID = (id) => `${TAG_API}/${id}`;
-
 // UNIT OF MEASURE
 export const UNIT_OF_MEASURE_API = `${API}/unitOfMeasures`;
 export const UNIT_OF_MEASURE_GENERIC_LIST = `${GENERIC_API}/unitOfMeasure/`;
@@ -341,6 +344,8 @@ export const SHIPMENT_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/picklist`;
 export const SHIPMENT_VALIDATE_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/validatePicklist`;
 export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPicklist`;
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
+export const SHIPMENT_OUTBOUND_RETURN_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/outboundReturnPrint`;
+export const SHIPMENT_GOODS_RECEIPT_NOTE_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/goodsReceiptNotePrint`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
 
 // REQUISITION TEMPLATE (stock list template screens)
@@ -393,6 +398,16 @@ export const INVENTORY_AUDIT_SUMMARY_REPORT = `${REPORTS}/inventory-audit-summar
 export const INVENTORY_AUDIT_SUMMARY_REPORT_CSV = `${INVENTORY_AUDIT_SUMMARY_REPORT}.csv`;
 export const INVENTORY_TRANSACTIONS_SUMMARY = `${REPORTS}/inventory-transactions-summary`;
 export const INVENTORY_TRANSACTIONS_SUMMARY_CSV = `${INVENTORY_TRANSACTIONS_SUMMARY}.csv`;
+export const REPORT_ON_ORDER_SUMMARY = `${REPORTS}/on-order-summary`;
+export const REPORT_ON_ORDER_DETAILS = `${REPORTS}/on-order-details`;
+export const REPORT_REQUEST_DETAILS = `${REPORTS}/request-details`;
+export const REPORT_REQUEST_REASON_CODES = `${REPORTS}/request-reason-codes`;
+export const REPORT_INVENTORY_BY_LOCATION = `${REPORTS}/inventory-by-location`;
+export const REPORT_PACKING_LIST = `${REPORTS}/packing-list`;
+export const REPORT_PACKING_LIST_SHIPMENTS = `${REPORTS}/packing-list-shipments`;
+export const JSON_QOH_BY_PRODUCT_GROUP = '/json/getQuantityOnHandByProductGroup';
+export const JSON_SUMMARY_BY_PRODUCT_GROUP = '/json/getSummaryByProductGroup';
+export const JSON_REQUEST_DETAIL_REPORT = '/json/getRequestDetailReport';
 
 // INDICATORS
 export const INDICATORS_REPORT = `${API}/reports/indicators`;

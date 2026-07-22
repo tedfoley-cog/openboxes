@@ -203,6 +203,36 @@ const AsyncProductTypeForm = Loadable({
   loading: Loading,
 });
 
+const AsyncProductTypeList = Loadable({
+  loader: () => import('components/productType/ProductTypeList'),
+  loading: Loading,
+});
+
+const AsyncProductTypeEdit = Loadable({
+  loader: () => import('components/productType/ProductTypeEdit'),
+  loading: Loading,
+});
+
+const AsyncProductTypeShow = Loadable({
+  loader: () => import('components/productType/ProductTypeShow'),
+  loading: Loading,
+});
+
+const AsyncTagList = Loadable({
+  loader: () => import('components/tag/TagList'),
+  loading: Loading,
+});
+
+const AsyncTagCreate = Loadable({
+  loader: () => import('components/tag/TagCreate'),
+  loading: Loading,
+});
+
+const AsyncTagEdit = Loadable({
+  loader: () => import('components/tag/TagEdit'),
+  loading: Loading,
+});
+
 const AsyncTagShow = Loadable({
   loader: () => import('components/tag/TagShow'),
   loading: Loading,
@@ -345,6 +375,36 @@ const AsyncPrintPickListReport = Loadable({
 
 const AsyncPrintPaginatedPackingListReport = Loadable({
   loader: () => import('components/reporting/shippingReport/PrintPaginatedPackingListReport'),
+  loading: Loading,
+});
+
+const AsyncForecastReport = Loadable({
+  loader: () => import('components/reporting/forecastReport/ForecastReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryByLocationReport = Loadable({
+  loader: () => import('components/reporting/inventoryByLocationReport/InventoryByLocationReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryReport = Loadable({
+  loader: () => import('components/reporting/inventoryReport/InventoryReport'),
+  loading: Loading,
+});
+
+const AsyncOnOrderReport = Loadable({
+  loader: () => import('components/reporting/onOrderReport/OnOrderReport'),
+  loading: Loading,
+});
+
+const AsyncPaginatedPackingListReport = Loadable({
+  loader: () => import('components/reporting/packingListReport/PaginatedPackingListReport'),
+  loading: Loading,
+});
+
+const AsyncRequestDetailReport = Loadable({
+  loader: () => import('components/reporting/requestDetailReport/RequestDetailReport'),
   loading: Loading,
 });
 
@@ -520,6 +580,21 @@ const AsyncOrderShow = Loadable({
 
 const AsyncOrderPrint = Loadable({
   loader: () => import('components/order/OrderPrint'),
+  loading: Loading,
+});
+
+const AsyncOutboundReturnPrint = Loadable({
+  loader: () => import('components/deliveryNote/OutboundReturnPrint'),
+  loading: Loading,
+});
+
+const AsyncGoodsReceiptNotePrint = Loadable({
+  loader: () => import('components/goodsReceiptNote/GoodsReceiptNotePrint'),
+  loading: Loading,
+});
+
+const AsyncReceiveOrderPage = Loadable({
+  loader: () => import('components/receiveOrder/ReceiveOrderPage'),
   loading: Loading,
 });
 
@@ -983,6 +1058,12 @@ const Router = () => {
             <MainLayoutRoute path="**/report/printPickListReport" component={AsyncPrintPickListReport} />
             <MainLayoutRoute path="**/report/printPaginatedPackingListReport" component={AsyncPrintPaginatedPackingListReport} />
             <MainLayoutRoute path="**/dataExport/index" component={AsyncDataExportList} />
+            <MainLayoutRoute path="**/report/showForecastReport" component={AsyncForecastReport} />
+            <MainLayoutRoute path="**/report/showInventoryByLocationReport" component={AsyncInventoryByLocationReport} />
+            <MainLayoutRoute path="**/report/showInventoryReport" component={AsyncInventoryReport} />
+            <MainLayoutRoute path="**/report/showOnOrderReport" component={AsyncOnOrderReport} />
+            <MainLayoutRoute path="**/report/showPaginatedPackingListReport" component={AsyncPaginatedPackingListReport} />
+            <MainLayoutRoute path="**/report/showRequestDetailReport" component={AsyncRequestDetailReport} />
             <MainLayoutRoute path="**/inventory/reorderReport" component={AsyncReorderReport} />
             <MainLayoutRoute path="**/inventory/browse" component={AsyncInventoryBrowse} />
             <MainLayoutRoute path="**/inventory/createTransaction" component={AsyncCreateTransaction} />
@@ -1045,6 +1126,9 @@ const Router = () => {
             <MainLayoutRoute path="**/order/orderItemDetails" component={OrderItemDetailsList} />
             <MainLayoutRoute path="**/order/show/:orderId" component={AsyncOrderShow} />
             <MainLayoutRoute path="**/order/print/:orderId" component={AsyncOrderPrint} />
+            <MainLayoutRoute path="**/deliveryNote/printOutboundReturn/:id?" component={AsyncOutboundReturnPrint} />
+            <MainLayoutRoute path="**/goodsReceiptNote/print/:id?" component={AsyncGoodsReceiptNotePrint} />
+            <MainLayoutRoute path="**/receiveOrderWorkflow/receiveOrder/:orderId?" component={AsyncReceiveOrderPage} />
             <MainLayoutRoute path="**/orderAdjustmentType/list" component={AsyncOrderAdjustmentTypeList} />
             <MainLayoutRoute path="**/orderAdjustmentType/create" component={AsyncOrderAdjustmentTypeForm} />
             <MainLayoutRoute path="**/orderAdjustmentType/edit/:orderAdjustmentTypeId" component={AsyncOrderAdjustmentTypeForm} />
@@ -1178,6 +1262,12 @@ const Router = () => {
             <MainLayoutRoute path="**/productGroup/edit/:productGroupId" component={AsyncProductGroupForm} />
             <MainLayoutRoute path="**/productGroup/show/:productGroupId" component={AsyncProductGroupShow} />
             <MainLayoutRoute path="**/productType/create" component={AsyncProductTypeForm} />
+            <MainLayoutRoute path="**/productType/list" component={AsyncProductTypeList} />
+            <MainLayoutRoute path="**/productType/edit/:productTypeId" component={AsyncProductTypeEdit} />
+            <MainLayoutRoute path="**/productType/show/:productTypeId" component={AsyncProductTypeShow} />
+            <MainLayoutRoute path="**/tag/list" component={AsyncTagList} />
+            <MainLayoutRoute path="**/tag/create" component={AsyncTagCreate} />
+            <MainLayoutRoute path="**/tag/edit/:tagId" component={AsyncTagEdit} />
             <MainLayoutRoute path="**/tag/show/:tagId" component={AsyncTagShow} />
             <MainLayoutRoute path="**/unitOfMeasureConversion/list" component={AsyncUnitOfMeasureConversionList} />
             <MainLayoutRoute path="**/unitOfMeasureConversion/create" component={AsyncUnitOfMeasureConversionForm} />

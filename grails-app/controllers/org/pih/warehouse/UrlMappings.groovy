@@ -221,12 +221,33 @@ class UrlMappings {
 
         "/api/productTypes"(parseRequest: true) {
             controller = { "productTypeApi" }
-            action = [POST: "create"]
+            action = [GET: "list", POST: "create"]
         }
 
         "/api/productTypes/$id"(parseRequest: true) {
             controller = { "productTypeApi" }
-            action = [DELETE: "delete"]
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        // Tag endpoints for the React tag screens
+        "/api/tags"(parseRequest: true) {
+            controller = { "tagApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/tags/$id"(parseRequest: true) {
+            controller = { "tagApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/tags/$id/products"(parseRequest: true) {
+            controller = { "tagApi" }
+            action = [POST: "addProducts"]
+        }
+
+        "/api/tags/$id/products/$productId"(parseRequest: true) {
+            controller = { "tagApi" }
+            action = [DELETE: "removeProduct"]
         }
 
         // Product activity / field options for the productType create screen
@@ -238,11 +259,6 @@ class UrlMappings {
         "/api/productFieldOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "productFieldOptions"]
-        }
-
-        "/api/tags/$id"(parseRequest: true) {
-            controller = { "tagApi" }
-            action = [GET: "read", DELETE: "delete"]
         }
 
         "/api/unitOfMeasureConversions"(parseRequest: true) {
@@ -1185,6 +1201,23 @@ class UrlMappings {
             action = [GET: "printData"]
         }
 
+        // Receive order API (migrated receiveOrderWorkflow screens)
+        "/api/orders/$id/receiveOrder"(parseRequest: true) {
+            controller = "receiveOrderApi"
+            action = [GET: "read", POST: "save"]
+        }
+
+        // Shipment print API (migrated deliveryNote/goodsReceiptNote print screens)
+        "/api/shipments/$id/outboundReturnPrint"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "outboundReturnPrintData"]
+        }
+
+        "/api/shipments/$id/goodsReceiptNotePrint"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "goodsReceiptNotePrintData"]
+        }
+
         // Order adjustment type API (migrated orderAdjustmentType screens)
         "/api/orderAdjustmentTypes"(parseRequest: true) {
             controller = "orderAdjustmentTypeApi"
@@ -1935,6 +1968,41 @@ class UrlMappings {
         "/api/dataExports" {
             controller = "dataExportApi"
             action = [GET: "list"]
+        }
+
+        "/api/reports/on-order-summary" {
+            controller = "reportApi"
+            action = [GET: "onOrderSummary"]
+        }
+
+        "/api/reports/on-order-details" {
+            controller = "reportApi"
+            action = [GET: "onOrderDetails"]
+        }
+
+        "/api/reports/request-details" {
+            controller = "reportApi"
+            action = [GET: "requestDetails"]
+        }
+
+        "/api/reports/request-reason-codes" {
+            controller = "reportApi"
+            action = [GET: "requestReasonCodes"]
+        }
+
+        "/api/reports/inventory-by-location" {
+            controller = "reportApi"
+            action = [GET: "inventoryByLocation"]
+        }
+
+        "/api/reports/packing-list" {
+            controller = "reportApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/reports/packing-list-shipments" {
+            controller = "reportApi"
+            action = [GET: "packingListShipments"]
         }
 
         "/api/reports/indicators/productsInventoried" {

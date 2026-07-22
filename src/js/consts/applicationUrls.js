@@ -144,6 +144,16 @@ const ORDER_URL = {
   orderItemDetails: () => `${ORDER_URL.base}/orderItemDetails`,
 };
 
+const GOODS_RECEIPT_NOTE_URL = {
+  base: `${CONTEXT_PATH}/goodsReceiptNote`,
+  print: (id) => `${GOODS_RECEIPT_NOTE_URL.base}/print/${id}`,
+};
+
+const RECEIVE_ORDER_URL = {
+  base: `${CONTEXT_PATH}/receiveOrderWorkflow`,
+  receiveOrder: (id) => `${RECEIVE_ORDER_URL.base}/receiveOrder/${id}`,
+};
+
 const ORDER_ADJUSTMENT_TYPE_URL = {
   base: `${CONTEXT_PATH}/orderAdjustmentType`,
   list: () => `${ORDER_ADJUSTMENT_TYPE_URL.base}/list`,
@@ -270,6 +280,24 @@ const REPLENISHMENT_URL = {
   print: (id) => `${REPLENISHMENT_URL.base}/print/${id}`,
 };
 
+const REPORT_URL = {
+  base: `${CONTEXT_PATH}/report`,
+  showForecastReport: () => `${REPORT_URL.base}/showForecastReport`,
+  showOnOrderReport: () => `${REPORT_URL.base}/showOnOrderReport`,
+  exportInventoryReport: () => `${REPORT_URL.base}/exportInventoryReport`,
+  showInventoryByLocationReport: () => `${REPORT_URL.base}/showInventoryByLocationReport`,
+  showPaginatedPackingListReport: () => `${REPORT_URL.base}/showPaginatedPackingListReport`,
+  downloadShippingReport: () => `${REPORT_URL.base}/downloadShippingReport`,
+  showBinLocationReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showBinLocationReport`,
+    query: params,
+  }),
+  showCycleCountReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showCycleCountReport`,
+    query: params,
+  }),
+};
+
 const BUDGET_CODE_URL = {
   base: `${CONTEXT_PATH}/budgetCode`,
   list: () => `${BUDGET_CODE_URL.base}/list`,
@@ -379,11 +407,14 @@ const PRODUCT_TYPE_URL = {
   base: `${CONTEXT_PATH}/productType`,
   list: () => `${PRODUCT_TYPE_URL.base}/list`,
   create: () => `${PRODUCT_TYPE_URL.base}/create`,
+  edit: (id) => `${PRODUCT_TYPE_URL.base}/edit/${id}`,
+  show: (id) => `${PRODUCT_TYPE_URL.base}/show/${id}`,
 };
 
 const TAG_URL = {
   base: `${CONTEXT_PATH}/tag`,
   list: () => `${TAG_URL.base}/list`,
+  create: () => `${TAG_URL.base}/create`,
   edit: (id) => `${TAG_URL.base}/edit/${id}`,
   show: (id) => `${TAG_URL.base}/show/${id}`,
 };
@@ -469,6 +500,7 @@ const SHIPMENT_SHOW_URL = {
 const DELIVERY_NOTE_URL = {
   base: `${CONTEXT_PATH}/deliveryNote`,
   print: (id) => `${DELIVERY_NOTE_URL.base}/print/${id}`,
+  printOutboundReturn: (id) => `${DELIVERY_NOTE_URL.base}/printOutboundReturn/${id}`,
 };
 
 const PICKLIST_URL = {
@@ -485,18 +517,6 @@ const BARCODE_URL = {
     query: {
       data, width: 100, height: 30, format: 'CODE_128',
     },
-  }),
-};
-
-const REPORT_URL = {
-  base: `${CONTEXT_PATH}/report`,
-  showBinLocationReport: (params = {}) => stringifyUrl({
-    url: `${REPORT_URL.base}/showBinLocationReport`,
-    query: params,
-  }),
-  showCycleCountReport: (params = {}) => stringifyUrl({
-    url: `${REPORT_URL.base}/showCycleCountReport`,
-    query: params,
   }),
 };
 
@@ -529,6 +549,7 @@ export {
   DOCUMENT_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
+  GOODS_RECEIPT_NOTE_URL,
   INVENTORY_BROWSER_URL,
   INVENTORY_ITEM_URL,
   INVENTORY_LEVEL_URL,
@@ -557,6 +578,7 @@ export {
   PRODUCT_URL,
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
+  RECEIVE_ORDER_URL,
   REPLENISHMENT_URL,
   REPORT_URL,
   REQUISITION_ITEM_URL,
