@@ -201,17 +201,17 @@ class InventoryApiController {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
         requireLocation(location)
 
-        InventoryCommand command = new InventoryCommand()
-        command.location = location
-        command.searchTerms = params.searchTerms ?: null
+        InventoryCommand inventoryCommand = new InventoryCommand()
+        inventoryCommand.location = location
+        inventoryCommand.searchTerms = params.searchTerms ?: null
         def category = params.categoryId ? Category.get(params.categoryId) : productService.getRootCategory()
-        command.category = category?.id ? category : null
-        command.tags = params.list("tags") ? Tag.getAll(params.list("tags")) : null
-        command.catalogs = params.list("catalogs") ? ProductCatalog.getAll(params.list("catalogs")) : null
-        command.maxResults = params.max ? params.int("max") : 10
-        command.offset = params.offset ? params.int("offset") : 0
+        inventoryCommand.category = category?.id ? category : null
+        inventoryCommand.tags = params.list("tags") ? Tag.getAll(params.list("tags")) : null
+        inventoryCommand.catalogs = params.list("catalogs") ? ProductCatalog.getAll(params.list("catalogs")) : null
+        inventoryCommand.maxResults = params.max ? params.int("max") : 10
+        inventoryCommand.offset = params.offset ? params.int("offset") : 0
 
-        PaginatedList searchResults = productAvailabilityService.searchProducts(command)
+        PaginatedList searchResults = productAvailabilityService.searchProducts(inventoryCommand)
 
         def data = searchResults.list.collect { result ->
             Product product = result.product
@@ -328,25 +328,25 @@ class InventoryApiController {
         }
         InventoryItem inventoryItem = InventoryItem.get(json.inventoryItemId as String)
 
-        AdjustStockCommand command = new AdjustStockCommand()
-        command.location = location
-        command.binLocation = json.binLocationId ? Location.get(json.binLocationId as String) : null
-        command.inventoryItem = inventoryItem
-        command.currentQuantity = json.currentQuantity != null ? json.currentQuantity as Integer : null
-        command.newQuantity = json.newQuantity as Integer
-        command.reasonCode = json.reasonCode ? ReasonCode.valueOf(json.reasonCode as String) : null
-        command.comment = json.comment ?: null
+        AdjustStockCommand adjustStockCommand = new AdjustStockCommand()
+        adjustStockCommand.location = location
+        adjustStockCommand.binLocation = json.binLocationId ? Location.get(json.binLocationId as String) : null
+        adjustStockCommand.inventoryItem = inventoryItem
+        adjustStockCommand.currentQuantity = json.currentQuantity != null ? json.currentQuantity as Integer : null
+        adjustStockCommand.newQuantity = json.newQuantity as Integer
+        adjustStockCommand.reasonCode = json.reasonCode ? ReasonCode.valueOf(json.reasonCode as String) : null
+        adjustStockCommand.comment = json.comment ?: null
 
-        inventoryService.adjustStock(command)
+        inventoryService.adjustStock(adjustStockCommand)
 
-        if (command.hasErrors()) {
-            throw new ValidationException("Invalid stock adjustment", command.errors)
+        if (adjustStockCommand.hasErrors()) {
+            throw new ValidationException("Invalid stock adjustment", adjustStockCommand.errors)
         }
 
         render([data: [
                 inventoryItemId: inventoryItem?.id,
                 productId      : inventoryItem?.product?.id,
-                newQuantity    : command.newQuantity,
+                newQuantity    : adjustStockCommand.newQuantity,
         ]] as JSON)
     }
 
