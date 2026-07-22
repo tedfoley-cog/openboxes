@@ -140,7 +140,7 @@ const RequisitionEditHeader = () => {
             <div className="col-sm-6">
               <Select
                 options={REQUISITION_TYPES.map((value) => ({ value, label: value }))}
-                value={form.type}
+                value={form.type ? { value: form.type, label: form.type } : null}
                 onChange={(value) => setField('type', value?.value ?? value ?? null)}
                 id="requisition-type-select"
               />
@@ -185,7 +185,8 @@ const RequisitionEditHeader = () => {
             <div className="col-sm-6">
               <Select
                 options={COMMODITY_CLASSES.map((value) => ({ value, label: value }))}
-                value={form.commodityClass}
+                value={form.commodityClass
+                  ? { value: form.commodityClass, label: form.commodityClass } : null}
                 onChange={(value) => setField('commodityClass', value?.value ?? value ?? null)}
                 id="requisition-commodity-class-select"
               />

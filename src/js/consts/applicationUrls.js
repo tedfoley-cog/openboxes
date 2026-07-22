@@ -213,8 +213,14 @@ const REQUISITION_URL = {
     query: templateId ? { templateId } : {},
   }),
   createNonStock: () => `${REQUISITION_URL.base}/createNonStock`,
-  exportRequisitions: () => `${REQUISITION_URL.base}/exportRequisitions`,
-  exportRequisitionItems: () => `${REQUISITION_URL.base}/exportRequisitionItems`,
+  exportRequisitions: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/exportRequisitions`,
+    query: { ...params },
+  }),
+  exportRequisitionItems: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/exportRequisitionItems`,
+    query: { ...params },
+  }),
   pick: (id) => `${REQUISITION_URL.base}/pick/${id}`,
   confirm: (id) => `${REQUISITION_URL.base}/confirm/${id}`,
   transfer: (id) => `${REQUISITION_URL.base}/transfer/${id}`,

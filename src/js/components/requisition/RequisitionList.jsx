@@ -129,6 +129,18 @@ const RequisitionList = () => {
     }
   };
 
+  // legacy export actions bind these params onto a Requisition criteria object
+  const exportParams = {
+    q: q || undefined,
+    status: status || undefined,
+    type: type || undefined,
+    'destination.id': destination?.id || undefined,
+    'requestedBy.id': requestedBy?.id || undefined,
+    'createdBy.id': createdBy?.id || undefined,
+    'updatedBy.id': updatedBy?.id || undefined,
+    relatedToMe: relatedToMe || undefined,
+  };
+
   const selectStatus = (value) => {
     setStatus(value);
     setOffset(0);
@@ -146,10 +158,10 @@ const RequisitionList = () => {
           {` (${totalCount})`}
         </h4>
         <div>
-          <a className="btn btn-outline-secondary btn-sm mr-2" href={REQUISITION_URL.exportRequisitions()}>
+          <a className="btn btn-outline-secondary btn-sm mr-2" href={REQUISITION_URL.exportRequisitions(exportParams)}>
             <Translate id="react.requisition.button.exportRequisitions.label" defaultMessage="Export requisitions" />
           </a>
-          <a className="btn btn-outline-secondary btn-sm" href={REQUISITION_URL.exportRequisitionItems()}>
+          <a className="btn btn-outline-secondary btn-sm" href={REQUISITION_URL.exportRequisitionItems(exportParams)}>
             <Translate id="react.requisition.button.exportRequisitionItems.label" defaultMessage="Export requisition items" />
           </a>
         </div>
