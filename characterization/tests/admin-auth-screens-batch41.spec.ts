@@ -74,8 +74,8 @@ test.describe('batch41 admin & auth screens', () => {
     const documentId = page.url().split('/').pop();
     await captureStep(page, 'batch41-document-create', 'created');
 
-    // Clean up so the flow is re-runnable.
-    await page.goto(url(`/document/delete/${documentId}`));
+    // Clean up so the flow is re-runnable (delete only allows POST).
+    await page.request.post(url(`/document/delete/${documentId}`));
   });
 
   test('auth/signup redirects to login when reCAPTCHA is not configured', async ({ page }) => {

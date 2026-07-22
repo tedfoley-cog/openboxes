@@ -17,7 +17,7 @@ def test_create_document(client, batch41_endpoints):
     assert data["filename"] == "zz-contract-document.txt"
     assert data["extension"] == "txt"
     # Clean up so the suite is re-runnable (legacy delete action).
-    client.request("GET", f"/document/delete/{data['id']}")
+    client.request("POST", f"/document/delete/{data['id']}")
 
 
 def test_create_document_requires_file(client, batch41_endpoints):

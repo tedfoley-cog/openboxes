@@ -157,7 +157,10 @@ const BatchImportData = () => {
           Alert.success(data.message || 'Data imported successfully', { timeout: 8000 });
         } else {
           setPreview(data);
-          if (data.message) {
+          const errorMessages = response.data?.errorMessages;
+          if (errorMessages?.length) {
+            errorMessages.forEach((message) => Alert.error(message, { timeout: 8000 }));
+          } else if (data.message) {
             Alert.success(data.message, { timeout: 8000 });
           }
         }
