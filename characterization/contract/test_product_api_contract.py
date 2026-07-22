@@ -133,4 +133,4 @@ def test_available_items_missing_params(client):
 def test_lot_numbers_with_expiration(client):
     check(client, spec, "GET",
           "/api/products/inventoryItems/lotNumbersWithExpirationDate",
-          params={"productId": client.product_id(PRODUCT_CODE)})
+          params={"productIds": client.product_id(PRODUCT_CODE)})

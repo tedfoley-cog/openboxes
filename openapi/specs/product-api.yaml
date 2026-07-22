@@ -585,15 +585,10 @@ paths:
       operationId: getLotNumbersWithExpirationDate
       summary: Lot numbers with expiration dates per product
       parameters:
-        - name: productId
-          in: query
-          required: false
-          description: Repeatable product id parameter ("productIds" list).
-          schema:
-            type: string
         - name: productIds
           in: query
           required: false
+          description: Repeatable product id parameter.
           schema:
             type: string
       responses:

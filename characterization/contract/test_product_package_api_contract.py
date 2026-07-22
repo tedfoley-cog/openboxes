@@ -39,7 +39,8 @@ def product_supplier(client, supplier_id):
 def _seeded_uom_id(client):
     # Resolve a unit of measure by the stable "BX" code from the seeded
     # product sources (there is no dedicated UoM list API).
-    for ps in client.get_json("/api/productSuppliers", params={"max": "100"})["data"]:
+    for ps in client.get_json("/api/productSuppliers",
+                              params={"disableMaxLimit": "true"})["data"]:
         uom = (ps.get("defaultProductPackage") or {}).get("uom") or {}
         if uom.get("code") == "BX":
             return uom["id"]

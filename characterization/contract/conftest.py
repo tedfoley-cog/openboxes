@@ -24,7 +24,8 @@ def supplier_id(client):
     # Resolve a supplier organization by its stable seeded code (natural key)
     # from the seeded product sources - there is no organization list API.
     code = "MID"
-    for ps in client.get_json("/api/productSuppliers", params={"max": "100"})["data"]:
+    for ps in client.get_json("/api/productSuppliers",
+                              params={"disableMaxLimit": "true"})["data"]:
         supplier = ps.get("supplier") or {}
         if supplier.get("code") == code:
             return supplier["id"]
