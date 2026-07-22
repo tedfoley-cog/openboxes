@@ -121,10 +121,7 @@ const OrganizationForm = () => {
       try {
         await organizationApi.updateOrganization(organizationId, payload);
       } catch (error) {
-        notification(NotificationType.ERROR)({
-          message: error?.response?.data?.errorMessage
-            || translate('react.organization.update.error.label', 'Organization could not be updated'),
-        });
+        // apiClient's response interceptor already notifies the user
         return;
       }
       notification(NotificationType.SUCCESS)({
@@ -143,10 +140,7 @@ const OrganizationForm = () => {
     try {
       response = await organizationApi.createOrganization(payload);
     } catch (error) {
-      notification(NotificationType.ERROR)({
-        message: error?.response?.data?.errorMessage
-          || translate('react.organization.create.error.label', 'Organization could not be created'),
-      });
+      // apiClient's response interceptor already notifies the user
       return;
     }
     notification(NotificationType.SUCCESS)({
