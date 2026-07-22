@@ -490,14 +490,20 @@ class ShipmentApiController {
                     Date.parse("yyyy-MM-dd HH:mm", jsonObject.actualShippingDate as String) : new Date()
             shipmentService.sendShipment(shipment, jsonObject.comments as String, userInstance,
                     warehouseInstance, actualShippingDate, true)
-            def emailRecipients = new HashSet()
-            jsonObject.emailRecipientIds?.each { recipientId ->
-                Person recipient = Person.get(recipientId)
-                if (recipient && recipient.email) {
-                    emailRecipients.add(recipient)
+            // notification failures must never surface as a send failure
+            // because the shipment has already been sent at this point
+            try {
+                def emailRecipients = new HashSet()
+                jsonObject.emailRecipientIds?.each { recipientId ->
+                    Person recipient = Person.get(recipientId)
+                    if (recipient && recipient.email) {
+                        emailRecipients.add(recipient)
+                    }
                 }
+                triggerSendShipmentEmails(shipment, userInstance, emailRecipients)
+            } catch (Exception e) {
+                log.error("Error triggering send shipment emails: ${e.message}", e)
             }
-            triggerSendShipmentEmails(shipment, userInstance, emailRecipients)
         } catch (ValidationException e) {
             renderValidationException(e)
             return
