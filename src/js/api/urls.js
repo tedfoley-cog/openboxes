@@ -146,6 +146,14 @@ export const LOCATION_ZONE_LOCATIONS = (id) => `${LOCATION_API}/${id}/zoneLocati
 export const LOCATION_CONTENTS = (id) => `${LOCATION_API}/${id}/contents`;
 export const LOCATION_LOGO = (id) => `${LOCATION_API}/${id}/logo`;
 export const LOCATION_GROUPS_API = `${API}/locationGroups`;
+export const LOCATION_GROUP_BY_ID = (id) => `${LOCATION_GROUPS_API}/${id}`;
+export const LOCATION_GROUP_SEARCH_API = `${LOCATION_GROUPS_API}/search`;
+export const LOCATION_GROUP_DETAILS = (id) => `${LOCATION_GROUPS_API}/${id}/details`;
+
+// LOCATION TYPES
+export const LOCATION_TYPE_API = `${API}/locationTypes`;
+export const LOCATION_TYPE_BY_ID = (id) => `${LOCATION_TYPE_API}/${id}`;
+export const LOCATION_TYPE_CODE_OPTIONS = `${API}/locationTypeCodeOptions`;
 
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
@@ -275,6 +283,17 @@ export const TRANSACTION_LOCATION_OPTIONS = `${TRANSACTION_API}/locationOptions`
 export const TRANSACTION_BY_ID = (id) => `${TRANSACTION_API}/${id}`;
 export const TRANSACTION_ENTRY_BY_ID = (id, entryId) => `${TRANSACTION_API}/${id}/entries/${entryId}`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
+export const INVENTORY_BROWSE = `${API}/inventories/browse`;
+export const INVENTORY_TRANSACTION_CANDIDATES = `${API}/inventories/transactionCandidates`;
+export const INVENTORY_BIN_LOCATION_DETAILS = `${API}/inventories/binLocationDetails`;
+export const INVENTORY_ADJUST_STOCK = `${API}/inventories/adjustStock`;
+
+// CONSUMPTION
+export const CONSUMPTION_AGGREGATE = `${API}/consumption/aggregate`;
+export const CONSUMPTION_SUMMARY = `${API}/consumption/summary`;
+
+// STOCK ADJUSTMENTS
+export const STOCK_ADJUSTMENTS_API = `${API}/stockAdjustments`;
 
 // ATTRIBUTES
 export const ATTRIBUTE_BY_ID = (id) => `${ATTRIBUTES}/${id}`;
