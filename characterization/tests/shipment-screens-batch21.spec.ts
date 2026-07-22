@@ -75,7 +75,8 @@ test('shipment/addComment renders the React screen and saves a comment', async (
   await page.click('[data-testid="comment-save-button"]');
   await page.waitForURL(/shipment\/showDetails/);
 
-  // the legacy showDetails screen still renders the saved comment
+  // the showDetails screen renders the saved comment on its Comments tab
+  await page.click('[data-testid="shipment-show-tab-comments"]');
   await expect(page.locator('body')).toContainText('ZZ batch21 comment');
   await captureStep(page, FLOW, 'show-details-after-save');
 
