@@ -31,6 +31,7 @@ const StockMovementShow = () => {
   const translate = useTranslate();
 
   useEffect(() => {
+    setTabData({});
     stockMovementApi.getDetails(stockMovementId)
       .then(({ data }) => {
         const fetchedDetails = data?.data;
@@ -155,7 +156,11 @@ const StockMovementShow = () => {
         <tbody>
           {shipmentItems.length === 0 && (
             <tr>
-              <td colSpan={13} className="text-center text-muted">
+              <td
+                colSpan={10 + (packingList?.isFromPurchaseOrder ? 1 : 0)
+                  + (packingList?.wasReceived ? 2 : 0)}
+                className="text-center text-muted"
+              >
                 <Translate id="react.stockMovement.noShipmentItems.label" defaultMessage="No shipment items" />
               </td>
             </tr>

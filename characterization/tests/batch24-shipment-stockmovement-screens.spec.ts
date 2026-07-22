@@ -130,7 +130,7 @@ test.describe('batch 24 shipment workflow & stock movement react screens', () =>
     expect(after.some((c) => c.comment === `Playwright comment ${id}`)).toBe(true);
   });
 
-  test('add document screen renders document type options', async ({ page }) => {
+  test('uploads a document via the react add document screen', async ({ page }) => {
     const listed = (await (await page.request.get(
       url('/api/stockMovements?direction=OUTBOUND&origin=1&max=1'),
     )).json()).data as Array<{ id: string }>;
@@ -140,5 +140,21 @@ test.describe('batch 24 shipment workflow & stock movement react screens', () =>
     await page.goto(url(`/stockMovement/addDocument/${movementId}`));
     await expect(page.getByTestId('document-file-input')).toBeVisible();
     await captureStep(page, 'stock-movement', 'react-add-document');
+
+    const id = runId();
+    const name = `playwright-doc-${id}.txt`;
+    await page.getByTestId('document-file-input').setInputFiles({
+      name,
+      mimeType: 'text/plain',
+      buffer: Buffer.from(`playwright upload ${id}`),
+    });
+    await page.getByTestId('document-name-input').fill(name);
+    await page.getByTestId('document-upload-button').click();
+    await page.waitForURL(`**/stockMovement/show/${movementId}**`);
+
+    const documents = (await (await page.request.get(
+      url(`/api/stockMovements/${movementId}/documents`),
+    )).json()).data as Array<{ name: string }>;
+    expect(documents.some((doc) => doc.name === name)).toBe(true);
   });
 });

@@ -65,8 +65,5 @@ export default {
   getComments: (id) => apiClient.get(STOCK_MOVEMENT_COMMENTS(id)),
   createComment: (id, payload) => apiClient.post(STOCK_MOVEMENT_COMMENTS(id), payload),
   getDocumentTypeOptions: () => apiClient.get(STOCK_MOVEMENT_DOCUMENT_TYPES),
-  uploadDocument: (id, formData) =>
-    apiClient.post(STOCK_MOVEMENT_UPLOAD_DOCUMENT(id), formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    }),
+  uploadDocument: (id, formData) => apiClient.post(STOCK_MOVEMENT_UPLOAD_DOCUMENT(id), formData),
 };
