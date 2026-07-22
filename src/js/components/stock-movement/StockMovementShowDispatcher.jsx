@@ -13,14 +13,13 @@ import StockMovementShow from 'components/stock-movement/StockMovementShow';
 // movement type.
 const StockMovementShowDispatcher = () => {
   const { stockMovementId } = useParams();
-  const [isOrderBased, setIsOrderBased] = useState(null);
+  const [details, setDetails] = useState(null);
 
   useEffect(() => {
-    setIsOrderBased(null);
+    setDetails(null);
     stockMovementApi.getDetails(stockMovementId)
       .then(({ data }) => {
-        // same check as the legacy controller: stockMovement?.order
-        setIsOrderBased(!!data?.data?.order);
+        setDetails(data?.data ?? null);
       })
       .catch((err) => {
         const message = err?.response?.data?.errorMessage;
@@ -30,10 +29,13 @@ const StockMovementShowDispatcher = () => {
       });
   }, [stockMovementId]);
 
-  if (isOrderBased === null) {
+  if (!details) {
     return null;
   }
-  return isOrderBased ? <ReturnsShow /> : <StockMovementShow />;
+  // same check as the legacy controller: stockMovement?.order
+  return details.order
+    ? <ReturnsShow />
+    : <StockMovementShow initialDetails={details} />;
 };
 
 export default StockMovementShowDispatcher;
