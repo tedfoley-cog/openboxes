@@ -136,7 +136,7 @@ const DocumentForm = () => {
     event.preventDefault();
     const file = fileInputRef.current?.files?.[0];
     if (!file) {
-      notification(NotificationType.ERROR_OUTLINE)({
+      notification(NotificationType.ERROR_OUTLINED)({
         message: translate('react.document.fileCannotBeEmpty.label', 'Please select a file to upload'),
       });
       return;
@@ -155,7 +155,7 @@ const DocumentForm = () => {
     } catch (error) {
       const message = error?.response?.data?.errorMessage;
       if (message) {
-        notification(NotificationType.ERROR_OUTLINE)({ message });
+        notification(NotificationType.ERROR_OUTLINED)({ message });
       }
     } finally {
       setUploading(false);
