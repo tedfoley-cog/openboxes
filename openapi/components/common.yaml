@@ -192,13 +192,14 @@ components:
         shape.
       required:
         - id
-        - active
         - name
       properties:
         id:
           $ref: '#/components/schemas/Id'
         active:
           type: boolean
+          nullable: true
+          description: Defaults to true; nullable in the domain.
         code:
           type: string
           nullable: true
@@ -241,6 +242,7 @@ components:
           additionalProperties: true
         tieredPricing:
           type: boolean
+          nullable: true
         ratingTypeCode:
           type: string
           nullable: true
