@@ -455,7 +455,7 @@ class ProductApiController extends BaseDomainApiController {
         }
 
         List<String> errorMessages = []
-        int savedCount = 0
+        List<Product> productsToSave = []
         productEntries.each { entry ->
             Product product = Product.get(entry.id as String)
             if (!product) {
@@ -472,8 +472,8 @@ class ProductApiController extends BaseDomainApiController {
             if (entry.category?.id) {
                 product.category = Category.get(entry.category.id as String)
             }
-            if (!product.hasErrors() && product.save()) {
-                savedCount++
+            if (product.validate()) {
+                productsToSave << product
             } else {
                 product.errors.allErrors.each { error ->
                     errorMessages << g.message(error: error).toString()
@@ -482,11 +482,14 @@ class ProductApiController extends BaseDomainApiController {
         }
 
         if (errorMessages) {
+            productsToSave.each { it.discard() }
             render(status: 400, contentType: "application/json",
-                    text: [errorCode: 400, errorMessage: errorMessages.join("; "), errorMessages: errorMessages, savedCount: savedCount] as JSON)
+                    text: [errorCode: 400, errorMessage: errorMessages.join("; "), errorMessages: errorMessages, savedCount: 0] as JSON)
             return
         }
-        render([savedCount: savedCount] as JSON)
+
+        productsToSave.each { it.save() }
+        render([savedCount: productsToSave.size()] as JSON)
     }
 
     /**
@@ -766,7 +769,7 @@ class ProductApiController extends BaseDomainApiController {
     def deleteDocument() {
         Product product = Product.get(params.id)
         Document document = Document.get(params.documentId)
-        if (!product || !document) {
+        if (!product || !document || !product.documents?.contains(document)) {
             render(status: 404, contentType: "application/json", text: [errorMessage: "Product or document not found"] as JSON)
             return
         }
