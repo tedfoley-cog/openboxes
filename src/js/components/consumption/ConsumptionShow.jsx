@@ -19,10 +19,13 @@ const toApiDate = (isoDate) => {
   return `${month}/${day}/${year}`;
 };
 
+const toIsoLocalDate = (date) =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
 const isoDateMonthsAgo = (months) => {
   const date = new Date();
   date.setMonth(date.getMonth() - months);
-  return date.toISOString().slice(0, 10);
+  return toIsoLocalDate(date);
 };
 
 const formatNumber = (value, fractionDigits = 1) => {
@@ -39,7 +42,7 @@ const ConsumptionShow = () => {
   const currentLocation = useSelector(getCurrentLocation);
 
   const [startDate, setStartDate] = useState(isoDateMonthsAgo(1));
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
+  const [endDate, setEndDate] = useState(toIsoLocalDate(new Date()));
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 

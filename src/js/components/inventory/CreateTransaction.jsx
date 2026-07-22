@@ -21,7 +21,16 @@ const TRANSFER_IN_CODE = 'CREDIT';
 // type was given (e.g. the record-stock link on the product page)
 const CONSUMPTION_TYPE_ID = '2';
 // Transfer In / Transfer Out (see Constants.TRANSFER_IN/OUT_TRANSACTION_TYPE_ID)
-const TRANSFER_TYPE_IDS = ['8', '9'];
+const TRANSFER_IN_TYPE_ID = '8';
+const TRANSFER_OUT_TYPE_ID = '9';
+const TRANSFER_TYPE_IDS = [TRANSFER_IN_TYPE_ID, TRANSFER_OUT_TYPE_ID];
+
+// The legacy source/destination pickers only listed locations supporting the
+// relevant activity (LocationService.getTransactionSources/Destinations)
+const TRANSFER_ACTIVITY_CODES = {
+  [TRANSFER_IN_TYPE_ID]: ['SEND_STOCK'],
+  [TRANSFER_OUT_TYPE_ID]: ['RECEIVE_STOCK'],
+};
 
 const CreateTransaction = () => {
   useTranslation('inventory');
@@ -64,7 +73,8 @@ const CreateTransaction = () => {
         setTransactionType(response.data.transactionType);
       })
       .finally(() => setLoading(false));
-    fetchLocations({ activityCodes: undefined }).then(setLocations);
+    fetchLocations({ activityCodes: TRANSFER_ACTIVITY_CODES[transactionTypeId] })
+      .then((fetched) => setLocations(fetched.filter((l) => l.id !== currentLocation.id)));
   }, [currentLocation?.id, location.search]);
 
   const isTransfer = TRANSFER_TYPE_IDS.includes(transactionType?.id);
