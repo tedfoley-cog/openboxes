@@ -97,6 +97,9 @@ paths:
     post:
       operationId: updateStocklistPost
       summary: Update a stock list (POST variant)
+      description: >
+        Unknown ids are NOT rejected - update() instantiates a fresh stock
+        list and responds 200, silently creating a new record.
       parameters:
         - $ref: '#/components/parameters/stocklistId'
       requestBody:
@@ -109,6 +112,7 @@ paths:
     put:
       operationId: updateStocklistPut
       summary: Update a stock list (PUT variant)
+      description: Same behavior (and create-on-unknown-id quirk) as the POST variant.
       parameters:
         - $ref: '#/components/parameters/stocklistId'
       requestBody:
