@@ -50,6 +50,7 @@ class ShipmentApiController {
             return
         }
         def sortedItems = shipment.shipmentItems?.sort { it.product?.name } ?: []
+        def sortedReceipts = shipment.receipts?.sort { it.dateCreated } ?: []
         render([data: [
                 id                   : shipment.id,
                 shipmentNumber       : shipment.shipmentNumber,
@@ -57,7 +58,7 @@ class ShipmentApiController {
                 origin               : locationToJson(shipment.origin),
                 destination          : locationToJson(shipment.destination),
                 expectedShippingDate : shipment.expectedShippingDate,
-                receivedDate         : shipment.receipts ? shipment.receipts.last()?.actualDeliveryDate : null,
+                receivedDate         : sortedReceipts ? sortedReceipts.last()?.actualDeliveryDate : null,
                 referenceNumber      : shipment.referenceNumbers ? shipment.referenceNumbers.first()?.identifier : null,
                 driverName           : shipment.driverName,
                 additionalInformation: shipment.additionalInformation,
@@ -114,7 +115,7 @@ class ShipmentApiController {
                 origin            : locationToJson(shipment.origin),
                 destination       : locationToJson(shipment.destination),
                 actualShippingDate: shipment.actualShippingDate,
-                lastReceiptDate   : shipment.receipts ? shipment.receipts.last()?.actualDeliveryDate : null,
+                lastReceiptDate   : receipts ? receipts.last()?.actualDeliveryDate : null,
                 receipts          : receipts.collect { [id: it.id, receiptNumber: it.receiptNumber] },
                 shipmentItems     : shipmentItems.collect { ShipmentItem item ->
                     def receiptItems = item.receiptItems.sort { !it.isSplitItem }

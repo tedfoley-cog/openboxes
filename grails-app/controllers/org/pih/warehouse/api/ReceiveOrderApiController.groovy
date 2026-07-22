@@ -65,7 +65,7 @@ class ReceiveOrderApiController {
                                     unitOfMeasure: orderItem.product.unitOfMeasure,
                             ] : null,
                             quantityOrdered      : orderItem.quantity,
-                            quantityFulfilled    : orderItem.quantityFulfilled(),
+                            quantityFulfilled    : orderItem.quantityShipped,
                             isCompletelyFulfilled: orderItem.isCompletelyFulfilled(),
                     ]
                 },

@@ -32,6 +32,16 @@ const formatDateTime = (value) => {
   return `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()} ${hour12}:${minutes} ${meridiem}`;
 };
 
+// The print timestamp reflects the user's local wall clock, like the legacy
+// server-rendered "date printed".
+const formatLocalDateTime = (date) => {
+  const hours = date.getHours();
+  const meridiem = hours >= 12 ? 'PM' : 'AM';
+  const hour12 = hours % 12 || 12;
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()} ${hour12}:${minutes} ${meridiem}`;
+};
+
 // Rows for a single shipment item: an optional struck-through original row
 // when the item was split during receiving, then one row per receipt item
 // (mirrors the legacy goodsReceiptNote/_body.gsp behavior).
@@ -176,7 +186,7 @@ const GoodsReceiptNotePrint = () => {
                       {translate('react.goodsReceiptNote.datePrinted.label', 'Date printed')}
                       :
                     </td>
-                    <td>{formatDateTime(new Date().toISOString())}</td>
+                    <td>{formatLocalDateTime(new Date())}</td>
                   </tr>
                   <tr>
                     <td className="text-right font-weight-bold">
