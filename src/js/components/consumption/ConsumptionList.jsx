@@ -7,6 +7,7 @@ import { getCurrentLocation } from 'selectors';
 
 import { CONSUMPTION_AGGREGATE } from 'api/urls';
 import Spinner from 'components/spinner/Spinner';
+import { CONSUMPTION_URL } from 'consts/applicationUrls';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import apiClient from 'utils/apiClient';
@@ -137,7 +138,7 @@ const ConsumptionList = () => {
           <a className="btn btn-outline-primary" href={downloadUrl}>
             {translate('react.default.button.download.label', 'Download')}
           </a>
-          <Link className="btn btn-outline-secondary" to="/consumption/pivot">
+          <Link className="btn btn-outline-secondary" to={CONSUMPTION_URL.pivot()}>
             {translate('react.consumption.pivot.label', 'Pivot')}
           </Link>
         </div>

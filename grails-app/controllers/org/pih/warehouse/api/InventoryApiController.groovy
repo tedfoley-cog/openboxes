@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.validation.ValidationException
 import org.pih.warehouse.PaginatedList
 import org.pih.warehouse.auth.AuthService
+import org.pih.warehouse.core.ActivityCode
 import org.pih.warehouse.core.DashboardService
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.importer.CSVUtils
@@ -197,6 +198,9 @@ class InventoryApiController {
     def adjustStock() {
         def json = request.JSON
         Location location = Location.get(json.locationId ?: session?.warehouse?.id)
+        if (location && !location.supports(ActivityCode.ADJUST_INVENTORY)) {
+            throw new UnsupportedOperationException("Location ${location.name} does not support adjustment transactions")
+        }
         InventoryItem inventoryItem = InventoryItem.get(json.inventoryItemId as String)
 
         AdjustStockCommand command = new AdjustStockCommand()

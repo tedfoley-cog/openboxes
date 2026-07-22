@@ -73,11 +73,12 @@ class ConsumptionController {
         }
 
         boolean fromLocationsEmpty = command.fromLocations.empty
-        def userHasFinanceRole = userService.hasRoleFinance(session?.user)
-        consumptionService.buildShowConsumption(command, userHasFinanceRole)
 
-        // Export as CSV
+        // Export as CSV (the React screen fetches its data through
+        // /api/consumption/summary, so only compute the report here)
         if (params.format == "csv") {
+            def userHasFinanceRole = userService.hasRoleFinance(session?.user)
+            consumptionService.buildShowConsumption(command, userHasFinanceRole)
 
             def csvrows = []
             command.rows.each { key, ShowConsumptionRowCommand row ->

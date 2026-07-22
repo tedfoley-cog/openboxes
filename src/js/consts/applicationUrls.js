@@ -115,6 +115,12 @@ const INVENTORY_URL = {
   showTransaction: (id) => `${INVENTORY_URL.base}/showTransaction/${id}`,
 };
 
+const CONSUMPTION_URL = {
+  base: `${CONTEXT_PATH}/consumption`,
+  list: () => `${CONSUMPTION_URL.base}/list`,
+  pivot: () => `${CONSUMPTION_URL.base}/pivot`,
+};
+
 const REQUISITION_TEMPLATE_URL = {
   base: `${CONTEXT_PATH}/requisitionTemplate`,
   create: () => `${REQUISITION_TEMPLATE_URL.base}/create`,
@@ -159,6 +165,7 @@ const CYCLE_COUNT = {
 
 export {
   CATEGORY_URL,
+  CONSUMPTION_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
   INVENTORY_ITEM_URL,

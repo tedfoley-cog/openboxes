@@ -12,6 +12,7 @@ package org.pih.warehouse.api
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
+import org.pih.warehouse.core.ActivityCode
 import org.pih.warehouse.core.Constants
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.core.User
@@ -33,6 +34,17 @@ import java.text.SimpleDateFormat
 @Transactional
 class TransactionApiController {
 
+    // Activity a location must support per transaction type, mirroring the
+    // guards on InventoryController.createAdjustment/createConsumed/
+    // createInboundTransfer/createOutboundTransfer.
+    private static final Map<String, ActivityCode> REQUIRED_ACTIVITY_BY_TRANSACTION_TYPE = [
+            (Constants.ADJUSTMENT_CREDIT_TRANSACTION_TYPE_ID): ActivityCode.ADJUST_INVENTORY,
+            (Constants.ADJUSTMENT_DEBIT_TRANSACTION_TYPE_ID) : ActivityCode.ADJUST_INVENTORY,
+            (Constants.CONSUMPTION_TRANSACTION_TYPE_ID)      : ActivityCode.CONSUME_STOCK,
+            (Constants.TRANSFER_IN_TRANSACTION_TYPE_ID)      : ActivityCode.RECEIVE_STOCK,
+            (Constants.TRANSFER_OUT_TRANSACTION_TYPE_ID)     : ActivityCode.SEND_STOCK,
+    ].asImmutable()
+
     def inventoryService
     def adjustInventoryService
     def transactionIdentifierService
@@ -47,6 +59,11 @@ class TransactionApiController {
         TransactionType transactionType = TransactionType.get(json.transactionTypeId as String)
         if (!transactionType) {
             throw new IllegalArgumentException("Invalid or missing transactionTypeId")
+        }
+
+        ActivityCode requiredActivity = REQUIRED_ACTIVITY_BY_TRANSACTION_TYPE[transactionType.id]
+        if (requiredActivity && !location.supports(requiredActivity)) {
+            throw new UnsupportedOperationException("Location ${location.name} does not support ${transactionType.name} transactions")
         }
 
         Transaction transaction = new Transaction()
