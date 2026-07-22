@@ -41,6 +41,7 @@ const InventorySnapshotList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [refreshMessage, setRefreshMessage] = useState(null);
   const [reloadCounter, setReloadCounter] = useState(0);
 
   const { currentLocation, translate } = useSelector((state) => ({
@@ -50,6 +51,7 @@ const InventorySnapshotList = () => {
 
   useEffect(() => {
     if (!currentLocation?.id) {
+      setLoading(false);
       return;
     }
     setLoading(true);
@@ -67,10 +69,15 @@ const InventorySnapshotList = () => {
   const triggerSnapshotRefresh = async () => {
     setRefreshing(true);
     setError(null);
+    setRefreshMessage(null);
     try {
       await apiClient.post(`${INVENTORY_SNAPSHOT_URL.base}/update`, null, {
         params: { date, 'location.id': currentLocation?.id },
       });
+      setRefreshMessage(translate(
+        'react.inventorySnapshot.refreshStarted.label',
+        'Snapshot refresh started - this may take some time. Reload the page later to see updated data.',
+      ));
       setReloadCounter((counter) => counter + 1);
     } catch (err) {
       setError(err.response?.data?.message
@@ -144,6 +151,9 @@ const InventorySnapshotList = () => {
       </div>
       {error && (
         <div className="alert alert-danger mx-3 mt-3" role="alert">{error}</div>
+      )}
+      {refreshMessage && (
+        <div className="alert alert-info mx-3 mt-3" role="alert">{refreshMessage}</div>
       )}
       <div className="p-3 d-flex align-items-end">
         <div className="form-group m-0">
