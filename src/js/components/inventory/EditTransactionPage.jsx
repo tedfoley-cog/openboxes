@@ -28,6 +28,7 @@ const EditTransactionPage = () => {
   const [transactionTypes, setTransactionTypes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [saving, setSaving] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const [message, setMessage] = useState(null);
 
   const { translate } = useSelector((state) => ({
@@ -36,7 +37,8 @@ const EditTransactionPage = () => {
 
   useEffect(() => {
     apiClient.get(TRANSACTION_BY_ID(id))
-      .then((response) => setTransaction(response.data.data));
+      .then((response) => setTransaction(response.data.data))
+      .catch(() => setNotFound(true));
     apiClient.get(TRANSACTION_TYPE_OPTIONS)
       .then((response) => setTransactionTypes(response.data.data));
     apiClient.get(TRANSACTION_LOCATION_OPTIONS)
@@ -108,7 +110,13 @@ const EditTransactionPage = () => {
     return (
       <PageWrapper className="inventory-list-page">
         <div className="p-3">
-          <Translate id="react.default.loading.label" defaultMessage="Loading..." />
+          {notFound ? (
+            <div className="alert alert-danger" role="alert">
+              <Translate id="react.inventory.transaction.notFound.label" defaultMessage="Transaction not found" />
+            </div>
+          ) : (
+            <Translate id="react.default.loading.label" defaultMessage="Loading..." />
+          )}
         </div>
       </PageWrapper>
     );

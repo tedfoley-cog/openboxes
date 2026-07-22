@@ -183,7 +183,7 @@ const InventorySummaryList = ({ lowStock }) => {
       <div className="list-page-header p-3 d-flex align-items-center justify-content-between">
         <h5 className="m-0">
           {lowStock
-            ? <Translate id="react.inventory.listLowStock.title.label" defaultMessage="Low stock" />
+            ? <Translate id="react.inventory.listLowStock.title.label" defaultMessage="Items that are below minimum level" />
             : <Translate id="react.inventory.list.title.label" defaultMessage="Inventory summary" />}
         </h5>
       </div>
