@@ -15,6 +15,7 @@ import grails.validation.ValidationException
 import grails.util.Holders
 import org.grails.plugins.web.taglib.ApplicationTagLib
 import org.hibernate.sql.JoinType
+import org.grails.orm.hibernate.cfg.GrailsHibernateUtil
 
 import grails.plugins.csv.CSVMapReader
 import org.hibernate.criterion.CriteriaSpecification
@@ -396,7 +397,10 @@ class OrderService {
     }
 
     Order saveOrder(Order order) {
-        if (order.destinationParty?.id != sessionManager.getCurrentLocation().organizationId) {
+        // destinationParty may be a Hibernate proxy of an Organization typed as
+        // Party; unwrap it so reflective property access doesn't throw
+        def destinationParty = GrailsHibernateUtil.unwrapIfProxy(order.destinationParty)
+        if (destinationParty?.id != sessionManager.getCurrentLocation().organizationId) {
             order.errors.rejectValue("destinationParty", "order.destinationParty.invalid.differentOrganization")
             throw new ValidationException("Unable to save order due to errors", order.errors)
         }
