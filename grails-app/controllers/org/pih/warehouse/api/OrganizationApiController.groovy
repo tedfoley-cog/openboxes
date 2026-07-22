@@ -21,6 +21,7 @@ import org.pih.warehouse.core.Location
 import org.pih.warehouse.core.Organization
 import org.pih.warehouse.core.OrganizationIdentifierService
 import org.pih.warehouse.core.OrganizationService
+import org.pih.warehouse.core.PartyRole
 import org.pih.warehouse.core.PartyType
 import org.pih.warehouse.core.RoleType
 import org.pih.warehouse.core.UserService
@@ -56,6 +57,18 @@ class OrganizationApiController extends BaseDomainApiController {
         String sort = params.sort in ['id', 'code', 'name', 'active'] ? params.sort : 'name'
         String sortOrder = params.order == 'desc' ? 'desc' : 'asc'
         List<RoleType> roleTypes = params.list("roleType").collect { it as RoleType }
+        // Restrict by an id subquery rather than joining the roles collection,
+        // which would duplicate organizations holding several of the selected
+        // role types (and inflate totalCount).
+        List<String> roleOrgIds = roleTypes
+                ? PartyRole.executeQuery(
+                        "select distinct pr.party.id from PartyRole pr where pr.roleType in (:roleTypes)",
+                        [roleTypes: roleTypes])
+                : null
+        if (roleTypes && !roleOrgIds) {
+            render([data: [], totalCount: 0] as JSON)
+            return
+        }
         def results = Organization.createCriteria().list(max: max, offset: offset) {
             if (params.q) {
                 or {
@@ -65,10 +78,8 @@ class OrganizationApiController extends BaseDomainApiController {
                     ilike("description", "${params.q}%")
                 }
             }
-            if (roleTypes) {
-                roles {
-                    'in'("roleType", roleTypes)
-                }
+            if (roleOrgIds) {
+                'in'("id", roleOrgIds)
             }
             if (params.active) {
                 eq('active', true)
