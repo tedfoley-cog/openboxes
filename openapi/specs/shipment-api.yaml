@@ -51,7 +51,7 @@ paths:
         its receipt items) that the legacy goodsReceiptNote/print.gsp screen
         rendered. Only shipment items that have receipt items are included;
         items are in shipment sort order and receipt items are ordered with
-        split items last. `status` is the localized shipment status display
+        split items first (the legacy _body.gsp sort). `status` is the localized shipment status display
         name. Returns 404 with an `errorMessage` body when the shipment does
         not exist.
       parameters:

@@ -212,7 +212,7 @@ const ReceiveOrderPage = () => {
   };
 
   const goToStep = (nextStep, validate) => {
-    const validationErrors = validate ? validate() : [];
+    const validationErrors = validate ? [...new Set(validate())] : [];
     setErrors(validationErrors);
     if (!validationErrors.length) {
       setStep(nextStep);
@@ -244,7 +244,7 @@ const ReceiveOrderPage = () => {
     } catch (err) {
       const responseErrors = err?.response?.data?.errorMessages
         ?? (err?.response?.data?.errorMessage ? [err.response.data.errorMessage] : []);
-      setErrors(responseErrors.length ? responseErrors : [translate('react.receiveOrder.error.system.label', 'An error occurred while receiving the order')]);
+      setErrors([...new Set(responseErrors.length ? responseErrors : [translate('react.receiveOrder.error.system.label', 'An error occurred while receiving the order')])]);
       if (err?.response?.status !== 400) {
         setStep('handleError');
       }

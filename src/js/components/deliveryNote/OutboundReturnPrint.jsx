@@ -10,12 +10,14 @@ import Translate from 'utils/Translate';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+// Grails serializes dates as UTC ISO strings; format them in UTC so the
+// rendered day/month cannot shift with the client timezone.
 const formatExpiry = (value) => {
   if (!value) {
     return '';
   }
   const date = new Date(value);
-  return `${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+  return `${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()}`;
 };
 
 const formatDateTime = (value) => {
@@ -23,7 +25,7 @@ const formatDateTime = (value) => {
     return '';
   }
   const date = new Date(value);
-  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  return `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
 };
 
 const Address = ({ location }) => (

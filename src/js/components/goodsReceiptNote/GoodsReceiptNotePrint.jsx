@@ -10,12 +10,14 @@ import Translate from 'utils/Translate';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+// Grails serializes dates as UTC ISO strings; format them in UTC so the
+// rendered day/month cannot shift with the client timezone.
 const formatDate = (value) => {
   if (!value) {
     return '';
   }
   const date = new Date(value);
-  return `${String(date.getDate()).padStart(2, '0')}/${MONTHS[date.getMonth()]}/${date.getFullYear()}`;
+  return `${String(date.getUTCDate()).padStart(2, '0')}/${MONTHS[date.getUTCMonth()]}/${date.getUTCFullYear()}`;
 };
 
 const formatDateTime = (value) => {
@@ -23,7 +25,11 @@ const formatDateTime = (value) => {
     return '';
   }
   const date = new Date(value);
-  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()} ${date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })}`;
+  const hours = date.getUTCHours();
+  const meridiem = hours >= 12 ? 'PM' : 'AM';
+  const hour12 = hours % 12 || 12;
+  const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+  return `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()} ${hour12}:${minutes} ${meridiem}`;
 };
 
 // Rows for a single shipment item: an optional struck-through original row

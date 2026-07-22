@@ -92,7 +92,8 @@ class ShipmentApiController {
 
     /**
      * Data for the migrated goods receipt note print screen (mirrors the
-     * legacy goodsReceiptNote/print.gsp view model).
+     * legacy goodsReceiptNote/print.gsp view model). Receipt items are
+     * ordered with split items first, like the legacy _body.gsp sort.
      */
     def goodsReceiptNotePrintData() {
         Shipment shipment = Shipment.get(params.id)
