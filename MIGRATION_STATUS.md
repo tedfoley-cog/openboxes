@@ -46,8 +46,15 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 3 — API formalization (parallel with Phase 2)
 | # | Task | Status |
 |---|------|--------|
-| 3.1 | OpenAPI harness + specs: Api, Attribute, BinLocation, Category, CombineShipment, CombinedShipmentItem | [893ec63d](https://app.devin.ai/sessions/893ec63d5d5744ad9ffc28c4539856f7) — in progress (establishes conventions) |
-| 3.2–3.9 | OpenAPI specs + contract tests for remaining 46 controllers, ~6 per child | queued behind 3.1 |
+| 3.1 | OpenAPI harness + specs: Api, Attribute, BinLocation, Category, CombineShipment, CombinedShipmentItem | [893ec63d](https://app.devin.ai/sessions/893ec63d5d5744ad9ffc28c4539856f7) — [#8](https://github.com/tedfoley-cog/openboxes/pull/8) merged (harness + 6 specs, contract suite 28/28) |
+| 3.2 | Base, BaseDomain, CycleCount, Dashboard, Fulfillment, Generic | [016e8528](https://app.devin.ai/sessions/016e8528fa6246f1bb58ef003407f4af) — in progress |
+| 3.3 | HelpScout, Indicator, InternalLocation, Inventory, InventoryLevel, InventoryTransactionSummary | [3bf3df8f](https://app.devin.ai/sessions/3bf3df8f6f2a4cd98ee684297991a1d2) — in progress |
+| 3.4 | Invoice, LoadData, Localization, Location, LocationGroup, Noop | [2c36091e](https://app.devin.ai/sessions/2c36091e7182440e822171e141f1e874) — in progress |
+| 3.5 | Organization, PackList, PartialReceiving, Person, Picklist, PrepaymentInvoice | [e07843a8](https://app.devin.ai/sessions/e07843a8d87d44919fa71b89a58888bc) — in progress |
+| 3.6 | PrepaymentInvoiceItem, Product, ProductClassification, ProductPackage, ProductSupplier, ProductSupplierAttribute | [7b9334a7](https://app.devin.ai/sessions/7b9334a78d01402fb40b345350092d1c) — in progress |
+| 3.7 | ProductSupplierPreference, ProductsConfiguration, PurchaseOrder, Putaway, PutawayItem, ReasonCode | [3592a490](https://app.devin.ai/sessions/3592a49054e14f71b143ac843c0e8c51) — in progress |
+| 3.8 | RecordStock, Replenishment, SelectOptions, StockAdjustment, StockMovement, StockMovementItem | [9b23fb73](https://app.devin.ai/sessions/9b23fb7380d44cb1b702689d20b11d4d) — in progress |
+| 3.9 | StockTransfer, Stocklist, StocklistItem, UnitOfMeasure | [ac15c4c2](https://app.devin.ai/sessions/ac15c4c2986a4235a4aaf68c4448a88d) — in progress |
 
 ## Phase 4 — Validation & cutover
 | # | Task | Status |
