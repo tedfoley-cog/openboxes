@@ -72,6 +72,7 @@ class GlAccountApiController {
         render([data: toJson(glAccount)] as JSON)
     }
 
+    @Transactional
     def delete() {
         GlAccount glAccount = GlAccount.get(params.id)
         if (!glAccount) {
@@ -80,6 +81,7 @@ class GlAccountApiController {
         try {
             glAccount.delete(flush: true)
         } catch (DataIntegrityViolationException ignored) {
+            transactionStatus.setRollbackOnly()
             String message = "${warehouse.message(code: 'default.not.deleted.message', args: [warehouse.message(code: 'glAccount.label', default: 'GL Account'), params.id])}"
             response.status = HttpStatus.BAD_REQUEST.value()
             render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)
