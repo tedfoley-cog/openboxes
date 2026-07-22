@@ -144,6 +144,16 @@ const ORDER_URL = {
   orderItemDetails: () => `${ORDER_URL.base}/orderItemDetails`,
 };
 
+const GOODS_RECEIPT_NOTE_URL = {
+  base: `${CONTEXT_PATH}/goodsReceiptNote`,
+  print: (id) => `${GOODS_RECEIPT_NOTE_URL.base}/print/${id}`,
+};
+
+const RECEIVE_ORDER_URL = {
+  base: `${CONTEXT_PATH}/receiveOrderWorkflow`,
+  receiveOrder: (id) => `${RECEIVE_ORDER_URL.base}/receiveOrder/${id}`,
+};
+
 const ORDER_ADJUSTMENT_TYPE_URL = {
   base: `${CONTEXT_PATH}/orderAdjustmentType`,
   list: () => `${ORDER_ADJUSTMENT_TYPE_URL.base}/list`,
@@ -379,11 +389,14 @@ const PRODUCT_TYPE_URL = {
   base: `${CONTEXT_PATH}/productType`,
   list: () => `${PRODUCT_TYPE_URL.base}/list`,
   create: () => `${PRODUCT_TYPE_URL.base}/create`,
+  edit: (id) => `${PRODUCT_TYPE_URL.base}/edit/${id}`,
+  show: (id) => `${PRODUCT_TYPE_URL.base}/show/${id}`,
 };
 
 const TAG_URL = {
   base: `${CONTEXT_PATH}/tag`,
   list: () => `${TAG_URL.base}/list`,
+  create: () => `${TAG_URL.base}/create`,
   edit: (id) => `${TAG_URL.base}/edit/${id}`,
   show: (id) => `${TAG_URL.base}/show/${id}`,
 };
@@ -485,6 +498,7 @@ const SHIPMENT_WORKFLOW_URL = {
 const DELIVERY_NOTE_URL = {
   base: `${CONTEXT_PATH}/deliveryNote`,
   print: (id) => `${DELIVERY_NOTE_URL.base}/print/${id}`,
+  printOutboundReturn: (id) => `${DELIVERY_NOTE_URL.base}/printOutboundReturn/${id}`,
 };
 
 const PICKLIST_URL = {
@@ -524,6 +538,7 @@ export {
   DOCUMENT_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
+  GOODS_RECEIPT_NOTE_URL,
   INVENTORY_BROWSER_URL,
   INVENTORY_ITEM_URL,
   INVENTORY_LEVEL_URL,
@@ -552,6 +567,7 @@ export {
   PRODUCT_URL,
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
+  RECEIVE_ORDER_URL,
   REPLENISHMENT_URL,
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
