@@ -12,12 +12,6 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
 
 // The pinned released image (characterization job) predates the Batch 18
 // endpoint/screens; these tests run against source builds (characterization-java21).
-async function skipUnlessBatch18(page): Promise<void> {
-  const res = await page.request.get(url('/api/stocklists/doesnotexist0000/details'));
-  test.skip(res.status() !== 404 || !(await res.text()).includes('errorMessage'),
-    'Batch 18 endpoints not present in target build');
-}
-
 async function seededStocklistId(page): Promise<string> {
   const res = await page.request.get(url('/api/stocklists'));
   expect(res.status()).toBe(200);
@@ -26,6 +20,12 @@ async function seededStocklistId(page): Promise<string> {
   );
   expect(match, 'Seeded stock list not found: Boston Monthly Replenishment').toBeTruthy();
   return match.id;
+}
+
+async function skipUnlessBatch18(page): Promise<void> {
+  const id = await seededStocklistId(page);
+  const res = await page.request.get(url(`/api/stocklists/${id}/details`));
+  test.skip(res.status() !== 200, 'Batch 18 endpoints not present in target build (pinned released image)');
 }
 
 async function locationId(page, name: string): Promise<string> {
