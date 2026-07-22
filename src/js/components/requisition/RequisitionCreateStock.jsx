@@ -73,7 +73,7 @@ const RequisitionCreateStock = () => {
     try {
       const { data } = await requisitionApi.createRequisition({
         type: 'STOCK',
-        originId: currentLocation?.id,
+        originId: template?.origin?.id ?? currentLocation?.id,
         destinationId: destination?.id || null,
         requestedById: requestedBy?.id || null,
         commodityClass: template?.commodityClass || null,

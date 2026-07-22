@@ -71,7 +71,7 @@ const RequisitionPick = () => {
     const availableForProduct = availableItems[selectedItem.product?.id] ?? [];
     setSaving(true);
     try {
-      const { data } = await requisitionApi.updatePicklistItems(requisitionId, {
+      await requisitionApi.updatePicklistItems(requisitionId, {
         requisitionItemId: selectedItem.id,
         picklistItems: availableForProduct.map((availableItem, index) => ({
           id: pickQuantities[index]?.id ?? null,
@@ -80,7 +80,9 @@ const RequisitionPick = () => {
           quantity: parseInt(pickQuantities[index]?.quantity, 10) || 0,
         })).filter((item) => item.id || item.quantity > 0),
       });
-      setRequisition((previous) => ({ ...previous, ...data?.data }));
+      // re-fetch so item quantities and available bin locations stay current
+      const { data } = await requisitionApi.pickRequisition(requisitionId);
+      applyDetails(data?.data);
       setSelectedItem(null);
     } catch (err) {
       const message = err?.response?.data?.errorMessage;
