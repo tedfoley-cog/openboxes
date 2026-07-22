@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: Wave 6 spawned (B21-B25 shipments/stock transfer, B36 people/suppliers, B37-B38 reports): b7093244, 2fb48d45, 1ca02513, 487e0a7e, 03a7041d, a2e164b3, ec9700e5, 95db3e77.
 - 2026-07-22: #47 (B19 create-shipment wizard), #55 (P1.5 integration reverify) merged. Phase 1 complete. 28/49 Phase 2 batches done.
 - 2026-07-22: #51 (B13), #53 (B18) merged. 27/49 Phase 2 batches done.
 - 2026-07-22: #45 (B17), #49 (B30), #52 (B35) merged. 25/49 Phase 2 batches done.
