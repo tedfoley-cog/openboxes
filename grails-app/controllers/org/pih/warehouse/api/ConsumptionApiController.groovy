@@ -33,6 +33,9 @@ class ConsumptionApiController {
      */
     def aggregate() {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        if (!location) {
+            throw new IllegalArgumentException("Cannot list consumption without a location - sign in or provide locationId as a request parameter")
+        }
         Category category = params.categoryId ? Category.get(params.categoryId) : null
 
         Date startDate = parseDate(params.startDate)
@@ -67,6 +70,9 @@ class ConsumptionApiController {
      */
     def summary() {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        if (!location) {
+            throw new IllegalArgumentException("Cannot build consumption report without a location - sign in or provide locationId as a request parameter")
+        }
 
         Date fromDate = parseDate(params.startDate)
         Date toDate = parseDate(params.endDate)
@@ -96,12 +102,20 @@ class ConsumptionApiController {
                     returnedQuantity         : row.returnedQuantity,
                     totalConsumptionQuantity : row.totalConsumptionQuantity,
                     totalConsumptionValue    : (row.pricePerUnit ?: 0) * row.totalConsumptionQuantity,
-                    monthlyQuantity          : row.monthlyQuantity,
+                    monthlyQuantity          : finiteOrNull(row.monthlyQuantity),
                     onHandQuantity           : row.onHandQuantity,
-                    numberOfMonthsRemaining  : row.numberOfMonthsRemaining,
+                    numberOfMonthsRemaining  : finiteOrNull(row.numberOfMonthsRemaining),
             ]
         }
         render([data: data, totalCount: data.size()] as JSON)
+    }
+
+    private static Number finiteOrNull(Number value) {
+        if (value == null) {
+            return null
+        }
+        double doubleValue = value.doubleValue()
+        return (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) ? null : value
     }
 
     private static Date parseDate(String value) {

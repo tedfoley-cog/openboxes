@@ -85,6 +85,7 @@ class InventoryApiController {
      */
     def browse() {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        requireLocation(location)
 
         InventoryCommand command = new InventoryCommand()
         command.location = location
@@ -122,6 +123,7 @@ class InventoryApiController {
      */
     def getTransactionCandidates() {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        requireLocation(location)
         TransactionType transactionType = TransactionType.get(params.transactionTypeId)
 
         List<String> productIds = params.list("product.id").collect { String.valueOf(it) }
@@ -167,6 +169,7 @@ class InventoryApiController {
      */
     def getBinLocationDetails() {
         Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        requireLocation(location)
         Product product = Product.findByProductCode(params.productCode)
         Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
         InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber ?: null)
@@ -198,7 +201,8 @@ class InventoryApiController {
     def adjustStock() {
         def json = request.JSON
         Location location = Location.get(json.locationId ?: session?.warehouse?.id)
-        if (location && !location.supports(ActivityCode.ADJUST_INVENTORY)) {
+        requireLocation(location)
+        if (!location.supports(ActivityCode.ADJUST_INVENTORY)) {
             throw new UnsupportedOperationException("Location ${location.name} does not support adjustment transactions")
         }
         InventoryItem inventoryItem = InventoryItem.get(json.inventoryItemId as String)
@@ -247,6 +251,12 @@ class InventoryApiController {
                         totalValueLostToExpiry   : report.totalValueLostToExpiry
                 ] as JSON)
             }
+        }
+    }
+
+    private static void requireLocation(Location location) {
+        if (!location) {
+            throw new IllegalArgumentException("Cannot access inventory without a location - sign in or provide locationId as a request parameter")
         }
     }
 }
