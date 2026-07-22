@@ -82,10 +82,10 @@ test.describe('admin react screens', () => {
     await captureStep(page, 'admin', 'react-send-mail');
 
     // Defaults mirror the legacy form (session user email + Test email subject).
-    await expect(page.getByLabel('Subject')).toHaveValue('Test email');
+    await expect(page.locator('#send-mail-subject')).toHaveValue('Test email');
 
-    await page.getByLabel('To').fill('admin@example.com');
-    await page.getByLabel('Message').fill('Characterization test email body');
+    await page.locator('#send-mail-to').fill('admin@example.com');
+    await page.locator('#send-mail-message').fill('Characterization test email body');
     await page.getByRole('button', { name: 'Send Mail' }).click();
     await expect(page.getByText(/email with subject Test email/)).toBeVisible();
   });

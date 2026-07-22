@@ -54,12 +54,10 @@ class AdminApiController {
     def controllerActions() {
         List actionNames = []
         grailsApplication.controllerClasses.sort { it.logicalPropertyName }.each { controller ->
-            controller.reference.propertyDescriptors.each { pd ->
-                def closure = controller.getPropertyOrStaticPropertyOrFieldValue(pd.name, Closure)
-                if (closure) {
-                    if (pd.name != 'beforeInterceptor' && pd.name != 'afterInterceptor') {
-                        actionNames << controller.logicalPropertyName + "." + pd.name + ".label = " + pd.name
-                    }
+            controller.clazz.declaredFields.each { field ->
+                if (Closure.isAssignableFrom(field.type)
+                        && field.name != 'beforeInterceptor' && field.name != 'afterInterceptor') {
+                    actionNames << controller.logicalPropertyName + "." + field.name + ".label = " + field.name
                 }
             }
         }
@@ -128,7 +126,7 @@ class AdminApiController {
         String message
         def domainClass = grailsApplication.getDomainClass(params.name)
         if (domainClass) {
-            sessionFactory.evict(domainClass.clazz)
+            sessionFactory.cache.evictEntityData(domainClass.clazz)
             message = "Domain cache '${params.name}' was invalidated"
         } else {
             message = "Domain cache '${params.name}' does not exist"
@@ -139,10 +137,10 @@ class AdminApiController {
     def evictQueryCache() {
         String message
         if (params.name) {
-            sessionFactory.evictQueries(params.name)
+            sessionFactory.cache.evictQueryRegion(params.name)
             message = "Query cache '${params.name}' was invalidated"
         } else {
-            sessionFactory.evictQueries()
+            sessionFactory.cache.evictQueryRegions()
             message = "All query caches were invalidated"
         }
         render([data: [message: message]] as JSON)
