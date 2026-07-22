@@ -60,10 +60,16 @@ const DocumentForm = () => {
   });
 
   const getDocument = async () => {
-    const response = await documentApi.getDocument(documentId);
-    const document = response?.data?.data;
-    setDocumentDetails(document);
-    return toFormValues(document);
+    try {
+      const response = await documentApi.getDocument(documentId);
+      const document = response?.data?.data;
+      setDocumentDetails(document);
+      return toFormValues(document);
+    } catch (error) {
+      // Like the legacy edit action: not-found redirects back to the list.
+      history.push(DOCUMENT_URL.list());
+      return toFormValues(null);
+    }
   };
 
   const {
