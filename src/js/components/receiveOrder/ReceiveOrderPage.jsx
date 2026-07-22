@@ -321,7 +321,7 @@ const ReceiveOrderPage = () => {
               </div>
               <div className="col-lg-4 col-md-6 px-2 pt-2" data-testid="receive-order-recipient">
                 <SelectField
-                  key={`recipient-${recipient?.id ?? ''}`}
+                  key={`recipient-${order?.defaultRecipient?.id ?? ''}`}
                   title={{ id: 'react.receiveOrder.recipient.label', defaultMessage: 'Recipient' }}
                   required
                   async
