@@ -264,10 +264,18 @@ const REQUISITION_URL = {
   }),
   show: (id) => `${REQUISITION_URL.base}/show/${id}`,
   edit: (id) => `${REQUISITION_URL.base}/edit/${id}`,
+  review: (id) => `${REQUISITION_URL.base}/review/${id}`,
   pick: (id) => `${REQUISITION_URL.base}/pick/${id}`,
+  process: (id) => `${REQUISITION_URL.base}/process/${id}`,
   confirm: (id) => `${REQUISITION_URL.base}/confirm/${id}`,
   transfer: (id) => `${REQUISITION_URL.base}/transfer/${id}`,
+  printDraft: (id) => `${REQUISITION_URL.base}/printDraft/${id}`,
   addDocument: (id) => `${REQUISITION_URL.base}/addDocument/${id}`,
+};
+
+const REQUISITION_ITEM_URL = {
+  base: `${CONTEXT_PATH}/requisitionItem`,
+  change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
 };
 
 const PICKLIST_URL = {
@@ -321,6 +329,7 @@ export {
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
   REPLENISHMENT_URL,
+  REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
   STOCK_MOVEMENT_URL,
