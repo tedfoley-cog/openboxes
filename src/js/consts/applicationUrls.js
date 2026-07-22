@@ -234,7 +234,10 @@ const ORGANIZATION_URL = {
   create: () => `${ORGANIZATION_URL.base}/create`,
   edit: (id) => `${ORGANIZATION_URL.base}/edit/${id}`,
   show: (id) => `${ORGANIZATION_URL.base}/show/${id}`,
-  download: () => `${ORGANIZATION_URL.base}/download`,
+  download: (params) => stringifyUrl({
+    url: `${ORGANIZATION_URL.base}/download`,
+    query: params ?? {},
+  }),
 };
 
 const CATEGORY_URL = {

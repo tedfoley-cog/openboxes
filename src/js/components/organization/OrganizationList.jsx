@@ -111,7 +111,12 @@ const OrganizationList = () => {
           <Translate id="react.organization.list.label" defaultMessage="List Organizations" />
         </span>
         <div className="d-flex justify-content-end buttons align-items-center">
-          <a href={ORGANIZATION_URL.download()}>
+          <a
+            href={ORGANIZATION_URL.download({
+              ...(filterParams.q ? { q: filterParams.q } : {}),
+              ...(filterParams.roleType?.length ? { roleType: filterParams.roleType } : {}),
+            })}
+          >
             <Button
               defaultLabel="Download"
               label="react.default.button.download.label"
