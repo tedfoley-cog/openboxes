@@ -963,9 +963,38 @@ class UrlMappings {
             action = [GET: "itemCreateOptions"]
         }
 
+        // Shipment Item API (shipmentItem scaffold screens migrated to React)
+
         "/api/shipmentItems"(parseRequest: true) {
-            controller = "shipmentApi"
-            action = [POST: "createItem"]
+            controller = { request.method == "POST" ? "shipmentApi" : "shipmentItemApi" }
+            action = [GET: "list", POST: "createItem"]
+        }
+
+        "/api/shipmentItems/options" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "options"]
+        }
+
+        "/api/shipmentItems/$id"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/shipmentItems/$id/pick" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "pickContext"]
+        }
+
+        "/api/shipmentItems/$id/split"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [POST: "split"]
+        }
+
+        // Shipment Workflow API (shipmentWorkflow/create migrated to React)
+
+        "/api/shipmentWorkflows"(parseRequest: true) {
+            controller = { "shipmentWorkflowApi" }
+            action = [GET: "list", POST: "create"]
         }
 
         // Requisition Template API (requisitionTemplate screens migrated to React)
@@ -2010,6 +2039,41 @@ class UrlMappings {
         "/api/reports/inventory-transactions-summary(.$format)?" {
             controller = "inventoryTransactionSummaryApi"
             action = [GET: "getInventoryTransactionsSummary"]
+        }
+
+        "/api/reports/on-order-summary" {
+            controller = "reportApi"
+            action = [GET: "onOrderSummary"]
+        }
+
+        "/api/reports/on-order-details" {
+            controller = "reportApi"
+            action = [GET: "onOrderDetails"]
+        }
+
+        "/api/reports/request-details" {
+            controller = "reportApi"
+            action = [GET: "requestDetails"]
+        }
+
+        "/api/reports/request-reason-codes" {
+            controller = "reportApi"
+            action = [GET: "requestReasonCodes"]
+        }
+
+        "/api/reports/inventory-by-location" {
+            controller = "reportApi"
+            action = [GET: "inventoryByLocation"]
+        }
+
+        "/api/reports/packing-list" {
+            controller = "reportApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/reports/packing-list-shipments" {
+            controller = "reportApi"
+            action = [GET: "packingListShipments"]
         }
 
         "/api/reports/indicators/productsInventoried" {

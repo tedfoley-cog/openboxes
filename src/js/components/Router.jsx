@@ -348,6 +348,36 @@ const AsyncExpirationHistoryReport = Loadable({
   loading: Loading,
 });
 
+const AsyncForecastReport = Loadable({
+  loader: () => import('components/reporting/forecastReport/ForecastReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryByLocationReport = Loadable({
+  loader: () => import('components/reporting/inventoryByLocationReport/InventoryByLocationReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryReport = Loadable({
+  loader: () => import('components/reporting/inventoryReport/InventoryReport'),
+  loading: Loading,
+});
+
+const AsyncOnOrderReport = Loadable({
+  loader: () => import('components/reporting/onOrderReport/OnOrderReport'),
+  loading: Loading,
+});
+
+const AsyncPaginatedPackingListReport = Loadable({
+  loader: () => import('components/reporting/packingListReport/PaginatedPackingListReport'),
+  loading: Loading,
+});
+
+const AsyncRequestDetailReport = Loadable({
+  loader: () => import('components/reporting/requestDetailReport/RequestDetailReport'),
+  loading: Loading,
+});
+
 const AsyncLocationGroupList = Loadable({
   loader: () => import('components/locationGroup/LocationGroupList'),
   loading: Loading,
@@ -963,6 +993,36 @@ const AsyncShipmentItemCreate = Loadable({
   loading: Loading,
 });
 
+const AsyncShipmentItemList = Loadable({
+  loader: () => import('components/shipmentItem/ShipmentItemList'),
+  loading: Loading,
+});
+
+const AsyncShipmentItemShow = Loadable({
+  loader: () => import('components/shipmentItem/ShipmentItemShow'),
+  loading: Loading,
+});
+
+const AsyncShipmentItemEdit = Loadable({
+  loader: () => import('components/shipmentItem/ShipmentItemEdit'),
+  loading: Loading,
+});
+
+const AsyncShipmentItemPick = Loadable({
+  loader: () => import('components/shipmentItem/ShipmentItemPick'),
+  loading: Loading,
+});
+
+const AsyncShipmentItemSplit = Loadable({
+  loader: () => import('components/shipmentItem/ShipmentItemSplit'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowCreate = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowCreate'),
+  loading: Loading,
+});
+
 const AsyncDeliveryNotePrint = Loadable({
   loader: () => import('components/shipment/DeliveryNotePrint'),
   loading: Loading,
@@ -1022,6 +1082,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/createOutbound/:stockMovementId?" component={AsyncStockMovement} />
             <MainLayoutRoute path="**/stockMovement/importOutboundStockMovement" component={AsyncOutboundImport} />
             <MainLayoutRoute path="**/report/expirationHistoryReport" component={AsyncExpirationHistoryReport} />
+            <MainLayoutRoute path="**/report/showForecastReport" component={AsyncForecastReport} />
+            <MainLayoutRoute path="**/report/showInventoryByLocationReport" component={AsyncInventoryByLocationReport} />
+            <MainLayoutRoute path="**/report/showInventoryReport" component={AsyncInventoryReport} />
+            <MainLayoutRoute path="**/report/showOnOrderReport" component={AsyncOnOrderReport} />
+            <MainLayoutRoute path="**/report/showPaginatedPackingListReport" component={AsyncPaginatedPackingListReport} />
+            <MainLayoutRoute path="**/report/showRequestDetailReport" component={AsyncRequestDetailReport} />
             <MainLayoutRoute path="**/inventory/reorderReport" component={AsyncReorderReport} />
             <MainLayoutRoute path="**/inventory/browse" component={AsyncInventoryBrowse} />
             <MainLayoutRoute path="**/inventory/createTransaction" component={AsyncCreateTransaction} />
@@ -1136,6 +1202,12 @@ const Router = () => {
             <MainLayoutRoute path="**/createShipmentWorkflow/packing/:shipmentId" component={AsyncCreateShipmentPacking} />
             <MainLayoutRoute path="**/createShipmentWorkflow/picking/:shipmentId" component={AsyncCreateShipmentPicking} />
             <MainLayoutRoute path="**/createShipmentWorkflow/sending/:shipmentId" component={AsyncCreateShipmentSending} />
+            <MainLayoutRoute path="**/shipmentItem/list" component={AsyncShipmentItemList} />
+            <MainLayoutRoute path="**/shipmentItem/show/:shipmentItemId" component={AsyncShipmentItemShow} />
+            <MainLayoutRoute path="**/shipmentItem/edit/:shipmentItemId" component={AsyncShipmentItemEdit} />
+            <MainLayoutRoute path="**/shipmentItem/pick/:shipmentItemId" component={AsyncShipmentItemPick} />
+            <MainLayoutRoute path="**/shipmentItem/split/:shipmentItemId" component={AsyncShipmentItemSplit} />
+            <MainLayoutRoute path="**/shipmentWorkflow/create" component={AsyncShipmentWorkflowCreate} />
             <MainLayoutRoute path="**/deliveryNote/print/:requisitionId" component={AsyncDeliveryNotePrint} />
             <MainLayoutRoute path="**/shipment/list" component={AsyncShipmentList} />
             <MainLayoutRoute path="**/shipment/showDetails/:shipmentId" component={AsyncShipmentShowDetails} />

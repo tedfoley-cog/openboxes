@@ -358,6 +358,16 @@ export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
 export const SHIPMENT_ITEM_CREATE_OPTIONS = `${SHIPMENT_ITEM_API}/createOptions`;
 export const SHIPMENT_OUTBOUND_RETURN_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/outboundReturnPrint`;
 export const SHIPMENT_GOODS_RECEIPT_NOTE_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/goodsReceiptNotePrint`;
+
+// SHIPMENT ITEM (shipmentItem scaffold screens)
+export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
+export const SHIPMENT_ITEM_API_BY_ID = (id) => `${SHIPMENT_ITEM_API}/${id}`;
+export const SHIPMENT_ITEM_OPTIONS = `${SHIPMENT_ITEM_API}/options`;
+export const SHIPMENT_ITEM_PICK_CONTEXT = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/pick`;
+export const SHIPMENT_ITEM_SPLIT_BY_ID = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/split`;
+
+// SHIPMENT WORKFLOW
+export const SHIPMENT_WORKFLOW_API = `${API}/shipmentWorkflows`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
 
 // REQUISITION TEMPLATE (stock list template screens)
@@ -410,6 +420,16 @@ export const INVENTORY_AUDIT_SUMMARY_REPORT = `${REPORTS}/inventory-audit-summar
 export const INVENTORY_AUDIT_SUMMARY_REPORT_CSV = `${INVENTORY_AUDIT_SUMMARY_REPORT}.csv`;
 export const INVENTORY_TRANSACTIONS_SUMMARY = `${REPORTS}/inventory-transactions-summary`;
 export const INVENTORY_TRANSACTIONS_SUMMARY_CSV = `${INVENTORY_TRANSACTIONS_SUMMARY}.csv`;
+export const REPORT_ON_ORDER_SUMMARY = `${REPORTS}/on-order-summary`;
+export const REPORT_ON_ORDER_DETAILS = `${REPORTS}/on-order-details`;
+export const REPORT_REQUEST_DETAILS = `${REPORTS}/request-details`;
+export const REPORT_REQUEST_REASON_CODES = `${REPORTS}/request-reason-codes`;
+export const REPORT_INVENTORY_BY_LOCATION = `${REPORTS}/inventory-by-location`;
+export const REPORT_PACKING_LIST = `${REPORTS}/packing-list`;
+export const REPORT_PACKING_LIST_SHIPMENTS = `${REPORTS}/packing-list-shipments`;
+export const JSON_QOH_BY_PRODUCT_GROUP = '/json/getQuantityOnHandByProductGroup';
+export const JSON_SUMMARY_BY_PRODUCT_GROUP = '/json/getSummaryByProductGroup';
+export const JSON_REQUEST_DETAIL_REPORT = '/json/getRequestDetailReport';
 
 // INDICATORS
 export const INDICATORS_REPORT = `${API}/reports/indicators`;

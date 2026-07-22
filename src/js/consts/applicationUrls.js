@@ -280,6 +280,16 @@ const REPLENISHMENT_URL = {
   print: (id) => `${REPLENISHMENT_URL.base}/print/${id}`,
 };
 
+const REPORT_URL = {
+  base: `${CONTEXT_PATH}/report`,
+  showForecastReport: () => `${REPORT_URL.base}/showForecastReport`,
+  showOnOrderReport: () => `${REPORT_URL.base}/showOnOrderReport`,
+  exportInventoryReport: () => `${REPORT_URL.base}/exportInventoryReport`,
+  showInventoryByLocationReport: () => `${REPORT_URL.base}/showInventoryByLocationReport`,
+  showPaginatedPackingListReport: () => `${REPORT_URL.base}/showPaginatedPackingListReport`,
+  downloadShippingReport: () => `${REPORT_URL.base}/downloadShippingReport`,
+};
+
 const BUDGET_CODE_URL = {
   base: `${CONTEXT_PATH}/budgetCode`,
   list: () => `${BUDGET_CODE_URL.base}/list`,
@@ -482,6 +492,22 @@ const SHIPMENT_SHOW_URL = {
   send: (id) => `${SHIPMENT_SHOW_URL.base}/sendShipment/${id}`,
 };
 
+const SHIPMENT_ITEM_URL = {
+  base: `${CONTEXT_PATH}/shipmentItem`,
+  list: () => `${SHIPMENT_ITEM_URL.base}/list`,
+  create: () => `${SHIPMENT_ITEM_URL.base}/create`,
+  show: (id) => `${SHIPMENT_ITEM_URL.base}/show/${id}`,
+  edit: (id) => `${SHIPMENT_ITEM_URL.base}/edit/${id}`,
+  pick: (id) => `${SHIPMENT_ITEM_URL.base}/pick/${id}`,
+  split: (id) => `${SHIPMENT_ITEM_URL.base}/split/${id}`,
+};
+
+const SHIPMENT_WORKFLOW_URL = {
+  base: `${CONTEXT_PATH}/shipmentWorkflow`,
+  list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
+  create: () => `${SHIPMENT_WORKFLOW_URL.base}/create`,
+};
+
 const DELIVERY_NOTE_URL = {
   base: `${CONTEXT_PATH}/deliveryNote`,
   print: (id) => `${DELIVERY_NOTE_URL.base}/print/${id}`,
@@ -556,10 +582,13 @@ export {
   PUTAWAY_URL,
   RECEIVE_ORDER_URL,
   REPLENISHMENT_URL,
+  REPORT_URL,
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
+  SHIPMENT_ITEM_URL,
   SHIPMENT_SHOW_URL,
+  SHIPMENT_WORKFLOW_URL,
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
