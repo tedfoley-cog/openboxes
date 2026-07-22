@@ -37,6 +37,7 @@ class ShipmentItemApiController {
     ]
 
     def inventoryService
+    def userService
 
     def list() {
         Integer max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -148,6 +149,9 @@ class ShipmentItemApiController {
      * selected bin location, inventory item and split quantity.
      */
     def split() {
+        if (!requireManager()) {
+            return
+        }
         ShipmentItem shipmentItem = ShipmentItem.get(params.id)
         if (!shipmentItem) {
             renderNotFound()
@@ -190,6 +194,21 @@ class ShipmentItemApiController {
                 originalItem: toDetailJson(shipmentItem),
                 splitItem   : toDetailJson(splitItem),
         ]] as JSON)
+    }
+
+    /**
+     * The legacy SecurityFilters already require a manager role for change
+     * actions matched by name (save*, create*, delete*, add*, update*); this
+     * guard applies the same requirement to split, which that convention
+     * does not cover.
+     */
+    private boolean requireManager() {
+        if (!userService.isUserManager(session?.user)) {
+            response.status = 403
+            render([errorCode: 403, errorMessage: "Manager role required"] as JSON)
+            return false
+        }
+        return true
     }
 
     private void bindShipmentItem(ShipmentItem shipmentItem, jsonObject) {
