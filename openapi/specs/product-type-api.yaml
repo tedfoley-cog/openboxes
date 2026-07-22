@@ -245,7 +245,8 @@ components:
           type: integer
           description: >
             Number of products of this type (drives the legacy edit screen's
-            conditional identifier-format row).
+            conditional identifier-format row). Included on read/create/update
+            responses; omitted from list rows to avoid a per-row count query.
   securitySchemes:
     cookieAuth:
       $ref: '../components/common.yaml#/components/securitySchemes/cookieAuth'

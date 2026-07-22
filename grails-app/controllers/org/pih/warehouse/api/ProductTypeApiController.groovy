@@ -30,7 +30,9 @@ class ProductTypeApiController {
         def results = ProductType.createCriteria().list(max: max, offset: offset) {
             order(sort, sortOrder)
         }
-        render([data: results.collect { toJson(it) }, totalCount: results.totalCount] as JSON)
+        // Skip productCount here: the list screen never shows it and computing
+        // it would cost one count query per row.
+        render([data: results.collect { toJson(it, false) }, totalCount: results.totalCount] as JSON)
     }
 
     def read() {
@@ -135,8 +137,8 @@ class ProductTypeApiController {
         render status: HttpStatus.NO_CONTENT.value()
     }
 
-    private static Map toJson(ProductType productType) {
-        [
+    private static Map toJson(ProductType productType, boolean includeProductCount = true) {
+        Map json = [
                 id                     : productType.id,
                 name                   : productType.name,
                 code                   : productType.code,
@@ -148,7 +150,10 @@ class ProductTypeApiController {
                 displayedFields        : (productType.displayedFields ?: []).collect { it.name() }.sort(),
                 dateCreated            : productType.dateCreated,
                 lastUpdated            : productType.lastUpdated,
-                productCount           : Product.countByProductType(productType),
         ]
+        if (includeProductCount) {
+            json.productCount = Product.countByProductType(productType)
+        }
+        json
     }
 }
