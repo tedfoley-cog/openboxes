@@ -30,9 +30,13 @@ class InventorySnapshotController {
         redirect(action: "list")
     }
 
-    def list() {}
+    def list() {
+        render(view: "/common/react", params: params)
+    }
 
-    def show() {}
+    def show() {
+        redirect(action: "list", params: params)
+    }
 
     def edit() {}
 

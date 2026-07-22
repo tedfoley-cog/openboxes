@@ -862,6 +862,11 @@ class UrlMappings {
             action = [POST: "createPicklistItem"]
         }
 
+        "/api/replenishments/$id/print" {
+            controller = { "replenishmentApi" }
+            action = [GET: "print"]
+        }
+
         // Dashboard API
 
         "/api/dashboard/config"(parseRequest: true) {
@@ -1087,6 +1092,11 @@ class UrlMappings {
          * Transaction API endpoints
          */
 
+        "/api/inventorySnapshots" {
+            controller = { "inventorySnapshotApi" }
+            action = [GET: "list"]
+        }
+
         "/api/transactions"(parseRequest: true) {
             controller = { "transactionApi" }
             action = [GET: "list", POST: "create"]
@@ -1110,6 +1120,11 @@ class UrlMappings {
         "/api/transactions/$id"(parseRequest: false) {
             controller = { "transactionApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/transactionEntries/$id"(parseRequest: false) {
+            controller = { "transactionApi" }
+            action = [GET: "readEntry", PUT: "updateEntry"]
         }
 
         "/api/transactions/$id/entries/$entryId"(parseRequest: false) {
