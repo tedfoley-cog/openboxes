@@ -1,9 +1,12 @@
 """Contract tests for ProductGroupApiController (openapi/specs/product-group-api.yaml).
 
-Product groups have no create API (the legacy create GSP remains), so the
-CRUD flow seeds a dedicated group through the generic API and deletes it
-through the product group API afterwards so the suite stays re-runnable.
+Covers the Batch 10 create endpoint plus the Batch 11 list/read/update/
+delete and product-membership endpoints. The CRUD flow seeds a dedicated
+group through the generic API and deletes it through the product group API
+afterwards so the suite stays re-runnable.
 """
+
+import uuid
 
 import pytest
 
@@ -13,6 +16,10 @@ spec = Spec("product-group-api.yaml")
 
 TEST_NAME = "ZZ Contract Product Group"
 PRODUCT_CODE = "AX738"
+
+
+def _test_name():
+    return f"{TEST_NAME} {uuid.uuid4().hex[:8]}"
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -123,3 +130,48 @@ def test_add_and_remove_sibling(client, product_group):
                       f"/products/{product_id}",
                  params={"isProductFamily": "true"})
     assert all(p["id"] != product_id for p in resp.json()["data"]["siblings"])
+
+
+def test_create_invalid(client):
+    # Missing name fails domain validation -> 400.
+    resp = check(client, spec, "POST", "/api/productGroups", json={})
+    assert resp.status_code == 400
+
+
+def test_create(client):
+    name = _test_name()
+    category_id = client.get_json("/api/categoryOptions")["data"][0]["id"]
+    resp = check(client, spec, "POST", "/api/productGroups",
+                 json={"name": name,
+                       "description": "contract test",
+                       "category": {"id": category_id}})
+    assert resp.status_code == 201
+    data = resp.json()["data"]
+    group_id = data["id"]
+    try:
+        assert data["name"] == name
+        assert data["description"] == "contract test"
+        assert data["category"]["id"] == category_id
+
+        options = client.get_json("/api/productGroupOptions")["data"]
+        assert any(o["id"] == group_id for o in options)
+
+        # The unique name constraint rejects a duplicate.
+        resp = check(client, spec, "POST", "/api/productGroups",
+                     json={"name": name})
+        assert resp.status_code == 400
+    finally:
+        client.request("DELETE", f"/api/productGroups/{group_id}")
+
+
+def test_create_without_category(client):
+    name = _test_name()
+    resp = check(client, spec, "POST", "/api/productGroups",
+                 json={"name": name})
+    assert resp.status_code == 201
+    data = resp.json()["data"]
+    try:
+        assert data["name"] == name
+        assert data["category"] is None
+    finally:
+        client.request("DELETE", f"/api/productGroups/{data['id']}")

@@ -10,6 +10,7 @@ import apiClient from 'utils/apiClient';
 export default {
   getProductGroupsOptions: () => apiClient.get(PRODUCT_GROUP_OPTION),
   getProductGroups: (config) => apiClient.get(PRODUCT_GROUP_API, config),
+  createProductGroup: (payload) => apiClient.post(PRODUCT_GROUP_API, payload),
   getProductGroup: (id) => apiClient.get(PRODUCT_GROUP_BY_ID(id)),
   updateProductGroup: (id, payload) => apiClient.put(PRODUCT_GROUP_BY_ID(id), payload),
   deleteProductGroup: (id) => apiClient.delete(PRODUCT_GROUP_BY_ID(id)),

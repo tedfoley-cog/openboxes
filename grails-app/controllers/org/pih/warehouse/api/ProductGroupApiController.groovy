@@ -44,6 +44,24 @@ class ProductGroupApiController {
         render([data: data, totalCount: results.totalCount] as JSON)
     }
 
+    def create() {
+        def payload = request.JSON
+        ProductGroup productGroup = new ProductGroup()
+        productGroup.name = payload.name ?: null
+        productGroup.description = payload.description ?: null
+        productGroup.category = payload.category?.id ? Category.get(payload.category.id as String) : null
+        if (!productGroup.validate() || !productGroup.save(flush: true)) {
+            List<String> errorMessages = productGroup.errors.allErrors.collect { error ->
+                g.message(error: error).toString()
+            }
+            render(status: HttpStatus.BAD_REQUEST.value(), contentType: "application/json",
+                    text: [errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: errorMessages.join("; "), errorMessages: errorMessages] as JSON)
+            return
+        }
+        response.status = HttpStatus.CREATED.value()
+        render([data: toJson(productGroup)] as JSON)
+    }
+
     def read() {
         ProductGroup productGroup = ProductGroup.get(params.id)
         if (!productGroup) {

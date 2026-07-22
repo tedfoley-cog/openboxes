@@ -2,8 +2,8 @@ openapi: 3.0.3
 info:
   title: OpenBoxes - ProductGroupApiController
   description: >
-    Product group (generic product / product family) list/read/update/delete
-    and product-membership endpoints handled by
+    Product group (generic product / product family) create/list/read/update/
+    delete and product-membership endpoints handled by
     org.pih.warehouse.api.ProductGroupApiController, routed via the explicit
     "/api/productGroups" mappings. Added in Phase 2 (Batch 11) to back the
     React productGroup list/edit/show screens. Parity notes: list matches the
@@ -61,6 +61,54 @@ paths:
                       $ref: '#/components/schemas/ProductGroupRow'
                   totalCount:
                     type: integer
+    post:
+      operationId: createProductGroup
+      summary: Create a product group
+      description: >
+        Mirrors the legacy ProductGroupController save action; added in
+        Phase 2 (Batch 10) to back the React productGroup create screen.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  nullable: true
+                description:
+                  type: string
+                  nullable: true
+                category:
+                  type: object
+                  nullable: true
+                  properties:
+                    id:
+                      $ref: '../components/common.yaml#/components/schemas/Id'
+      responses:
+        '201':
+          description: Created product group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductGroupEnvelope'
+        '400':
+          description: Validation failure.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [errorCode, errorMessage]
+                properties:
+                  errorCode:
+                    type: integer
+                  errorMessage:
+                    type: string
+                  errorMessages:
+                    type: array
+                    items:
+                      type: string
   /api/productGroups/{id}:
     parameters:
       - $ref: '#/components/parameters/productGroupId'

@@ -195,7 +195,7 @@ class UrlMappings {
 
         "/api/productGroups"(parseRequest: true) {
             controller = { "productGroupApi" }
-            action = [GET: "list"]
+            action = [GET: "list", POST: "create"]
         }
 
         "/api/productGroups/$id"(parseRequest: true) {
@@ -292,6 +292,31 @@ class UrlMappings {
         "/api/productAssociations/$id"(parseRequest: true) {
             controller = { "productAssociationApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productCatalogs"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/productCatalogs/$id"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productCatalogs/$id/items"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [POST: "addItem"]
+        }
+
+        "/api/productCatalogs/$id/items/$itemId"(parseRequest: true) {
+            controller = { "productCatalogApi" }
+            action = [DELETE: "removeItem"]
+        }
+
+        "/api/productCatalogs/$id/importItems" {
+            controller = { "productCatalogApi" }
+            action = [POST: "importItems"]
         }
 
         "/api/stockMovements/shipmentStatusCodes" {
