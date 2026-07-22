@@ -344,6 +344,16 @@ class UrlMappings {
             action = [GET: "documentTypeOptions"]
         }
 
+        "/api/eventCodeOptions" {
+            controller = { "selectOptionsApi" }
+            action = [GET: "eventCodeOptions"]
+        }
+
+        "/api/documents/$id/content"(parseRequest: false) {
+            controller = { "documentApi" }
+            action = [POST: "uploadContent"]
+        }
+
         "/api/productAssociationTypeCodeOptions" {
             controller = { "selectOptionsApi" }
             action = [GET: "productAssociationTypeCodeOptions"]

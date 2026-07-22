@@ -314,6 +314,17 @@ const GL_ACCOUNT_TYPE_URL = {
 const DOCUMENT_URL = {
   base: `${CONTEXT_PATH}/document`,
   download: (id) => `${DOCUMENT_URL.base}/download/${id}`,
+  list: () => `${DOCUMENT_URL.base}/list`,
+  create: () => `${DOCUMENT_URL.base}/create`,
+  edit: (id) => `${DOCUMENT_URL.base}/edit/${id}`,
+  show: (id) => `${DOCUMENT_URL.base}/show/${id}`,
+};
+
+const EVENT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/eventType`,
+  list: () => `${EVENT_TYPE_URL.base}/list`,
+  create: () => `${EVENT_TYPE_URL.base}/create`,
+  edit: (id) => `${EVENT_TYPE_URL.base}/edit/${id}`,
 };
 
 const LOCATION_GROUP_URL = {
@@ -569,6 +580,7 @@ export {
   DASHBOARD_URL,
   DELIVERY_NOTE_URL,
   DOCUMENT_URL,
+  EVENT_TYPE_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
   GOODS_RECEIPT_NOTE_URL,

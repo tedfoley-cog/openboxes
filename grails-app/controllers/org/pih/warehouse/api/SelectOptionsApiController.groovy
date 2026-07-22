@@ -11,6 +11,7 @@ package org.pih.warehouse.api
 
 import grails.converters.JSON
 import org.pih.warehouse.core.DocumentType
+import org.pih.warehouse.core.EventCode
 import org.pih.warehouse.core.GlAccount
 import org.pih.warehouse.core.GlAccountType
 import org.pih.warehouse.core.GlAccountTypeCode
@@ -245,11 +246,20 @@ class SelectOptionsApiController {
     }
 
     def documentTypeOptions() {
-        List<DocumentType> documentTypes = documentService.getNonTemplateDocumentTypes()
+        List<DocumentType> documentTypes = (params.boolean("includeTemplates")
+                ? DocumentType.list().sort { it.name }
+                : documentService.getNonTemplateDocumentTypes())
                 .collect {
                     [id: it.id, label: it.name]
                 }
         render([data: documentTypes] as JSON)
+    }
+
+    def eventCodeOptions() {
+        List<Map> options = EventCode.values().collect {
+            [id: it.name(), value: it.name(), label: it.name()]
+        }
+        render([data: options] as JSON)
     }
 
     def validationCodeOptions() {

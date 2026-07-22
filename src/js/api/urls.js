@@ -128,6 +128,16 @@ export const PRODUCT_CATALOG_IMPORT_ITEMS = (id) => `${PRODUCT_CATALOG_API}/${id
 export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
 export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
 export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
+
+// DOCUMENTS
+export const DOCUMENT_API = `${API}/documents`;
+export const DOCUMENT_BY_ID = (id) => `${DOCUMENT_API}/${id}`;
+export const DOCUMENT_CONTENT = (id) => `${DOCUMENT_API}/${id}/content`;
+
+// EVENT TYPES
+export const EVENT_TYPE_API = `${API}/eventTypes`;
+export const EVENT_TYPE_BY_ID = (id) => `${EVENT_TYPE_API}/${id}`;
+export const EVENT_CODE_OPTIONS = `${API}/eventCodeOptions`;
 export const INVENTORY_ITEM = (productCode, lotNumber) => `${CONTEXT_PATH}/${PRODUCT_API}/${productCode}/inventoryItems/${lotNumber}`;
 export const LOT_NUMBERS_WITH_EXPIRATION_DATE = `${PRODUCT_API}/inventoryItems/lotNumbersWithExpirationDate`;
 export const AVAILABLE_ITEMS = `${PRODUCT_API}/availableItems`;
