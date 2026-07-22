@@ -132,8 +132,11 @@ class TagApiController {
 
     def removeProduct() {
         Tag tag = Tag.get(params.id)
+        if (!tag) {
+            throw new ObjectNotFoundException(params.id, Tag.class.toString())
+        }
         Product product = Product.get(params.productId)
-        if (!tag || !product) {
+        if (!product) {
             throw new ObjectNotFoundException(params.productId as String, Product.class.toString())
         }
         tag.removeFromProducts(product)
