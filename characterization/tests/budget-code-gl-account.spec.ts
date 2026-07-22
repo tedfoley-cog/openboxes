@@ -96,6 +96,10 @@ test.describe('gl account react screens', () => {
   });
 
   test('creates, edits and deletes a gl account', async ({ page }) => {
+    // GL account type is required, so the round trip needs at least one type seeded.
+    const typeOptions = await (await page.request.get(url('/api/glAccountTypeOptions'))).json();
+    test.skip(!typeOptions.data.length, 'seeded dataset has no GL account types');
+
     const code = `ZZGL${runId()}`;
     await page.goto(url('/glAccount/create'));
     await expect(page.getByText('Create GL Account').first()).toBeVisible();
