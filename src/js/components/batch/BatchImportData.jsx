@@ -149,7 +149,7 @@ const BatchImportData = () => {
       .then((response) => {
         dispatch(hideSpinner());
         const { data } = response.data;
-        if (data.imported) {
+        if (data.importedSuccessfully) {
           setPreview(null);
           if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -171,9 +171,9 @@ const BatchImportData = () => {
       });
   };
 
-  const columns = preview?.columnMap?.labels
-    ? Object.values(preview.columnMap.labels)
-    : (preview?.data?.[0] && Object.keys(preview.data[0]));
+  const columns = preview?.columnMap?.columnMap
+    ? Object.values(preview.columnMap.columnMap)
+    : (preview?.rows?.[0] && Object.keys(preview.rows[0]));
 
   return (
     <PageWrapper>
@@ -270,13 +270,13 @@ const BatchImportData = () => {
             )}
           </div>
         </form>
-        {preview?.data && (
+        {preview?.rows && (
           <div className="p-3" data-testid="import-preview">
             <h3>
               <Translate id="react.batch.importData.preview.label" defaultMessage="Data preview" />
               {' '}
               (
-              {preview.data.length}
+              {preview.rows.length}
               {' '}
               <Translate id="react.batch.rows.label" defaultMessage="rows" />
               )
@@ -289,7 +289,7 @@ const BatchImportData = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {preview.data.map((row, index) => (
+                  {preview.rows.map((row, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <tr key={index}>
                       {Object.values(row).map((value, cellIndex) => (
