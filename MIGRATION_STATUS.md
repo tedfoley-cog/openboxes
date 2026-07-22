@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #51 (B13), #53 (B18) merged. 27/49 Phase 2 batches done.
 - 2026-07-22: #45 (B17), #49 (B30), #52 (B35) merged. 25/49 Phase 2 batches done.
 - 2026-07-22: Wave 5 spawned: P1.5 reverify + B12 [f71be77f](https://app.devin.ai/sessions/f71be77f3ca342fa9e9a5f303f3a6622), B13 [61e38fe7](https://app.devin.ai/sessions/61e38fe7c07f4620be134673a4500deb), B18 [fd4f1f12](https://app.devin.ai/sessions/fd4f1f1216d54ca99d3278b662c39d06), B20 [e90b1dbc](https://app.devin.ai/sessions/e90b1dbc4b8b4809b27bce543c8bf3f9), B30 [1bb0b972](https://app.devin.ai/sessions/1bb0b972c60b4a9eb16ca715e8e1906f), B35 [485864c6](https://app.devin.ai/sessions/485864c689964a02b8b658e4cebdc2dc).
 - 2026-07-22: #43 (B11), #48 (Grails 7.2.1 + Boot 3.5 + jakarta + Liquibase 4.27) merged. Backend platform target reached; 1.5 integration reverify next.
