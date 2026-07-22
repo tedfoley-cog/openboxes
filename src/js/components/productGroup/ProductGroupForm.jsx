@@ -137,7 +137,7 @@ const ProductGroupForm = () => {
         productId: product.id,
         isProductFamily,
       });
-      applyProductGroup(response?.data?.data);
+      setProductGroup(response?.data?.data);
       if (isProductFamily) {
         setSiblingToAdd(null);
       } else {
@@ -153,7 +153,7 @@ const ProductGroupForm = () => {
     try {
       const response = await productGroupApi
         .removeProduct(productGroupId, productId, isProductFamily);
-      applyProductGroup(response?.data?.data);
+      setProductGroup(response?.data?.data);
     } finally {
       dispatch(hideSpinner());
     }

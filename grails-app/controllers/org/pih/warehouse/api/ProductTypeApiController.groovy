@@ -67,7 +67,9 @@ class ProductTypeApiController {
             return
         }
         try {
-            productTypeService.delete(productType)
+            // Flush so referential-integrity failures surface here instead of
+            // at transaction commit (after the response has been rendered).
+            productType.delete(flush: true)
         } catch (DataIntegrityViolationException ignored) {
             transactionStatus.setRollbackOnly()
             String message = "${warehouse.message(code: 'default.not.deleted.message', args: [warehouse.message(code: 'productType.label', default: 'ProductType'), params.id])}"
