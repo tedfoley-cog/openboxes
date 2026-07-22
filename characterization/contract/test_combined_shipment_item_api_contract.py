@@ -22,8 +22,7 @@ def test_add_to_shipment_unknown(client):
 
 
 def test_get_products_in_orders(client):
-    check(client, spec, "GET", "/api/combinedShipmentItems/getProductsInOrders",
-          params={"orderIds": ""})
+    check(client, spec, "GET", "/api/combinedShipmentItems/getProductsInOrders")
 
 
 def test_export_template_blank(client):

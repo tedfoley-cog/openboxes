@@ -256,7 +256,10 @@ components:
           type: string
           nullable: true
         quantityAvailable:
-          type: integer
+          type: number
+          description: >
+            Quantity remaining to ship; usually integral but
+            getQuantityRemainingToShip() is not constrained to integers.
         quantityToShip:
           type: string
           description: Always rendered as an empty string placeholder.
