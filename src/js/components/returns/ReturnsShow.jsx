@@ -73,13 +73,13 @@ const ReturnsShow = () => {
             <span className="font-weight-bold mr-2">{data.identifier}</span>
             {data.name}
             <span className="text-muted text-uppercase ml-2 small">
-              {data.isSameOrigin
-                ? <Translate id="react.default.outbound.label" defaultMessage="Outbound" />
-                : <Translate id="react.default.inbound.label" defaultMessage="Inbound" />}
+              {data.isSameDestination
+                ? <Translate id="react.default.inbound.label" defaultMessage="Inbound" />
+                : <Translate id="react.default.outbound.label" defaultMessage="Outbound" />}
             </span>
           </div>
           <div>
-            <a className="btn btn-sm btn-outline-secondary mr-2" href={STOCK_MOVEMENT_URL.uploadDocuments(data.id)}>
+            <a className="btn btn-sm btn-outline-secondary mr-2" href={`${STOCK_MOVEMENT_URL.base}/addDocument/${data.id}`}>
               <Translate id="react.stockMovement.uploadDocuments.label" defaultMessage="Upload documents" />
             </a>
             {visibleDocuments.length > 0 && (
