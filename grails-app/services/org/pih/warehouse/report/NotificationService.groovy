@@ -15,7 +15,7 @@ import grails.util.Holders
 import org.apache.commons.mail2.core.EmailException
 import org.apache.commons.validator.EmailValidator
 import org.grails.plugins.web.taglib.ApplicationTagLib
-import org.grails.plugins.web.taglib.RenderGrailsLayoutTagLib
+import org.grails.plugins.web.taglib.RenderTagLib
 import grails.web.context.ServletContextHolder
 import org.grails.web.errors.GrailsWrappedRuntimeException
 import org.pih.warehouse.api.PartialReceipt
@@ -57,7 +57,7 @@ class NotificationService {
             def applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext)
             GrailsWebMockUtil.bindMockWebRequest(applicationContext)
         }
-        return new RenderGrailsLayoutTagLib().render(template: template, model: model)
+        return new RenderTagLib().render(template: template, model: model)
     }
 
     def getExpiryAlertsByLocation(Location location, Integer daysUntilExpiry = 0) {
