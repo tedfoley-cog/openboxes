@@ -141,7 +141,12 @@ bootRun {
 }
 
 configurations {
-    configureEach {
+    configureEach { config ->
+        // JaCoCo 0.8.x needs its own modern ASM; don't apply app-wide excludes/forces to it
+        if (config.name.startsWith('jacoco')) {
+            return
+        }
+
         // log4j-over-slf4j exposes the same API as this fork of log4j 1.x does
         exclude group: 'ch.qos.reload4j', module: 'reload4j'
 
