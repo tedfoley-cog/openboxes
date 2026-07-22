@@ -341,6 +341,16 @@ export const SHIPMENT_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/picklist`;
 export const SHIPMENT_VALIDATE_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/validatePicklist`;
 export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPicklist`;
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
+
+// SHIPMENT ITEM (shipmentItem scaffold screens)
+export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
+export const SHIPMENT_ITEM_API_BY_ID = (id) => `${SHIPMENT_ITEM_API}/${id}`;
+export const SHIPMENT_ITEM_OPTIONS = `${SHIPMENT_ITEM_API}/options`;
+export const SHIPMENT_ITEM_PICK_CONTEXT = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/pick`;
+export const SHIPMENT_ITEM_SPLIT_BY_ID = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/split`;
+
+// SHIPMENT WORKFLOW
+export const SHIPMENT_WORKFLOW_API = `${API}/shipmentWorkflows`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
 
 // REQUISITION TEMPLATE (stock list template screens)
