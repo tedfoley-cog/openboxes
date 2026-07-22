@@ -51,6 +51,11 @@ const AttributeForm = () => {
         } else {
           setAttribute(emptyAttribute);
         }
+      } catch (error) {
+        // Like the legacy edit action: not-found redirects back to the list.
+        Alert.error(error.response?.data?.errorMessage
+          ?? translate('react.attribute.notFound.message', 'Attribute not found'));
+        history.push(ATTRIBUTE_URL.list());
       } finally {
         spinner.hide();
       }

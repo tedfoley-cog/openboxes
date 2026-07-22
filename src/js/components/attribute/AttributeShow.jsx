@@ -33,6 +33,11 @@ const AttributeShow = () => {
       try {
         const { data } = await attributeApi.getAttribute(id);
         setAttribute(data);
+      } catch (error) {
+        // Like the legacy show action: not-found redirects back to the list.
+        Alert.error(error.response?.data?.errorMessage
+          ?? translate('react.attribute.notFound.message', 'Attribute not found'));
+        history.push(ATTRIBUTE_URL.list());
       } finally {
         spinner.hide();
       }

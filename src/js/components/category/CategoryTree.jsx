@@ -77,8 +77,28 @@ const CategoryTree = () => {
     return rootCategories.find((category) => category.isRoot) ?? rootCategories[0];
   }, [rootCategories, queryParams?.id]);
 
+  const isDescendantOf = (ancestorId, categories) => {
+    for (let i = 0; i < (categories?.length ?? 0); i += 1) {
+      if (categories[i].id === ancestorId) {
+        return categories[i];
+      }
+      const found = isDescendantOf(ancestorId, categories[i].categories);
+      if (found) {
+        return found;
+      }
+    }
+    return undefined;
+  };
+
   const onMoveCategory = async (childId, newParentId) => {
     if (!childId || childId === newParentId) {
+      return;
+    }
+    // Moving a category under its own descendant would create a cycle.
+    const draggedCategory = isDescendantOf(childId, rootCategories);
+    if (draggedCategory && isDescendantOf(newParentId, draggedCategory.categories)) {
+      Alert.error(translate('react.category.moveIntoDescendant.message',
+        'Cannot move a category into one of its own subcategories'));
       return;
     }
     spinner.show();
