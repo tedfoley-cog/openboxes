@@ -908,6 +908,13 @@ jacocoTestReport {
     }
 }
 
+// groovyc needs a lot of heap to compile the full test suite in one pass, so run
+// it in its own forked JVM rather than inflating the Gradle daemon's heap
+tasks.withType(GroovyCompile) {
+    groovyOptions.fork = true
+    groovyOptions.forkOptions.memoryMaximumSize = '4g'
+}
+
 // Configuration for both "test" and "integrationTest" tasks.
 tasks.withType(Test) {
     // never consider test tasks as up-to-date - always run them when requested
