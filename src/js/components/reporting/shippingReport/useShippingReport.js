@@ -11,6 +11,12 @@ import reportApi from 'api/services/ReportApi';
  */
 const useShippingReport = () => {
   const { search } = useLocation();
+
+  useEffect(() => {
+    document.body.classList.add('print-report');
+    return () => document.body.classList.remove('print-report');
+  }, []);
+
   const shipmentId = new URLSearchParams(search).get('shipment.id');
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
