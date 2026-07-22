@@ -29,7 +29,7 @@ const InventoryByLocationReport = () => {
 
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [includeSubcategories, setIncludeSubcategories] = useState(false);
+  const [includeSubcategories, setIncludeSubcategories] = useState(true);
 
   const [report, setReport] = useState(null);
 
@@ -55,9 +55,7 @@ const InventoryByLocationReport = () => {
     const searchParams = new URLSearchParams();
     selectedLocations.forEach((location) => searchParams.append('locations', location.id));
     selectedCategories.forEach((category) => searchParams.append('categories', category.id));
-    if (includeSubcategories) {
-      searchParams.append('includeSubcategories', 'on');
-    }
+    searchParams.append('includeSubcategories', includeSubcategories ? 'true' : 'false');
     return searchParams;
   };
 

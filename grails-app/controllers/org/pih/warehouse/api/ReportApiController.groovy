@@ -199,7 +199,7 @@ class ReportApiController {
         command.shipment = shipment
         reportService.generateShippingReport(command)
 
-        def containers = command.checklistReportEntryList
+        def containers = (command.checklistReportEntryList ?: [])
                 .groupBy { it?.shipmentItem?.container }
                 .collect { container, checklistEntries ->
                     [

@@ -773,6 +773,7 @@ class ReportController {
             } else {
                 log.info("Unable to generate forecast report due to lack of data")
                 flash.message = "Unable to generate forecast report due to lack of data"
+                redirect(action: "showForecastReport")
             }
             return
         }
