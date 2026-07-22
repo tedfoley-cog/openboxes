@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { getTranslate } from 'react-localize-redux';
+import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Alert from 'react-s-alert';
@@ -23,6 +24,7 @@ const ReturnsShow = () => {
   const { stockMovementId } = useParams();
   const [data, setData] = useState(null);
   const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [synchronizeDialogHtml, setSynchronizeDialogHtml] = useState(null);
 
   useTranslation('stockMovement', 'shipping', 'default');
 
@@ -46,6 +48,13 @@ const ReturnsShow = () => {
   if (!data) {
     return null;
   }
+
+  const openSynchronizeDialog = () => {
+    fetch(`${CONTEXT_PATH}/stockMovement/synchronizeDialog/${data.id}`, { credentials: 'same-origin' })
+      .then((response) => response.text())
+      .then((html) => setSynchronizeDialogHtml(html))
+      .catch(() => Alert.error('Unable to load synchronize dialog'));
+  };
 
   const visibleDocuments = (data.documents ?? []).filter((document) => !document.hidden);
   const canDelete = (data.isPending || !data.shipment?.currentStatus)
@@ -124,10 +133,29 @@ const ReturnsShow = () => {
             </a>
           )}
           {data.isSuperuser && (
-            <a className="btn btn-sm btn-outline-secondary mr-2 mb-1" href={`${CONTEXT_PATH}/stockMovement/synchronizeDialog/${data.id}`}>
+            <button type="button" className="btn btn-sm btn-outline-secondary mr-2 mb-1" onClick={openSynchronizeDialog} data-testid="synchronize-button">
               <Translate id="react.default.button.synchronize.label" defaultMessage="Synchronize" />
-            </a>
+            </button>
           )}
+          <Modal
+            isOpen={!!synchronizeDialogHtml}
+            onRequestClose={() => setSynchronizeDialogHtml(null)}
+            className="modal-content-custom"
+            shouldCloseOnOverlayClick
+            ariaHideApp={false}
+          >
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <h5 className="m-0">
+                <Translate id="react.default.button.synchronize.label" defaultMessage="Synchronize" />
+              </h5>
+              <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setSynchronizeDialogHtml(null)}>
+                <Translate id="react.default.button.close.label" defaultMessage="Close" />
+              </button>
+            </div>
+            {/* Legacy synchronizeDialog fragment, loaded like the legacy btn-show-dialog modal */}
+            {/* eslint-disable-next-line react/no-danger */}
+            <div data-testid="synchronize-dialog" dangerouslySetInnerHTML={{ __html: synchronizeDialogHtml }} />
+          </Modal>
         </div>
       </div>
       <div className="row">
