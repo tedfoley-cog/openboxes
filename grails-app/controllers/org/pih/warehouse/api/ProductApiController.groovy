@@ -455,6 +455,7 @@ class ProductApiController extends BaseDomainApiController {
         }
 
         List<String> errorMessages = []
+        List<Product> loadedProducts = []
         List<Product> productsToSave = []
         productEntries.each { entry ->
             Product product = Product.get(entry.id as String)
@@ -462,6 +463,7 @@ class ProductApiController extends BaseDomainApiController {
                 errorMessages << "Product with ID ${entry.id} not found".toString()
                 return
             }
+            loadedProducts << product
             if (entry.containsKey("productCode")) product.productCode = entry.productCode
             if (entry.containsKey("name")) product.name = entry.name
             if (entry.containsKey("manufacturer")) product.manufacturer = entry.manufacturer
@@ -482,7 +484,7 @@ class ProductApiController extends BaseDomainApiController {
         }
 
         if (errorMessages) {
-            productsToSave.each { it.discard() }
+            loadedProducts.each { it.discard() }
             render(status: 400, contentType: "application/json",
                     text: [errorCode: 400, errorMessage: errorMessages.join("; "), errorMessages: errorMessages, savedCount: 0] as JSON)
             return

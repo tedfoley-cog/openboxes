@@ -335,6 +335,7 @@ const ProductBatchEdit = () => {
                           value={product.category?.id ?? ''}
                           onChange={(event) => setProductField(index, 'category', { id: event.target.value })}
                         >
+                          <option value="" aria-label="empty" />
                           {categories.map((category) => (
                             <option key={category.id} value={category.id}>{category.label}</option>
                           ))}
