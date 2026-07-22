@@ -15,7 +15,7 @@ import org.pih.warehouse.core.Location
 @Transactional
 class ShipmentItemController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST"]
 
     def inventoryService
     def shipmentService
