@@ -77,7 +77,7 @@ class ShipmentWorkflowApiController {
         }
         if (jsonObject.containsKey("referenceNumberTypes")) {
             shipmentWorkflow.referenceNumberTypes?.clear()
-            jsonObject.referenceNumberTypes.each { rnt ->
+            jsonObject.referenceNumberTypes?.each { rnt ->
                 ReferenceNumberType referenceNumberType = ReferenceNumberType.get(rnt instanceof Map ? rnt.id : rnt)
                 if (referenceNumberType) {
                     shipmentWorkflow.addToReferenceNumberTypes(referenceNumberType)
@@ -86,7 +86,7 @@ class ShipmentWorkflowApiController {
         }
         if (jsonObject.containsKey("containerTypes")) {
             shipmentWorkflow.containerTypes?.clear()
-            jsonObject.containerTypes.each { ct ->
+            jsonObject.containerTypes?.each { ct ->
                 ContainerType containerType = ContainerType.get(ct instanceof Map ? ct.id : ct)
                 if (containerType) {
                     shipmentWorkflow.addToContainerTypes(containerType)
@@ -95,7 +95,7 @@ class ShipmentWorkflowApiController {
         }
         if (jsonObject.containsKey("documentTemplates")) {
             shipmentWorkflow.documentTemplates?.clear()
-            jsonObject.documentTemplates.each { dt ->
+            jsonObject.documentTemplates?.each { dt ->
                 Document document = Document.get(dt instanceof Map ? dt.id : dt)
                 if (document) {
                     shipmentWorkflow.addToDocumentTemplates(document)

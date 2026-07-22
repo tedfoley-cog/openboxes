@@ -261,8 +261,9 @@ const StockMovementShow = () => {
               </td>
             </tr>
           )}
-          {events.map((event) => (
-            <tr key={`${event.eventType}-${event.dateLogged}`} data-testid="event-row">
+          {events.map((event, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <tr key={`${event.eventType}-${event.dateLogged}-${index}`} data-testid="event-row">
               <td>
                 {event.eventType}
                 {event.referenceDocument?.url && (
