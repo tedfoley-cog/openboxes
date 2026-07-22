@@ -478,8 +478,9 @@ paths:
         transactionEntry/edit GSP. Returns the entry with its transaction
         summary plus the selectable candidates the legacy form offered -
         availableInventoryItems (all lots of the entry's product) and
-        availableBinLocations (active bin locations of the session warehouse;
-        empty when the warehouse has no bin-location support).
+        availableBinLocations (active bin locations of the transaction's own
+        warehouse, falling back to the session warehouse; empty when that
+        warehouse has no bin-location support).
       parameters:
         - $ref: '#/components/parameters/transactionEntryId'
       responses:

@@ -234,9 +234,9 @@ class TransactionApiController {
     private Map toEntryDetailJson(TransactionEntry entry) {
         Transaction transaction = entry.transaction
         Product product = entry.inventoryItem?.product
-        Location currentLocation = Location.get(session?.warehouse?.id)
-        List<Location> binLocations = currentLocation?.hasBinLocationSupport() ?
-                Location.findAllByParentLocationAndActive(currentLocation, true).sort { it?.name?.toLowerCase() } : []
+        Location transactionLocation = transaction?.inventory?.warehouse ?: Location.get(session?.warehouse?.id)
+        List<Location> binLocations = transactionLocation?.hasBinLocationSupport() ?
+                Location.findAllByParentLocationAndActive(transactionLocation, true).sort { it?.name?.toLowerCase() } : []
         List<InventoryItem> inventoryItems = product ? InventoryItem.findAllByProduct(product) : []
         [
                 id                    : entry.id,
