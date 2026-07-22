@@ -140,6 +140,12 @@ const INVENTORY_URL = {
   }),
 };
 
+const CONSUMPTION_URL = {
+  base: `${CONTEXT_PATH}/consumption`,
+  list: () => `${CONSUMPTION_URL.base}/list`,
+  pivot: () => `${CONSUMPTION_URL.base}/pivot`,
+};
+
 const REQUISITION_TEMPLATE_URL = {
   base: `${CONTEXT_PATH}/requisitionTemplate`,
   create: () => `${REQUISITION_TEMPLATE_URL.base}/create`,
@@ -248,6 +254,7 @@ export {
   BARCODE_URL,
   BUDGET_CODE_URL,
   CATEGORY_URL,
+  CONSUMPTION_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
   GL_ACCOUNT_URL,

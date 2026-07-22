@@ -1966,7 +1966,9 @@ class InventoryService implements ApplicationContextAware {
 
         // Reports and QoH calculations get messed up if two transactions for a product exist at the same exact time.
         if (hasTransactionEntriesOnDate(location, transactionDate, [inventoryItem.product])) {
-            command.errors.rejectValue("transactionDate", "adjustStock.invalid.transactionDate.duplicate.message")
+            // AdjustStockCommand has no transactionDate property, so attach the
+            // error to newQuantity to avoid a NotReadablePropertyException.
+            command.errors.rejectValue("newQuantity", "adjustStock.invalid.transactionDate.duplicate.message")
         }
 
         if (command.validate() && !command.hasErrors()) {
@@ -3300,7 +3302,7 @@ class InventoryService implements ApplicationContextAware {
             return []
         }
         List<AvailableItem> availableItems = productAvailabilityService.getAvailableItems(location, products.id, true, true)
-        MultiKeyMap<Object, AvailableItem> map = new MultiKeyMap()
+        MultiKeyMap map = new MultiKeyMap()
         for (AvailableItem availableItem in availableItems) {
             InventoryItem inventoryItem = availableItem.inventoryItem
             Location binLocation = availableItem.binLocation
