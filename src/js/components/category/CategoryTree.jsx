@@ -44,6 +44,8 @@ const CategoryTree = () => {
       const { data } = await categoryApi.getCategoryTree();
       setRootCategories(data?.data ?? []);
       setAssigningParentToProductEnabled(!!data?.assigningParentToProductEnabled);
+    } catch (error) {
+      Alert.error(error.response?.data?.errorMessage ?? 'Unable to load categories');
     } finally {
       spinner.hide();
     }

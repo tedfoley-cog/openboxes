@@ -46,6 +46,11 @@ const CategoryForm = () => {
         } else {
           setCategory(emptyCategory);
         }
+      } catch (error) {
+        // Like the legacy edit action: not-found redirects back to the tree.
+        Alert.error(error.response?.data?.errorMessage
+          ?? translate('react.category.notFound.message', 'Category not found'));
+        history.push(CATEGORY_URL.tree());
       } finally {
         spinner.hide();
       }

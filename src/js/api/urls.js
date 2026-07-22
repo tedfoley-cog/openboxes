@@ -231,8 +231,7 @@ export const REORDER_REPORT = (id) => `${INVENTORY_API(id)}/reorderReport`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
 
 // ATTRIBUTES
-export const ATTRIBUTE_API = `${API}/attributes`;
-export const ATTRIBUTE_BY_ID = (id) => `${ATTRIBUTE_API}/${id}`;
+export const ATTRIBUTE_BY_ID = (id) => `${ATTRIBUTES}/${id}`;
 
 // CATEGORIES
 export const CATEGORY_API = `${API}/categories`;

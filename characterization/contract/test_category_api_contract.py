@@ -103,6 +103,27 @@ def test_update_persists_json_body(client, batch7_api):
               path=f"/api/categories/{category_id}")
 
 
+def test_update_reparents_category(client, batch7_api):
+    # The React category tree drag-and-drop sends PUT {parentCategory: {id}};
+    # verify a JSON PUT actually reparents the category.
+    categories = client.get_json("/api/categories")["data"]
+    root = next(c for c in categories if c.get("name") == "ROOT")
+    other_parent = next(c for c in categories
+                        if c["id"] != root["id"] and c.get("name") != TEST_NAME)
+    resp = check(client, spec, "POST", "/api/categories",
+                 json={"name": TEST_NAME, "parentCategory": {"id": root["id"]}})
+    category_id = resp.json()["id"]
+    try:
+        check(client, spec, "PUT", "/api/categories/{id}",
+              path=f"/api/categories/{category_id}",
+              json={"parentCategory": {"id": other_parent["id"]}})
+        details = client.get_json(f"/api/categories/{category_id}/details")
+        assert details["data"]["parentCategory"]["id"] == other_parent["id"]
+    finally:
+        check(client, spec, "DELETE", "/api/categories/{id}",
+              path=f"/api/categories/{category_id}")
+
+
 def test_delete_unknown(client):
     check(client, spec, "DELETE", "/api/categories/{id}",
           path="/api/categories/doesnotexist0000")

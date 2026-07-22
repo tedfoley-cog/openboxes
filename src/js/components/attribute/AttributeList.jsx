@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import _ from 'lodash';
 import { Link, useHistory } from 'react-router-dom';
+import Alert from 'react-s-alert';
 
 import attributeApi from 'api/services/AttributeApi';
 import Button from 'components/form-elements/Button';
@@ -40,6 +41,8 @@ const AttributeList = () => {
       });
       setAttributes(data?.data ?? []);
       setPage(0);
+    } catch (error) {
+      Alert.error(error.response?.data?.errorMessage ?? 'Unable to load attributes');
     } finally {
       spinner.hide();
     }
