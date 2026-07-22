@@ -11,7 +11,8 @@ info:
     "/api/productTypeOptions", "/api/documentTypeOptions",
     "/api/productAssociationTypeCodeOptions" and
     "/api/stockMovements/shipmentStatusCodes", "/api/glAccountTypeOptions",
-    "/api/locationTypeCodeOptions").
+    "/api/locationTypeCodeOptions", "/api/partyTypeOptions",
+    "/api/organizationRoleTypeOptions").
     All endpoints are GET-only and
     render an option list under a "data" envelope; the option shape varies
     slightly per endpoint (some include "value" and/or "variant").
@@ -70,6 +71,29 @@ paths:
         Returns every LocationTypeCode enum value as {id, label} pairs (both
         the enum name). Added in Phase 2 (Batch 32) for the React
         locationType form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/partyTypeOptions:
+    get:
+      operationId: listPartyTypeOptions
+      summary: Party type options
+      description: >
+        Returns all PartyType records as {id, label} pairs (label is the
+        party type name). Added in Phase 2 (Batch 33) for the React
+        organization form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/organizationRoleTypeOptions:
+    get:
+      operationId: listOrganizationRoleTypeOptions
+      summary: Organization role type options
+      description: >
+        Returns the RoleType.listOrganizationRoleTypes() enum values (e.g.
+        ROLE_SUPPLIER, ROLE_MANUFACTURER) as {id, label} pairs (both the
+        enum name). Added in Phase 2 (Batch 33) for the React organization
+        list filters.
       responses:
         '200':
           $ref: '#/components/responses/IdLabelOptionsOk'
@@ -220,6 +244,90 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/IdLabelOptionsOk'
+  /api/orderAdjustmentTypeOptions:
+    get:
+      operationId: orderAdjustmentTypeOptions
+      summary: Order adjustment type options (React order adjustment screen)
+      description: >
+        Renders all OrderAdjustmentType records as id/value/label options,
+        mirroring the legacy selectOrderAdjustmentTypes tag.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelValueOptionsOk'
+  /api/budgetCodeOptions:
+    get:
+      operationId: budgetCodeOptions
+      summary: Budget code options (React order adjustment screen)
+      description: >
+        Renders BudgetCode records (active only by default) as id/value/label
+        options labeled with the budget code, mirroring the legacy
+        selectBudgetCode tag.
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelValueOptionsOk'
+  /api/orderStatusOptions:
+    get:
+      operationId: orderStatusOptions
+      summary: Order status options (React order list screen)
+      description: >
+        Renders the OrderStatus enum values as id/value/label options with
+        localized labels.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelValueOptionsOk'
+  /api/orderSummaryStatusOptions:
+    get:
+      operationId: orderSummaryStatusOptions
+      summary: Grouped OrderSummaryStatus options (React order summary screens)
+      description: >
+        Renders the OrderSummaryStatus enum groupings (order, shipment,
+        receipt, payment and derived statuses) used by the legacy order
+        summary list filters.
+      responses:
+        '200':
+          description: Grouped status options.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - orderStatuses
+                      - shipmentStatuses
+                      - receiptStatuses
+                      - paymentStatuses
+                      - derivedStatuses
+                    properties:
+                      orderStatuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IdLabelValueOption'
+                      shipmentStatuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IdLabelValueOption'
+                      receiptStatuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IdLabelValueOption'
+                      paymentStatuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IdLabelValueOption'
+                      derivedStatuses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IdLabelValueOption'
   /api/productAssociationTypeCodeOptions:
     get:
       operationId: productAssociationTypeCodeOptions

@@ -118,6 +118,12 @@ const ORDER_URL = {
   addComment: (id) => `${ORDER_URL.base}/addComment/${id}`,
   addDocument: (id) => `${ORDER_URL.base}/addDocument/${id}`,
   placeOrder: (id) => `${ORDER_URL.base}/placeOrder/${id}`,
+  listOrderItems: () => `${ORDER_URL.base}/listOrderItems`,
+  addAdjustment: (id) => `${ORDER_URL.base}/addAdjustment/${id}`,
+  editAdjustment: (id) => `${ORDER_URL.base}/editAdjustment/${id}`,
+  orderSummaryList: () => `${ORDER_URL.base}/orderSummaryList`,
+  orderItemSummary: () => `${ORDER_URL.base}/orderItemSummary`,
+  orderItemDetails: () => `${ORDER_URL.base}/orderItemDetails`,
 };
 
 const PURCHASE_ORDER_URL = {
@@ -257,6 +263,19 @@ const LOCATION_TYPE_URL = {
   list: () => `${LOCATION_TYPE_URL.base}/list`,
   create: () => `${LOCATION_TYPE_URL.base}/create`,
   edit: (id) => `${LOCATION_TYPE_URL.base}/edit/${id}`,
+  show: (id) => `${LOCATION_TYPE_URL.base}/show/${id}`,
+};
+
+const ORGANIZATION_URL = {
+  base: `${CONTEXT_PATH}/organization`,
+  list: () => `${ORGANIZATION_URL.base}/list`,
+  create: () => `${ORGANIZATION_URL.base}/create`,
+  edit: (id) => `${ORGANIZATION_URL.base}/edit/${id}`,
+  show: (id) => `${ORGANIZATION_URL.base}/show/${id}`,
+  download: (params) => stringifyUrl({
+    url: `${ORGANIZATION_URL.base}/download`,
+    query: params ?? {},
+  }),
 };
 
 const CATEGORY_URL = {
@@ -313,9 +332,16 @@ const REQUISITION_URL = {
     query: { ...params },
   }),
   pick: (id) => `${REQUISITION_URL.base}/pick/${id}`,
+  process: (id) => `${REQUISITION_URL.base}/process/${id}`,
   confirm: (id) => `${REQUISITION_URL.base}/confirm/${id}`,
   transfer: (id) => `${REQUISITION_URL.base}/transfer/${id}`,
+  printDraft: (id) => `${REQUISITION_URL.base}/printDraft/${id}`,
   addDocument: (id) => `${REQUISITION_URL.base}/addDocument/${id}`,
+};
+
+const REQUISITION_ITEM_URL = {
+  base: `${CONTEXT_PATH}/requisitionItem`,
+  change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
 };
 
 const PICKLIST_URL = {
@@ -364,6 +390,7 @@ export {
   LOCATION_TYPE_URL,
   LOCATION_URL,
   ORDER_URL,
+  ORGANIZATION_URL,
   PICKLIST_URL,
   PRODUCT_ASSOCIATION_URL,
   PRODUCT_CONFIGURATION_URL,
@@ -372,6 +399,7 @@ export {
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
   REPLENISHMENT_URL,
+  REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
   STOCK_MOVEMENT_URL,

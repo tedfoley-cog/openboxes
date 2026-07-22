@@ -131,6 +131,28 @@ class UrlMappings {
             action = [GET: "locationTypeCodeOptions"]
         }
 
+        // Party type options for the organization form
+        "/api/partyTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "partyTypeOptions"]
+        }
+
+        // Organization role type options for the organization list filters
+        "/api/organizationRoleTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "organizationRoleTypeOptions"]
+        }
+
+        "/api/organizations/search"(parseRequest: true) {
+            controller = { "organizationApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/organizations/$id/details"(parseRequest: true) {
+            controller = { "organizationApi" }
+            action = [GET: "details"]
+        }
+
         "/api/locationTypes"(parseRequest: true) {
             controller = { "locationTypeApi" }
             action = [GET: "list", POST: "create"]
@@ -564,6 +586,11 @@ class UrlMappings {
             action = [GET: "returnPrint"]
         }
 
+        "/api/picklists"(parseRequest: true) {
+            controller = "picklistApi"
+            action = [POST: "save"]
+        }
+
         // Requisition API (classic requisition flow screens migrated to React)
 
         "/api/requisitions"(parseRequest: true) {
@@ -629,6 +656,53 @@ class UrlMappings {
         "/api/requisitions/documentTypes" {
             controller = "requisitionApi"
             action = [GET: "documentTypes"]
+        }
+
+        "/api/requisitions/$id/review"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "review"]
+        }
+
+        "/api/requisitions/$id/process" {
+            controller = "requisitionApi"
+            action = [GET: "process"]
+        }
+
+        "/api/requisitions/$id/issue"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "issue"]
+        }
+
+        "/api/requisitions/$id/printDraft" {
+            controller = "requisitionApi"
+            action = [GET: "printDraft"]
+        }
+
+        // Requisition Item API (requisitionItem/change screen migrated to React)
+
+        "/api/requisitionItems/$id" {
+            controller = "requisitionItemApi"
+            action = [GET: "read"]
+        }
+
+        "/api/requisitionItems/$id/changeQuantity"(parseRequest: true) {
+            controller = "requisitionItemApi"
+            action = [POST: "changeQuantity"]
+        }
+
+        "/api/requisitionItems/$id/substitute"(parseRequest: true) {
+            controller = "requisitionItemApi"
+            action = [POST: "substitute"]
+        }
+
+        "/api/requisitionItems/$id/cancel"(parseRequest: true) {
+            controller = "requisitionItemApi"
+            action = [POST: "cancel"]
+        }
+
+        "/api/requisitionItems/$id/undoChanges"(parseRequest: true) {
+            controller = "requisitionItemApi"
+            action = [POST: "undoChanges"]
         }
 
         // Partial Receiving API
@@ -783,6 +857,67 @@ class UrlMappings {
         "/api/orders/$id/comments"(parseRequest: true) {
             controller = "orderApi"
             action = [POST: "createComment"]
+        }
+
+        // Order API (migrated order list / documents / adjustments screens)
+        "/api/orders/pendingItems"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "pendingItems"]
+        }
+
+        "/api/orders/documentTypes"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/orders/$id/documents"(parseRequest: false) {
+            controller = "orderApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/orders/$id/orderItemOptions"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "orderItemOptions"]
+        }
+
+        "/api/orders/$id/adjustments"(parseRequest: true) {
+            controller = "orderApi"
+            action = [POST: "createAdjustment"]
+        }
+
+        "/api/orders/$id/adjustments/$adjustmentId"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "readAdjustment", PUT: "updateAdjustment"]
+        }
+
+        "/api/orderSummaries"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "orderSummaryList"]
+        }
+
+        "/api/orderItemSummaries"(parseRequest: true) {
+            controller = "orderApi"
+            action = [GET: "orderItemSummaryList"]
+        }
+
+        "/api/orderAdjustmentTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "orderAdjustmentTypeOptions"]
+        }
+
+        "/api/budgetCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "budgetCodeOptions"]
+        }
+
+        "/api/orderStatusOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "orderStatusOptions"]
+        }
+
+        "/api/orderSummaryStatusOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "orderSummaryStatusOptions"]
         }
 
         "/api/invoices/$id/items"(parseRequest: true) {
