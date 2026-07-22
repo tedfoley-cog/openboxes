@@ -91,6 +91,12 @@ class UrlMappings {
             action = [GET: "glAccountOptions"]
         }
 
+        // Gl account type options for the GL account form
+        "/api/glAccountTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "glAccountTypeOptions"]
+        }
+
         "/api/paymentTermOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "paymentTermOptions"]

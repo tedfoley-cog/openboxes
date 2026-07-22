@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: OpenBoxes - SelectOptionsApiController
+  description: >
+    Dropdown option endpoints handled by
+    org.pih.warehouse.api.SelectOptionsApiController, routed via dedicated
+    "/api/*Options" mappings. Only glAccountTypeOptions (added in Phase 2,
+    Batch 26 for the React glAccount form) is pinned here so far; the other
+    option actions (categoryOptions, catalogOptions, tagOptions,
+    productGroupOptions, glAccountOptions, ...) predate the OpenAPI effort
+    and can be added incrementally.
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080/openboxes
+    description: Local Docker baseline (docs/migration/RUNNING_LOCALLY.md)
+security:
+  - cookieAuth: []
+paths:
+  /api/glAccountTypeOptions:
+    get:
+      operationId: listGlAccountTypeOptions
+      summary: List GL account type options for selects
+      description: >
+        Returns all GlAccountType records that have a code, sorted by code,
+        as {id, label} pairs (label is the code).
+      responses:
+        '200':
+          description: GL account type options.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, label]
+                      properties:
+                        id:
+                          $ref: '../components/common.yaml#/components/schemas/Id'
+                        label:
+                          type: string
+                      additionalProperties: true
+components:
+  securitySchemes:
+    cookieAuth:
+      $ref: '../components/common.yaml#/components/securitySchemes/cookieAuth'
