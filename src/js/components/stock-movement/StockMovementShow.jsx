@@ -435,7 +435,7 @@ const StockMovementShow = () => {
           </ul>
         </div>
         <div className="card-body p-0 table-responsive">
-          {tabRenderers[activeTab]()}
+          {activeTab && tabRenderers[activeTab]()}
         </div>
       </div>
     </div>
