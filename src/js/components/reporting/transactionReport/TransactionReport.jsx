@@ -36,6 +36,9 @@ const DATE_FORMAT = 'MM/DD/YYYY';
 
 const formatNumber = (value) => Number(value ?? 0).toLocaleString('en-US');
 
+// The legacy metadata panel showed refresh times relative to now (prettyDateFormat)
+const formatRelative = (value) => (value ? moment(value, 'DD/MMM/YYYY HH:mm:ss').fromNow() : null);
+
 const TransactionReport = () => {
   useTranslation('transactionReport', 'default');
 
@@ -405,11 +408,11 @@ const TransactionReport = () => {
                 </tr>
                 <tr>
                   <td>{translate('react.transactionReport.previousRefresh.label', 'Previous Refresh')}</td>
-                  <td>{metadata?.previousRefresh}</td>
+                  <td>{formatRelative(metadata?.previousRefresh)}</td>
                 </tr>
                 <tr>
                   <td>{translate('react.transactionReport.nextRefresh.label', 'Next Refresh')}</td>
-                  <td>{metadata?.nextRefresh}</td>
+                  <td>{formatRelative(metadata?.nextRefresh)}</td>
                 </tr>
               </tbody>
             </table>
