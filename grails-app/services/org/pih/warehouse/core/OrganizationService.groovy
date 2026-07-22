@@ -11,7 +11,6 @@ package org.pih.warehouse.core
 
 import grails.gorm.transactions.Transactional
 import org.apache.commons.lang.StringUtils
-import org.hibernate.criterion.CriteriaSpecification
 
 @Transactional
 class OrganizationService {
@@ -142,10 +141,18 @@ class OrganizationService {
     List<Organization> getOrganizations(Map params) {
         List roleTypes = params.list("roleType").collect { it as RoleType }
 
+        // Restrict by an id subquery rather than joining the roles collection,
+        // which would return one row per matching role and break pagination.
+        List<String> roleOrgIds = roleTypes
+                ? PartyRole.executeQuery(
+                        "select distinct pr.party.id from PartyRole pr where pr.roleType in (:roleTypes)",
+                        [roleTypes: roleTypes])
+                : null
+        if (roleTypes && !roleOrgIds) {
+            return []
+        }
+
         List<Organization> organizations = Organization.createCriteria().list(params) {
-            // Joining the roles collection returns one row per matching role, so
-            // collapse duplicates back to distinct organizations.
-            resultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
             if (params.q) {
                 or {
                     ilike("id", "${params.q}%")
@@ -154,10 +161,8 @@ class OrganizationService {
                     ilike("description", "${params.q}%")
                 }
             }
-            if (roleTypes) {
-                roles {
-                    'in'("roleType", roleTypes)
-                }
+            if (roleOrgIds) {
+                'in'("id", roleOrgIds)
             }
             if (params.active) {
                 eq('active', true)
