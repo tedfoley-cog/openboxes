@@ -127,7 +127,7 @@ class SelectOptionsApiController {
     }
 
     def localeOptions() {
-        List<String> supportedLocales = grailsApplication.config.openboxes.locale.supportedLocales?.sort() ?: []
+        List<String> supportedLocales = grailsApplication.config.openboxes.locale.supportedLocales?.toSorted() ?: []
         List options = supportedLocales.collect { String localeCode ->
             [id: localeCode, label: LocalizationUtil.getLocale(localeCode).getDisplayName(LocalizationUtil.currentLocale)]
         }
