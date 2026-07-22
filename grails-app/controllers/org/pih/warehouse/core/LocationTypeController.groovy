@@ -42,7 +42,7 @@ class LocationTypeController {
     def edit() {
         // The legacy show screen posts to this action with the id as a request
         // parameter; redirect so the id lands in the path for the React route.
-        if (request.post && params.id) {
+        if (request.method == "POST" && params.id) {
             redirect(action: "edit", id: params.id)
             return
         }
