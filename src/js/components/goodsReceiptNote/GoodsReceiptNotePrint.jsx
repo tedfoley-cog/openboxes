@@ -94,6 +94,7 @@ const GoodsReceiptNotePrint = () => {
 
   const [shipment, setShipment] = useState(null);
   const [loadError, setLoadError] = useState(null);
+  const [datePrinted] = useState(() => new Date());
 
   useEffect(() => {
     if (!id) {
@@ -186,7 +187,7 @@ const GoodsReceiptNotePrint = () => {
                       {translate('react.goodsReceiptNote.datePrinted.label', 'Date printed')}
                       :
                     </td>
-                    <td>{formatLocalDateTime(new Date())}</td>
+                    <td>{formatLocalDateTime(datePrinted)}</td>
                   </tr>
                   <tr>
                     <td className="text-right font-weight-bold">
