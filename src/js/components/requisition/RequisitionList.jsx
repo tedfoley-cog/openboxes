@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+import moment from 'moment';
 import queryString from 'query-string';
 import { getTranslate } from 'react-localize-redux';
 import { useSelector } from 'react-redux';
@@ -30,6 +31,8 @@ const prettyDate = (value) => {
   return value.split(' ')[0];
 };
 
+const DATE_TIME_FORMAT = 'DD/MMM/YYYY HH:mm:ss';
+
 // Mirrors the legacy "time to process" column: dateIssued (or the furthest
 // milestone reached) minus dateCreated, rendered as a rough duration.
 const timeToProcess = (row) => {
@@ -38,7 +41,8 @@ const timeToProcess = (row) => {
   if (!end || !row.dateCreated) {
     return null;
   }
-  const ms = new Date(end).getTime() - new Date(row.dateCreated).getTime();
+  const ms = moment(end, DATE_TIME_FORMAT).valueOf()
+    - moment(row.dateCreated, DATE_TIME_FORMAT).valueOf();
   if (Number.isNaN(ms) || ms < 0) {
     return null;
   }
