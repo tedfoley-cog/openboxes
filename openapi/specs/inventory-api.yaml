@@ -287,12 +287,22 @@ paths:
           description: Transaction type id (echoed back in the response).
         - name: product.id
           in: query
-          required: true
+          required: false
           schema:
             type: string
           description: >
-            Repeatable product ids. Omitting it raises
+            Repeatable product ids. At least one product.id or
+            inventoryItem.id is required; omitting both raises
             IllegalArgumentException (500).
+        - name: inventoryItem.id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >
+            Repeatable inventory item ids, used by the legacy
+            expiring/expired stock lists. Only consulted when no
+            product.id values are supplied.
       responses:
         '200':
           description: Candidate rows plus the resolved transaction type.

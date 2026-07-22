@@ -30,6 +30,7 @@ const CreateTransaction = () => {
   const params = queryString.parse(location.search);
   const transactionTypeId = params['transactionType.id'];
   const productIds = [].concat(params['product.id'] || []);
+  const inventoryItemIds = [].concat(params['inventoryItem.id'] || []);
 
   const [transactionType, setTransactionType] = useState(null);
   const [rows, setRows] = useState([]);
@@ -41,7 +42,7 @@ const CreateTransaction = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (!currentLocation?.id || !productIds.length) {
+    if (!currentLocation?.id || (!productIds.length && !inventoryItemIds.length)) {
       setLoading(false);
       return;
     }
@@ -51,6 +52,7 @@ const CreateTransaction = () => {
         locationId: currentLocation?.id,
         transactionTypeId,
         'product.id': productIds,
+        'inventoryItem.id': inventoryItemIds,
       },
       paramsSerializer: (parameters) => queryString.stringify(parameters),
     })
@@ -60,7 +62,7 @@ const CreateTransaction = () => {
       })
       .finally(() => setLoading(false));
     fetchLocations({ activityCodes: undefined }).then(setLocations);
-  }, [currentLocation?.id]);
+  }, [currentLocation?.id, location.search]);
 
   const isTransfer = TRANSFER_TYPE_IDS.includes(transactionType?.id);
   const isTransferIn = transactionType?.transactionCode === TRANSFER_IN_CODE;

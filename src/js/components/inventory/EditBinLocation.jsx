@@ -55,7 +55,7 @@ const EditBinLocation = () => {
         setReasonCodes(reasonCodesResponse.data.data);
       })
       .finally(() => setLoading(false));
-  }, [currentLocation?.id]);
+  }, [currentLocation?.id, location.search]);
 
   const onSubmit = (event) => {
     event.preventDefault();

@@ -102,9 +102,9 @@ class ConsumptionApiController {
                     returnedQuantity         : row.returnedQuantity,
                     totalConsumptionQuantity : row.totalConsumptionQuantity,
                     totalConsumptionValue    : (row.pricePerUnit ?: 0) * row.totalConsumptionQuantity,
-                    monthlyQuantity          : finiteOrNull(row.monthlyQuantity),
+                    monthlyQuantity          : command.numberOfDays ? finiteOrNull(row.monthlyQuantity) : null,
                     onHandQuantity           : row.onHandQuantity,
-                    numberOfMonthsRemaining  : finiteOrNull(row.numberOfMonthsRemaining),
+                    numberOfMonthsRemaining  : command.numberOfDays ? finiteOrNull(row.numberOfMonthsRemaining) : null,
             ]
         }
         render([data: data, totalCount: data.size()] as JSON)

@@ -127,11 +127,18 @@ class InventoryApiController {
         TransactionType transactionType = TransactionType.get(params.transactionTypeId)
 
         List<String> productIds = params.list("product.id").collect { String.valueOf(it) }
-        if (!productIds) {
-            throw new IllegalArgumentException("You must select at least one product")
+        List<String> inventoryItemIds = params.list("inventoryItem.id").collect { String.valueOf(it) }
+        if (!productIds && !inventoryItemIds) {
+            throw new IllegalArgumentException("You must select at least one product or inventory item")
         }
-        List<Product> products = Product.getAll(productIds)
-        def binLocationEntries = inventoryService.getProductQuantityByBinLocation(location, products)
+        def binLocationEntries
+        if (productIds) {
+            List<Product> products = Product.getAll(productIds)
+            binLocationEntries = inventoryService.getProductQuantityByBinLocation(location, products)
+        } else {
+            List<InventoryItem> inventoryItems = InventoryItem.getAll(inventoryItemIds).findAll { it }
+            binLocationEntries = inventoryService.getBinLocationsByInventoryItems(location, inventoryItems)
+        }
 
         def data = binLocationEntries.collect { entry ->
             [

@@ -819,6 +819,18 @@ class InventoryController {
     }
 
     def createTransaction() {
+        // Legacy screens (expiring/expired stock lists) POST their selection;
+        // redirect to a GET so the React screen can read the selection from
+        // the query string.
+        if (request.post) {
+            Map redirectParams = [
+                    'transactionType.id': params['transactionType.id'] ?: params.transactionType,
+                    'product.id'        : params.list('product.id'),
+                    'inventoryItem.id'  : params.list('inventoryItem.id'),
+            ].findAll { it.value }
+            redirect(action: "createTransaction", params: redirectParams)
+            return
+        }
         render(view: "/common/react", params: params)
     }
 
