@@ -176,6 +176,21 @@ class UrlMappings {
             action = [GET: "documentTypeOptions"]
         }
 
+        "/api/productAssociationTypeCodeOptions" {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productAssociationTypeCodeOptions"]
+        }
+
+        "/api/productAssociations"(parseRequest: true) {
+            controller = { "productAssociationApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/productAssociations/$id"(parseRequest: true) {
+            controller = { "productAssociationApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         "/api/stockMovements/shipmentStatusCodes" {
             controller = { "selectOptionsApi" }
             action = [GET: "shipmentStatusCodesOptions"]
@@ -194,6 +209,16 @@ class UrlMappings {
         "/api/products/mergeLogs"(parseRequest: true) {
             controller = { "productApi" }
             action = [GET: "mergeLogs"]
+        }
+
+        "/api/products/productSearch" {
+            controller = { "productApi" }
+            action = [GET: "productSearch"]
+        }
+
+        "/api/products/upnDatabase" {
+            controller = { "productApi" }
+            action = [GET: "upnDatabase"]
         }
 
         "/api/products/batchEdit"(parseRequest: true) {
@@ -543,7 +568,37 @@ class UrlMappings {
 
         "/api/requisitions"(parseRequest: true) {
             controller = "requisitionApi"
-            action = [POST: "create"]
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/requisitions/$id/edit"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "edit"]
+        }
+
+        "/api/requisitions/$id/header"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "updateHeader"]
+        }
+
+        "/api/requisitions/$id/items"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "saveItems"]
+        }
+
+        "/api/requisitions/$id/pick"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "pick"]
+        }
+
+        "/api/requisitions/$id/picklist"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "updatePicklist"]
+        }
+
+        "/api/requisitions/$id/picklistItems"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "updatePicklistItems"]
         }
 
         "/api/requisitions/templates" {
@@ -862,6 +917,11 @@ class UrlMappings {
             action = [POST: "createPicklistItem"]
         }
 
+        "/api/replenishments/$id/print" {
+            controller = { "replenishmentApi" }
+            action = [GET: "print"]
+        }
+
         // Dashboard API
 
         "/api/dashboard/config"(parseRequest: true) {
@@ -1087,6 +1147,11 @@ class UrlMappings {
          * Transaction API endpoints
          */
 
+        "/api/inventorySnapshots" {
+            controller = { "inventorySnapshotApi" }
+            action = [GET: "list"]
+        }
+
         "/api/transactions"(parseRequest: true) {
             controller = { "transactionApi" }
             action = [GET: "list", POST: "create"]
@@ -1110,6 +1175,11 @@ class UrlMappings {
         "/api/transactions/$id"(parseRequest: false) {
             controller = { "transactionApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/transactionEntries/$id"(parseRequest: false) {
+            controller = { "transactionApi" }
+            action = [GET: "readEntry", PUT: "updateEntry"]
         }
 
         "/api/transactions/$id/entries/$entryId"(parseRequest: false) {
