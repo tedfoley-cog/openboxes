@@ -94,6 +94,11 @@ export const PRODUCT_DOCUMENT_BY_ID = (id, documentId) => `${PRODUCT_API}/${id}/
 export const PRODUCT_MERGE_LOGS = `${PRODUCT_API}/mergeLogs`;
 export const PRODUCT_BATCH_EDIT = `${PRODUCT_API}/batchEdit`;
 export const PRODUCT_VALIDATE_IMPORT = `${PRODUCT_API}/validateImport`;
+export const PRODUCT_SCREEN_SEARCH = `${PRODUCT_API}/productSearch`;
+export const PRODUCT_UPN_DATABASE = `${PRODUCT_API}/upnDatabase`;
+export const PRODUCT_ASSOCIATION_API = `${API}/productAssociations`;
+export const PRODUCT_ASSOCIATION_BY_ID = (id) => `${PRODUCT_ASSOCIATION_API}/${id}`;
+export const PRODUCT_ASSOCIATION_TYPE_CODE_OPTIONS = `${API}/productAssociationTypeCodeOptions`;
 export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
 export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
 export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
@@ -246,6 +251,12 @@ export const REQUISITION_ITEM_CHANGE_QUANTITY = (id) => `${REQUISITION_ITEM_BY_I
 export const REQUISITION_ITEM_SUBSTITUTE = (id) => `${REQUISITION_ITEM_BY_ID(id)}/substitute`;
 export const REQUISITION_ITEM_CANCEL = (id) => `${REQUISITION_ITEM_BY_ID(id)}/cancel`;
 export const REQUISITION_ITEM_UNDO_CHANGES = (id) => `${REQUISITION_ITEM_BY_ID(id)}/undoChanges`;
+export const REQUISITION_EDIT = (id) => `${REQUISITION_BY_ID(id)}/edit`;
+export const REQUISITION_HEADER = (id) => `${REQUISITION_BY_ID(id)}/header`;
+export const REQUISITION_ITEMS = (id) => `${REQUISITION_BY_ID(id)}/items`;
+export const REQUISITION_PICK = (id) => `${REQUISITION_BY_ID(id)}/pick`;
+export const REQUISITION_PICKLIST = (id) => `${REQUISITION_BY_ID(id)}/picklist`;
+export const REQUISITION_PICKLIST_ITEMS = (id) => `${REQUISITION_BY_ID(id)}/picklistItems`;
 
 // FULL OUTBOUND IMPORT FEATURE
 export const FULFILLMENT_API = `${API}/fulfillments`;

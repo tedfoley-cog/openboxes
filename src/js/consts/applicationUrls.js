@@ -31,6 +31,18 @@ const PRODUCT_URL = {
   batchEdit: () => `${PRODUCT_URL.base}/batchEdit`,
   batchEditProperties: () => `${PRODUCT_URL.base}/batchEditProperties`,
   mergeLogs: () => `${PRODUCT_URL.base}/productMergeLogs`,
+  search: () => `${PRODUCT_URL.base}/search`,
+  show: (id) => `${PRODUCT_URL.base}/show/${id}`,
+  upnDatabase: () => `${PRODUCT_URL.base}/upnDatabase`,
+  barcode: (data) => `${PRODUCT_URL.base}/barcode?data=${encodeURIComponent(data)}&width=100&height=10&format=CODE_128`,
+};
+
+const PRODUCT_ASSOCIATION_URL = {
+  base: `${CONTEXT_PATH}/productAssociation`,
+  list: () => `${PRODUCT_ASSOCIATION_URL.base}/list`,
+  create: () => `${PRODUCT_ASSOCIATION_URL.base}/create`,
+  edit: (id) => `${PRODUCT_ASSOCIATION_URL.base}/edit/${id}`,
+  exportXls: () => `${PRODUCT_ASSOCIATION_URL.base}/list?format=xls`,
 };
 
 const LOCATION_URL = {
@@ -264,7 +276,22 @@ const REQUISITION_URL = {
   }),
   show: (id) => `${REQUISITION_URL.base}/show/${id}`,
   edit: (id) => `${REQUISITION_URL.base}/edit/${id}`,
+  editHeader: (id) => `${REQUISITION_URL.base}/editHeader/${id}`,
   review: (id) => `${REQUISITION_URL.base}/review/${id}`,
+  picked: (id) => `${REQUISITION_URL.base}/picked/${id}`,
+  createStock: (templateId) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/createStock`,
+    query: templateId ? { templateId } : {},
+  }),
+  createNonStock: () => `${REQUISITION_URL.base}/createNonStock`,
+  exportRequisitions: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/exportRequisitions`,
+    query: { ...params },
+  }),
+  exportRequisitionItems: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/exportRequisitionItems`,
+    query: { ...params },
+  }),
   pick: (id) => `${REQUISITION_URL.base}/pick/${id}`,
   process: (id) => `${REQUISITION_URL.base}/process/${id}`,
   confirm: (id) => `${REQUISITION_URL.base}/confirm/${id}`,
@@ -323,6 +350,7 @@ export {
   LOCATION_URL,
   ORDER_URL,
   PICKLIST_URL,
+  PRODUCT_ASSOCIATION_URL,
   PRODUCT_CONFIGURATION_URL,
   PRODUCT_SUPPLIER_URL,
   PRODUCT_URL,

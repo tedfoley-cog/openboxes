@@ -388,6 +388,31 @@ const AsyncProductMergeLogs = Loadable({
   loading: Loading,
 });
 
+const AsyncProductSearch = Loadable({
+  loader: () => import('components/product/ProductSearch'),
+  loading: Loading,
+});
+
+const AsyncProductShow = Loadable({
+  loader: () => import('components/product/ProductShow'),
+  loading: Loading,
+});
+
+const AsyncProductUpnDatabase = Loadable({
+  loader: () => import('components/product/ProductUpnDatabase'),
+  loading: Loading,
+});
+
+const AsyncProductAssociationList = Loadable({
+  loader: () => import('components/productAssociation/ProductAssociationList'),
+  loading: Loading,
+});
+
+const AsyncProductAssociationForm = Loadable({
+  loader: () => import('components/productAssociation/ProductAssociationForm'),
+  loading: Loading,
+});
+
 const StockMovementList = (props) => {
   const parsedSearchQuery = queryString.parse(props?.location?.search);
   const direction = parsedSearchQuery?.direction?.toUpperCase();
@@ -551,6 +576,36 @@ const AsyncPicklistReturnPrint = Loadable({
   loading: Loading,
 });
 
+const AsyncRequisitionList = Loadable({
+  loader: () => import('components/requisition/RequisitionList'),
+  loading: Loading,
+});
+
+const AsyncRequisitionCreateNonStock = Loadable({
+  loader: () => import('components/requisition/RequisitionCreateNonStock'),
+  loading: Loading,
+});
+
+const AsyncRequisitionCreateStock = Loadable({
+  loader: () => import('components/requisition/RequisitionCreateStock'),
+  loading: Loading,
+});
+
+const AsyncRequisitionEdit = Loadable({
+  loader: () => import('components/requisition/RequisitionEdit'),
+  loading: Loading,
+});
+
+const AsyncRequisitionEditHeader = Loadable({
+  loader: () => import('components/requisition/RequisitionEditHeader'),
+  loading: Loading,
+});
+
+const AsyncRequisitionPick = Loadable({
+  loader: () => import('components/requisition/RequisitionPick'),
+  loading: Loading,
+});
+
 const Router = () => {
   useConnectionListener();
 
@@ -631,6 +686,12 @@ const Router = () => {
             <Route path="**/resettingInstanceInfo/index">
               <AsyncResetInstancePage />
             </Route>
+            <MainLayoutRoute path="**/requisition/list" component={AsyncRequisitionList} />
+            <MainLayoutRoute path="**/requisition/createNonStock" component={AsyncRequisitionCreateNonStock} />
+            <MainLayoutRoute path="**/requisition/createStock" component={AsyncRequisitionCreateStock} />
+            <MainLayoutRoute path="**/requisition/edit/:requisitionId" component={AsyncRequisitionEdit} />
+            <MainLayoutRoute path="**/requisition/editHeader/:requisitionId" component={AsyncRequisitionEditHeader} />
+            <MainLayoutRoute path="**/requisition/pick/:requisitionId" component={AsyncRequisitionPick} />
             <MainLayoutRoute path="**/requisition/create" component={AsyncRequisitionCreate} />
             <MainLayoutRoute path="**/requisition/chooseTemplate" component={AsyncRequisitionChooseTemplate} />
             <MainLayoutRoute path="**/requisition/confirm/:requisitionId" component={AsyncRequisitionConfirm} />
@@ -652,6 +713,12 @@ const Router = () => {
             <MainLayoutRoute path="**/product/batchEditProperties" component={AsyncProductBatchEditProperties} />
             <MainLayoutRoute path="**/product/importAsCsv" component={AsyncProductImportCsv} />
             <MainLayoutRoute path="**/product/productMergeLogs" component={AsyncProductMergeLogs} />
+            <MainLayoutRoute path="**/product/search" component={AsyncProductSearch} />
+            <MainLayoutRoute path="**/product/show/:id" component={AsyncProductShow} />
+            <MainLayoutRoute path="**/product/upnDatabase" component={AsyncProductUpnDatabase} />
+            <MainLayoutRoute path="**/productAssociation/list" component={AsyncProductAssociationList} />
+            <MainLayoutRoute path="**/productAssociation/create" component={AsyncProductAssociationForm} />
+            <MainLayoutRoute path="**/productAssociation/edit/:id" component={AsyncProductAssociationForm} />
             <MainLayoutRoute path="**/stockTransfer/list" component={AsyncStockTransferList} />
             <MainLayoutRoute path="**/locationGroup/list" component={AsyncLocationGroupList} />
             <MainLayoutRoute path="**/locationGroup/create" component={AsyncLocationGroupForm} />
