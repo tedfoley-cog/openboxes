@@ -17,6 +17,18 @@ const defaultShippingDate = () => {
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
 };
 
+// appends the browser's UTC offset (e.g. "+02:00") so the server can
+// validate the shipping date against "now" timezone-aware, like the legacy
+// sendShipment form did
+const withTimezoneOffset = (value) => {
+  const offsetMinutes = -new Date(value).getTimezoneOffset();
+  const sign = offsetMinutes >= 0 ? '+' : '-';
+  const pad = (num) => String(Math.abs(num)).padStart(2, '0');
+  const hours = pad(Math.trunc(offsetMinutes / 60));
+  const minutes = pad(offsetMinutes % 60);
+  return `${value.replace('T', ' ')} ${sign}${hours}:${minutes}`;
+};
+
 // React version of the legacy shipment/sendShipment GSP (standalone screen
 // reached from showDetails, distinct from the create-shipment wizard step).
 const SendShipment = () => {
@@ -47,7 +59,7 @@ const SendShipment = () => {
     setSaving(true);
     try {
       await shipmentApi.sendShipment(shipmentId, {
-        actualShippingDate: actualShippingDate ? actualShippingDate.replace('T', ' ') : null,
+        actualShippingDate: actualShippingDate ? withTimezoneOffset(actualShippingDate) : null,
         comments: comments || null,
         debitStockOnSend: true,
         emailRecipientIds: Object.keys(emailRecipients).filter((id) => emailRecipients[id]),

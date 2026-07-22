@@ -628,9 +628,14 @@ class ShipmentApiController {
         Location warehouseInstance = Location.get(session.warehouse.id)
         try {
             shipmentService.validatePicklist(shipment)
-            Date actualShippingDate = jsonObject.actualShippingDate ?
-                    Date.parse("yyyy-MM-dd HH:mm", jsonObject.actualShippingDate as String) : new Date()
-            if (actualShippingDate > new Date()) {
+            String shippingDateInput = jsonObject.actualShippingDate as String
+            // dates with an explicit offset (like the legacy sendShipment form
+            // sent) are parsed timezone-aware and validated against "now";
+            // offset-less dates keep the wizard's server-timezone parsing
+            boolean hasOffset = shippingDateInput && shippingDateInput ==~ /.*(Z|[+-]\d{2}:?\d{2})$/
+            Date actualShippingDate = shippingDateInput ?
+                    Date.parse(hasOffset ? "yyyy-MM-dd HH:mm XXX" : "yyyy-MM-dd HH:mm", shippingDateInput) : new Date()
+            if (hasOffset && actualShippingDate > new Date()) {
                 renderError(g.message(code: 'shipping.specifyValidShipmentDate.message') as String)
                 return
             }

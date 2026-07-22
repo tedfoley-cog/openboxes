@@ -567,7 +567,11 @@ paths:
                 actualShippingDate:
                   type: string
                   nullable: true
-                  description: Format yyyy-MM-dd HH:mm; defaults to now.
+                  description: >-
+                    Format yyyy-MM-dd HH:mm, optionally followed by a UTC
+                    offset (e.g. "2024-01-01 12:00 +02:00"). When an offset is
+                    present the date is validated to not be in the future.
+                    Defaults to now.
                 comments:
                   type: string
                   nullable: true
