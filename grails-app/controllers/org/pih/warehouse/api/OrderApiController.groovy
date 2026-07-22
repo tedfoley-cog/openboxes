@@ -69,11 +69,11 @@ class OrderApiController {
         def orderIds = orders?.collect { it?.id }
         def ordersDerivedStatus = orderService.getOrdersDerivedStatus(orderIds)
 
-        if (params.format && orders) {
+        if (params.format) {
             renderOrderLineItemsCsv(orders, ordersDerivedStatus)
             return
         }
-        if (params.downloadOrders && orders) {
+        if (params.downloadOrders) {
             renderOrdersCsv(orders, ordersDerivedStatus)
             return
         }
