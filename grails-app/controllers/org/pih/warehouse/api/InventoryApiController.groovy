@@ -129,7 +129,7 @@ class InventoryApiController {
         List<InventoryItem> inventoryItems = expired ?
                 dashboardService.getExpiredStock(command) :
                 dashboardService.getExpiringStock(command)
-        List<Category> categories = inventoryItems*.product*.category.findAll { it }.unique().sort { it.name }
+        List<Category> categories = inventoryItems*.product*.category.findAll { it }.unique().sort { it.name ?: '' }
 
         Map<InventoryItem, Integer> quantityMap = inventoryItems.isEmpty() ? [:] :
                 productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
