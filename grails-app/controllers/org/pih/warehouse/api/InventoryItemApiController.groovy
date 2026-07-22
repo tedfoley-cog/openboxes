@@ -2,6 +2,7 @@ package org.pih.warehouse.api
 
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import org.pih.warehouse.core.Constants
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.inventory.InventoryItem
 import org.pih.warehouse.inventory.InventoryItemDataService
@@ -91,7 +92,8 @@ class InventoryItemApiController {
             return
         }
 
-        Date minDate = grailsApplication.config.openboxes.expirationDate.minValue
+        Date minDate = Constants.EXPIRATION_DATE_FORMATTER.parse(
+                grailsApplication.config.openboxes.expirationDate.minValue.toString())
         if (expirationDate && expirationDate < minDate) {
             response.status = 400
             render([errorMessage: "This date is invalid. Please enter a date after ${minDate.getYear() + 1900}."] as JSON)

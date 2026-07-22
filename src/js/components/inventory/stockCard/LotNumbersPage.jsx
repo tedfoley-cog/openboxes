@@ -22,6 +22,7 @@ import Translate, { translateWithDefaultMessage } from 'utils/Translate';
 import PageWrapper from 'wrappers/PageWrapper';
 
 import 'components/inventory/styles.scss';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const LotNumbersPage = () => {
   useTranslation('stockCard', 'inventory', 'reactTable');

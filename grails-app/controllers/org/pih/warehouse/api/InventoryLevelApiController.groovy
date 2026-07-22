@@ -95,7 +95,16 @@ class InventoryLevelApiController {
         }
 
         String status = request.JSON?.containsKey("status") ? request.JSON.status : params.status
-        inventoryLevel.status = status ? InventoryStatus.valueOf(status) : null
+        InventoryStatus inventoryStatus = null
+        if (status) {
+            inventoryStatus = InventoryStatus.values().find { it.name() == status }
+            if (!inventoryStatus) {
+                response.status = 400
+                render([errorMessage: "Invalid inventory status '${status}'"] as JSON)
+                return
+            }
+        }
+        inventoryLevel.status = inventoryStatus
 
         if (!inventoryLevel.hasErrors() && inventoryLevel.save()) {
             render([data: [

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { STOCK_CARD_SUMMARY } from 'api/urls';
 import { INVENTORY_ITEM_URL } from 'consts/applicationUrls';
@@ -9,6 +10,7 @@ import Translate from 'utils/Translate';
 
 const StockCardHeader = ({ productId, activeScreen, onSummaryLoaded }) => {
   const [summary, setSummary] = useState(null);
+  const currentLocationId = useSelector((state) => state.session.currentLocation?.id);
 
   useEffect(() => {
     if (!productId) {
@@ -19,7 +21,7 @@ const StockCardHeader = ({ productId, activeScreen, onSummaryLoaded }) => {
         setSummary(response.data.data);
         onSummaryLoaded?.(response.data.data);
       });
-  }, [productId]);
+  }, [productId, currentLocationId]);
 
   const product = summary?.product;
 

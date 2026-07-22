@@ -56,7 +56,7 @@ const StockCardPage = () => {
   const productId = useProductId();
   const [activeTab, setActiveTab] = useState('currentStock');
   const [tabData, setTabData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loadingTabs, setLoadingTabs] = useState({});
 
   const { currentLocation, translate } = useSelector((state) => ({
     currentLocation: state.session.currentLocation,
@@ -79,18 +79,20 @@ const StockCardPage = () => {
     if (cachedTabData[activeTab]) {
       return;
     }
-    setLoading(true);
-    const request = activeTab === 'currentStock'
+    const fetchedTab = activeTab;
+    setLoadingTabs((prev) => ({ ...prev, [fetchedTab]: true }));
+    const request = fetchedTab === 'currentStock'
       ? apiClient.get(AVAILABLE_ITEMS, { params: { 'product.id': productId, 'location.id': currentLocation?.id } })
-      : apiClient.get(TAB_URLS[activeTab](productId));
+      : apiClient.get(TAB_URLS[fetchedTab](productId));
     request
       .then((response) => {
-        setTabData((prev) => ({ ...prev, [activeTab]: response.data.data }));
+        setTabData((prev) => ({ ...prev, [fetchedTab]: response.data.data }));
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingTabs((prev) => ({ ...prev, [fetchedTab]: false })));
   }, [productId, activeTab, currentLocation?.id]);
 
   const data = tabData[activeTab];
+  const loading = Boolean(loadingTabs[activeTab]);
 
   const currentStockColumns = useMemo(() => [
     {
