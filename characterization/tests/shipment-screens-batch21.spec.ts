@@ -52,7 +52,8 @@ async function seededProduct(page): Promise<{ id: string; productCode: string }>
     url(`/api/products?q=${encodeURIComponent(PRODUCTS.lamivudine.name)}`),
   );
   expect(res.status()).toBe(200);
-  const product = (await res.json()).data[0];
+  const products = (await res.json()).data;
+  const product = products.find((p) => p.name === PRODUCTS.lamivudine.name) ?? products[0];
   expect(product, `Seeded product not found: ${PRODUCTS.lamivudine.name}`).toBeTruthy();
   return product;
 }

@@ -51,7 +51,12 @@ const ReturnsShow = () => {
 
   const openSynchronizeDialog = () => {
     fetch(`${CONTEXT_PATH}/stockMovement/synchronizeDialog/${data.id}`, { credentials: 'same-origin' })
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Unable to load synchronize dialog (${response.status})`);
+        }
+        return response.text();
+      })
       .then((html) => setSynchronizeDialogHtml(html))
       .catch(() => Alert.error('Unable to load synchronize dialog'));
   };
