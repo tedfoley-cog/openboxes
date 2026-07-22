@@ -469,6 +469,9 @@ class RequisitionApiController extends BaseApiController {
         }
         jsonObject.picklistItems?.each { itemData ->
             PicklistItem existingPicklistItem = itemData.id ? PicklistItem.get(itemData.id) : null
+            if (existingPicklistItem && existingPicklistItem.picklist != picklist) {
+                existingPicklistItem = null
+            }
             Integer quantity = (itemData.quantity ?: 0) as Integer
             if (quantity > 0) {
                 if (existingPicklistItem) {
