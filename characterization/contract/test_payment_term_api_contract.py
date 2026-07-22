@@ -60,11 +60,11 @@ def test_read_and_update(client):
     assert created.status_code == 201
     term_id = created.json()["data"]["id"]
 
-    read = check(client, spec, "GET", f"/api/paymentTerms/{term_id}")
+    read = check(client, spec, "GET", "/api/paymentTerms/{id}", path=f"/api/paymentTerms/{term_id}")
     assert read.status_code == 200
     assert read.json()["data"]["code"] == f"ZZRU-{suffix}"
 
-    updated = check(client, spec, "PUT", f"/api/paymentTerms/{term_id}",
+    updated = check(client, spec, "PUT", "/api/paymentTerms/{id}", path=f"/api/paymentTerms/{term_id}",
                     json={"code": f"ZZRU-{suffix}",
                           "name": f"ZZ Read/update payment term {suffix} (edited)",
                           "daysToPayment": 60})

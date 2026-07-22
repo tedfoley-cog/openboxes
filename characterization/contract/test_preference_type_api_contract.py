@@ -42,11 +42,11 @@ def test_create_read_update(client):
     assert data["name"] == name
     assert data["validationCode"] == "WARN"
 
-    read = check(client, spec, "GET", f"/api/preferenceTypes/{data['id']}")
+    read = check(client, spec, "GET", "/api/preferenceTypes/{id}", path=f"/api/preferenceTypes/{data['id']}")
     assert read.status_code == 200
     assert read.json()["data"]["name"] == name
 
-    updated = check(client, spec, "PUT", f"/api/preferenceTypes/{data['id']}",
+    updated = check(client, spec, "PUT", "/api/preferenceTypes/{id}", path=f"/api/preferenceTypes/{data['id']}",
                     json={"name": f"{name} (edited)", "validationCode": "BLOCK"})
     assert updated.status_code == 200
     assert updated.json()["data"]["name"] == f"{name} (edited)"
