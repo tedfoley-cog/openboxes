@@ -46,6 +46,9 @@ const ProductsWithoutDefaultItemList = () => {
         { count: response.data.data.created },
       ));
       fetchData();
+    } catch (error) {
+      Alert.error(error.response?.data?.errorMessage
+        || translate('react.inventory.showProducts.createFailed.label', 'Default inventory items could not be created'));
     } finally {
       setCreating(false);
     }

@@ -256,6 +256,7 @@ const TransactionsList = () => {
       </div>
       <DataTable
         manual
+        sortable
         data={data}
         columns={columns}
         loading={loading}
