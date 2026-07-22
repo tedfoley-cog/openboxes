@@ -267,6 +267,7 @@ class InventoryLevelApiController {
     private Map toDetailJson(InventoryLevel inventoryLevel) {
         return toListJson(inventoryLevel) + [
                 version                : inventoryLevel.version,
+                facility               : inventoryLevel.inventory?.warehouse ? [id: inventoryLevel.inventory.warehouse.id, name: inventoryLevel.inventory.warehouse.name] : null,
                 supported              : inventoryLevel.status ? inventoryLevel.status in InventoryStatus.listEnabled() : null,
                 internalLocation       : inventoryLevel.internalLocation ? [id: inventoryLevel.internalLocation.id, name: inventoryLevel.internalLocation.name] : null,
                 preferredBinLocation   : inventoryLevel.preferredBinLocation ? [id: inventoryLevel.preferredBinLocation.id, name: inventoryLevel.preferredBinLocation.name] : null,

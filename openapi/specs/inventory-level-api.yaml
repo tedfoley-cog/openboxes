@@ -506,6 +506,8 @@ components:
             version:
               type: integer
               nullable: true
+            facility:
+              $ref: '#/components/schemas/NamedReference'
             supported:
               type: boolean
               nullable: true

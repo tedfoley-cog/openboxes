@@ -85,10 +85,13 @@ const InventoryLevelFormPage = () => {
   }, [location?.id, currentLocation?.id]);
 
   useEffect(() => {
+    if (!id && currentLocation?.id) {
+      setLocation({ id: currentLocation.id, label: currentLocation.name });
+    }
+  }, [id, currentLocation?.id]);
+
+  useEffect(() => {
     if (!id) {
-      if (currentLocation?.id) {
-        setLocation({ id: currentLocation.id, label: currentLocation.name });
-      }
       return;
     }
     apiClient.get(INVENTORY_LEVEL_BY_ID(id)).then((response) => {
@@ -98,8 +101,8 @@ const InventoryLevelFormPage = () => {
       setProduct(level.product
         ? { id: level.product.id, label: `${level.product.productCode} - ${level.product.name}` }
         : null);
-      setLocation(level.inventory
-        ? { id: null, label: level.inventory.warehouse }
+      setLocation(level.facility
+        ? { id: level.facility.id, label: level.facility.name }
         : null);
       setInternalLocation(level.internalLocation
         ? { id: level.internalLocation.id, label: level.internalLocation.name }
@@ -120,7 +123,7 @@ const InventoryLevelFormPage = () => {
       setForecastQuantity(level.forecastQuantity ?? '');
       setForecastPeriodDays(level.forecastPeriodDays ?? '');
     });
-  }, [id, currentLocation?.id]);
+  }, [id]);
 
   const save = async () => {
     setSaving(true);
