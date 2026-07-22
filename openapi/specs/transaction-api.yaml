@@ -37,7 +37,7 @@ paths:
               properties:
                 transactionTypeId:
                   type: string
-                  description: TransactionType id (e.g. "1" Consumed, "2" Adjustment debit).
+                  description: TransactionType id (e.g. "2" Consumed, "10" Adjustment debit).
                 locationId:
                   type: string
                   nullable: true
