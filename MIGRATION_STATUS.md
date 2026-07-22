@@ -66,6 +66,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #42 (B34), #44 (B10), #46 (B29) merged. 21/49 Phase 2 batches done. Grails 7 child (1.4b) running.
 - 2026-07-22: #38 (B5), #41 (Grails 6.2.3 + Java 21) merged. Grails 7 wave (jakarta/Boot3/Groovy4) queued as 1.4b.
 - 2026-07-22: #29, #35, #36, #37, #39, #40 merged (B15, B6, B33, B28, B9, B16). 17/49 Phase 2 batches done.
 - 2026-07-22: #34 (Grails 4→5) merged. Grails 6 + Java 21 + jakarta child spawned.
