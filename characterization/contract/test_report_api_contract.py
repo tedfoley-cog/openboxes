@@ -1,5 +1,7 @@
 """Contract tests for ReportApiController (openapi/specs/report-api.yaml)."""
 
+from datetime import date
+
 import pytest
 
 from oas import Spec, check
@@ -90,12 +92,17 @@ def test_packing_list(client):
     assert isinstance(data["containers"], list)
 
 
+def _today():
+    return date.today().strftime("%m/%d/%Y")
+
+
 def test_transaction_report(client):
+    # Demo transactions are dated at seed time, so the range must end today.
     location = _location_id(client)
     resp = check(client, spec, "GET", "/api/reports/transaction-report",
                  params={"locationId": location,
                          "startDate": "01/01/2000",
-                         "endDate": "01/01/2020"})
+                         "endDate": _today()})
     assert isinstance(resp.json()["data"], list)
 
 
@@ -125,18 +132,25 @@ def test_transaction_report_metadata(client):
 
 
 def test_transaction_report_details(client):
+    # The demo ARVS category contains products with seeded transactions.
     location = _location_id(client)
+    categories = client.request("GET", "/api/categories").json()["data"]
+    arvs = next((c for c in categories if c["name"] == "ARVS"), None)
+    if not arvs:
+        pytest.skip("demo ARVS category not present")
     rows = check(client, spec, "GET", "/api/reports/transaction-report",
                  params={"locationId": location,
                          "startDate": "01/01/2000",
-                         "endDate": "01/01/2020"}).json()["data"]
+                         "endDate": _today(),
+                         "category": arvs["id"],
+                         "includeCategoryChildren": "on"}).json()["data"]
     if not rows:
         pytest.skip("no seeded transactions in the date range")
     resp = check(client, spec, "GET", "/api/reports/transaction-report-details",
                  params={"productCode": rows[0]["productCode"],
                          "locationId": location,
                          "startDate": "01/01/2000",
-                         "endDate": "01/01/2020"})
+                         "endDate": _today()})
     data = resp.json()["data"]
     assert data[0]["transactionCode"] == "BALANCE_OPENING"
     assert data[-1]["transactionCode"] == "BALANCE_CLOSING"

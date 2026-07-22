@@ -18,6 +18,14 @@ async function skipUnlessBatch39(page: Page): Promise<void> {
   test.skip(res.status() !== 200, 'Batch 39 endpoints not present in target build (pinned released image)');
 }
 
+// Demo transactions are dated at seed time, so ranges must end today.
+function today(): string {
+  const now = new Date();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  return `${mm}/${dd}/${now.getFullYear()}`;
+}
+
 test('report/showTransactionReport renders the React transaction report', async ({ page }) => {
   resetStepCounter();
   const FLOW = 'transaction-report-react';
@@ -33,8 +41,13 @@ test('report/showTransactionReport renders the React transaction report', async 
   );
   const metadata = (await metadataRes.json()).data;
 
+  // Filter by the demo ARVS category (contains products with transactions)
+  const categoriesRes = await page.request.get(url('/api/categories'));
+  const arvs = (await categoriesRes.json()).data.find((c) => c.name === 'ARVS');
+
   const apiRes = await page.request.get(
-    url(`/api/reports/transaction-report?locationId=${mainId}&startDate=01/01/2000&endDate=01/01/2020`),
+    url(`/api/reports/transaction-report?locationId=${mainId}&startDate=01/01/2000&endDate=${today()}`
+      + `&category=${arvs.id}&includeCategoryChildren=on`),
   );
   const apiRows = (await apiRes.json()).data;
 
@@ -47,7 +60,11 @@ test('report/showTransactionReport renders the React transaction report', async 
     .toHaveText(Number(metadata.transactionCount).toLocaleString('en-US'));
 
   await page.fill('#start-date-input', '2000-01-01');
-  await page.fill('#end-date-input', '2020-01-01');
+  const [mm, dd, yyyy] = today().split('/');
+  await page.fill('#end-date-input', `${yyyy}-${mm}-${dd}`);
+  await page.click('[data-testid="category-select"]');
+  await page.keyboard.type('ARVS');
+  await page.keyboard.press('Enter');
   await page.click('[data-testid="run-report-button"]');
   await page.waitForSelector('[data-testid="transaction-report-table"]');
   await captureStep(page, FLOW, 'results');
