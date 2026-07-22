@@ -91,9 +91,24 @@ test.describe('batch 25 stock transfer react screens', () => {
     await expect(page.getByTestId('stock-transfer-print-order-number')).toHaveText(printData.orderNumber);
     await captureStep(page, 'stock-transfer-print', 'react-print');
 
-    // Every parent item renders one row per split item (or a single row)
-    const expectedRows = (printData.orderItems as Array<{ splitItems: Array<unknown> }>)
-      .reduce((sum, item) => sum + Math.max(item.splitItems.length, 1), 0);
+    // Every parent item renders one row per split item (or a single row) in
+    // EACH category group it matches (only General Goods is exclusive)
+    type PrintItem = {
+      splitItems: Array<unknown>,
+      coldChain: boolean,
+      controlledSubstance: boolean,
+      hazardousMaterial: boolean,
+    };
+    const groupMemberships = (item: PrintItem) => {
+      const flagged = [item.coldChain, item.controlledSubstance, item.hazardousMaterial]
+        .filter(Boolean).length;
+      return flagged || 1;
+    };
+    const expectedRows = (printData.orderItems as Array<PrintItem>)
+      .reduce(
+        (sum, item) => sum + groupMemberships(item) * Math.max(item.splitItems.length, 1),
+        0,
+      );
     const rows = page.locator('[data-testid="stock-transfer-print-items-table"] tbody tr');
     await expect(rows).toHaveCount(expectedRows);
   });

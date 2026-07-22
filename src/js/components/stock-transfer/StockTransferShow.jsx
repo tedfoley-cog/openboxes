@@ -13,7 +13,14 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 
-const formatDate = (value) => (value ? new Date(value).toLocaleDateString() : '');
+const formatDate = (value) => {
+  if (!value) {
+    return '';
+  }
+  const date = new Date(value);
+  const pad = (part) => `${part}`.padStart(2, '0');
+  return `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}`;
+};
 
 const StockTransferShow = () => {
   const { stockTransferId } = useParams();
@@ -96,15 +103,27 @@ const StockTransferShow = () => {
             <a className="btn btn-outline-secondary btn-sm" href={STOCK_TRANSFER_URL.list()}>
               <Translate id="react.stockTransfer.show.listStockTransfers.label" defaultMessage="List Stock Transfers" />
             </a>
-            {stockTransfer.canEdit && (
-              <a
-                className="btn btn-outline-secondary btn-sm"
-                href={editUrl}
-                data-testid="stock-transfer-show-edit-button"
-              >
-                <Translate id="react.stockTransfer.show.editStockTransfer.label" defaultMessage="Edit Stock Transfer" />
-              </a>
-            )}
+            {stockTransfer.canEdit
+              ? (
+                <a
+                  className="btn btn-outline-secondary btn-sm"
+                  href={editUrl}
+                  data-testid="stock-transfer-show-edit-button"
+                >
+                  <Translate id="react.stockTransfer.show.editStockTransfer.label" defaultMessage="Edit Stock Transfer" />
+                </a>
+              )
+              : (
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-sm"
+                  disabled
+                  title={translate('react.stockTransfer.show.editCompleted.label', 'Cannot edit completed order')}
+                  data-testid="stock-transfer-show-edit-button"
+                >
+                  <Translate id="react.stockTransfer.show.editStockTransfer.label" defaultMessage="Edit Stock Transfer" />
+                </button>
+              )}
             {stockTransfer.canDelete && (
               <button
                 type="button"

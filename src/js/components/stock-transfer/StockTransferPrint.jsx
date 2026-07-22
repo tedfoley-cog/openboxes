@@ -29,25 +29,34 @@ const compareZoneNames = (a, b) => {
   return a.localeCompare(b);
 };
 
+// Mirrors the legacy print.gsp buckets: an item appears in EVERY category it
+// matches; only General Goods is exclusive
 const GROUPS = [
-  { key: 'coldChain', labelId: 'react.stockTransfer.print.coldChain.label', defaultMessage: 'Cold Chain' },
-  { key: 'controlledSubstance', labelId: 'react.stockTransfer.print.controlledSubstance.label', defaultMessage: 'Controlled Substance' },
-  { key: 'hazardousMaterial', labelId: 'react.stockTransfer.print.hazardousMaterial.label', defaultMessage: 'Hazardous Material' },
-  { key: 'other', labelId: 'react.stockTransfer.print.generalGoods.label', defaultMessage: 'General Goods' },
+  {
+    key: 'coldChain',
+    labelId: 'react.stockTransfer.print.coldChain.label',
+    defaultMessage: 'Cold Chain',
+    includes: (item) => Boolean(item.coldChain),
+  },
+  {
+    key: 'controlledSubstance',
+    labelId: 'react.stockTransfer.print.controlledSubstance.label',
+    defaultMessage: 'Controlled Substance',
+    includes: (item) => Boolean(item.controlledSubstance),
+  },
+  {
+    key: 'hazardousMaterial',
+    labelId: 'react.stockTransfer.print.hazardousMaterial.label',
+    defaultMessage: 'Hazardous Material',
+    includes: (item) => Boolean(item.hazardousMaterial),
+  },
+  {
+    key: 'other',
+    labelId: 'react.stockTransfer.print.generalGoods.label',
+    defaultMessage: 'General Goods',
+    includes: (item) => !item.coldChain && !item.controlledSubstance && !item.hazardousMaterial,
+  },
 ];
-
-const groupKey = (item) => {
-  if (item.coldChain) {
-    return 'coldChain';
-  }
-  if (item.controlledSubstance) {
-    return 'controlledSubstance';
-  }
-  if (item.hazardousMaterial) {
-    return 'hazardousMaterial';
-  }
-  return 'other';
-};
 
 const StockTransferPrint = () => {
   const { stockTransferId } = useParams();
@@ -209,7 +218,7 @@ const StockTransferPrint = () => {
             const zoneItems = items.filter((item) => (item.zoneName ?? null) === zoneName);
             const itemsByGroup = GROUPS.map((group) => ({
               ...group,
-              items: zoneItems.filter((item) => groupKey(item) === group.key),
+              items: zoneItems.filter(group.includes),
             })).filter((group) => group.items.length > 0);
             const showZoneName = Boolean(zoneName) || zoneNames.length > 1;
             return (
