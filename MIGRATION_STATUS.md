@@ -40,7 +40,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 2 — UI: GSP → React (parallel module waves; needs Phase 0)
 | # | Task | Status |
 |---|------|--------|
-| 2.x | Module batches: 49 total per SCREEN_INVENTORY.md | wave 1 running: B1 [0655a5d4](https://app.devin.ai/sessions/0655a5d4852645f8beb786e14aecad22), B2 [2c8733a6](https://app.devin.ai/sessions/2c8733a676d74864a3de97b0b992dc5d), B7 [28bee35b](https://app.devin.ai/sessions/28bee35b4b9841a0833af50909081c67), B14 [2f748489](https://app.devin.ai/sessions/2f74848940e74b1e8b7dfa86f8521598), B26 [0ab21723](https://app.devin.ai/sessions/0ab217233630420398ccee4410d83c76), B31 [3c983315](https://app.devin.ai/sessions/3c9833158dd24b728713614ac53c0b6e) |
+| 2.x | Module batches: 49 total per SCREEN_INVENTORY.md | wave 1: B7 [#24](https://github.com/tedfoley-cog/openboxes/pull/24) merged, B14 [#25](https://github.com/tedfoley-cog/openboxes/pull/25) merged, B31 [#22](https://github.com/tedfoley-cog/openboxes/pull/22) merged; B1 [0655a5d4](https://app.devin.ai/sessions/0655a5d4852645f8beb786e14aecad22), B2 [2c8733a6](https://app.devin.ai/sessions/2c8733a676d74864a3de97b0b992dc5d), B26 [0ab21723](https://app.devin.ai/sessions/0ab217233630420398ccee4410d83c76) in progress |
 | 2.R | React 16.8→18 + Redux/router modernization of existing SPA | [1674abb2](https://app.devin.ai/sessions/1674abb277894ead9017aaf991b0597a) — [#18](https://github.com/tedfoley-cog/openboxes/pull/18) merged (React 18.3.1, react-redux 8; router v6 deferred) |
 
 ## Phase 3 — API formalization (parallel with Phase 2)
@@ -55,7 +55,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 3.7 | ProductSupplierPreference, ProductsConfiguration, PurchaseOrder, Putaway, PutawayItem, ReasonCode | [3592a490](https://app.devin.ai/sessions/3592a49054e14f71b143ac843c0e8c51) — [#16](https://github.com/tedfoley-cog/openboxes/pull/16) merged |
 | 3.8 | RecordStock, Replenishment, SelectOptions, StockAdjustment, StockMovement, StockMovementItem | [9b23fb73](https://app.devin.ai/sessions/9b23fb7380d44cb1b702689d20b11d4d) — [#17](https://github.com/tedfoley-cog/openboxes/pull/17) merged |
 | 3.9 | StockTransfer, Stocklist, StocklistItem, UnitOfMeasure | [ac15c4c2](https://app.devin.ai/sessions/ac15c4c2986a4235a4aaf68c4448a88d) — [#13](https://github.com/tedfoley-cog/openboxes/pull/13) merged |
-| 3.10 | Make contract suite re-run-safe (KNOWN_ISSUES_CONTRACT_SUITE.md) | [d87216b4](https://app.devin.ai/sessions/d87216b44c06463da4b70581970390bc) — in progress |
+| 3.10 | Make contract suite re-run-safe | [d87216b4](https://app.devin.ai/sessions/d87216b44c06463da4b70581970390bc) — [#26](https://github.com/tedfoley-cog/openboxes/pull/26) merged |
 
 ## Phase 4 — Validation & cutover
 | # | Task | Status |
@@ -66,6 +66,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: PRs #26 (contract re-run-safety), #22/#24/#25 (Phase 2 batches B31/B7/B14) merged. Grails 3→4 (P1.2) in progress.
 - 2026-07-21: Coordinator initialized; tracking branch created; Phase 0 wave 1 spawned.
 - 2026-07-21: PR #1 (Docker baseline + fork CI) and PR #2 (dead-screen audit) merged; wave 2 spawned (0.2a, 0.3a, 0.3b). 0.2b/0.2c queued behind 0.2a harness.
 - 2026-07-21: PR #5 (0.2a Playwright flows) and PR #4 (0.3b API snapshots M–Z) merged. 0.3a PR #3 conflicted with #4's harness — child instructed to rebase/unify. 0.2b + 0.2c spawned.
