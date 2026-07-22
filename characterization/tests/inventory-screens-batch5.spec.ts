@@ -35,8 +35,12 @@ test.describe('inventory level & transaction log React screens', () => {
   test.beforeEach(async ({ page }) => {
     resetStepCounter();
     await login(page);
+    // On the pinned baseline image /api/inventoryLevels falls through to the
+    // generic domain API (no totalCount envelope), so probe the shape.
     const probe = await page.request.get(url('/api/inventoryLevels'));
-    test.skip(probe.status() === 404, 'Batch 5 endpoints not present in this build');
+    const present = probe.status() === 200
+      && Object.prototype.hasOwnProperty.call(await probe.json(), 'totalCount');
+    test.skip(!present, 'Batch 5 endpoints not present in this build');
   });
 
   test('transaction log lists product transactions matching the API', async ({ page }) => {
