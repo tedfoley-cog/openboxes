@@ -256,12 +256,19 @@ const REQUISITION_TEMPLATE_URL = {
   edit: (id) => `${REQUISITION_TEMPLATE_URL.base}/edit/${id}`,
   batch: (id) => `${REQUISITION_TEMPLATE_URL.base}/batch/${id}`,
   editHeader: (id) => `${REQUISITION_TEMPLATE_URL.base}/editHeader/${id}`,
+  list: () => `${REQUISITION_TEMPLATE_URL.base}/list`,
+  sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
+  export: (id) => `${REQUISITION_TEMPLATE_URL.base}/export/${id}`,
+  clone: (id) => `${REQUISITION_TEMPLATE_URL.base}/clone/${id}`,
+  publish: (id) => `${REQUISITION_TEMPLATE_URL.base}/publish/${id}`,
+  unpublish: (id) => `${REQUISITION_TEMPLATE_URL.base}/unpublish/${id}`,
 };
 
 const STOCKLIST_URL = {
   base: `${CONTEXT_PATH}/stocklist`,
   pdf: (id) => `${STOCKLIST_URL.base}/renderPdf/${id}`,
   csv: (id) => `${STOCKLIST_URL.base}/generateCsv/${id}`,
+  html: (id) => `${STOCKLIST_URL.base}/renderHtml/${id}`,
 };
 
 const REPLENISHMENT_URL = {
@@ -346,6 +353,9 @@ const PARTY_ROLE_URL = {
 
 const PARTY_TYPE_URL = {
   base: `${CONTEXT_PATH}/partyType`,
+  list: () => `${PARTY_TYPE_URL.base}/list`,
+  create: () => `${PARTY_TYPE_URL.base}/create`,
+  edit: (id) => `${PARTY_TYPE_URL.base}/edit/${id}`,
   show: (id) => `${PARTY_TYPE_URL.base}/show/${id}`,
 };
 
@@ -420,6 +430,11 @@ const REQUISITION_URL = {
 const REQUISITION_ITEM_URL = {
   base: `${CONTEXT_PATH}/requisitionItem`,
   change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
+  list: () => `${REQUISITION_ITEM_URL.base}/list`,
+  export: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_ITEM_URL.base}/export`,
+    query: { ...params },
+  }),
 };
 
 const PICKLIST_URL = {

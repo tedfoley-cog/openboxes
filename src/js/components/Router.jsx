@@ -358,6 +358,31 @@ const AsyncPartyRoleForm = Loadable({
   loading: Loading,
 });
 
+const AsyncPartyRoleList = Loadable({
+  loader: () => import('components/partyRole/PartyRoleList'),
+  loading: Loading,
+});
+
+const AsyncPartyRoleShow = Loadable({
+  loader: () => import('components/partyRole/PartyRoleShow'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeList = Loadable({
+  loader: () => import('components/partyType/PartyTypeList'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeForm = Loadable({
+  loader: () => import('components/partyType/PartyTypeForm'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeShow = Loadable({
+  loader: () => import('components/partyType/PartyTypeShow'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -773,6 +798,36 @@ const AsyncRequisitionItemChange = Loadable({
   loading: Loading,
 });
 
+const AsyncRequisitionItemList = Loadable({
+  loader: () => import('components/requisition/RequisitionItemList'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateCreate = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateCreate'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateEdit = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateEdit'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateEditHeader = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateEditHeader'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateBatch = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateBatch'),
+  loading: Loading,
+});
+
+const AsyncStockListTemplateSendMail = Loadable({
+  loader: () => import('components/stock-list/template/StockListTemplateSendMail'),
+  loading: Loading,
+});
+
 const AsyncPicklistPrint = Loadable({
   loader: () => import('components/requisition/PicklistPrint'),
   loading: Loading,
@@ -937,10 +992,16 @@ const Router = () => {
             <MainLayoutRoute path="**/requisition/transfer/:requisitionId" component={AsyncRequisitionTransfer} />
             <MainLayoutRoute path="**/requisition/printDraft/:requisitionId" component={AsyncRequisitionPrintDraft} />
             <MainLayoutRoute path="**/requisitionItem/change/:requisitionItemId" component={AsyncRequisitionItemChange} />
+            <MainLayoutRoute path="**/requisitionItem/list" component={AsyncRequisitionItemList} />
             <MainLayoutRoute path="**/picklist/print/:requisitionId" component={AsyncPicklistPrint} />
             <MainLayoutRoute path="**/picklist/returnPrint/:orderId" component={AsyncPicklistReturnPrint} />
             <MainLayoutRoute path="**/purchaseOrder/list" component={AsyncPurchaseOrderList} />
             <MainLayoutRoute path="**/requisitionTemplate/list" component={AsyncStockList} />
+            <MainLayoutRoute path="**/requisitionTemplate/create" component={AsyncStockListTemplateCreate} />
+            <MainLayoutRoute path="**/requisitionTemplate/edit/:templateId" component={AsyncStockListTemplateEdit} />
+            <MainLayoutRoute path="**/requisitionTemplate/editHeader/:templateId" component={AsyncStockListTemplateEditHeader} />
+            <MainLayoutRoute path="**/requisitionTemplate/batch/:templateId" component={AsyncStockListTemplateBatch} />
+            <MainLayoutRoute path="**/requisitionTemplate/sendMail/:templateId" component={AsyncStockListTemplateSendMail} />
             <MainLayoutRoute path="**/product/list" component={AsyncProductsList} />
             <MainLayoutRoute path="**/product/edit/:id" component={AsyncProductForm} />
             <MainLayoutRoute path="**/product/addDocument/:id" component={AsyncProductAddDocument} />
@@ -977,8 +1038,14 @@ const Router = () => {
             <MainLayoutRoute path="**/party/create" component={AsyncPartyForm} />
             <MainLayoutRoute path="**/party/edit/:partyId" component={AsyncPartyForm} />
             <MainLayoutRoute path="**/party/show/:partyId" component={AsyncPartyShow} />
+            <MainLayoutRoute path="**/partyRole/list" component={AsyncPartyRoleList} />
             <MainLayoutRoute path="**/partyRole/create" component={AsyncPartyRoleForm} />
             <MainLayoutRoute path="**/partyRole/edit/:partyRoleId" component={AsyncPartyRoleForm} />
+            <MainLayoutRoute path="**/partyRole/show/:partyRoleId" component={AsyncPartyRoleShow} />
+            <MainLayoutRoute path="**/partyType/list" component={AsyncPartyTypeList} />
+            <MainLayoutRoute path="**/partyType/create" component={AsyncPartyTypeForm} />
+            <MainLayoutRoute path="**/partyType/edit/:partyTypeId" component={AsyncPartyTypeForm} />
+            <MainLayoutRoute path="**/partyType/show/:partyTypeId" component={AsyncPartyTypeShow} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />
