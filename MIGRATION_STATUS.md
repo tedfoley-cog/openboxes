@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #69 merged — fixed batch-11 product-group flake (real flush bug in ProductGroupService + test race). B37/B42/B44 asked to rebase and re-run CI.
 - 2026-07-22: #67 (B43) merged. 39/49 Phase 2 batches done. B37/B42/B44 PRs blocked on flaky batch-11 java21 test (fix session spawned: ac3bb393).
 - 2026-07-22: #68 (B40) merged. 38/49 Phase 2 batches done.
 - 2026-07-22: #57 (B21) merged. 37/49 Phase 2 batches done. B37 + wave 7 (B39-B44) in flight.
