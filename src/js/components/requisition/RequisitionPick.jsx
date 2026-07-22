@@ -98,6 +98,7 @@ const RequisitionPick = () => {
 
   const savePicklist = async (event) => {
     event.preventDefault();
+    setSaving(true);
     try {
       await requisitionApi.updatePicklist(requisitionId, {
         pickerId: picker?.id ?? null,
@@ -109,6 +110,7 @@ const RequisitionPick = () => {
       if (message) {
         Alert.error(message);
       }
+      setSaving(false);
     }
   };
 
@@ -163,7 +165,7 @@ const RequisitionPick = () => {
                 <a className="btn btn-outline-secondary mr-2" href={REQUISITION_URL.review(requisitionId)}>
                   <Translate id="react.default.button.back.label" defaultMessage="Back" />
                 </a>
-                <button type="submit" className="btn btn-primary" data-testid="picklist-complete-button">
+                <button type="submit" className="btn btn-primary" disabled={saving} data-testid="picklist-complete-button">
                   <Translate id="react.default.button.next.label" defaultMessage="Next" />
                 </button>
               </div>
