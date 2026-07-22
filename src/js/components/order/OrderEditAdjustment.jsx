@@ -10,6 +10,8 @@ import useTranslation from 'hooks/useTranslation';
 import Select from 'utils/Select';
 import Translate from 'utils/Translate';
 
+const hasValue = (value) => value !== '' && value !== null && Number(value) !== 0;
+
 const OrderEditAdjustment = () => {
   const { orderId: orderIdParam, adjustmentId } = useParams();
   const location = useLocation();
@@ -176,7 +178,7 @@ const OrderEditAdjustment = () => {
                 id="adjustment-amount-input"
                 className="form-control"
                 value={amount}
-                disabled={percentage !== '' && percentage !== null}
+                disabled={hasValue(percentage)}
                 onChange={(event) => setAmount(event.target.value)}
                 data-testid="adjustment-amount-input"
               />
@@ -193,7 +195,7 @@ const OrderEditAdjustment = () => {
                 id="adjustment-percentage-input"
                 className="form-control"
                 value={percentage}
-                disabled={amount !== '' && amount !== null}
+                disabled={hasValue(amount)}
                 onChange={(event) => setPercentage(event.target.value)}
                 data-testid="adjustment-percentage-input"
               />
