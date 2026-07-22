@@ -21,9 +21,16 @@ const RequisitionAddDocument = () => {
   useTranslation('requisition', 'default');
 
   useEffect(() => {
-    requisitionApi.getDocumentTypeOptions().then(({ data }) => {
-      setDocumentTypes(data?.data ?? []);
-    });
+    requisitionApi.getDocumentTypeOptions()
+      .then(({ data }) => {
+        setDocumentTypes(data?.data ?? []);
+      })
+      .catch((err) => {
+        const message = err?.response?.data?.errorMessage;
+        if (message) {
+          Alert.error(message);
+        }
+      });
   }, []);
 
   const submit = async (event) => {
