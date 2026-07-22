@@ -100,6 +100,11 @@ const STOCK_MOVEMENT_URL = {
   addDocument: (id) => `${STOCK_MOVEMENT_URL.base}/addDocument/${id}`,
 };
 
+const RECEIVING_URL = {
+  base: `${CONTEXT_PATH}/partialReceiving`,
+  createPartialReceiving: (shipmentId) => `${RECEIVING_URL.base}/create/${shipmentId}`,
+};
+
 const SHIPMENT_WORKFLOW_URL = {
   base: `${CONTEXT_PATH}/shipmentWorkflow`,
   list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
@@ -549,6 +554,7 @@ export {
   PRODUCT_URL,
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
+  RECEIVING_URL,
   REPLENISHMENT_URL,
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,

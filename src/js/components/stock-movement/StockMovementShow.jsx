@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Alert from 'react-s-alert';
 
 import stockMovementApi from 'api/services/StockMovementApi';
-import { STOCK_MOVEMENT_URL } from 'consts/applicationUrls';
+import { RECEIVING_URL, STOCK_MOVEMENT_URL } from 'consts/applicationUrls';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
@@ -383,6 +383,11 @@ const StockMovementShow = () => {
             {details?.permissions?.canUserEdit && (
               <a className="btn btn-primary btn-sm mr-2" href={STOCK_MOVEMENT_URL.genericEdit(stockMovementId)} data-testid="stock-movement-edit-button">
                 <Translate id="react.default.button.edit.label" defaultMessage="Edit" />
+              </a>
+            )}
+            {!details?.flags?.isApprovalRequired && details?.shipment?.id && (
+              <a className="btn btn-outline-primary btn-sm mr-2" href={RECEIVING_URL.createPartialReceiving(details.shipment.id)} data-testid="stock-movement-receive-button">
+                <Translate id="react.default.button.receive.label" defaultMessage="Receive" />
               </a>
             )}
             <a className="btn btn-outline-primary btn-sm mr-2" href={STOCK_MOVEMENT_URL.addComment(stockMovementId)} data-testid="stock-movement-add-comment-button">
