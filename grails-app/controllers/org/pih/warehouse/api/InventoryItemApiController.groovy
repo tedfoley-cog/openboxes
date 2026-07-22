@@ -1,6 +1,7 @@
 package org.pih.warehouse.api
 
 import grails.converters.JSON
+import grails.gorm.transactions.Transactional
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.inventory.InventoryItem
 import org.pih.warehouse.inventory.InventoryItemDataService
@@ -30,6 +31,7 @@ class InventoryItemApiController {
         render([data: inventoryItems.collect { toJson(it) }] as JSON)
     }
 
+    @Transactional
     def create() {
         Product product = Product.get(request.JSON?.product?.id ?: params?.product?.id)
         if (!product) {
@@ -52,7 +54,7 @@ class InventoryItemApiController {
         }
 
         InventoryItem inventoryItem = new InventoryItem(product: product, lotNumber: lotNumber, expirationDate: expirationDate)
-        if (inventoryItem.save()) {
+        if (inventoryItem.save(flush: true)) {
             render([data: toJson(inventoryItem)] as JSON)
         } else {
             response.status = 400
@@ -60,6 +62,7 @@ class InventoryItemApiController {
         }
     }
 
+    @Transactional
     def update() {
         InventoryItem inventoryItem = InventoryItem.get(params.id)
         if (!inventoryItem) {
@@ -128,6 +131,7 @@ class InventoryItemApiController {
         }
     }
 
+    @Transactional
     def recall() {
         InventoryItem inventoryItem = InventoryItem.get(params.id)
         if (!inventoryItem) {
@@ -150,6 +154,7 @@ class InventoryItemApiController {
         render([data: toJson(inventoryItem)] as JSON)
     }
 
+    @Transactional
     def revertRecall() {
         InventoryItem inventoryItem = InventoryItem.get(params.id)
         if (!inventoryItem) {

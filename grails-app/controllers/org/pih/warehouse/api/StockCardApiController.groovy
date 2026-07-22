@@ -42,7 +42,11 @@ class StockCardApiController {
     StockHistoryAssembler stockHistoryAssembler
 
     private Location getCurrentLocation() {
-        return Location.get(session?.warehouse?.id)
+        Location location = Location.get(session?.warehouse?.id)
+        if (!location) {
+            throw new IllegalArgumentException("Unable to resolve current location from session")
+        }
+        return location
     }
 
     private Product getProduct() {
