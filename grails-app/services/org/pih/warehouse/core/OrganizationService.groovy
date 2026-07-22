@@ -11,6 +11,7 @@ package org.pih.warehouse.core
 
 import grails.gorm.transactions.Transactional
 import org.apache.commons.lang.StringUtils
+import org.hibernate.criterion.CriteriaSpecification
 
 @Transactional
 class OrganizationService {
@@ -142,6 +143,9 @@ class OrganizationService {
         List roleTypes = params.list("roleType").collect { it as RoleType }
 
         List<Organization> organizations = Organization.createCriteria().list(params) {
+            // Joining the roles collection returns one row per matching role, so
+            // collapse duplicates back to distinct organizations.
+            resultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
             if (params.q) {
                 or {
                     ilike("id", "${params.q}%")
