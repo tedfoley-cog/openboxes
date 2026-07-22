@@ -361,13 +361,14 @@ const ReceiveOrderPage = () => {
               </div>
             </div>
             <div className="d-flex gap-8 pt-3 border-top mt-3">
-              <Button
-                defaultLabel="Next"
-                label="react.default.button.next.label"
-                variant="primary"
-                onClick={() => goToStep('processOrderItems', validateShipmentDetails)}
-                data-testid="receive-order-next-button"
-              />
+              <span data-testid="receive-order-next-button">
+                <Button
+                  defaultLabel="Next"
+                  label="react.default.button.next.label"
+                  variant="primary"
+                  onClick={() => goToStep('processOrderItems', validateShipmentDetails)}
+                />
+              </span>
             </div>
           </div>
         </div>
@@ -426,9 +427,9 @@ const ReceiveOrderPage = () => {
                             <TextInput
                               type="number"
                               value={row.quantityReceived}
-                              onChange={(e) => updateRow(
+                              onChange={(quantity) => updateRow(
                                 row.key,
-                                { quantityReceived: e.target.value },
+                                { quantityReceived: quantity ?? '' },
                               )}
                               ariaLabel={{ id: 'react.receiveOrder.received.label', defaultMessage: 'Received' }}
                               data-testid="receive-order-quantity-input"
@@ -495,13 +496,14 @@ const ReceiveOrderPage = () => {
                 variant="primary-outline"
                 onClick={() => goToStep('enterShipmentDetails', null)}
               />
-              <Button
-                defaultLabel="Next"
-                label="react.default.button.next.label"
-                variant="primary"
-                onClick={() => goToStep('confirmOrderReceipt', validateOrderItems)}
-                data-testid="receive-order-next-button"
-              />
+              <span data-testid="receive-order-next-button">
+                <Button
+                  defaultLabel="Next"
+                  label="react.default.button.next.label"
+                  variant="primary"
+                  onClick={() => goToStep('confirmOrderReceipt', validateOrderItems)}
+                />
+              </span>
             </div>
           </div>
         </div>
@@ -600,14 +602,15 @@ const ReceiveOrderPage = () => {
                 variant="primary-outline"
                 onClick={() => goToStep('processOrderItems', null)}
               />
-              <Button
-                defaultLabel="Finish"
-                label="react.default.button.finish.label"
-                variant="primary"
-                disabled={submitting}
-                onClick={onSubmit}
-                data-testid="receive-order-finish-button"
-              />
+              <span data-testid="receive-order-finish-button">
+                <Button
+                  defaultLabel="Finish"
+                  label="react.default.button.finish.label"
+                  variant="primary"
+                  disabled={submitting}
+                  onClick={onSubmit}
+                />
+              </span>
             </div>
           </div>
         </div>
