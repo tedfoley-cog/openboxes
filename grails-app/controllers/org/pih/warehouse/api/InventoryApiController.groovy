@@ -134,7 +134,8 @@ class InventoryApiController {
         Map<InventoryItem, Integer> quantityMap = inventoryItems.isEmpty() ? [:] :
                 productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
 
-        List data = inventoryItems.collect { InventoryItem inventoryItem ->
+        // Same as the legacy screens: only items with an availability record are listed
+        List data = quantityMap.collect { InventoryItem inventoryItem, Integer quantity ->
             [
                     inventoryItem: [
                             id            : inventoryItem.id,
@@ -148,7 +149,7 @@ class InventoryApiController {
                             category     : inventoryItem.product?.category?.name,
                             unitOfMeasure: inventoryItem.product?.unitOfMeasure,
                     ],
-                    quantity     : quantityMap[inventoryItem] ?: 0,
+                    quantity     : quantity ?: 0,
             ]
         }
 
