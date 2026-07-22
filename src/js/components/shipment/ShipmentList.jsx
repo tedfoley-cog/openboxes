@@ -40,7 +40,6 @@ const ShipmentList = () => {
     const params = {
       type,
       terms: currentFilters.terms || null,
-      status: currentFilters.status || null,
       shipmentType: currentFilters.shipmentType || null,
       max: currentFilters.max || null,
     };

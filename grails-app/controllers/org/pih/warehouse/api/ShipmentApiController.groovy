@@ -919,8 +919,9 @@ class ShipmentApiController {
         if (!requireManager()) {
             return
         }
+        Shipment shipment = Shipment.get(params.id)
         ReceiptItem receiptItem = ReceiptItem.get(params.receiptItemId)
-        if (!receiptItem) {
+        if (!shipment || !receiptItem || receiptItem.receipt?.shipment?.id != shipment.id) {
             renderNotFound()
             return
         }
