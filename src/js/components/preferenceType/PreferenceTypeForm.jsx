@@ -65,7 +65,7 @@ const PreferenceTypeForm = () => {
     mode: 'onBlur',
     defaultValues: preferenceTypeId
       ? getPreferenceType
-      : { name: '', validationCode: null },
+      : { name: '', validationCode: { id: 'DEFAULT', value: 'DEFAULT', label: 'DEFAULT' } },
   });
 
   const onSubmit = async (values) => {
