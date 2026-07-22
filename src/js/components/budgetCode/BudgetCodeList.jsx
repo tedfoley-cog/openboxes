@@ -9,12 +9,15 @@ import DateCell from 'components/DataTable/DateCell';
 import Button from 'components/form-elements/Button';
 import { BUDGET_CODE_URL } from 'consts/applicationUrls';
 import useTableData from 'hooks/list-pages/useTableData';
+import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import StatusIndicator from 'utils/StatusIndicator';
 import Translate from 'utils/Translate';
 
 const BudgetCodeList = () => {
   useTranslation('budgetCode', 'reactTable', 'default');
+
+  const translate = useTranslate();
 
   const isUserAdmin = useSelector((state) => state.session.isUserAdmin);
 
@@ -134,8 +137,8 @@ const BudgetCodeList = () => {
             <input
               className="form-control"
               type="text"
-              placeholder="Search by code"
-              aria-label="Search by code"
+              placeholder={translate('react.budgetCode.searchByCode.label', 'Search by code')}
+              aria-label={translate('react.budgetCode.searchByCode.label', 'Search by code')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -158,7 +161,7 @@ const BudgetCodeList = () => {
           pages={tableData.pages}
           totalData={tableData.totalCount}
           onFetchData={onFetchHandler}
-          noDataText="No budget codes match the given criteria"
+          noDataText={translate('react.budgetCode.empty.label', 'No budget codes match the given criteria')}
         />
       </div>
     </div>
