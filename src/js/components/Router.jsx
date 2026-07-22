@@ -533,6 +533,36 @@ const AsyncInvoiceAddDocument = Loadable({
   loading: Loading,
 });
 
+const AsyncStockMovementShow = Loadable({
+  loader: () => import('components/stock-movement/StockMovementShowDispatcher'),
+  loading: Loading,
+});
+
+const AsyncStockMovementAddComment = Loadable({
+  loader: () => import('components/stock-movement/StockMovementAddComment'),
+  loading: Loading,
+});
+
+const AsyncStockMovementAddDocument = Loadable({
+  loader: () => import('components/stock-movement/StockMovementAddDocument'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowList = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowList'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowShow = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowShow'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowEdit = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowEdit'),
+  loading: Loading,
+});
+
 const AsyncOrderAddComment = Loadable({
   loader: () => import('components/order/OrderAddComment'),
   loading: Loading,
@@ -1078,11 +1108,6 @@ const AsyncAddToShipment = Loadable({
   loading: Loading,
 });
 
-const AsyncReturnsShow = Loadable({
-  loader: () => import('components/returns/ReturnsShow'),
-  loading: Loading,
-});
-
 const AsyncRequisitionList = Loadable({
   loader: () => import('components/requisition/RequisitionList'),
   loading: Loading,
@@ -1188,6 +1213,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/createRequest/:stockMovementId?" component={AsyncStockMovementRequest} />
             <MainLayoutRoute path="**/stockMovement/verifyRequest/:stockMovementId?" component={AsyncStockMovementVerifyRequest} />
             <MainLayoutRoute path="**/stockMovement/create/:stockMovementId?" component={AsyncStockMovement} />
+            <MainLayoutRoute path="**/stockMovement/show/:stockMovementId" component={AsyncStockMovementShow} />
+            <MainLayoutRoute path="**/stockMovement/addComment/:stockMovementId" component={AsyncStockMovementAddComment} />
+            <MainLayoutRoute path="**/stockMovement/addDocument/:stockMovementId" component={AsyncStockMovementAddDocument} />
+            <MainLayoutRoute path="**/shipmentWorkflow/list" component={AsyncShipmentWorkflowList} />
+            <MainLayoutRoute path="**/shipmentWorkflow/show/:shipmentWorkflowId" component={AsyncShipmentWorkflowShow} />
+            <MainLayoutRoute path="**/shipmentWorkflow/edit/:shipmentWorkflowId" component={AsyncShipmentWorkflowEdit} />
             <MainLayoutRoute path="**/partialReceiving/create/:shipmentId" component={AsyncReceivingPage} />
             <MainLayoutRoute path="**/stocklistManagement/index/:productId?" component={AsyncManagement} />
             <MainLayoutRoute path="**/invoice/create/:invoiceId?" component={AsyncInvoice} />
@@ -1270,7 +1301,6 @@ const Router = () => {
             <MainLayoutRoute path="**/shipment/addEvent/:shipmentId" component={AsyncShipmentEditEvent} />
             <MainLayoutRoute path="**/shipment/editEvent/:eventId" component={AsyncShipmentEditEvent} />
             <MainLayoutRoute path="**/shipment/addToShipment" component={AsyncAddToShipment} />
-            <MainLayoutRoute path="**/stockMovement/show/:stockMovementId" component={AsyncReturnsShow} />
             <MainLayoutRoute path="**/shipment/list" component={AsyncShipmentList} />
             <MainLayoutRoute path="**/shipment/showDetails/:shipmentId" component={AsyncShipmentShowDetails} />
             <MainLayoutRoute path="**/shipment/showPackingList/:shipmentId" component={AsyncShipmentPackingList} />
