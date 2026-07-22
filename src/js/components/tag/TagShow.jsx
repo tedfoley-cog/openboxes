@@ -34,6 +34,9 @@ const TagShow = () => {
       .catch(() => {
         // Unknown/deleted tag: return to the (legacy GSP) tag list, like the
         // legacy show action did.
+        notification(NotificationType.ERROR_OUTLINED)({
+          message: translate('react.tag.notFound.label', 'Tag not found'),
+        });
         window.location.href = TAG_URL.list();
       });
   }, [tagId]);
