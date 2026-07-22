@@ -12,7 +12,7 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
  */
 
 async function reactTableRowCount(page: Page): Promise<number> {
-  return page.locator('.rt-tbody .rt-tr-group:has(.rt-td:not(:empty))').count();
+  return page.locator('.rt-tbody .rt-tr:not(.-padRow)').count();
 }
 
 test.describe('budget code react screens', () => {
