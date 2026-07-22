@@ -14,8 +14,6 @@ import org.pih.warehouse.api.GenericApiService
 import org.pih.warehouse.core.DocumentService
 import org.pih.warehouse.core.UploadService
 import org.pih.warehouse.data.DataService
-import org.pih.warehouse.importer.DataImporter
-import org.pih.warehouse.importer.ExcelImporterFactory
 import org.pih.warehouse.importer.ImportDataCommand
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest
 
@@ -85,13 +83,5 @@ class BatchController {
     def importData(ImportDataCommand command) {
         // Screen migrated to React; uploads and imports go through BatchApiController.importData
         render(view: "/common/react", params: params)
-    }
-
-    DataImporter createExcelImporter(ImportDataCommand command) {
-        DataImporter dataImporter = ExcelImporterFactory.createImporter(command.importType, command?.filename as String)
-        if (!dataImporter) {
-            command.errors.reject("importType", "${warehouse.message(code: 'import.invalidType.message', default: 'Please choose a valid import type')}")
-        }
-        return dataImporter
     }
 }
