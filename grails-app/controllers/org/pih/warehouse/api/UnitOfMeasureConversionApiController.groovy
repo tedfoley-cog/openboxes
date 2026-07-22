@@ -112,7 +112,7 @@ class UnitOfMeasureConversionApiController {
             uomConversion.conversionRate = parseConversionRate(uomConversion, jsonObject.conversionRate)
         }
         if (jsonObject.containsKey("active")) {
-            uomConversion.active = jsonObject.active as Boolean
+            uomConversion.active = Boolean.parseBoolean(jsonObject.active.toString())
         }
         uomConversion.validate()
     }
