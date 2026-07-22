@@ -74,7 +74,11 @@ class TransactionApiController {
             order(params.sort ?: "dateCreated", params.order ?: "desc")
         }
 
-        render([data: transactions.collect { toSummaryJson(it) }, totalCount: transactions.totalCount] as JSON)
+        Map<String, Long> entryCounts = transactions ? TransactionEntry.executeQuery(
+                "select te.transaction.id, count(te.id) from TransactionEntry te where te.transaction in (:transactions) group by te.transaction.id",
+                [transactions: transactions.toList()]).collectEntries { [(it[0]): it[1]] } : [:]
+
+        render([data: transactions.collect { toSummaryJson(it, entryCounts[it.id] ?: 0L) }, totalCount: transactions.totalCount] as JSON)
     }
 
     def listDaily() {
@@ -211,7 +215,7 @@ class TransactionApiController {
         render([data: locations.sort { it.name?.toLowerCase() }.collect { [id: it.id, name: it.name] }] as JSON)
     }
 
-    private Map toSummaryJson(Transaction transaction) {
+    private Map toSummaryJson(Transaction transaction, Long entryCount) {
         [
                 id               : transaction.id,
                 transactionNumber: transaction.transactionNumber,
@@ -225,7 +229,7 @@ class TransactionApiController {
                 source           : transaction.source ? [id: transaction.source.id, name: transaction.source.name] : null,
                 destination      : transaction.destination ? [id: transaction.destination.id, name: transaction.destination.name] : null,
                 createdBy        : transaction.createdBy ? [id: transaction.createdBy.id, name: transaction.createdBy.name] : null,
-                entryCount       : transaction.transactionEntries?.size() ?: 0,
+                entryCount       : entryCount,
         ]
     }
 

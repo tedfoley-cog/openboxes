@@ -989,7 +989,7 @@ class UrlMappings {
          * Transaction API endpoints
          */
 
-        "/api/transactions" {
+        "/api/transactions"(parseRequest: true) {
             controller = { "transactionApi" }
             action = [GET: "list", POST: "create"]
         }
