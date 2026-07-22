@@ -236,17 +236,21 @@ const CONSUMPTION_URL = {
 
 const REQUISITION_TEMPLATE_URL = {
   base: `${CONTEXT_PATH}/requisitionTemplate`,
+  list: () => `${REQUISITION_TEMPLATE_URL.base}/list`,
   create: () => `${REQUISITION_TEMPLATE_URL.base}/create`,
   show: (id) => `${REQUISITION_TEMPLATE_URL.base}/show/${id}`,
   edit: (id) => `${REQUISITION_TEMPLATE_URL.base}/edit/${id}`,
   batch: (id) => `${REQUISITION_TEMPLATE_URL.base}/batch/${id}`,
   editHeader: (id) => `${REQUISITION_TEMPLATE_URL.base}/editHeader/${id}`,
+  export: (id) => `${REQUISITION_TEMPLATE_URL.base}/export/${id}`,
+  sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
 };
 
 const STOCKLIST_URL = {
   base: `${CONTEXT_PATH}/stocklist`,
   pdf: (id) => `${STOCKLIST_URL.base}/renderPdf/${id}`,
   csv: (id) => `${STOCKLIST_URL.base}/generateCsv/${id}`,
+  html: (id) => `${STOCKLIST_URL.base}/renderHtml/${id}`,
 };
 
 const REPLENISHMENT_URL = {

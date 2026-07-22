@@ -864,6 +864,11 @@ class UrlMappings {
             action = [POST: "sendMail"]
         }
 
+        "/api/stocklists/$id/details"(parseRequest: true) {
+            controller = "stocklistApi"
+            action = [GET: "details"]
+        }
+
         "/api/stocklists/$id/export"(parseRequest: true) {
             controller = "stocklistApi"
             action = [GET: "export"]
