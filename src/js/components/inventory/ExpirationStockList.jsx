@@ -55,7 +55,9 @@ const ExpirationStockList = ({ expired }) => {
         },
       });
       setData(response.data.data.items);
-      setCategories(response.data.data.categories);
+      if (!selectedCategory) {
+        setCategories(response.data.data.categories);
+      }
       setSelectedItems({});
     } finally {
       setLoading(false);
@@ -65,6 +67,8 @@ const ExpirationStockList = ({ expired }) => {
   useEffect(() => {
     if (currentLocation?.id) {
       fetchData();
+    } else {
+      setLoading(false);
     }
   }, [currentLocation?.id, expired]);
 

@@ -86,8 +86,15 @@ const EditTransactionPage = () => {
   };
 
   const deleteEntry = async (entryId) => {
-    const response = await apiClient.delete(TRANSACTION_ENTRY_BY_ID(id, entryId));
-    setTransaction(response.data.data);
+    try {
+      const response = await apiClient.delete(TRANSACTION_ENTRY_BY_ID(id, entryId));
+      setTransaction(response.data.data);
+    } catch (error) {
+      const text = error.response?.data?.errorMessage
+        || error.response?.data?.errorMessages?.join(', ')
+        || translate('react.inventory.transaction.saveError.label', 'Unable to save transaction');
+      setMessage({ type: 'danger', text });
+    }
   };
 
   if (!transaction) {

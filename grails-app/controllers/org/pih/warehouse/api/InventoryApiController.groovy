@@ -18,6 +18,7 @@ import org.pih.warehouse.inventory.InventoryItem
 import org.pih.warehouse.inventory.TransactionEntry
 import org.pih.warehouse.inventory.product.ExpirationHistoryReport
 import org.pih.warehouse.product.Category
+import org.pih.warehouse.core.UserService
 import org.pih.warehouse.report.InventoryReportCommand
 
 class InventoryApiController {
@@ -25,6 +26,7 @@ class InventoryApiController {
     InventoryImportDataService inventoryImportDataService
     DashboardService dashboardService
     InventoryService inventoryService
+    UserService userService
     def productAvailabilityService
 
     def importCsv() {
@@ -54,8 +56,7 @@ class InventoryApiController {
     def getInventorySummary() {
         Location location = Location.get(params.facilityId ?: session?.warehouse?.id)
         if (!location) {
-            response.status = 400
-            render([errorMessage: "Location is required - sign in or provide facilityId as a request parameter"] as JSON)
+            renderMissingLocation()
             return
         }
 
@@ -72,8 +73,9 @@ class InventoryApiController {
                 dashboardService.getLowStock(location, categories) :
                 dashboardService.getInventoryItems(location, categories)
 
+        Boolean hasRoleFinance = userService.hasRoleFinance(AuthService.currentUser)
         List data = inventoryItems.collect {
-            BigDecimal unitPrice = it.product?.pricePerUnit ?: 0.0
+            BigDecimal unitPrice = hasRoleFinance ? (it.product?.pricePerUnit ?: 0.0) : null
             [
                     status                    : it.status?.toString(),
                     product                   : [
@@ -91,7 +93,8 @@ class InventoryApiController {
                     quantityOnHand            : it.quantity,
                     quantityAvailableToPromise: it.quantityAvailableToPromise,
                     unitPrice                 : unitPrice,
-                    totalValue                : (it.product?.pricePerUnit && it.quantity) ? it.product.pricePerUnit * it.quantity : 0.0,
+                    totalValue                : hasRoleFinance ?
+                            ((it.product?.pricePerUnit && it.quantity) ? it.product.pricePerUnit * it.quantity : 0.0) : null,
             ]
         }
 
@@ -99,15 +102,29 @@ class InventoryApiController {
     }
 
     def getExpiredStock(InventoryReportCommand command) {
+        command.location = Location.get(params.facilityId ?: session?.warehouse?.id)
+        if (!command.location) {
+            renderMissingLocation()
+            return
+        }
         render([data: getExpirationStockData(command, true)] as JSON)
     }
 
     def getExpiringStock(InventoryReportCommand command) {
+        command.location = Location.get(params.facilityId ?: session?.warehouse?.id)
+        if (!command.location) {
+            renderMissingLocation()
+            return
+        }
         render([data: getExpirationStockData(command, false)] as JSON)
     }
 
+    private void renderMissingLocation() {
+        response.status = 400
+        render([errorMessage: "Location is required - sign in or provide facilityId as a request parameter"] as JSON)
+    }
+
     private Map getExpirationStockData(InventoryReportCommand command, boolean expired) {
-        command.location = Location.get(params.facilityId ?: session?.warehouse?.id)
 
         List<InventoryItem> inventoryItems = expired ?
                 dashboardService.getExpiredStock(command) :

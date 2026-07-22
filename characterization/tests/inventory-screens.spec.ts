@@ -10,6 +10,9 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
  * list, listLowStock, listExpiredStock, listExpiringStock,
  * listDailyTransactions and editTransaction. Each screen is asserted
  * against the data returned by its backing API endpoint.
+ *
+ * The backing endpoints only exist in source builds (added in Phase 2
+ * Batch 2), so the whole suite skips against the pinned baseline image.
  */
 
 async function apiGet(page: Page, path: string) {
@@ -27,6 +30,8 @@ test.describe('inventory React screens', () => {
   test.beforeEach(async ({ page }) => {
     resetStepCounter();
     await login(page);
+    const probe = await page.request.get(url('/api/transactions/types'));
+    test.skip(probe.status() === 404, 'inventory/transaction endpoints not present in this build');
   });
 
   test('inventory summary list shows rows matching the API', async ({ page }) => {

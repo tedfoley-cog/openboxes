@@ -69,6 +69,8 @@ const InventorySummaryList = ({ lowStock }) => {
   useEffect(() => {
     if (currentLocation?.id) {
       fetchData();
+    } else {
+      setLoading(false);
     }
   }, [currentLocation?.id, lowStock]);
 

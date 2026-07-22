@@ -139,6 +139,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpirationStockResponse'
+        '400':
+          description: No location could be resolved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
   /api/facilities/{facilityId}/inventories/expiringStock:
     get:
       operationId: getExpiringStock
@@ -181,6 +190,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpirationStockResponse'
+        '400':
+          description: No location could be resolved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
   /api/facilities/{facilityId}/inventories/reorderReport:
     get:
       operationId: getReorderReport
@@ -404,9 +422,11 @@ components:
         unitPrice:
           type: number
           nullable: true
+          description: Null unless the user has the finance role.
         totalValue:
           type: number
           nullable: true
+          description: Null unless the user has the finance role.
     ExpirationStockResponse:
       type: object
       required: [data]

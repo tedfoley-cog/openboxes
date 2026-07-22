@@ -3,6 +3,10 @@
 The update test is a no-op round-trip (reads a seeded transaction and PUTs
 its own values back) so the seeded dataset is left unchanged. The deleteEntry
 operation is destructive, so only its 404 branch is exercised.
+
+The whole controller was added in Phase 2 Batch 2, so it does not exist in
+the pinned baseline image - these tests skip when the endpoints respond 404
+and run against source builds instead.
 """
 
 import pytest
@@ -10,6 +14,12 @@ import pytest
 from oas import Spec, check
 
 spec = Spec("transaction-api.yaml")
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _requires_transaction_api(client):
+    if client.request("GET", "/api/transactions/types").status_code == 404:
+        pytest.skip("transaction API endpoints not present in this build")
 
 
 @pytest.fixture(scope="module")

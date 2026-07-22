@@ -91,7 +91,7 @@ class TransactionApiController {
                 }
             }
             if (entryJson.has("quantity")) {
-                entry.quantity = entryJson.optInt("quantity")
+                entry.quantity = entryJson.isNull("quantity") ? null : entryJson.optInt("quantity")
             }
         }
 
