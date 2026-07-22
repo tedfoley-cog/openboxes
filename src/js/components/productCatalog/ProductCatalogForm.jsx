@@ -46,6 +46,11 @@ const ProductCatalogForm = () => {
     setItems(catalog?.productCatalogItems ?? []);
   };
 
+  const applyItems = (catalog) => {
+    setItems(catalog?.productCatalogItems ?? []);
+    setVersion(catalog?.version ?? null);
+  };
+
   useEffect(() => {
     if (!isEdit) {
       setCode('');
@@ -131,7 +136,7 @@ const ProductCatalogForm = () => {
       const { data } = await productCatalogApi.addProductCatalogItem(id, {
         product: { id: productToAdd.id },
       });
-      setItems(data?.data?.productCatalogItems ?? []);
+      applyItems(data?.data);
       setProductToAdd(null);
     } catch (error) {
       setErrors([error.response?.data?.errorMessage ?? 'Unable to add product to catalog']);
@@ -145,7 +150,7 @@ const ProductCatalogForm = () => {
     spinner.show();
     try {
       const { data } = await productCatalogApi.removeProductCatalogItem(id, itemId);
-      setItems(data?.data?.productCatalogItems ?? []);
+      applyItems(data?.data);
     } catch (error) {
       setErrors([error.response?.data?.errorMessage ?? 'Unable to remove product from catalog']);
     } finally {
@@ -165,7 +170,7 @@ const ProductCatalogForm = () => {
       const formData = new FormData();
       formData.append('importFile', file);
       const { data } = await productCatalogApi.importProductCatalogItems(id, formData);
-      setItems(data?.data?.productCatalogItems ?? []);
+      applyItems(data?.data);
       importFileRef.current.value = '';
       Alert.success(translate('react.productCatalog.imported.label', 'Product catalog items imported'));
     } catch (error) {
