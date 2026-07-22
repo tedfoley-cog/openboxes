@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import { hideSpinner, showSpinner } from 'actions';
 import partyApi from 'api/services/PartyApi';
@@ -12,7 +12,7 @@ import SelectField from 'components/form-elements/v2/SelectField';
 import TextInput from 'components/form-elements/v2/TextInput';
 import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
-import { PARTY_ROLE_URL } from 'consts/applicationUrls';
+import { PARTY_ROLE_URL, PARTY_URL } from 'consts/applicationUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
@@ -36,6 +36,7 @@ const PartyRoleForm = () => {
   useTranslation('partyRole', 'default');
 
   const { partyRoleId } = useParams();
+  const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
   const translate = useTranslate();
@@ -94,6 +95,7 @@ const PartyRoleForm = () => {
     control,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm({
     mode: 'onBlur',
@@ -107,6 +109,17 @@ const PartyRoleForm = () => {
     }
     reset(emptyValues);
   }, [partyRoleId]);
+
+  // Navigate client-side to the owning party's React show screen so the
+  // success toast survives; navigating to the legacy partyRole list would
+  // require a full page reload that tears down the SPA before it renders.
+  const navigateAfterSave = (partyId) => {
+    if (partyId) {
+      history.push(PARTY_URL.show(partyId));
+      return;
+    }
+    window.location.assign(PARTY_ROLE_URL.list());
+  };
 
   const onSubmit = async (values) => {
     const payload = {
@@ -125,7 +138,7 @@ const PartyRoleForm = () => {
       notification(NotificationType.SUCCESS)({
         message: translate('react.partyRole.update.success.label', 'Party role has been updated successfully'),
       });
-      window.location.assign(PARTY_ROLE_URL.list());
+      navigateAfterSave(values.party?.id);
       return;
     }
     try {
@@ -137,7 +150,7 @@ const PartyRoleForm = () => {
     notification(NotificationType.SUCCESS)({
       message: translate('react.partyRole.create.success.label', 'Party role has been created successfully'),
     });
-    window.location.assign(PARTY_ROLE_URL.list());
+    navigateAfterSave(values.party?.id);
   };
 
   const deletePartyRole = async () => {
@@ -148,7 +161,7 @@ const PartyRoleForm = () => {
         notification(NotificationType.SUCCESS)({
           message: translate('react.partyRole.delete.success.label', 'Party role has been deleted successfully'),
         });
-        window.location.assign(PARTY_ROLE_URL.list());
+        navigateAfterSave(getValues('party')?.id);
       }
     } finally {
       dispatch(hideSpinner());

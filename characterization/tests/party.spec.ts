@@ -76,7 +76,8 @@ test.describe('party react screens', () => {
     await page.getByText('Select', { exact: true }).first().click({ force: true });
     await page.getByText('ROLE_SUPPLIER', { exact: true }).click();
     await page.getByRole('button', { name: 'Create' }).click();
-    await page.waitForURL('**/partyRole/list**');
+    // Saving navigates to the owning party's React show screen so the toast survives.
+    await page.waitForURL(`**/party/show/${partyId}`);
 
     const details = await page.request.get(url(`/api/parties/${partyId}/details`));
     const roles = (await details.json()).data.roles;
@@ -90,7 +91,7 @@ test.describe('party react screens', () => {
     await captureStep(page, 'party', 'react-party-role-edit');
     await page.getByLabel('Start Date').fill('2026-01-01T00:00');
     await page.getByRole('button', { name: 'Update' }).click();
-    await page.waitForURL('**/partyRole/list**');
+    await page.waitForURL(`**/party/show/${partyId}`);
 
     const roleDetails = await page.request.get(url(`/api/partyRoles/${roleId}/details`));
     expect((await roleDetails.json()).data.startDate).toBeTruthy();
