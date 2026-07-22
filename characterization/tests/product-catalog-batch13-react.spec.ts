@@ -91,7 +91,11 @@ test.describe('product catalog batch 13 React screens', () => {
     await page.click('.react-confirm-alert button:has-text("Yes")');
     await page.waitForURL('**/tag/list**');
 
-    const api = await page.request.get(url(`/api/tags/${tagId}`));
+    // Without Accept: application/json the app-wide error path renders an
+    // HTML 500 page instead of a JSON 404.
+    const api = await page.request.get(url(`/api/tags/${tagId}`), {
+      headers: { Accept: 'application/json' },
+    });
     expect(api.status()).toBe(404);
   });
 
@@ -160,8 +164,11 @@ test.describe('product catalog batch 13 React screens', () => {
     await page.waitForURL('**/unitOfMeasureConversion/list**');
     await captureStep(page, FLOW, 'deleted');
 
+    // Without Accept: application/json the app-wide error path renders an
+    // HTML 500 page instead of a JSON 404.
     const gone = await page.request.get(
       url(`/api/unitOfMeasureConversions/${conversionId}`),
+      { headers: { Accept: 'application/json' } },
     );
     expect(gone.status()).toBe(404);
   });
