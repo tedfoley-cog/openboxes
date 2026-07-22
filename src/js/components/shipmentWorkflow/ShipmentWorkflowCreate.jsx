@@ -25,7 +25,7 @@ const ShipmentWorkflowCreate = () => {
   const [shipmentTypes, setShipmentTypes] = useState([]);
 
   useEffect(() => {
-    apiClient.get('/api/generic/shipmentType')
+    apiClient.get('/api/generic/shipmentType', { params: { max: 100 } })
       .then((response) => {
         setShipmentTypes((response?.data?.data ?? []).map((shipmentType) => ({
           id: shipmentType.id,
