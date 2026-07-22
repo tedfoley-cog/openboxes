@@ -18,7 +18,12 @@ import { LOCATION_URL } from 'consts/applicationUrls';
 import useTranslation from 'hooks/useTranslation';
 import Checkbox from 'utils/Checkbox';
 import { renderFormField } from 'utils/form-utils';
-import { debounceLocationGroupsFetch, debounceOrganizationsFetch, debouncePeopleFetch } from 'utils/option-utils';
+import {
+  debounceLocationGroupsFetch,
+  debounceLocationsFetch,
+  debounceOrganizationsFetch,
+  debouncePeopleFetch,
+} from 'utils/option-utils';
 import Translate, { translateWithDefaultMessage } from 'utils/Translate';
 import splitTranslation from 'utils/translation-utils';
 import PageWrapper from 'wrappers/PageWrapper';
@@ -121,6 +126,42 @@ const DETAILS_FIELDS = {
   },
 };
 
+const PARENT_FIELDS = {
+  parentLocation: {
+    type: SelectField,
+    label: 'react.location.parentLocation.label',
+    defaultMessage: 'Parent Location',
+    attributes: {
+      async: true,
+      showValueTooltip: true,
+      openOnClick: false,
+      autoload: false,
+      cache: false,
+      options: [],
+      filterOptions: (options) => options,
+    },
+    getDynamicAttr: ({ debouncedLocationsFetch }) => ({
+      loadOptions: debouncedLocationsFetch,
+    }),
+  },
+};
+
+const ZONE_FIELD = {
+  zone: {
+    type: SelectField,
+    label: 'react.location.zoneLocation.label',
+    defaultMessage: 'Zone Location',
+    attributes: {
+      showValueTooltip: true,
+      valueKey: 'id',
+      labelKey: 'name',
+    },
+    getDynamicAttr: ({ zoneOptions }) => ({
+      options: zoneOptions,
+    }),
+  },
+};
+
 const STYLE_FIELDS = {
   bgColor: {
     type: ColorPickerField,
@@ -179,6 +220,7 @@ const LocationEdit = () => {
   const [locationTypes, setLocationTypes] = useState([]);
   const [supportedActivityOptions, setSupportedActivityOptions] = useState([]);
   const [useDefaultActivities, setUseDefaultActivities] = useState(true);
+  const [zoneOptions, setZoneOptions] = useState([]);
 
   const {
     debounceTime,
@@ -202,6 +244,10 @@ const LocationEdit = () => {
   );
   const debouncedOrganizationsFetch = useCallback(
     debounceOrganizationsFetch(debounceTime, minSearchLength, [], true),
+    [debounceTime, minSearchLength],
+  );
+  const debouncedLocationsFetch = useCallback(
+    debounceLocationsFetch(debounceTime, minSearchLength, [], true),
     [debounceTime, minSearchLength],
   );
 
@@ -238,6 +284,10 @@ const LocationEdit = () => {
       }
       setDetails(location);
       setUseDefaultActivities(location.useDefaultActivities);
+      if (location.isInternalLocation && location.parentLocation?.id) {
+        locationApi.getZoneLocations(location.parentLocation.id)
+          .then((res) => setZoneOptions(res.data.data ?? []));
+      }
       setInitialValues({
         ...location,
         organization: location.organization
@@ -255,6 +305,14 @@ const LocationEdit = () => {
           }
           : '',
         manager: location.manager ? location.manager : '',
+        parentLocation: location.parentLocation
+          ? {
+            ...location.parentLocation,
+            value: location.parentLocation.id,
+            label: location.parentLocation.name,
+          }
+          : '',
+        zone: location.zone ? location.zone : '',
         locationType: location.locationType
           ? {
             ...location.locationType,
@@ -275,6 +333,10 @@ const LocationEdit = () => {
     }
   }, [locationId]);
 
+  const isInternalLocation = details?.isInternalLocation;
+  const isZoneLocation = details?.isZoneLocation;
+  const showAddress = !isInternalLocation && !isZoneLocation;
+
   const onSubmit = (values) => {
     dispatch(showSpinner());
     const payload = {
@@ -290,6 +352,12 @@ const LocationEdit = () => {
       supportedActivities: _.map(values.supportedActivities, (activity) => activity.value),
       address: values.address,
     };
+    if (isInternalLocation || isZoneLocation) {
+      payload.parentLocation = values.parentLocation ? { id: values.parentLocation.id } : null;
+    }
+    if (isInternalLocation) {
+      payload.zone = values.zone ? { id: values.zone.id } : null;
+    }
 
     const request = locationId
       ? locationApi.updateLocation(locationId, payload, { useDefaultActivities })
@@ -311,10 +379,6 @@ const LocationEdit = () => {
         return Promise.reject(new Error(translate('react.location.error.saveLocation.label', 'Could not save location')));
       });
   };
-
-  const isInternalLocation = details?.isInternalLocation;
-  const isZoneLocation = details?.isZoneLocation;
-  const showAddress = !isInternalLocation && !isZoneLocation;
 
   return (
     <PageWrapper>
@@ -378,6 +442,18 @@ const LocationEdit = () => {
                     debouncedLocationGroupsFetch,
                     debouncedOrganizationsFetch,
                     debouncedPeopleFetch,
+                  }),
+                )}
+                {(isInternalLocation || isZoneLocation) && _.map(
+                  PARENT_FIELDS,
+                  (fieldConfig, fieldName) => renderFormField(fieldConfig, fieldName, {
+                    debouncedLocationsFetch,
+                  }),
+                )}
+                {isInternalLocation && _.map(
+                  ZONE_FIELD,
+                  (fieldConfig, fieldName) => renderFormField(fieldConfig, fieldName, {
+                    zoneOptions,
                   }),
                 )}
 
