@@ -230,8 +230,8 @@ paths:
       summary: Delete a container (wizard packing step)
       description: >
         Mirrors the deleteContainer / deleteContainersAndItems flow events.
-        With deleteItems=false the container's items become unpacked items;
-        with deleteItems=true the items are deleted too.
+        With deleteItems=false the request fails if the container still
+        contains items; with deleteItems=true the items are deleted too.
       parameters:
         - $ref: '#/components/parameters/shipmentId'
         - name: containerId

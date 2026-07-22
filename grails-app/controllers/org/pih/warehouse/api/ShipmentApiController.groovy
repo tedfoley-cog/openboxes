@@ -219,9 +219,9 @@ class ShipmentApiController {
     }
 
     /**
-     * Mirrors the deleteContainer / deleteContainersAndItems flow events.
-     * When deleteItems is false the container's items are moved to unpacked
-     * items (like the legacy deleteContainer event).
+     * Mirrors the deleteContainers / deleteContainersAndItems flow events.
+     * When deleteItems is false a container that still contains items cannot
+     * be deleted (like the legacy deleteContainers event).
      */
     def deleteContainer() {
         Shipment shipment = Shipment.get(params.id)
@@ -232,11 +232,7 @@ class ShipmentApiController {
         }
         boolean deleteItems = params.boolean("deleteItems", false)
         try {
-            if (deleteItems) {
-                shipmentService.deleteContainers(shipment.id, [container.id], true)
-            } else {
-                shipmentService.deleteContainer(container)
-            }
+            shipmentService.deleteContainers(shipment.id, [container.id], deleteItems)
         } catch (ShipmentException e) {
             renderError(e.message)
             return
@@ -292,9 +288,11 @@ class ShipmentApiController {
                 shipmentService.saveShipmentItem(shipmentItem)
             }
         } catch (ValidationException e) {
+            shipmentItem.discard()
             renderValidationException(e)
             return
         } catch (Exception e) {
+            shipmentItem.discard()
             renderError(e.message)
             return
         }
@@ -380,9 +378,11 @@ class ShipmentApiController {
             shipmentService.validateShipmentItem(shipmentItem)
             shipmentItem.save(flush: true)
         } catch (ValidationException e) {
+            shipmentItem.discard()
             renderValidationException(e)
             return
         } catch (Exception e) {
+            shipmentItem.discard()
             renderError(e.message)
             return
         }

@@ -72,7 +72,7 @@ const CreateShipmentDetails = () => {
         setError(err?.response?.data?.errorMessage
           || translate('react.default.errors.error.label', 'An error occurred'));
       });
-  }, [shipmentId]);
+  }, [shipmentId, currentLocation?.id]);
 
   const save = async (nextStep) => {
     setSaving(true);
