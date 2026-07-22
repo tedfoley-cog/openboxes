@@ -31,8 +31,11 @@ def require_endpoint(client, order_id):
     # of this branch expose it. A 404 is also the expected contract response
     # for an unknown id, so probe with a real order id instead.
     resp = client.request("GET", f"/api/orders/{order_id}/receiveOrder")
-    if resp.status_code != 200:
+    if resp.status_code == 404:
         pytest.skip("app build does not expose /api/orders/{id}/receiveOrder")
+    assert resp.status_code == 200, (
+        f"/api/orders/{{id}}/receiveOrder returned {resp.status_code} for a real order"
+    )
 
 
 def test_read_unknown(client):

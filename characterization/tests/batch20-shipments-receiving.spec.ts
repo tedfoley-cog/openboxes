@@ -35,7 +35,8 @@ test.describe('batch 20 shipments & receiving react screens', () => {
     test.skip(!shipmentId, 'seeded dataset has no shipments');
 
     const probe = await page.request.get(url(`/api/shipments/${shipmentId}/outboundReturnPrint`));
-    test.skip(probe.status() !== 200, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    test.skip(probe.status() === 404, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    expect(probe.status(), 'outboundReturnPrint endpoint should return 200 for a real shipment').toBe(200);
     const printData = (await probe.json()).data;
 
     await page.goto(url(`/deliveryNote/printOutboundReturn/${shipmentId}`));
@@ -67,7 +68,8 @@ test.describe('batch 20 shipments & receiving react screens', () => {
     test.skip(!shipmentId, 'seeded dataset has no shipments');
 
     const probe = await page.request.get(url(`/api/shipments/${shipmentId}/goodsReceiptNotePrint`));
-    test.skip(probe.status() !== 200, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    test.skip(probe.status() === 404, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    expect(probe.status(), 'goodsReceiptNotePrint endpoint should return 200 for a real shipment').toBe(200);
     const printData = (await probe.json()).data;
 
     await page.goto(url(`/goodsReceiptNote/print/${shipmentId}`));
@@ -93,7 +95,8 @@ test.describe('batch 20 shipments & receiving react screens', () => {
     test.skip(!orderId, 'seeded dataset has no orders');
 
     const probe = await page.request.get(url(`/api/orders/${orderId}/receiveOrder`));
-    test.skip(probe.status() !== 200, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    test.skip(probe.status() === 404, 'app build does not expose the Batch 20 endpoints (pinned released image)');
+    expect(probe.status(), 'receiveOrder endpoint should return 200 for a real order').toBe(200);
     const orderData = (await probe.json()).data;
 
     await page.goto(url(`/receiveOrderWorkflow/receiveOrder/${orderId}`));
