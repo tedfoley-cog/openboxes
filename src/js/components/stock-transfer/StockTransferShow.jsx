@@ -13,9 +13,15 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 
+// Formats the server-provided date components (mirrors the legacy
+// server-side g:formatDate output regardless of the browser timezone)
 const formatDate = (value) => {
   if (!value) {
     return '';
+  }
+  const isoMatch = typeof value === 'string' && value.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (isoMatch) {
+    return `${isoMatch[2]}/${isoMatch[3]}/${isoMatch[1]}`;
   }
   const date = new Date(value);
   const pad = (part) => `${part}`.padStart(2, '0');
