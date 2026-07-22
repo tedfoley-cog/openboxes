@@ -153,6 +153,47 @@ class UrlMappings {
             action = [GET: "details"]
         }
 
+        "/api/productGroups"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [GET: "list"]
+        }
+
+        "/api/productGroups/$id"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/productGroups/$id/products"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [POST: "addProduct"]
+        }
+
+        "/api/productGroups/$id/products/$productId"(parseRequest: true) {
+            controller = { "productGroupApi" }
+            action = [DELETE: "removeProduct"]
+        }
+
+        "/api/productTypes"(parseRequest: true) {
+            controller = { "productTypeApi" }
+            action = [POST: "create"]
+        }
+
+        "/api/productTypes/$id"(parseRequest: true) {
+            controller = { "productTypeApi" }
+            action = [DELETE: "delete"]
+        }
+
+        // Product activity / field options for the productType create screen
+        "/api/productActivityCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productActivityCodeOptions"]
+        }
+
+        "/api/productFieldOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productFieldOptions"]
+        }
+
         "/api/locationTypes"(parseRequest: true) {
             controller = { "locationTypeApi" }
             action = [GET: "list", POST: "create"]
@@ -1403,6 +1444,11 @@ class UrlMappings {
         "/api/productSuppliers/export" {
             controller = { "productSupplierApi" }
             action = [GET: "export"]
+        }
+
+        "/api/productSuppliers/$id/details" {
+            controller = { "productSupplierApi" }
+            action = [GET: "details"]
         }
 
         // Load Data

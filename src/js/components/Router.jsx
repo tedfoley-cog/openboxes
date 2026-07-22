@@ -168,6 +168,31 @@ const AsyncProductSupplierList = Loadable({
   loading: Loading,
 });
 
+const AsyncProductSupplierShow = Loadable({
+  loader: () => import('components/productSupplier/show/ProductSupplierShow'),
+  loading: Loading,
+});
+
+const AsyncProductGroupList = Loadable({
+  loader: () => import('components/productGroup/ProductGroupList'),
+  loading: Loading,
+});
+
+const AsyncProductGroupForm = Loadable({
+  loader: () => import('components/productGroup/ProductGroupForm'),
+  loading: Loading,
+});
+
+const AsyncProductGroupShow = Loadable({
+  loader: () => import('components/productGroup/ProductGroupShow'),
+  loading: Loading,
+});
+
+const AsyncProductTypeForm = Loadable({
+  loader: () => import('components/productType/ProductTypeForm'),
+  loading: Loading,
+});
+
 const AsyncProductSupplierCreatePage = Loadable({
   loader: () => import('components/productSupplier/create/ProductSupplierForm'),
   loading: Loading,
@@ -839,6 +864,12 @@ const Router = () => {
             <MainLayoutRoute path="**/location/uploadLogo/:locationId" component={AsyncLocationUploadLogo} />
             <MainLayoutRoute path="**/productSupplier/list" component={AsyncProductSupplierList} />
             <MainLayoutRoute path="**/productSupplier/create/:productSupplierId?" component={AsyncProductSupplierCreatePage} />
+            <MainLayoutRoute path="**/productSupplier/edit/:productSupplierId" component={AsyncProductSupplierCreatePage} />
+            <MainLayoutRoute path="**/productSupplier/show/:productSupplierId" component={AsyncProductSupplierShow} />
+            <MainLayoutRoute path="**/productGroup/list" component={AsyncProductGroupList} />
+            <MainLayoutRoute path="**/productGroup/edit/:productGroupId" component={AsyncProductGroupForm} />
+            <MainLayoutRoute path="**/productGroup/show/:productGroupId" component={AsyncProductGroupShow} />
+            <MainLayoutRoute path="**/productType/create" component={AsyncProductTypeForm} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
             <MainLayoutRoute path="**/" component={Dashboard} />
           </Switch>
