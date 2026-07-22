@@ -71,9 +71,15 @@ const InventorySnapshotList = () => {
     setError(null);
     setRefreshMessage(null);
     try {
-      await apiClient.post(`${INVENTORY_SNAPSHOT_URL.base}/update`, null, {
+      const response = await apiClient.post(`${INVENTORY_SNAPSHOT_URL.base}/update`, null, {
         params: { date, 'location.id': currentLocation?.id },
       });
+      // The legacy update action renders error JSON with a 200 status
+      if (response.data?.error) {
+        setError(response.data.message
+          || translate('react.default.errors.error.label', 'An error occurred'));
+        return;
+      }
       setRefreshMessage(translate(
         'react.inventorySnapshot.refreshStarted.label',
         'Snapshot refresh started - this may take some time. Reload the page later to see updated data.',

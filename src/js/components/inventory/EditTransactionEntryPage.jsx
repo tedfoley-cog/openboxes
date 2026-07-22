@@ -75,7 +75,7 @@ const EditTransactionEntryPage = () => {
     } catch (error) {
       const text = error.response?.data?.errorMessage
         || error.response?.data?.errorMessages?.join(', ')
-        || translate('react.inventory.transaction.saveError.label', 'Unable to save transaction');
+        || translate('react.inventory.transactions.deleteFailed.label', 'Transaction could not be deleted');
       setMessage({ type: 'danger', text });
     }
   };
