@@ -31,8 +31,8 @@ const LocalizationList = () => {
 
   const [localeOptions, setLocaleOptions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [locale, setLocale] = useState(activeLanguage ?? 'en');
-  const [filterParams, setFilterParams] = useState({ q: '', locale: activeLanguage ?? 'en' });
+  const [locale, setLocale] = useState(activeLanguage || 'en');
+  const [filterParams, setFilterParams] = useState({ q: '', locale: activeLanguage || 'en' });
   const [showImport, setShowImport] = useState(false);
   const fileInputRef = useRef(null);
 

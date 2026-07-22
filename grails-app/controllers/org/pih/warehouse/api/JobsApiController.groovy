@@ -37,6 +37,12 @@ class JobsApiController {
     }
 
     def read() {
+        if (!params.name) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            render([errorCode: HttpStatus.BAD_REQUEST.value(),
+                    errorMessage: "A job name is required"] as JSON)
+            return
+        }
         String jobGroup = params.group ?: GrailsJobClassConstants.DEFAULT_GROUP
         JobKey jobKey = new JobKey(params.name, jobGroup)
         JobDetail jobDetail = quartzScheduler.getJobDetail(jobKey)

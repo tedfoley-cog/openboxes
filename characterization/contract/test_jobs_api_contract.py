@@ -49,6 +49,11 @@ def test_read_unknown_job(client):
     assert resp.status_code == 404
 
 
+def test_read_missing_name(client):
+    resp = check(client, spec, "GET", "/api/jobs/details")
+    assert resp.status_code == 400
+
+
 def test_create_and_delete_trigger(client):
     if client.request("GET", "/api/jobs/details",
                       params={"name": JOB_NAME}).status_code != 200:

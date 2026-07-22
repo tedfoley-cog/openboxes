@@ -34,7 +34,8 @@ class LocalizationOverrideApiController {
         String sort = params.sort in ['id', 'code', 'locale', 'text', 'dateCreated', 'lastUpdated'] ? params.sort : 'code'
         String sortOrder = params.order == 'desc' ? 'desc' : 'asc'
         String defaultLocale = grailsApplication.config.openboxes.locale.defaultLocale
-        String currentLocale = session?.user?.locale?.toString() ?: session?.locale?.toString() ?: defaultLocale
+        Locale sessionLocale = session?.user?.locale ?: session?.locale ?: new Locale(defaultLocale)
+        String currentLocale = sessionLocale.language
         String locale = params.containsKey("locale") ? params.locale : currentLocale
         def results = Localization.createCriteria().list(max: max, offset: offset) {
             if (locale) {

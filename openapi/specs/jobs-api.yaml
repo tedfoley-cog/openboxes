@@ -46,6 +46,12 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/JobDetail'
+        '400':
+          description: Missing job name.
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
         '404':
           description: No job detail for the given key.
           content:
