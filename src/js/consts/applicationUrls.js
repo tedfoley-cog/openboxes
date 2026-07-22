@@ -5,6 +5,19 @@ import { stringifyUrl } from 'query-string';
 
 export const CONTEXT_PATH = window.CONTEXT_PATH ?? '/openboxes';
 
+const ADMIN_URL = {
+  base: `${CONTEXT_PATH}/admin`,
+  index: () => `${ADMIN_URL.base}/index`,
+  cache: () => `${ADMIN_URL.base}/cache`,
+  controllerActions: () => `${ADMIN_URL.base}/controllerActions`,
+  plugins: () => `${ADMIN_URL.base}/plugins`,
+  sendMail: () => `${ADMIN_URL.base}/sendMail`,
+  showSettings: () => `${ADMIN_URL.base}/showSettings`,
+  showDatabaseStatus: () => `${ADMIN_URL.base}/showDatabaseStatus`,
+  showDatabaseProcessList: () => `${ADMIN_URL.base}/showDatabaseProcessList`,
+  showUpgrade: () => `${ADMIN_URL.base}/showUpgrade`,
+};
+
 const DASHBOARD_URL = {
   base: `${CONTEXT_PATH}/dashboard`,
 };
@@ -141,6 +154,8 @@ const PUTAWAY_URL = {
 
 const STOCK_TRANSFER_URL = {
   base: `${CONTEXT_PATH}/stockTransfer`,
+  list: () => `${STOCK_TRANSFER_URL.base}/list`,
+  erase: (id) => `${STOCK_TRANSFER_URL.base}/eraseStockTransfer/${id}`,
   create: () => `${STOCK_TRANSFER_URL.base}/create`,
   createOutbound: () => `${STOCK_TRANSFER_URL.base}/createOutboundReturn`,
   createInbound: () => `${STOCK_TRANSFER_URL.base}/createInboundReturn`,
@@ -358,6 +373,29 @@ const LOCATION_GROUP_URL = {
   show: (id) => `${LOCATION_GROUP_URL.base}/show/${id}`,
 };
 
+const EVENT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/eventType`,
+  list: () => `${EVENT_TYPE_URL.base}/list`,
+  create: () => `${EVENT_TYPE_URL.base}/create`,
+  edit: (id) => `${EVENT_TYPE_URL.base}/edit/${id}`,
+  show: (id) => `${EVENT_TYPE_URL.base}/show/${id}`,
+};
+
+const LOCALIZATION_URL = {
+  base: `${CONTEXT_PATH}/localization`,
+  list: () => `${LOCALIZATION_URL.base}/list`,
+  create: () => `${LOCALIZATION_URL.base}/create`,
+  edit: (id) => `${LOCALIZATION_URL.base}/edit/${id}`,
+  export: (locale) => `${LOCALIZATION_URL.base}/export?locale=${locale}`,
+};
+
+const JOB_URL = {
+  base: `${CONTEXT_PATH}/jobs`,
+  show: (name) => `${JOB_URL.base}/show/${name}`,
+  quartzList: () => `${CONTEXT_PATH}/quartz/list`,
+  backgroundJobSettings: () => `${CONTEXT_PATH}/admin/showSettings#tab-5`,
+};
+
 const LOCATION_TYPE_URL = {
   base: `${CONTEXT_PATH}/locationType`,
   list: () => `${LOCATION_TYPE_URL.base}/list`,
@@ -541,6 +579,12 @@ const SHIPMENT_SHOW_URL = {
   base: `${CONTEXT_PATH}/shipment`,
   show: (id) => `${SHIPMENT_SHOW_URL.base}/showDetails/${id}`,
   list: () => `${SHIPMENT_SHOW_URL.base}/list`,
+  addComment: (id) => `${SHIPMENT_SHOW_URL.base}/addComment/${id}`,
+  addDocument: (id) => `${SHIPMENT_SHOW_URL.base}/addDocument/${id}`,
+  deleteShipment: (id) => `${SHIPMENT_SHOW_URL.base}/deleteShipment/${id}`,
+  addEvent: (id) => `${SHIPMENT_SHOW_URL.base}/addEvent/${id}`,
+  editEvent: (eventId, shipmentId) => `${SHIPMENT_SHOW_URL.base}/editEvent/${eventId}?shipmentId=${shipmentId}`,
+  addToShipment: () => `${SHIPMENT_SHOW_URL.base}/addToShipment`,
   packingList: (id) => `${SHIPMENT_SHOW_URL.base}/showPackingList/${id}`,
   receive: (id) => `${SHIPMENT_SHOW_URL.base}/receiveShipment/${id}`,
   send: (id) => `${SHIPMENT_SHOW_URL.base}/sendShipment/${id}`,
@@ -595,6 +639,7 @@ const CYCLE_COUNT = {
 };
 
 export {
+  ADMIN_URL,
   ATTRIBUTE_URL,
   BARCODE_URL,
   BUDGET_CODE_URL,
@@ -606,6 +651,7 @@ export {
   DATA_EXPORT_URL,
   DELIVERY_NOTE_URL,
   DOCUMENT_URL,
+  EVENT_TYPE_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
   GOODS_RECEIPT_NOTE_URL,
@@ -615,6 +661,8 @@ export {
   INVENTORY_SNAPSHOT_URL,
   INVENTORY_URL,
   INVOICE_URL,
+  JOB_URL,
+  LOCALIZATION_URL,
   LOCATION_CONFIGURATION_URL,
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
