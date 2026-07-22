@@ -55,7 +55,24 @@ const CategoryTree = () => {
 
   const selectedCategory = useMemo(() => {
     if (queryParams?.id) {
-      return rootCategories.find((category) => category.id === queryParams.id);
+      // Like the legacy tree (Category.get(params.id)), ?id may point at any
+      // category in the hierarchy, not just a root.
+      const findCategory = (categories) => {
+        for (let i = 0; i < (categories?.length ?? 0); i += 1) {
+          if (categories[i].id === queryParams.id) {
+            return categories[i];
+          }
+          const found = findCategory(categories[i].categories);
+          if (found) {
+            return found;
+          }
+        }
+        return undefined;
+      };
+      const found = findCategory(rootCategories);
+      if (found) {
+        return found;
+      }
     }
     return rootCategories.find((category) => category.isRoot) ?? rootCategories[0];
   }, [rootCategories, queryParams?.id]);
