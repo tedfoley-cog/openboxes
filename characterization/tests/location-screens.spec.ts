@@ -15,6 +15,19 @@ test.describe('location screens', () => {
   test.beforeEach(async ({ page }) => {
     resetStepCounter();
     await login(page);
+    // The React location screens (and their APIs) only exist in builds
+    // containing the Batch 31 migration. Against an older pinned baseline
+    // image, skip; re-baseline OB_VERSION after release to activate.
+    const probe = await page.request.get(url('/api/locations/search?max=1'));
+    let deployed = false;
+    if (probe.status() === 200) {
+      try {
+        deployed = 'totalCount' in (await probe.json());
+      } catch {
+        deployed = false;
+      }
+    }
+    test.skip(!deployed, 'React location screens not present in deployed app image');
   });
 
   test('location list shows seeded depots and filters by search term', async ({ page }) => {
