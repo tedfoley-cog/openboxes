@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Alert from 'react-s-alert';
 
@@ -77,7 +77,7 @@ const ReceiveOrderPage = () => {
     currentLocation: state.session.currentLocation,
     debounceTime: state.session.searchConfig.debounceTime,
     minSearchLength: state.session.searchConfig.minSearchLength,
-  }));
+  }), shallowEqual);
 
   const debouncedPeopleFetch = useMemo(
     () => debouncePeopleFetch(debounceTime, minSearchLength),
@@ -212,7 +212,7 @@ const ReceiveOrderPage = () => {
   const validateOrderItems = () => {
     const validationErrors = [];
     rows.forEach((row) => {
-      if (row.quantityReceived && !row.productReceived) {
+      if (Number(row.quantityReceived) > 0 && !row.productReceived) {
         validationErrors.push(translate('react.receiveOrder.error.productRequired.label', 'Product is required for received items'));
       }
     });
@@ -322,6 +322,7 @@ const ReceiveOrderPage = () => {
               </div>
               <div className="col-lg-4 col-md-6 px-2 pt-2">
                 <SelectField
+                  key={`recipient-${recipient?.id ?? ''}`}
                   title={{ id: 'react.receiveOrder.recipient.label', defaultMessage: 'Recipient' }}
                   required
                   async
