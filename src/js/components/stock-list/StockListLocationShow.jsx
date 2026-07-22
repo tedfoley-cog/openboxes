@@ -59,7 +59,14 @@ const StockListLocationShow = () => {
           locationApi.getLocation(locationId),
           fetchAllInventoryLevels(locationId),
         ]);
-        setLocation(locationResponse?.data?.data);
+        const locationData = locationResponse?.data?.data;
+        if (!locationData) {
+          notification(NotificationType.ERROR)({
+            message: translate('react.stockListShow.locationNotFound.label', 'Location not found'),
+          });
+          return;
+        }
+        setLocation(locationData);
         setInventoryLevels(levels);
       } catch (error) {
         notification(NotificationType.ERROR)({

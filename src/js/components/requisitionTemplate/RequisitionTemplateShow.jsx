@@ -80,7 +80,7 @@ const RequisitionTemplateShow = () => {
       notification(NotificationType.SUCCESS)({
         message: translate('react.requisitionTemplate.updated.label', 'Stock list has been updated'),
       });
-      fetchTemplate();
+      await fetchTemplate();
     } catch (error) {
       notification(NotificationType.ERROR)({
         message: translate('react.requisitionTemplate.updateError.label', 'Unable to update stock list'),
