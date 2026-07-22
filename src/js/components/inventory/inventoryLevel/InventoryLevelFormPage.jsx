@@ -40,7 +40,8 @@ const InventoryLevelFormPage = () => {
   const [version, setVersion] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  const [status, setStatus] = useState(null);
+  // Legacy domain default for new inventory levels is SUPPORTED
+  const [status, setStatus] = useState(id ? null : { id: 'SUPPORTED', label: 'SUPPORTED' });
   const [product, setProduct] = useState(null);
   const [location, setLocation] = useState(null);
   const [internalLocation, setInternalLocation] = useState(null);
