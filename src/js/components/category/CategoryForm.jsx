@@ -16,7 +16,7 @@ import './styles.scss';
 
 const emptyCategory = {
   name: '',
-  description: '',
+  isRoot: false,
   sortOrder: 0,
   parentCategory: null,
   categories: [],
@@ -62,7 +62,7 @@ const CategoryForm = () => {
     const payload = id
       ? {
         name: category.name,
-        description: category.description || null,
+        isRoot: !!category.isRoot,
         sortOrder: category.sortOrder,
         parentCategory: category.parentCategory?.id ? { id: category.parentCategory.id } : null,
       }
@@ -151,15 +151,15 @@ const CategoryForm = () => {
           {id && (
             <>
               <div className="form-group row">
-                <label className="col-sm-3 col-form-label" htmlFor="description">
-                  <Translate id="react.category.description.label" defaultMessage="Description" />
+                <label className="col-sm-3 col-form-label" htmlFor="isRoot">
+                  <Translate id="react.category.isRoot.label" defaultMessage="Is root node?" />
                 </label>
-                <div className="col-sm-9">
-                  <textarea
-                    id="description"
-                    className="form-control"
-                    value={category.description ?? ''}
-                    onChange={(event) => setField('description', event.target.value)}
+                <div className="col-sm-9 d-flex align-items-center">
+                  <input
+                    id="isRoot"
+                    type="checkbox"
+                    checked={!!category.isRoot}
+                    onChange={(event) => setField('isRoot', event.target.checked)}
                   />
                 </div>
               </div>

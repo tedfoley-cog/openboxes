@@ -70,7 +70,7 @@ const AttributeShow = () => {
     { label: 'react.attribute.column.name.label', defaultLabel: 'Name', value: attribute.name },
     { label: 'react.attribute.dateCreated.label', defaultLabel: 'Date Created', value: attribute.dateCreated },
     { label: 'react.attribute.lastUpdated.label', defaultLabel: 'Last Updated', value: attribute.lastUpdated },
-    { label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Other', value: attribute.allowOther ? 'true' : 'false' },
+    { label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Free-Text', value: attribute.allowOther ? 'true' : 'false' },
     { label: 'react.attribute.column.options.label', defaultLabel: 'Options', value: attribute.options?.join(', ') },
   ];
 

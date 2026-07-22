@@ -71,7 +71,7 @@ class CategoryApiController {
         if (!category) {
             category = new Category(request.JSON)
         } else {
-            category.properties = params
+            category.properties = request.JSON ?: params
         }
 
         if (!category.hasErrors() && category.save()) {

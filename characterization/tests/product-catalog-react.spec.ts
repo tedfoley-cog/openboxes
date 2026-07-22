@@ -125,7 +125,6 @@ test.describe('product catalog React screens', () => {
     await page.goto(url(`/category/edit/${created.id}`));
     await page.waitForLoadState('networkidle');
     await expect(page.locator('#name')).toHaveValue(name);
-    await page.fill('#description', 'characterization suite');
     await page.fill('#sortOrder', '5');
     await captureStep(page, FLOW, 'category-edit');
     await page.click('button:has-text("Save")');
@@ -134,7 +133,6 @@ test.describe('product catalog React screens', () => {
     const details = await page.request
       .get(url(`/api/categories/${created.id}/details`))
       .then((r) => r.json());
-    expect(details.data.description).toBe('characterization suite');
     expect(details.data.sortOrder).toBe(5);
 
     // --- Cleanup: delete from the tree screen ---

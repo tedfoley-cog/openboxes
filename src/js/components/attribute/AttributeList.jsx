@@ -87,7 +87,7 @@ const AttributeList = () => {
     { id: 'options', label: 'react.attribute.column.options.label', defaultLabel: 'Options' },
     { id: 'active', label: 'react.attribute.column.active.label', defaultLabel: 'Active' },
     { id: 'required', label: 'react.attribute.column.required.label', defaultLabel: 'Required' },
-    { id: 'allowOther', label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Other' },
+    { id: 'allowOther', label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Free-Text' },
   ];
 
   return (

@@ -8,7 +8,9 @@ info:
     parity: save() responds 200 (not 201) with the bare category JSON (no
     "data" envelope), and both POST and PUT on /api/categories/{id} invoke
     save(). Tree/details/assigningParentToProduct endpoints were added for
-    the React category screens (Phase 2 Batch 7).
+    the React category screens (Phase 2 Batch 7), and save() now binds the
+    JSON request body on updates (previously the body was silently ignored
+    and JSON updates were no-ops).
   version: 0.2.0
 servers:
   - url: http://localhost:8080/openboxes

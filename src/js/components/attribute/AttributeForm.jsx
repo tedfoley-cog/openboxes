@@ -261,7 +261,7 @@ const AttributeForm = () => {
           {[
             { field: 'active', label: 'react.attribute.column.active.label', defaultLabel: 'Active' },
             { field: 'required', label: 'react.attribute.column.required.label', defaultLabel: 'Required' },
-            { field: 'allowOther', label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Other' },
+            { field: 'allowOther', label: 'react.attribute.column.allowOther.label', defaultLabel: 'Allow Free-Text' },
           ].map(({ field, label, defaultLabel }) => (
             <div className="form-group row" key={field}>
               <label className="col-sm-3 col-form-label" htmlFor={field}>

@@ -83,6 +83,26 @@ def test_create_update_delete(client):
               path=f"/api/categories/{category_id}")
 
 
+def test_update_persists_json_body(client, batch7_api):
+    # Batch 7 fix: save() now binds the JSON body on updates (previously the
+    # body was silently ignored and updates were no-ops).
+    root = next(c for c in client.get_json("/api/categories")["data"]
+                if c.get("name") == "ROOT")
+    resp = check(client, spec, "POST", "/api/categories",
+                 json={"name": TEST_NAME, "parentCategory": {"id": root["id"]}})
+    category_id = resp.json()["id"]
+    try:
+        resp = check(client, spec, "PUT", "/api/categories/{id}",
+                     path=f"/api/categories/{category_id}",
+                     json={"description": "persisted by contract suite",
+                           "sortOrder": 7})
+        assert resp.json()["description"] == "persisted by contract suite"
+        assert resp.json()["sortOrder"] == 7
+    finally:
+        check(client, spec, "DELETE", "/api/categories/{id}",
+              path=f"/api/categories/{category_id}")
+
+
 def test_delete_unknown(client):
     check(client, spec, "DELETE", "/api/categories/{id}",
           path="/api/categories/doesnotexist0000")
