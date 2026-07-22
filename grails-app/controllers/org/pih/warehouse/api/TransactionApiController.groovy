@@ -74,7 +74,7 @@ class TransactionApiController {
             throw new IllegalArgumentException("Transaction entries must not be empty")
         }
 
-        if (transactionType.transactionCode == TransactionCode.DEBIT) {
+        if (transactionType.transactionCode == TransactionCode.DEBIT && !isAdjustment) {
             transaction.transactionNumber = transactionIdentifierService.generate(transaction)
         }
 
@@ -96,7 +96,7 @@ class TransactionApiController {
                     throw new IllegalArgumentException("Quantity for lot number ${inventoryItem.lotNumber ?: 'default'} cannot be greater than on-hand quantity")
                 }
             }
-            if (transactionType.transactionCode == TransactionCode.CREDIT && quantity < 0) {
+            if ((transactionType.transactionCode == TransactionCode.CREDIT || isAdjustment) && quantity < 0) {
                 throw new IllegalArgumentException("Quantity for lot number ${inventoryItem.lotNumber ?: 'default'} must not be negative")
             }
 

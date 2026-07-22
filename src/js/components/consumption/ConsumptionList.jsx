@@ -84,7 +84,7 @@ const ConsumptionList = () => {
     return { columns: months, pivotRows: productRows };
   }, [rows]);
 
-  const downloadUrl = `${CONTEXT_PATH}/consumption/list?download=true&startDate=${toApiDate(startDate) ?? ''}&endDate=${toApiDate(endDate) ?? ''}&category=${categoryId}`;
+  const downloadUrl = `${CONTEXT_PATH}/consumption/list?download=true&location=${currentLocation?.id ?? ''}&startDate=${toApiDate(startDate) ?? ''}&endDate=${toApiDate(endDate) ?? ''}&category=${categoryId}`;
 
   return (
     <PageWrapper>
