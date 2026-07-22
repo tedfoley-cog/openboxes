@@ -33,7 +33,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — [#9](https://github.com/tedfoley-cog/openboxes/pull/9) merged |
 | 1.1b | Dependency cleanup / Grails 4 de-risk audit | [d11e6110](https://app.devin.ai/sessions/d11e611086ee4de4840215ef5cb2f7e4) — [#19](https://github.com/tedfoley-cog/openboxes/pull/19) merged (audit in docs/migration/DEPENDENCY_AUDIT.md) |
 | 1.2 | Grails 3→4 | [f3400cd2](https://app.devin.ai/sessions/f3400cd2cb624535ab89390e465486dd) — [#27](https://github.com/tedfoley-cog/openboxes/pull/27) merged (Grails 4.1.4, GORM 7, Hibernate 5.4, Gradle 6.9.4) |
-| 1.3 | Grails 4→5 (3–5 children) | pending |
+| 1.3 | Grails 4→5 | [7943163d](https://app.devin.ai/sessions/7943163d2df74a1ea669461b357271c3) — in progress |
 | 1.4 | Grails 5→6 / Java 21 / javax→jakarta (4–6 children) | pending |
 | 1.5 | Re-verify Quartz jobs, Liquibase, mail/reporting (3–4 children) | pending |
 
