@@ -42,7 +42,7 @@ class EventTypeController {
     def edit() {
         // The legacy eventType/show GSP posts its Edit button here with the id as a
         // request parameter; the React route needs the id in the path.
-        if (request.post && params.id) {
+        if (request.method == "POST" && params.id) {
             redirect(uri: "/eventType/edit/${params.id}")
             return
         }

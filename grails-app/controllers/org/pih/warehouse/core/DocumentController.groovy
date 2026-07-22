@@ -92,7 +92,7 @@ class DocumentController {
     def show() {
         // The legacy document/show GSP posted its Edit/Delete buttons here with the id as
         // a request parameter; the React route needs the id in the path.
-        if (request.post && params.id) {
+        if (request.method == "POST" && params.id) {
             redirect(uri: "/document/show/${params.id}")
             return
         }
@@ -100,7 +100,7 @@ class DocumentController {
     }
 
     def edit() {
-        if (request.post && params.id) {
+        if (request.method == "POST" && params.id) {
             redirect(uri: "/document/edit/${params.id}")
             return
         }
