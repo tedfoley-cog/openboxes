@@ -18,10 +18,21 @@ async function firstShipmentId(page: Page): Promise<string | null> {
   return shipments.length ? shipments[0].id : null;
 }
 
+// Prefers an order with a receivable (not completely fulfilled) line so the
+// receive test can exercise the full save path; falls back to the first order.
 async function firstOrderId(page: Page): Promise<string | null> {
-  const orders = (await (await page.request.get(url('/api/generic/order/?max=1'))).json())
+  const orders = (await (await page.request.get(url('/api/generic/order/?max=10'))).json())
     .data as Array<{ id: string }>;
-  return orders.length ? orders[0].id : null;
+  if (!orders.length) return null;
+  for (const order of orders) {
+    const probe = await page.request.get(url(`/api/orders/${order.id}/receiveOrder`));
+    if (probe.status() !== 200) break;
+    const data = (await probe.json()).data;
+    if (data.orderItems.some((item: any) => !item.isCompletelyFulfilled)) {
+      return order.id;
+    }
+  }
+  return orders[0].id;
 }
 
 test.describe('batch 20 shipments & receiving react screens', () => {
@@ -168,6 +179,14 @@ test.describe('batch 20 shipments & receiving react screens', () => {
       // Successful receive redirects to the legacy order show page
       await page.waitForURL(`**/order/show/${orderId}**`, { timeout: 30000 });
       await captureStep(page, 'receive-order', 'legacy-order-show-after-receive');
+
+      // The received unit must be linked back to the order (order_shipment
+      // join), which is what drives the fulfilled quantity on the order
+      const after = (await (await page.request.get(url(`/api/orders/${orderId}/receiveOrder`))).json()).data;
+      const fulfilled = (data: any) => data.orderItems
+        .reduce((sum: number, item: any) => sum + item.quantityFulfilled, 0);
+      expect(fulfilled(after), 'receiving 1 unit should increase the order fulfilled quantity by 1')
+        .toBe(fulfilled(orderData) + 1);
     }
   });
 });

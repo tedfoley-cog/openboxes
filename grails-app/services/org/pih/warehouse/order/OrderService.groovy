@@ -315,6 +315,7 @@ class OrderService {
         shipmentInstance.expectedShippingDate = orderCommand?.shippedOn
 
         orderCommand?.shipment = shipmentInstance
+        def shipmentItemsToLink = []
         orderCommand?.orderItems.each { orderItemCommand ->
 
             // Ignores any null order items and makes sure that the order item has a product and quantity
@@ -337,7 +338,7 @@ class OrderService {
                 shipmentItem.quantity = orderItemCommand.quantityReceived
                 shipmentItem.recipient = orderCommand?.recipient
                 shipmentItem.inventoryItem = inventoryItem
-                shipmentItem.addToOrderItems(orderItemCommand?.orderItem)
+                shipmentItemsToLink << [shipmentItem: shipmentItem, orderItemId: orderItemCommand?.orderItem?.id]
                 shipmentInstance.addToShipmentItems(shipmentItem)
             }
         }
@@ -348,6 +349,14 @@ class OrderService {
         // order before continuing
         if (orderCommand?.order?.id) {
             orderCommand.order = Order.get(orderCommand.order.id)
+        }
+
+        // Link the shipment items to their order items only after the last
+        // session.clear() above, on freshly attached order items, so the
+        // order_shipment join rows actually get flushed
+        shipmentItemsToLink.each {
+            OrderItem orderItem = OrderItem.get(it.orderItemId)
+            it.shipmentItem.addToOrderItems(orderItem)
         }
 
         // Validate the shipment and save it if there are no errors
