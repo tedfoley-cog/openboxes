@@ -56,7 +56,7 @@ const ShipmentItemRows = ({
         <td className="product-name"><del>{item.productName}</del></td>
         <td><del>{item.lotNumber ?? ''}</del></td>
         <td><del>{formatDate(item.expirationDate)}</del></td>
-        <td><del>{item.unitOfMeasure || translate('react.default.each.label', 'EA')}</del></td>
+        <td><del>{item.unitOfMeasure || translate('react.default.each.label', 'each')}</del></td>
         <td><del>{item.quantityShipped}</del></td>
         {receipts.map((receipt) => <td key={receipt.id} />)}
         <td />
@@ -70,7 +70,7 @@ const ShipmentItemRows = ({
         <td className="product-name">{item.productName}</td>
         <td>{receiptItem.lotNumber ?? ''}</td>
         <td>{formatDate(receiptItem.expirationDate)}</td>
-        <td>{!item.hasSplit && j === 0 ? (item.unitOfMeasure || translate('react.default.each.label', 'EA')) : ''}</td>
+        <td>{!item.hasSplit && j === 0 ? (item.unitOfMeasure || translate('react.default.each.label', 'each')) : ''}</td>
         <td>{receiptItem.quantityShipped}</td>
         {receipts.map((receipt) => (
           <td key={receipt.id}>
