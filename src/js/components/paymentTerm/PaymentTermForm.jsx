@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
 import Alert from 'react-s-alert';
 
 import paymentTermApi from 'api/services/PaymentTermApi';
@@ -20,11 +19,12 @@ import PageWrapper from 'wrappers/PageWrapper';
 const PaymentTermForm = () => {
   useTranslation('paymentTerm', 'default');
 
-  const history = useHistory();
   const translate = useTranslate();
 
+  // The payment term list is still a legacy GSP screen, so a full page
+  // navigation is required (there is no React route for it).
   const goToList = () => {
-    history.push(PAYMENT_TERM_URL.list());
+    window.location.href = PAYMENT_TERM_URL.list();
   };
 
   const {

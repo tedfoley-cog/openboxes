@@ -155,7 +155,7 @@ const OrderShow = () => {
     { key: 'type', header: <Translate id="react.order.adjustment.type.label" defaultMessage="Adjustment type" />, render: (row) => row.orderAdjustmentType?.name },
     { key: 'description', header: <Translate id="react.order.adjustment.description.label" defaultMessage="Description" />, render: (row) => row.description },
     { key: 'percentage', header: <Translate id="react.order.adjustment.percentage.label" defaultMessage="Percentage" />, render: (row) => (row.percentage != null ? `${row.percentage}%` : '') },
-    { key: 'amount', header: <Translate id="react.order.adjustment.amount.label" defaultMessage="Amount" />, render: (row) => formatCurrency(row.totalAdjustments, currencyCode) },
+    { key: 'amount', header: <Translate id="react.order.adjustment.amount.label" defaultMessage="Amount" />, render: (row) => formatCurrency(row.amount ?? row.totalAdjustments, currencyCode) },
     { key: 'budgetCode', header: <Translate id="react.order.show.column.budgetCode.label" defaultMessage="Budget code" />, render: (row) => row.budgetCode },
     { key: 'status', header: <Translate id="react.order.show.column.status.label" defaultMessage="Status" />, render: (row) => (row.canceled ? 'CANCELED' : row.derivedPaymentStatus) },
   ];
@@ -235,7 +235,11 @@ const OrderShow = () => {
       case 'documents':
         return renderItemsTable(
           documentColumns,
-          [...(documents?.documents ?? []), ...(documents?.links ?? [])],
+          [
+            ...(documents?.documents ?? []),
+            ...(documents?.links ?? []),
+            ...(documents?.documentTemplates ?? []),
+          ],
         );
       case 'comments':
         return renderItemsTable(commentColumns, comments ?? []);

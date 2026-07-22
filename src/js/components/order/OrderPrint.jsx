@@ -67,6 +67,10 @@ const OrderPrint = () => {
   }
 
   const { currencyCode } = order;
+  const columnCount = 7
+    + (order.hasSupplierCode ? 1 : 0)
+    + (order.hasManufacturerName ? 1 : 0)
+    + (order.hasManufacturerCode ? 1 : 0);
 
   return (
     <div className="d-flex flex-column m-3" data-testid="order-print-page">
@@ -146,7 +150,7 @@ const OrderPrint = () => {
             <tbody>
               {(order.orderItems ?? []).length === 0 && (
                 <tr>
-                  <td colSpan={10} className="text-center">
+                  <td colSpan={columnCount} className="text-center">
                     <Translate id="react.default.noResults.label" defaultMessage="No results" />
                   </td>
                 </tr>
@@ -168,14 +172,14 @@ const OrderPrint = () => {
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan={9} className="text-right">
+                <td colSpan={columnCount - 1} className="text-right">
                   <strong><Translate id="react.order.show.subtotal.label" defaultMessage="Subtotal" /></strong>
                 </td>
                 <td data-testid="order-print-subtotal">{formatCurrency(order.subtotal, currencyCode)}</td>
               </tr>
               {(order.orderAdjustments ?? []).map((adjustment) => (
                 <tr key={adjustment.id}>
-                  <td colSpan={9} className="text-right">
+                  <td colSpan={columnCount - 1} className="text-right">
                     {adjustment.description || adjustment.orderAdjustmentType}
                     {adjustment.percentage != null && ` (${adjustment.percentage}%)`}
                   </td>
@@ -183,7 +187,7 @@ const OrderPrint = () => {
                 </tr>
               ))}
               <tr>
-                <td colSpan={9} className="text-right">
+                <td colSpan={columnCount - 1} className="text-right">
                   <strong><Translate id="react.order.show.total.label" defaultMessage="Total" /></strong>
                 </td>
                 <td data-testid="order-print-total">
