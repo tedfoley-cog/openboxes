@@ -75,7 +75,6 @@ def batch22_endpoints(client):
 
 
 @pytest.fixture(scope="session")
->>>>>>> origin/develop
 def batch17_endpoints(client):
     # Same rationale as batch14_endpoints for the Batch 17 requisition
     # template and canceled requisition item endpoints.
