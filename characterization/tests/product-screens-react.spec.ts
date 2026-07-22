@@ -12,7 +12,9 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
  * suite skips itself when /product/productMergeLogs does not serve the SPA.
  */
 
-const PRODUCT_CODE = 'AX738';
+// Product codes are randomly generated at demo-import time, so resolve the
+// product by its stable seeded NAME.
+const PRODUCT_NAME = 'Lamivudine 150mg tablet';
 
 async function isReactScreen(page: Page, path: string): Promise<boolean> {
   await page.goto(url(path));
@@ -22,10 +24,10 @@ async function isReactScreen(page: Page, path: string): Promise<boolean> {
 
 async function productId(page: Page): Promise<string> {
   const body = await page.request
-    .get(url(`/api/products/search?name=${PRODUCT_CODE}`))
+    .get(url(`/api/products/search?name=${encodeURIComponent(PRODUCT_NAME)}`))
     .then((r) => r.json());
   const product = body.data.find(
-    (p: { productCode: string }) => p.productCode === PRODUCT_CODE,
+    (p: { name: string }) => p.name === PRODUCT_NAME,
   );
   expect(product).toBeTruthy();
   return product.id;

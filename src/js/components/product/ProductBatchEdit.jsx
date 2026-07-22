@@ -96,6 +96,12 @@ const ProductBatchEdit = () => {
     }
   };
 
+  useEffect(() => {
+    if (queryParams.categoryId || queryParams.tagId) {
+      fetchProducts();
+    }
+  }, []);
+
   const onSearch = (event) => {
     event.preventDefault();
     fetchProducts();

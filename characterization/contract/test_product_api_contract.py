@@ -130,6 +130,16 @@ IMPORT_CSV_HEADER = (
 )
 
 
+
+def _batch8_product_id(client):
+    # Product codes are randomly generated at demo-import time on source
+    # builds, so resolve the product by its stable seeded name.
+    name = "Lamivudine 150mg tablet"
+    data = client.get_json("/api/products/search", params={"name": name})["data"]
+    matches = [p for p in data if p.get("name") == name]
+    assert matches, f"Product not found in seeded data: {name}"
+    return matches[0]["id"]
+
 def test_merge_logs(client, batch8_endpoints):
     resp = check(client, spec, "GET", "/api/products/mergeLogs",
                  params={"max": "10", "offset": "0"})
@@ -167,7 +177,7 @@ def test_batch_save_unknown_product(client, batch8_endpoints):
 
 
 def test_batch_save_roundtrip(client, batch8_endpoints):
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     details = client.get_json(f"/api/products/{pid}/details")["data"]
     resp = check(client, spec, "POST", "/api/products/batchEdit",
                  path="/api/products/batchEdit",
@@ -176,11 +186,10 @@ def test_batch_save_roundtrip(client, batch8_endpoints):
 
 
 def test_details(client, batch8_endpoints):
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     resp = check(client, spec, "GET", "/api/products/{id}/details",
                  path=f"/api/products/{pid}/details")
     data = resp.json()["data"]
-    assert data["productCode"] == PRODUCT_CODE
     assert data["displayedFields"]
 
 
@@ -192,7 +201,7 @@ def test_details_unknown_id(client, batch8_endpoints):
 
 def test_update_details_roundtrip(client, batch8_endpoints):
     # Re-save the product's current name (a no-op update).
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     details = client.get_json(f"/api/products/{pid}/details")["data"]
     resp = check(client, spec, "PUT", "/api/products/{id}/details",
                  path=f"/api/products/{pid}/details",
@@ -201,7 +210,7 @@ def test_update_details_roundtrip(client, batch8_endpoints):
 
 
 def test_upload_document_empty(client, batch8_endpoints):
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     resp = check(client, spec, "POST", "/api/products/{id}/documents",
                  path=f"/api/products/{pid}/documents",
                  files={"name": (None, "empty doc")})
@@ -209,7 +218,7 @@ def test_upload_document_empty(client, batch8_endpoints):
 
 
 def test_delete_document_unknown(client, batch8_endpoints):
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     resp = check(client, spec, "DELETE",
                  "/api/products/{id}/documents/{documentId}",
                  path=f"/api/products/{pid}/documents/ZZNOSUCHDOC")
@@ -217,7 +226,7 @@ def test_delete_document_unknown(client, batch8_endpoints):
 
 
 def test_document_upload_and_delete_roundtrip(client, batch8_endpoints):
-    pid = client.product_id(PRODUCT_CODE)
+    pid = _batch8_product_id(client)
     resp = check(client, spec, "POST", "/api/products/{id}/documents",
                  path=f"/api/products/{pid}/documents",
                  files={"fileContents": ("contract-test.txt", b"contract test",
@@ -261,7 +270,7 @@ def test_validate_import_invalid(client, batch8_endpoints):
 def test_available_items(client):
     check(client, spec, "GET", "/api/products/availableItems",
           params={"location.id": client.location_id("Main Warehouse"),
-                  "product.id": client.product_id(PRODUCT_CODE)})
+                  "product.id": _batch8_product_id(client)})
 
 
 def test_available_items_missing_params(client):
@@ -272,4 +281,4 @@ def test_available_items_missing_params(client):
 def test_lot_numbers_with_expiration(client):
     check(client, spec, "GET",
           "/api/products/inventoryItems/lotNumbersWithExpirationDate",
-          params={"productIds": client.product_id(PRODUCT_CODE)})
+          params={"productIds": _batch8_product_id(client)})

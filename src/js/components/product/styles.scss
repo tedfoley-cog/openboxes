@@ -27,5 +27,11 @@
 
   .nav-tabs .nav-link {
     background: none;
+    color: #6c757d !important;
+
+    &.active {
+      background-color: #fff;
+      color: #212529 !important;
+    }
   }
 }
