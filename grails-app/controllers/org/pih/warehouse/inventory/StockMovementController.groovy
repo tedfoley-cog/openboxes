@@ -154,22 +154,17 @@ class StockMovementController {
 
     def show() {
         Location currentLocation = Location.get(session?.warehouse?.id)
-        HistoryItem latestHistoryItem = null
 
         // Pull Outbound Stock movement (Requisition based) or Outbound or Inbound Return (Order based)
         def stockMovement = outboundStockMovementService.getStockMovement(params.id)
-        if (stockMovement) {
-            latestHistoryItem = outboundStockMovementService.getLatestHistoryItem(stockMovement)
-        }
 
         // For inbound stockMovement only
         if (!stockMovement) {
-            stockMovement =  stockMovementService.getStockMovement(params.id)
-            latestHistoryItem = stockMovementService.getLatestHistoryItem(stockMovement)
+            stockMovement = stockMovementService.getStockMovement(params.id)
         }
-        stockMovement.documents = stockMovementService.getDocuments(stockMovement)
 
         if (stockMovement?.order) {
+            stockMovement.documents = stockMovementService.getDocuments(stockMovement)
             render(view: "/returns/show", model: [stockMovement: stockMovement, currentLocation: currentLocation])
         } else {
             render(view: "/common/react", params: params)

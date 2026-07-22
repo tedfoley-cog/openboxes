@@ -23,7 +23,7 @@ const detailRow = (labelId, defaultLabel, value, testId) => (
 const StockMovementShow = () => {
   const { stockMovementId } = useParams();
   const [details, setDetails] = useState(null);
-  const [activeTab, setActiveTab] = useState('requestDetails');
+  const [activeTab, setActiveTab] = useState(null);
   const [tabData, setTabData] = useState({});
 
   useTranslation('stockMovement', 'default');
@@ -33,7 +33,15 @@ const StockMovementShow = () => {
   useEffect(() => {
     stockMovementApi.getDetails(stockMovementId)
       .then(({ data }) => {
-        setDetails(data?.data);
+        const fetchedDetails = data?.data;
+        setDetails(fetchedDetails);
+        // Mirrors the legacy show.gsp tab selection: Request Details is the
+        // initial tab only for pending, same-origin movements and is hidden
+        // entirely for supplier-origin movements.
+        const showRequestDetails = !fetchedDetails?.origin?.isSupplier;
+        const defaultToRequestDetails = showRequestDetails
+          && fetchedDetails?.flags?.isPending && fetchedDetails?.flags?.isSameOrigin;
+        setActiveTab(defaultToRequestDetails ? 'requestDetails' : 'packingList');
       })
       .catch((err) => {
         const message = err?.response?.data?.errorMessage;
@@ -44,7 +52,7 @@ const StockMovementShow = () => {
   }, [stockMovementId]);
 
   useEffect(() => {
-    if (tabData[activeTab] !== undefined) {
+    if (!activeTab || tabData[activeTab] !== undefined) {
       return;
     }
     const fetchers = {
@@ -68,7 +76,9 @@ const StockMovementShow = () => {
   }, [activeTab, stockMovementId]);
 
   const tabs = [
-    { id: 'requestDetails', labelId: 'react.stockMovement.requestDetails.label', defaultLabel: 'Request Details' },
+    ...(details?.origin?.isSupplier ? [] : [
+      { id: 'requestDetails', labelId: 'react.stockMovement.requestDetails.label', defaultLabel: 'Request Details' },
+    ]),
     { id: 'packingList', labelId: 'react.stockMovement.packingList.label', defaultLabel: 'Packing List' },
     { id: 'receipts', labelId: 'react.stockMovement.receipts.label', defaultLabel: 'Receipts' },
     { id: 'events', labelId: 'react.stockMovement.events.label', defaultLabel: 'Events' },

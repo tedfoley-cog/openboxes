@@ -449,15 +449,12 @@ class StockMovementDetailApiController {
     }
 
     private def getStockMovement(String id) {
-        def stockMovement = outboundStockMovementService.getStockMovement(id)
-        if (!stockMovement) {
-            try {
-                stockMovement = stockMovementService.getStockMovement(id)
-            } catch (Exception ignored) {
-                stockMovement = null
-            }
+        try {
+            def stockMovement = outboundStockMovementService.getStockMovement(id)
+            return stockMovement ?: stockMovementService.getStockMovement(id)
+        } catch (Exception ignored) {
+            return null
         }
-        return stockMovement
     }
 
     private void renderNotFound() {

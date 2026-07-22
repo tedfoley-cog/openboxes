@@ -10,6 +10,10 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 
+// Stable reference: useTableData refetches whenever the filterParams
+// reference changes (see PartyRoleList).
+const FILTER_PARAMS = { q: '' };
+
 const ShipmentWorkflowList = () => {
   useTranslation('shipmentWorkflow', 'reactTable', 'default');
 
@@ -27,7 +31,7 @@ const ShipmentWorkflowList = () => {
     tableData,
     onFetchHandler,
   } = useTableData({
-    filterParams: { q: '' },
+    filterParams: FILTER_PARAMS,
     url: SHIPMENT_WORKFLOW_API,
     errorMessageId: 'react.shipmentWorkflow.fetch.fail.label',
     defaultErrorMessage: 'Unable to fetch shipment workflows',

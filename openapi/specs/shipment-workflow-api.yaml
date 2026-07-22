@@ -194,6 +194,12 @@ components:
         name:
           type: string
           nullable: true
+    IdReference:
+      type: object
+      required: [id]
+      properties:
+        id:
+          $ref: '../components/common.yaml#/components/schemas/Id'
     ShipmentWorkflowRequest:
       type: object
       properties:
@@ -217,15 +223,15 @@ components:
         referenceNumberTypes:
           type: array
           items:
-            $ref: '#/components/schemas/NamedReference'
+            $ref: '#/components/schemas/IdReference'
         containerTypes:
           type: array
           items:
-            $ref: '#/components/schemas/NamedReference'
+            $ref: '#/components/schemas/IdReference'
         documentTemplates:
           type: array
           items:
-            $ref: '#/components/schemas/NamedReference'
+            $ref: '#/components/schemas/IdReference'
     ShipmentWorkflow:
       type: object
       required: [id, name]
