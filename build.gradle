@@ -917,15 +917,11 @@ jacocoTestReport {
         html.enabled true  // Useful for verifying locally during development.
     }
 
-    doFirst {
-        // Our source code builds to both "build/classes/groovy" and "build/classes/java" so we need to filter one of
-        // the two class paths out to avoid "Can't add different class with same name" errors. It's dirty to do this
-        // in the "doFirst" block, but it's the only way to tell Jacoco to ONLY use this path.
-        classDirectories.setFrom(files("build/classes/groovy/main").collect {
-            // Then also exclude any packages from the report that we didn't actually generate any coverage % for.
-            fileTree(dir: it, exclude: jacocoExcludes)
-        })
-    }
+    // Our source code builds to both "build/classes/groovy" and "build/classes/java" so we need to filter one of
+    // the two class paths out to avoid "Can't add different class with same name" errors. fileTree is evaluated
+    // lazily, so this can be configured up front (Gradle 7 finalizes the collection before doFirst runs).
+    // Also exclude any packages from the report that we didn't actually generate any coverage % for.
+    classDirectories.setFrom(fileTree(dir: "build/classes/groovy/main", exclude: jacocoExcludes))
 }
 
 // groovyc needs a lot of heap to compile the full test suite in one pass, so run
