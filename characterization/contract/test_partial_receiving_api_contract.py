@@ -89,9 +89,10 @@ def test_update_import_rollback(client, shipment_id):
     assert resp.json()["data"]["receiptId"]
 
     # Import a template with no data rows against the pending receipt.
-    check(client, spec, "POST", "/api/partialReceiving/importCsv/{id}",
-          path=f"/api/partialReceiving/importCsv/{shipment_id}",
-          files={"importFile": ("import.csv", IMPORT_HEADER, "text/csv")})
+    resp = check(client, spec, "POST", "/api/partialReceiving/importCsv/{id}",
+                 path=f"/api/partialReceiving/importCsv/{shipment_id}",
+                 files={"importFile": ("import.csv", IMPORT_HEADER, "text/csv")})
+    assert resp.status_code == 200
 
     # Roll the pending receipt back so the shipment can be deleted.
     resp = check(client, spec, "POST", "/api/partialReceiving/{id}",
