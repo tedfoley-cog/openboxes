@@ -30,7 +30,8 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 ## Phase 1 — Backend platform (sequential waves; app must boot after each)
 | # | Task | Status |
 |---|------|--------|
-| 1.1 | Java 8→11 + dependency cleanup (2 children) | pending |
+| 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — in progress |
+| 1.1b | Dependency cleanup / Grails 4 de-risk audit | queued behind 1.1a |
 | 1.2 | Grails 3→4 (3–5 children) | pending |
 | 1.3 | Grails 4→5 (3–5 children) | pending |
 | 1.4 | Grails 5→6 / Java 21 / javax→jakarta (4–6 children) | pending |
@@ -40,12 +41,13 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | # | Task | Status |
 |---|------|--------|
 | 2.x | Module batches (3–6 live screens each): inventory browser, product catalog, locations/orgs, requisitions, shipments, orders, admin/config, reporting | pending (scoped after 0.4 audit) |
-| 2.R | React 16.8→18 + Redux/router modernization of existing SPA (3–5 children) | pending |
+| 2.R | React 16.8→18 + Redux/router modernization of existing SPA | [1674abb2](https://app.devin.ai/sessions/1674abb277894ead9017aaf991b0597a) — in progress (lands before module batches) |
 
 ## Phase 3 — API formalization (parallel with Phase 2)
 | # | Task | Status |
 |---|------|--------|
-| 3.1–3.9 | OpenAPI specs + contract tests, ~6 controllers per child; wire into CI | pending |
+| 3.1 | OpenAPI harness + specs: Api, Attribute, BinLocation, Category, CombineShipment, CombinedShipmentItem | [893ec63d](https://app.devin.ai/sessions/893ec63d5d5744ad9ffc28c4539856f7) — in progress (establishes conventions) |
+| 3.2–3.9 | OpenAPI specs + contract tests for remaining 46 controllers, ~6 per child | queued behind 3.1 |
 
 ## Phase 4 — Validation & cutover
 | # | Task | Status |
