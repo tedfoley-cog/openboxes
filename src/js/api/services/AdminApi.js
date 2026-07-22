@@ -1,5 +1,14 @@
 import {
+  ADMIN_CACHE,
+  ADMIN_CACHE_EVICT_DOMAIN,
+  ADMIN_CACHE_EVICT_QUERIES,
+  ADMIN_CONTROLLER_ACTIONS,
+  ADMIN_CONTROLLERS,
+  ADMIN_MAIL,
+  ADMIN_PLUGINS,
+  ADMIN_SETTINGS,
   ADMIN_STATUS_API,
+  ADMIN_STOCK_ALERTS_TRIGGER,
   ADMIN_UPGRADE_API,
   ADMIN_UPGRADE_DEPLOY_API,
   ADMIN_UPGRADE_DOWNLOAD_API,
@@ -7,6 +16,20 @@ import {
 import apiClient from 'utils/apiClient';
 
 export default {
+  getControllers: () => apiClient.get(ADMIN_CONTROLLERS),
+  getControllerActions: () => apiClient.get(ADMIN_CONTROLLER_ACTIONS),
+  getCache: () => apiClient.get(ADMIN_CACHE),
+  evictDomainCache: (name) => apiClient.post(ADMIN_CACHE_EVICT_DOMAIN, null, { params: { name } }),
+  evictQueryCache: (name) => apiClient.post(
+    ADMIN_CACHE_EVICT_QUERIES,
+    null,
+    { params: name ? { name } : {} },
+  ),
+  getPlugins: () => apiClient.get(ADMIN_PLUGINS),
+  getMailInfo: () => apiClient.get(ADMIN_MAIL),
+  sendMail: (formData) => apiClient.post(ADMIN_MAIL, formData),
+  getSettings: () => apiClient.get(ADMIN_SETTINGS),
+  triggerStockAlerts: () => apiClient.post(ADMIN_STOCK_ALERTS_TRIGGER),
   getStatus: () => apiClient.get(ADMIN_STATUS_API),
   getUpgrade: () => apiClient.get(ADMIN_UPGRADE_API),
   downloadUpgrade: (payload) => apiClient.post(ADMIN_UPGRADE_DOWNLOAD_API, payload),

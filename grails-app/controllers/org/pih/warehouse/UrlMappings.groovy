@@ -238,6 +238,52 @@ class UrlMappings {
             action = [POST: "create"]
         }
 
+        // Admin console endpoints for the React admin screens (Phase 2 Batch 40)
+        "/api/admin/controllers"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "controllers"]
+        }
+
+        "/api/admin/controllerActions"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "controllerActions"]
+        }
+
+        "/api/admin/cache"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "cache"]
+        }
+
+        "/api/admin/cache/evictDomain"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "evictDomainCache"]
+        }
+
+        "/api/admin/cache/evictQueries"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "evictQueryCache"]
+        }
+
+        "/api/admin/plugins"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "plugins"]
+        }
+
+        "/api/admin/mail"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "mailInfo", POST: "sendMail"]
+        }
+
+        "/api/admin/settings"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "settings"]
+        }
+
+        "/api/admin/stockAlerts/trigger"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "triggerStockAlerts"]
+        }
+
         // Person endpoints for the React person screens; explicit mappings
         // take precedence over the generic "/api/${resource}s" pattern.
         "/api/persons/search"(parseRequest: true) {
@@ -356,6 +402,46 @@ class UrlMappings {
         "/api/locationTypes/$id"(parseRequest: true) {
             controller = { "locationTypeApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/eventTypes"(parseRequest: true) {
+            controller = { "eventTypeApi" }
+            action = [GET: "list"]
+        }
+
+        "/api/eventTypes/$id"(parseRequest: true) {
+            controller = { "eventTypeApi" }
+            action = [GET: "read", DELETE: "delete"]
+        }
+
+        "/api/localizationOverrides"(parseRequest: true) {
+            controller = { "localizationOverrideApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/localizationOverrides/import"(parseRequest: false) {
+            controller = { "localizationOverrideApi" }
+            action = [POST: "importMessages"]
+        }
+
+        "/api/localizationOverrides/$id"(parseRequest: true) {
+            controller = { "localizationOverrideApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/localeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "localeOptions"]
+        }
+
+        "/api/jobs/details"(parseRequest: true) {
+            controller = { "jobsApi" }
+            action = [GET: "read"]
+        }
+
+        "/api/jobs/triggers"(parseRequest: true) {
+            controller = { "jobsApi" }
+            action = [POST: "createTrigger", DELETE: "deleteTrigger"]
         }
 
         "/api/paymentTermOptions"(parseRequest: true) {
@@ -791,6 +877,63 @@ class UrlMappings {
             action = [GET: "getDocuments"]
         }
 
+        "/api/stockMovements/$id/returnsShow" {
+            controller = "stockMovementApi"
+            action = [GET: "returnsShow"]
+        }
+
+        // Stock movement detail API (migrated stockMovement show / addComment / addDocument screens)
+        "/api/stockMovements/documentTypes" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/stockMovements/$id/details" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "details"]
+        }
+
+        "/api/stockMovements/$id/packingList" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/stockMovements/$id/receiptItems" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "receiptItems"]
+        }
+
+        "/api/stockMovements/$id/events" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "events"]
+        }
+
+        "/api/stockMovements/$id/comments"(parseRequest: true) {
+            controller = "stockMovementDetailApi"
+            action = [GET: "listComments", POST: "createComment"]
+        }
+
+        "/api/stockMovements/$id/uploadDocument" {
+            controller = "stockMovementDetailApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        // Shipment workflow API (migrated shipmentWorkflow create/list/show/edit screens)
+        "/api/shipmentWorkflows"(parseRequest: true) {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/shipmentWorkflows/options" {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "options"]
+        }
+
+        "/api/shipmentWorkflows/$id"(parseRequest: true) {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         "/api/picklists/$id/items" {
             controller = "picklistApi"
             action = [DELETE: "clearPicklist"]
@@ -923,9 +1066,49 @@ class UrlMappings {
             action = [POST: "bulkAction"]
         }
 
+        "/api/shipments/documentTypes" {
+            controller = "shipmentApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/shipments/eventOptions" {
+            controller = "shipmentApi"
+            action = [GET: "eventOptions"]
+        }
+
+        "/api/shipments/addToShipmentCandidates" {
+            controller = "shipmentApi"
+            action = [GET: "addToShipmentCandidates"]
+        }
+
+        "/api/shipments/addToShipment"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "addToShipment"]
+        }
+
         "/api/shipments/$id" {
             controller = "shipmentApi"
-            action = [GET: "read"]
+            action = [GET: "read", DELETE: "delete"]
+        }
+
+        "/api/shipments/$id/comments"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "createComment"]
+        }
+
+        "/api/shipments/$id/documents" {
+            controller = "shipmentApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/shipments/$id/events"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "saveEvent"]
+        }
+
+        "/api/shipments/$id/events/$eventId"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "readEvent", POST: "saveEvent", DELETE: "deleteEvent"]
         }
 
         "/api/shipments/$id/details"(parseRequest: true) {
@@ -1005,16 +1188,6 @@ class UrlMappings {
             action = [GET: "packingList"]
         }
 
-        "/api/shipments/$id/comments"(parseRequest: true) {
-            controller = "shipmentApi"
-            action = [POST: "addComment"]
-        }
-
-        "/api/shipments/$id/events"(parseRequest: true) {
-            controller = "shipmentApi"
-            action = [POST: "addEvent"]
-        }
-
         "/api/shipments/$id/receipt"(parseRequest: true) {
             controller = "shipmentApi"
             action = [GET: "receipt", POST: "saveReceipt", DELETE: "deleteReceipt"]
@@ -1065,13 +1238,6 @@ class UrlMappings {
         "/api/shipmentItems/$id/split"(parseRequest: true) {
             controller = { "shipmentItemApi" }
             action = [POST: "split"]
-        }
-
-        // Shipment Workflow API (shipmentWorkflow/create migrated to React)
-
-        "/api/shipmentWorkflows"(parseRequest: true) {
-            controller = { "shipmentWorkflowApi" }
-            action = [GET: "list", POST: "create"]
         }
 
         // Requisition Template API (requisitionTemplate screens migrated to React)
@@ -1555,6 +1721,17 @@ class UrlMappings {
         "/api/stockTransfers/$id/removeAllItems"(parseRequest: true) {
             controller = { "stockTransferApi" }
             action = [DELETE: "removeAllItems"]
+        }
+
+        // Stock Transfer API (migrated stockTransfer show / print screens)
+        "/api/stockTransfers/$id/details"(parseRequest: true) {
+            controller = { "stockTransferApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/stockTransfers/$id/print"(parseRequest: true) {
+            controller = { "stockTransferApi" }
+            action = [GET: "printData"]
         }
 
         // Requirement API

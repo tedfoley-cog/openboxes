@@ -33,6 +33,7 @@ export const PACKING_LIST_TEMPLATE = `${STOCK_MOVEMENT_API}/packingList/template
 export const STOCK_MOVEMENT_UPDATE_SHIPMENT = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/updateShipment`;
 export const STOCK_MOVEMENT_UPLOAD_DOCUMENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/uploadDocuments`;
 export const STOCK_MOVEMENT_DOCUMENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/documents`;
+export const STOCK_MOVEMENT_RETURNS_SHOW = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/returnsShow`;
 
 // STOCK MOVEMENT ITEMS
 export const STOCK_MOVEMENT_ITEM_API = `${API}/stockMovementItems`;
@@ -48,6 +49,8 @@ export const STOCK_TRANSFER_API = `${API}/stockTransfers`;
 export const STOCK_TRANSFER_BY_ID = (id) => `${STOCK_TRANSFER_API}/${id}`;
 export const STOCK_TRANSFER_REMOVE_ALL_ITEMS = (id) => `${STOCK_TRANSFER_BY_ID(id)}/removeAllItems`;
 export const STOCK_TRANSFER_CANDIDATES = `${STOCK_TRANSFER_API}/candidates`;
+export const STOCK_TRANSFER_DETAILS = (id) => `${STOCK_TRANSFER_BY_ID(id)}/details`;
+export const STOCK_TRANSFER_PRINT = (id) => `${STOCK_TRANSFER_BY_ID(id)}/print`;
 
 // STOCK TRANSFER ITEMS
 export const STOCK_TRANSFER_ITEM_API = `${API}/stockTransferItems`;
@@ -218,6 +221,20 @@ export const LOCATION_TYPE_API = `${API}/locationTypes`;
 export const LOCATION_TYPE_BY_ID = (id) => `${LOCATION_TYPE_API}/${id}`;
 export const LOCATION_TYPE_CODE_OPTIONS = `${API}/locationTypeCodeOptions`;
 
+// EVENT TYPES
+export const EVENT_TYPE_API = `${API}/eventTypes`;
+export const EVENT_TYPE_BY_ID = (id) => `${EVENT_TYPE_API}/${id}`;
+
+// LOCALIZATION OVERRIDES
+export const LOCALIZATION_OVERRIDE_API = `${API}/localizationOverrides`;
+export const LOCALIZATION_OVERRIDE_BY_ID = (id) => `${LOCALIZATION_OVERRIDE_API}/${id}`;
+export const LOCALIZATION_OVERRIDE_IMPORT = `${LOCALIZATION_OVERRIDE_API}/import`;
+export const LOCALE_OPTIONS = `${API}/localeOptions`;
+
+// JOBS
+export const JOBS_DETAILS_API = `${API}/jobs/details`;
+export const JOBS_TRIGGERS_API = `${API}/jobs/triggers`;
+
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
 
@@ -266,6 +283,18 @@ export const BATCH_IMPORT_DATA_API = `${API}/batch/importData`;
 
 // DOCUMENTS
 export const DOCUMENT_API = `${API}/documents`;
+
+// ADMIN CONSOLE (Phase 2 Batch 40)
+export const ADMIN_API = `${API}/admin`;
+export const ADMIN_CONTROLLERS = `${ADMIN_API}/controllers`;
+export const ADMIN_CONTROLLER_ACTIONS = `${ADMIN_API}/controllerActions`;
+export const ADMIN_CACHE = `${ADMIN_API}/cache`;
+export const ADMIN_CACHE_EVICT_DOMAIN = `${ADMIN_API}/cache/evictDomain`;
+export const ADMIN_CACHE_EVICT_QUERIES = `${ADMIN_API}/cache/evictQueries`;
+export const ADMIN_PLUGINS = `${ADMIN_API}/plugins`;
+export const ADMIN_MAIL = `${ADMIN_API}/mail`;
+export const ADMIN_SETTINGS = `${ADMIN_API}/settings`;
+export const ADMIN_STOCK_ALERTS_TRIGGER = `${ADMIN_API}/stockAlerts/trigger`;
 
 // PERSONS
 export const PERSON_API = `${API}/persons`;
@@ -373,12 +402,18 @@ export const SHIPMENT_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/picklist`;
 export const SHIPMENT_VALIDATE_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/validatePicklist`;
 export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPicklist`;
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
+export const SHIPMENT_COMMENTS = (id) => `${SHIPMENT_BY_ID(id)}/comments`;
+export const SHIPMENT_DOCUMENTS = (id) => `${SHIPMENT_BY_ID(id)}/documents`;
+export const SHIPMENT_DOCUMENT_TYPES = `${SHIPMENT_API}/documentTypes`;
+export const SHIPMENT_EVENTS = (id) => `${SHIPMENT_BY_ID(id)}/events`;
+export const SHIPMENT_EVENT_BY_ID = (id, eventId) => `${SHIPMENT_EVENTS(id)}/${eventId}`;
+export const SHIPMENT_EVENT_OPTIONS = `${SHIPMENT_API}/eventOptions`;
+export const SHIPMENT_ADD_TO_SHIPMENT_CANDIDATES = `${SHIPMENT_API}/addToShipmentCandidates`;
+export const SHIPMENT_ADD_TO_SHIPMENT = `${SHIPMENT_API}/addToShipment`;
 export const SHIPMENT_LIST_OPTIONS = `${SHIPMENT_API}/listOptions`;
 export const SHIPMENT_BULK_ACTION = `${SHIPMENT_API}/bulkAction`;
 export const SHIPMENT_SHOW_DETAILS = (id) => `${SHIPMENT_BY_ID(id)}/showDetails`;
 export const SHIPMENT_PACKING_LIST = (id) => `${SHIPMENT_BY_ID(id)}/packingList`;
-export const SHIPMENT_COMMENTS = (id) => `${SHIPMENT_BY_ID(id)}/comments`;
-export const SHIPMENT_EVENTS = (id) => `${SHIPMENT_BY_ID(id)}/events`;
 export const SHIPMENT_RECEIPT = (id) => `${SHIPMENT_BY_ID(id)}/receipt`;
 export const SHIPMENT_RECEIPT_ITEM = (id, receiptItemId) => `${SHIPMENT_RECEIPT(id)}/items/${receiptItemId}`;
 export const SHIPMENT_RECEIPT_ITEM_SPLIT = (id, receiptItemId) => `${SHIPMENT_RECEIPT_ITEM(id, receiptItemId)}/split`;
@@ -394,9 +429,21 @@ export const SHIPMENT_ITEM_CREATE_OPTIONS = `${SHIPMENT_ITEM_API}/createOptions`
 export const SHIPMENT_ITEM_PICK_CONTEXT = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/pick`;
 export const SHIPMENT_ITEM_SPLIT_BY_ID = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/split`;
 
-// SHIPMENT WORKFLOW
-export const SHIPMENT_WORKFLOW_API = `${API}/shipmentWorkflows`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
+
+// SHIPMENT WORKFLOW (migrated shipmentWorkflow list/show/edit screens)
+export const SHIPMENT_WORKFLOW_API = `${API}/shipmentWorkflows`;
+export const SHIPMENT_WORKFLOW_BY_ID = (id) => `${SHIPMENT_WORKFLOW_API}/${id}`;
+export const SHIPMENT_WORKFLOW_OPTIONS = `${SHIPMENT_WORKFLOW_API}/options`;
+
+// STOCK MOVEMENT DETAIL (migrated stockMovement show/addComment/addDocument screens)
+export const STOCK_MOVEMENT_DETAILS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/details`;
+export const STOCK_MOVEMENT_PACKING_LIST = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/packingList`;
+export const STOCK_MOVEMENT_RECEIPT_ITEMS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/receiptItems`;
+export const STOCK_MOVEMENT_EVENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/events`;
+export const STOCK_MOVEMENT_COMMENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/comments`;
+export const STOCK_MOVEMENT_UPLOAD_DOCUMENT = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/uploadDocument`;
+export const STOCK_MOVEMENT_DOCUMENT_TYPES = `${STOCK_MOVEMENT_API}/documentTypes`;
 
 // REQUISITION TEMPLATE (stock list template screens)
 export const REQUISITION_TEMPLATE_API = `${API}/requisitionTemplates`;

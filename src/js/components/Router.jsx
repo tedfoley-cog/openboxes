@@ -393,6 +393,31 @@ const AsyncLocationGroupShow = Loadable({
   loading: Loading,
 });
 
+const AsyncEventTypeList = Loadable({
+  loader: () => import('components/eventType/EventTypeList'),
+  loading: Loading,
+});
+
+const AsyncEventTypeShow = Loadable({
+  loader: () => import('components/eventType/EventTypeShow'),
+  loading: Loading,
+});
+
+const AsyncLocalizationList = Loadable({
+  loader: () => import('components/localization/LocalizationList'),
+  loading: Loading,
+});
+
+const AsyncLocalizationForm = Loadable({
+  loader: () => import('components/localization/LocalizationForm'),
+  loading: Loading,
+});
+
+const AsyncJobShow = Loadable({
+  loader: () => import('components/job/JobShow'),
+  loading: Loading,
+});
+
 const AsyncLocationTypeForm = Loadable({
   loader: () => import('components/locationType/LocationTypeForm'),
   loading: Loading,
@@ -450,6 +475,36 @@ const AsyncBatchImportData = Loadable({
 
 const AsyncDocumentCreate = Loadable({
   loader: () => import('components/document/DocumentCreate'),
+  loading: Loading,
+});
+
+const AsyncAdminIndex = Loadable({
+  loader: () => import('components/admin/AdminIndex'),
+  loading: Loading,
+});
+
+const AsyncAdminControllerActions = Loadable({
+  loader: () => import('components/admin/AdminControllerActions'),
+  loading: Loading,
+});
+
+const AsyncAdminCache = Loadable({
+  loader: () => import('components/admin/AdminCache'),
+  loading: Loading,
+});
+
+const AsyncAdminPlugins = Loadable({
+  loader: () => import('components/admin/AdminPlugins'),
+  loading: Loading,
+});
+
+const AsyncAdminSendMail = Loadable({
+  loader: () => import('components/admin/AdminSendMail'),
+  loading: Loading,
+});
+
+const AsyncAdminSettings = Loadable({
+  loader: () => import('components/admin/AdminSettings'),
   loading: Loading,
 });
 
@@ -560,6 +615,36 @@ const AsyncInvoiceShow = Loadable({
 
 const AsyncInvoiceAddDocument = Loadable({
   loader: () => import('components/invoice/addDocument/InvoiceAddDocument'),
+  loading: Loading,
+});
+
+const AsyncStockMovementShow = Loadable({
+  loader: () => import('components/stock-movement/StockMovementShowDispatcher'),
+  loading: Loading,
+});
+
+const AsyncStockMovementAddComment = Loadable({
+  loader: () => import('components/stock-movement/StockMovementAddComment'),
+  loading: Loading,
+});
+
+const AsyncStockMovementAddDocument = Loadable({
+  loader: () => import('components/stock-movement/StockMovementAddDocument'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowList = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowList'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowShow = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowShow'),
+  loading: Loading,
+});
+
+const AsyncShipmentWorkflowEdit = Loadable({
+  loader: () => import('components/shipmentWorkflow/ShipmentWorkflowEdit'),
   loading: Loading,
 });
 
@@ -779,6 +864,16 @@ const StockMovementList = (props) => {
 
 const AsyncStockTransferList = Loadable({
   loader: () => import('components/stock-transfer/list/StockTransferList'),
+  loading: Loading,
+});
+
+const AsyncStockTransferShow = Loadable({
+  loader: () => import('components/stock-transfer/StockTransferShow'),
+  loading: Loading,
+});
+
+const AsyncStockTransferPrint = Loadable({
+  loader: () => import('components/stock-transfer/StockTransferPrint'),
   loading: Loading,
 });
 
@@ -1083,6 +1178,31 @@ const AsyncDeliveryNotePrint = Loadable({
   loading: Loading,
 });
 
+const AsyncShipmentAddComment = Loadable({
+  loader: () => import('components/shipment/ShipmentAddComment'),
+  loading: Loading,
+});
+
+const AsyncShipmentAddDocument = Loadable({
+  loader: () => import('components/shipment/ShipmentAddDocument'),
+  loading: Loading,
+});
+
+const AsyncShipmentDelete = Loadable({
+  loader: () => import('components/shipment/ShipmentDelete'),
+  loading: Loading,
+});
+
+const AsyncShipmentEditEvent = Loadable({
+  loader: () => import('components/shipment/ShipmentEditEvent'),
+  loading: Loading,
+});
+
+const AsyncAddToShipment = Loadable({
+  loader: () => import('components/shipment/AddToShipment'),
+  loading: Loading,
+});
+
 const AsyncRequisitionList = Loadable({
   loader: () => import('components/requisition/RequisitionList'),
   loading: Loading,
@@ -1188,6 +1308,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/createRequest/:stockMovementId?" component={AsyncStockMovementRequest} />
             <MainLayoutRoute path="**/stockMovement/verifyRequest/:stockMovementId?" component={AsyncStockMovementVerifyRequest} />
             <MainLayoutRoute path="**/stockMovement/create/:stockMovementId?" component={AsyncStockMovement} />
+            <MainLayoutRoute path="**/stockMovement/show/:stockMovementId" component={AsyncStockMovementShow} />
+            <MainLayoutRoute path="**/stockMovement/addComment/:stockMovementId" component={AsyncStockMovementAddComment} />
+            <MainLayoutRoute path="**/stockMovement/addDocument/:stockMovementId" component={AsyncStockMovementAddDocument} />
+            <MainLayoutRoute path="**/shipmentWorkflow/list" component={AsyncShipmentWorkflowList} />
+            <MainLayoutRoute path="**/shipmentWorkflow/show/:shipmentWorkflowId" component={AsyncShipmentWorkflowShow} />
+            <MainLayoutRoute path="**/shipmentWorkflow/edit/:shipmentWorkflowId" component={AsyncShipmentWorkflowEdit} />
             <MainLayoutRoute path="**/partialReceiving/create/:shipmentId" component={AsyncReceivingPage} />
             <MainLayoutRoute path="**/stocklistManagement/index/:productId?" component={AsyncManagement} />
             <MainLayoutRoute path="**/invoice/create/:invoiceId?" component={AsyncInvoice} />
@@ -1264,6 +1390,12 @@ const Router = () => {
             <MainLayoutRoute path="**/shipmentItem/split/:shipmentItemId" component={AsyncShipmentItemSplit} />
             <MainLayoutRoute path="**/shipmentWorkflow/create" component={AsyncShipmentWorkflowCreate} />
             <MainLayoutRoute path="**/deliveryNote/print/:requisitionId" component={AsyncDeliveryNotePrint} />
+            <MainLayoutRoute path="**/shipment/addComment/:shipmentId" component={AsyncShipmentAddComment} />
+            <MainLayoutRoute path="**/shipment/addDocument/:shipmentId" component={AsyncShipmentAddDocument} />
+            <MainLayoutRoute path="**/shipment/deleteShipment/:shipmentId" component={AsyncShipmentDelete} />
+            <MainLayoutRoute path="**/shipment/addEvent/:shipmentId" component={AsyncShipmentEditEvent} />
+            <MainLayoutRoute path="**/shipment/editEvent/:eventId" component={AsyncShipmentEditEvent} />
+            <MainLayoutRoute path="**/shipment/addToShipment" component={AsyncAddToShipment} />
             <MainLayoutRoute path="**/shipment/list" component={AsyncShipmentList} />
             <MainLayoutRoute path="**/shipment/showDetails/:shipmentId" component={AsyncShipmentShowDetails} />
             <MainLayoutRoute path="**/shipment/showPackingList/:shipmentId" component={AsyncShipmentPackingList} />
@@ -1299,10 +1431,18 @@ const Router = () => {
             <MainLayoutRoute path="**/productCatalog/show/:id" component={AsyncProductCatalogShow} />
             <MainLayoutRoute path="**/productGroup/create" component={AsyncProductGroupCreate} />
             <MainLayoutRoute path="**/stockTransfer/list" component={AsyncStockTransferList} />
+            <MainLayoutRoute path="**/stockTransfer/show/:stockTransferId" component={AsyncStockTransferShow} />
+            <MainLayoutRoute path="**/stockTransfer/print/:stockTransferId" component={AsyncStockTransferPrint} />
             <MainLayoutRoute path="**/locationGroup/list" component={AsyncLocationGroupList} />
             <MainLayoutRoute path="**/locationGroup/create" component={AsyncLocationGroupForm} />
             <MainLayoutRoute path="**/locationGroup/edit/:locationGroupId" component={AsyncLocationGroupForm} />
             <MainLayoutRoute path="**/locationGroup/show/:locationGroupId" component={AsyncLocationGroupShow} />
+            <MainLayoutRoute path="**/eventType/list" component={AsyncEventTypeList} />
+            <MainLayoutRoute path="**/eventType/show/:eventTypeId" component={AsyncEventTypeShow} />
+            <MainLayoutRoute path="**/localization/list" component={AsyncLocalizationList} />
+            <MainLayoutRoute path="**/localization/create" component={AsyncLocalizationForm} />
+            <MainLayoutRoute path="**/localization/edit/:localizationId" component={AsyncLocalizationForm} />
+            <MainLayoutRoute path="**/jobs/show/:jobName" component={AsyncJobShow} />
             <MainLayoutRoute path="**/locationType/list" component={AsyncLocationTypeList} />
             <MainLayoutRoute path="**/locationType/create" component={AsyncLocationTypeForm} />
             <MainLayoutRoute path="**/locationType/edit/:locationTypeId" component={AsyncLocationTypeForm} />
@@ -1317,6 +1457,12 @@ const Router = () => {
             <MainLayoutRoute path="**/admin/showUpgrade" component={AsyncAdminUpgrade} />
             <MainLayoutRoute path="**/batch/importData" component={AsyncBatchImportData} />
             <MainLayoutRoute path="**/document/create" component={AsyncDocumentCreate} />
+            <MainLayoutRoute path="**/admin/index" component={AsyncAdminIndex} />
+            <MainLayoutRoute path="**/admin/controllerActions" component={AsyncAdminControllerActions} />
+            <MainLayoutRoute path="**/admin/cache" component={AsyncAdminCache} />
+            <MainLayoutRoute path="**/admin/plugins" component={AsyncAdminPlugins} />
+            <MainLayoutRoute path="**/admin/sendMail" component={AsyncAdminSendMail} />
+            <MainLayoutRoute path="**/admin/showSettings" component={AsyncAdminSettings} />
             <MainLayoutRoute path="**/person/list" component={AsyncPersonList} />
             <MainLayoutRoute path="**/person/create" component={AsyncPersonForm} />
             <MainLayoutRoute path="**/person/edit/:personId" component={AsyncPersonForm} />
