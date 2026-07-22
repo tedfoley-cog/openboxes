@@ -35,6 +35,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 1.2 | Grails 3→4 | [f3400cd2](https://app.devin.ai/sessions/f3400cd2cb624535ab89390e465486dd) — [#27](https://github.com/tedfoley-cog/openboxes/pull/27) merged (Grails 4.1.4, GORM 7, Hibernate 5.4, Gradle 6.9.4) |
 | 1.3 | Grails 4→5 | [7943163d](https://app.devin.ai/sessions/7943163d2df74a1ea669461b357271c3) — [#34](https://github.com/tedfoley-cog/openboxes/pull/34) merged (Grails 5.3.6, Groovy 3, GORM 7.3, Boot 2.7, Gradle 7) |
 | 1.4 | Grails 5→6 / Java 21 | [24db1e26](https://app.devin.ai/sessions/24db1e2655464a0591029bb420745f63) — [#41](https://github.com/tedfoley-cog/openboxes/pull/41) merged (Grails 6.2.3, GORM 8.1, Gradle 8, Java 21). javax→jakarta/Boot 3/Groovy 4 only arrive with Grails 7 — deferred to 1.4b |
+| 1.4b | Grails 6→7.2.1 / Boot 3.5 / Groovy 4 / jakarta / Liquibase 4.27 | [3583f869](https://app.devin.ai/sessions/3583f8697c57472e9401ebc65444dd7e) — [#48](https://github.com/tedfoley-cog/openboxes/pull/48) merged |
 | 1.5 | Re-verify Quartz jobs, Liquibase, mail/reporting (3–4 children) | pending |
 
 ## Phase 2 — UI: GSP → React (parallel module waves; needs Phase 0)
@@ -66,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #43 (B11), #48 (Grails 7.2.1 + Boot 3.5 + jakarta + Liquibase 4.27) merged. Backend platform target reached; 1.5 integration reverify next.
 - 2026-07-22: #42 (B34), #44 (B10), #46 (B29) merged. 21/49 Phase 2 batches done. Grails 7 child (1.4b) running.
 - 2026-07-22: #38 (B5), #41 (Grails 6.2.3 + Java 21) merged. Grails 7 wave (jakarta/Boot3/Groovy4) queued as 1.4b.
 - 2026-07-22: #29, #35, #36, #37, #39, #40 merged (B15, B6, B33, B28, B9, B16). 17/49 Phase 2 batches done.
