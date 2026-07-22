@@ -108,26 +108,31 @@ class UnitOfMeasureConversionApiController {
                     : jsonObject.toUnitOfMeasure
             uomConversion.toUnitOfMeasure = toId ? UnitOfMeasure.get(toId) : null
         }
+        boolean invalidConversionRate = false
         if (jsonObject.containsKey("conversionRate")) {
-            uomConversion.conversionRate = parseConversionRate(uomConversion, jsonObject.conversionRate)
+            try {
+                uomConversion.conversionRate = parseConversionRate(jsonObject.conversionRate)
+            } catch (NumberFormatException ignored) {
+                uomConversion.conversionRate = null
+                invalidConversionRate = true
+            }
         }
         if (jsonObject.containsKey("active")) {
             uomConversion.active = Boolean.parseBoolean(jsonObject.active.toString())
         }
+        // validate() resets the errors object, so type errors must be rejected after it
         uomConversion.validate()
+        if (invalidConversionRate) {
+            uomConversion.errors.rejectValue("conversionRate", "typeMismatch.java.math.BigDecimal",
+                    [jsonObject.conversionRate] as Object[], "Conversion rate must be a valid number")
+        }
     }
 
-    private static BigDecimal parseConversionRate(UnitOfMeasureConversion uomConversion, value) {
+    private static BigDecimal parseConversionRate(value) {
         if (value == null || value.toString().trim() == "") {
             return null
         }
-        try {
-            return new BigDecimal(value.toString().trim())
-        } catch (NumberFormatException ignored) {
-            uomConversion.errors.rejectValue("conversionRate", "typeMismatch.java.math.BigDecimal",
-                    [value] as Object[], "Conversion rate must be a valid number")
-            return null
-        }
+        return new BigDecimal(value.toString().trim())
     }
 
     private static Map toJson(UnitOfMeasureConversion uomConversion) {
