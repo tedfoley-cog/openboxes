@@ -11,6 +11,7 @@ from oas import Spec, check
 spec = Spec("requisition-api.yaml")
 
 TEST_DESCRIPTION = "ZZ Contract Requisition Screens"
+PRODUCT_CODE = "AX738"  # seeded demo product used across the contract suites
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -55,7 +56,7 @@ def test_list_requisitions_status_filter(client, requisition_id):
 
 
 def test_create_requisition_with_items(client):
-    product_id = client.product_id("10001")
+    product_id = client.product_id(PRODUCT_CODE)
     resp = check(client, spec, "POST", "/api/requisitions",
                  path="/api/requisitions", json={
                      "type": "STOCK",
@@ -102,7 +103,7 @@ def test_update_header(client, requisition_id):
 
 
 def test_save_items(client, requisition_id):
-    product_id = client.product_id("10001")
+    product_id = client.product_id(PRODUCT_CODE)
     resp = check(client, spec, "POST", "/api/requisitions/{id}/items",
                  path=f"/api/requisitions/{requisition_id}/items", json={
                      "requisitionItems": [
@@ -128,7 +129,7 @@ def test_pick_requires_verified_by(client, requisition_id):
 
 
 def test_pick_and_picklist(client, requisition_id):
-    product_id = client.product_id("10001")
+    product_id = client.product_id(PRODUCT_CODE)
     resp = client.request("POST", f"/api/requisitions/{requisition_id}/items", json={
         "requisitionItems": [{"productId": product_id, "quantity": 2}],
     })

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../fixtures/auth';
-import { LOCATIONS, runId, url } from '../fixtures/constants';
+import { LOCATIONS, PRODUCTS, runId, url } from '../fixtures/constants';
 import { captureStep, resetStepCounter } from '../fixtures/screenshots';
 
 /**
@@ -33,14 +33,16 @@ async function createRequisition(page): Promise<string> {
   return (await res.json()).data.id;
 }
 
-async function productId(page, productCode: string): Promise<string> {
+// Demo product codes are randomized per seed, so resolve by the stable name.
+async function seededProduct(page): Promise<{ id: string, productCode: string }> {
+  const name = PRODUCTS.lamivudine.name;
   const res = await page.request.get(
-    url(`/api/products/search?name=${productCode}&productCode=${productCode}&location.id=${LOCATIONS.mainWarehouse.id}`),
+    url(`/api/products/search?name=${encodeURIComponent(name)}`),
   );
   expect(res.status()).toBe(200);
-  const match = (await res.json()).data.find((p) => p.productCode === productCode);
-  expect(match, `Product not found in seeded data: ${productCode}`).toBeTruthy();
-  return match.id;
+  const match = (await res.json()).data.find((p) => p.name === name);
+  expect(match, `Product not found in seeded data: ${name}`).toBeTruthy();
+  return { id: match.id, productCode: match.productCode };
 }
 
 test('requisition/list renders the React list with API-matched rows', async ({ page }) => {
@@ -54,7 +56,7 @@ test('requisition/list renders the React list with API-matched rows', async ({ p
   await page.waitForSelector('[data-testid="requisition-list-table"]');
   await captureStep(page, FLOW, 'list');
 
-  const res = await page.request.get(url('/api/requisitions'));
+  const res = await page.request.get(url('/api/requisitions?max=1000'));
   expect(res.status()).toBe(200);
   const body = await res.json();
   expect(body.statistics.ALL).toBeGreaterThan(0);
@@ -79,6 +81,10 @@ test('requisition/createNonStock creates a requisition via the React form', asyn
   await page.click('[data-testid="requisition-destination-select"]');
   await page.keyboard.type('Boston Office');
   await page.click('.custom-option >> text=Boston Office');
+
+  await page.click('[data-testid="requisition-requested-by-select"]');
+  await page.keyboard.type('Administrator');
+  await page.click('.custom-option >> text=Administrator');
 
   await page.fill('[data-testid="requisition-date-requested"]', '2026-07-01');
   const description = `ZZ characterization non-stock ${runId()}`;
@@ -124,9 +130,9 @@ test('requisition/edit adds requisition items via the React screen', async ({ pa
   const statusRes = await page.request.get(url(`/api/requisitions/${requisitionId}`));
   expect((await statusRes.json()).data.status).toBe('EDITING');
 
-  const pid = await productId(page, '10001');
+  const product = await seededProduct(page);
   const itemsRes = await page.request.post(url(`/api/requisitions/${requisitionId}/items`), {
-    data: { requisitionItems: [{ productId: pid, quantity: 4 }] },
+    data: { requisitionItems: [{ productId: product.id, quantity: 4 }] },
   });
   expect(itemsRes.status()).toBe(200);
 
@@ -167,9 +173,9 @@ test('requisition/pick moves the requisition to PICKING and shows pick table', a
   await skipUnlessBatch15(page);
   const requisitionId = await createRequisition(page);
 
-  const pid = await productId(page, '10001');
+  const product = await seededProduct(page);
   const itemsRes = await page.request.post(url(`/api/requisitions/${requisitionId}/items`), {
-    data: { requisitionItems: [{ productId: pid, quantity: 2 }] },
+    data: { requisitionItems: [{ productId: product.id, quantity: 2 }] },
   });
   expect(itemsRes.status()).toBe(200);
   const headerRes = await page.request.post(url(`/api/requisitions/${requisitionId}/header`), {
@@ -183,7 +189,7 @@ test('requisition/pick moves the requisition to PICKING and shows pick table', a
 
   const res = await page.request.get(url(`/api/requisitions/${requisitionId}`));
   expect((await res.json()).data.status).toBe('PICKING');
-  await expect(page.locator('[data-testid="requisition-pick-table"]')).toContainText('10001');
+  await expect(page.locator('[data-testid="requisition-pick-table"]')).toContainText(product.productCode);
 
   await page.request.delete(url(`/api/stockMovements/${requisitionId}`));
 });

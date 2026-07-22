@@ -53,13 +53,13 @@ class RequisitionApiController extends BaseApiController {
         Requisition criteria = new Requisition()
         criteria.origin = origin
         if (params.status) {
-            criteria.status = params.status as RequisitionStatus
+            criteria.status = RequisitionStatus.values().find { it.name() == params.status }
         }
         if (params.type) {
-            criteria.type = params.type as RequisitionType
+            criteria.type = RequisitionType.values().find { it.name() == params.type }
         }
         if (params.commodityClass) {
-            criteria.commodityClass = params.commodityClass as CommodityClass
+            criteria.commodityClass = CommodityClass.values().find { it.name() == params.commodityClass }
         }
         if (params.destinationId) {
             criteria.destination = Location.get(params.destinationId)

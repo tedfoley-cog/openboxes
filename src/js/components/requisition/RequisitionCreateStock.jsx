@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+import moment from 'moment';
 import queryString from 'query-string';
 import { getTranslate } from 'react-localize-redux';
 import { useSelector } from 'react-redux';
@@ -21,7 +22,8 @@ const RequisitionCreateStock = () => {
   const [template, setTemplate] = useState(null);
   const [destination, setDestination] = useState(null);
   const [requestedBy, setRequestedBy] = useState(null);
-  const [dateRequested, setDateRequested] = useState('');
+  // Legacy createStockFromTemplate defaults the requested date to today
+  const [dateRequested, setDateRequested] = useState(moment().format('YYYY-MM-DD'));
   const [description, setDescription] = useState('');
   const [items, setItems] = useState([]);
   const [saving, setSaving] = useState(false);
