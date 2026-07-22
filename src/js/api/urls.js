@@ -247,6 +247,17 @@ export const INDICATORS_INVENTORY_ACCURACY = `${INDICATORS_REPORT}/inventoryAccu
 // INVENTORY
 export const INVENTORY_API = (id) => `${API}/facilities/${id}/inventories`;
 export const REORDER_REPORT = (id) => `${INVENTORY_API(id)}/reorderReport`;
+export const INVENTORY_SUMMARY = (id) => `${INVENTORY_API(id)}/summary`;
+export const EXPIRED_STOCK = (id) => `${INVENTORY_API(id)}/expiredStock`;
+export const EXPIRING_STOCK = (id) => `${INVENTORY_API(id)}/expiringStock`;
+
+// TRANSACTIONS
+export const TRANSACTION_API = `${API}/transactions`;
+export const DAILY_TRANSACTIONS = `${TRANSACTION_API}/daily`;
+export const TRANSACTION_TYPE_OPTIONS = `${TRANSACTION_API}/types`;
+export const TRANSACTION_LOCATION_OPTIONS = `${TRANSACTION_API}/locationOptions`;
+export const TRANSACTION_BY_ID = (id) => `${TRANSACTION_API}/${id}`;
+export const TRANSACTION_ENTRY_BY_ID = (id, entryId) => `${TRANSACTION_API}/${id}/entries/${entryId}`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
 export const INVENTORY_BROWSE = `${API}/inventories/browse`;
 export const INVENTORY_TRANSACTION_CANDIDATES = `${API}/inventories/transactionCandidates`;
@@ -256,9 +267,6 @@ export const INVENTORY_ADJUST_STOCK = `${API}/inventories/adjustStock`;
 // CONSUMPTION
 export const CONSUMPTION_AGGREGATE = `${API}/consumption/aggregate`;
 export const CONSUMPTION_SUMMARY = `${API}/consumption/summary`;
-
-// TRANSACTIONS
-export const TRANSACTION_API = `${API}/transactions`;
 
 // STOCK ADJUSTMENTS
 export const STOCK_ADJUSTMENTS_API = `${API}/stockAdjustments`;
