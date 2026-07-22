@@ -901,7 +901,7 @@ jacocoTestReport {
         // Our source code builds to both "build/classes/groovy" and "build/classes/java" so we need to filter one of
         // the two class paths out to avoid "Can't add different class with same name" errors. It's dirty to do this
         // in the "doFirst" block, but it's the only way to tell Jacoco to ONLY use this path.
-        classDirectories = files(files("build/classes/groovy/main").collect {
+        classDirectories.setFrom(files("build/classes/groovy/main").collect {
             // Then also exclude any packages from the report that we didn't actually generate any coverage % for.
             fileTree(dir: it, exclude: jacocoExcludes)
         })

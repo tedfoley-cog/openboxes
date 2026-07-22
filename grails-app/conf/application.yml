@@ -69,6 +69,11 @@ quartz:
 management:
     endpoints:
         enabled-by-default: true
+        # Boot 1 served endpoints at the servlet root (e.g. /health); keep them there
+        web:
+            base-path: /
+            exposure:
+                include: "health,info"
         jmx:
             exposure:
                 include: "*"
