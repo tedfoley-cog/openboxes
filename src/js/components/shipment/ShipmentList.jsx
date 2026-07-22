@@ -40,6 +40,7 @@ const ShipmentList = () => {
     const params = {
       type,
       terms: currentFilters.terms || null,
+      status: currentFilters.status || null,
       shipmentType: currentFilters.shipmentType || null,
       max: currentFilters.max || null,
     };
@@ -115,9 +116,11 @@ const ShipmentList = () => {
     acc[shipment.status] = (acc[shipment.status] || 0) + 1;
     return acc;
   }, {});
-  const visibleShipments = filters.status
-    ? shipments.filter((shipment) => shipment.status === filters.status)
-    : shipments;
+  const selectStatus = (status) => {
+    const next = { ...filters, status };
+    setFilters(next);
+    fetchShipments(next);
+  };
 
   return (
     <div className="d-flex flex-column m-3" data-testid="shipment-list">
@@ -208,7 +211,7 @@ const ShipmentList = () => {
         <button
           type="button"
           className={`btn btn-sm mr-2 ${!filters.status ? 'btn-primary' : 'btn-outline-primary'}`}
-          onClick={() => setFilters({ ...filters, status: '' })}
+          onClick={() => selectStatus('')}
         >
           {translate('react.default.all.label', 'All')}
           {` (${shipments.length})`}
@@ -218,7 +221,7 @@ const ShipmentList = () => {
             key={status}
             type="button"
             className={`btn btn-sm mr-2 ${filters.status === status ? 'btn-primary' : 'btn-outline-primary'}`}
-            onClick={() => setFilters({ ...filters, status })}
+            onClick={() => selectStatus(status)}
           >
             {status}
             {` (${statuses[status]})`}
@@ -277,14 +280,14 @@ const ShipmentList = () => {
           </tr>
         </thead>
         <tbody>
-          {!visibleShipments.length && (
+          {!shipments.length && (
             <tr>
               <td colSpan={data.isSuperuser ? 10 : 9} className="text-center text-muted">
                 {translate('react.shipment.list.empty.label', 'No shipments returned')}
               </td>
             </tr>
           )}
-          {visibleShipments.map((shipment) => (
+          {shipments.map((shipment) => (
             <tr key={shipment.id} data-testid="shipment-list-row">
               {data.isSuperuser && (
                 <td className="text-center">
