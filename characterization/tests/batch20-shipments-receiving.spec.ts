@@ -117,11 +117,11 @@ test.describe('batch 20 shipments & receiving react screens', () => {
     await page.keyboard.press('Enter');
     // The v2 DateField renders a div-based custom input, so open the
     // datepicker and pick today from the calendar instead of filling text
-    const day = String(new Date().getDate()).padStart(2, '0');
+    const day = new Date().getDate();
     const pickToday = async (testId: string) => {
       await page.getByTestId(testId).locator('.date-field-input').click();
       await page
-        .locator(`.react-datepicker__day--0${day}:not(.react-datepicker__day--outside-month)`)
+        .locator(`.react-datepicker__month [aria-label="day-${day}"]:not(.react-datepicker__day--outside-month)`)
         .first()
         .click();
     };

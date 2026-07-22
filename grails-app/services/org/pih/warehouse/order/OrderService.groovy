@@ -345,6 +345,11 @@ class OrderService {
         // Validate the shipment and save it if there are no errors
         if (shipmentInstance.validate() && !shipmentInstance.hasErrors()) {
             shipmentService.saveShipment(shipmentInstance)
+            // Flush the shipment insert before sendShipment creates the SHIPPED
+            // event, otherwise Hibernate executes the shipment insert (whose
+            // beforeInsert sets currentEvent) before the event insert at the next
+            // flush, violating the shipment.current_event_id foreign key
+            shipmentInstance.save(flush: true)
         } else {
             log.info("Errors with shipment " + shipmentInstance?.errors)
             throw new ShipmentException(message: "Validation errors on shipment ", shipment: shipmentInstance)
