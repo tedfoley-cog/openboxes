@@ -34,15 +34,21 @@ const useShippingReport = () => {
   return { data, error, shipmentId };
 };
 
+// Order-independent grouping (like Groovy's groupBy { container } in the
+// legacy GSPs): all entries sharing a container id are merged into one group,
+// ordered by each container's first appearance.
 export const groupEntriesByContainer = (entries) => {
   const groups = [];
+  const groupsByKey = new Map();
   (entries ?? []).forEach((entry) => {
     const key = entry.container?.id ?? null;
-    const lastGroup = groups[groups.length - 1];
-    if (lastGroup && lastGroup.key === key) {
-      lastGroup.entries.push(entry);
+    const group = groupsByKey.get(key);
+    if (group) {
+      group.entries.push(entry);
     } else {
-      groups.push({ key, container: entry.container, entries: [entry] });
+      const newGroup = { key, container: entry.container, entries: [entry] };
+      groupsByKey.set(key, newGroup);
+      groups.push(newGroup);
     }
   });
   return groups;
