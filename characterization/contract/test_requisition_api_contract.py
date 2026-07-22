@@ -19,7 +19,7 @@ TEST_DESCRIPTION = "ZZ Contract Requisition"
 
 
 @pytest.fixture(scope="module", autouse=True)
-def cleanup_leftovers(client):
+def cleanup_leftovers(client, batch14_endpoints):
     for req in client.get_json("/api/generic/requisition")["data"]:
         if (req.get("description") or "") == TEST_DESCRIPTION:
             client.request("DELETE", f"/api/stockMovements/{req['id']}")

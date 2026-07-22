@@ -82,7 +82,7 @@ def test_clear_picklist_unknown(client):
     assert resp.status_code == 404
 
 
-def test_print_picklist(client, movement_with_picklist):
+def test_print_picklist(client, batch14_endpoints, movement_with_picklist):
     resp = check(client, spec, "GET", "/api/picklists/print/{id}",
                  path=f"/api/picklists/print/{movement_with_picklist}")
     assert resp.status_code == 200
@@ -91,13 +91,13 @@ def test_print_picklist(client, movement_with_picklist):
     assert isinstance(data["requisitionItems"], list)
 
 
-def test_print_picklist_unknown(client):
+def test_print_picklist_unknown(client, batch14_endpoints):
     resp = check(client, spec, "GET", "/api/picklists/print/{id}",
                  path="/api/picklists/print/doesnotexist0000")
     assert resp.status_code == 404
 
 
-def test_return_print_picklist_unknown(client):
+def test_return_print_picklist_unknown(client, batch14_endpoints):
     resp = check(client, spec, "GET", "/api/picklists/returnPrint/{id}",
                  path="/api/picklists/returnPrint/doesnotexist0000")
     assert resp.status_code == 404

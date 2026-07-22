@@ -12,6 +12,13 @@ import { captureStep, resetStepCounter } from '../fixtures/screenshots';
  * REST endpoints the screens consume.
  */
 
+// The pinned released image (characterization job) predates the Batch 14
+// endpoints/screens; these tests run against source builds (characterization-java11).
+async function skipUnlessBatch14(page): Promise<void> {
+  const res = await page.request.get(url('/api/requisitions/documentTypes'));
+  test.skip(res.status() === 404, 'Batch 14 endpoints not present in target build');
+}
+
 async function locationId(page, name: string): Promise<string> {
   const res = await page.request.get(url('/api/locations'));
   expect(res.status()).toBe(200);
@@ -38,6 +45,7 @@ test('requisition/create renders the React form and creates a requisition', asyn
   resetStepCounter();
   const FLOW = 'requisition-create-react';
   await login(page);
+  await skipUnlessBatch14(page);
 
   await page.goto(url('/requisition/create'));
   await page.waitForSelector('[data-testid="requisition-date-requested"]');
@@ -73,6 +81,7 @@ test('requisition/chooseTemplate renders the React template picker', async ({ pa
   resetStepCounter();
   const FLOW = 'requisition-choose-template-react';
   await login(page);
+  await skipUnlessBatch14(page);
 
   await page.goto(url('/requisition/chooseTemplate'));
   await page.waitForSelector('[data-testid="requisition-template-select"]');
@@ -87,6 +96,7 @@ test('requisition/confirm moves the requisition to CHECKING and lists items', as
   resetStepCounter();
   const FLOW = 'requisition-confirm-react';
   await login(page);
+  await skipUnlessBatch14(page);
   const requisitionId = await createRequisition(page);
 
   await page.goto(url(`/requisition/confirm/${requisitionId}`));
@@ -104,6 +114,7 @@ test('requisition/addDocument uploads a document via the React form', async ({ p
   resetStepCounter();
   const FLOW = 'requisition-add-document-react';
   await login(page);
+  await skipUnlessBatch14(page);
   const requisitionId = await createRequisition(page);
 
   await page.goto(url(`/requisition/addDocument/${requisitionId}`));
@@ -128,6 +139,7 @@ test('picklist/print renders the React print screen with picklist data', async (
   resetStepCounter();
   const FLOW = 'picklist-print-react';
   await login(page);
+  await skipUnlessBatch14(page);
 
   const smRes = await page.request.post(url('/api/stockMovements'), {
     data: {

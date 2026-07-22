@@ -84,6 +84,7 @@ ItemsTable.propTypes = {
 const PicklistReturnPrint = () => {
   const { orderId } = useParams();
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
   const translate = useSelector(
     (state) => translateWithDefaultMessage(getTranslate(state.localize)),
   );
@@ -91,9 +92,14 @@ const PicklistReturnPrint = () => {
   useTranslation('picklist', 'default');
 
   useEffect(() => {
-    requisitionApi.getPicklistReturnPrint(orderId).then((response) => {
-      setData(response.data?.data);
-    });
+    requisitionApi.getPicklistReturnPrint(orderId)
+      .then((response) => {
+        setData(response.data?.data);
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.errorMessage
+          || translate('react.default.errors.error.label', 'An error occurred'));
+      });
   }, [orderId]);
 
   const groups = useMemo(() => {
@@ -116,6 +122,10 @@ const PicklistReturnPrint = () => {
       ),
     };
   }, [data]);
+
+  if (error) {
+    return <div className="alert alert-danger m-3" role="alert">{error}</div>;
+  }
 
   if (!data) {
     return null;

@@ -19,6 +19,7 @@ const RequisitionConfirm = () => {
   const [checkedBy, setCheckedBy] = useState(null);
   const [dateChecked, setDateChecked] = useState('');
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
   const translate = useSelector(
     (state) => translateWithDefaultMessage(getTranslate(state.localize)),
   );
@@ -28,12 +29,17 @@ const RequisitionConfirm = () => {
   const debouncedPeopleFetch = debouncePeopleFetch(500, 2);
 
   useEffect(() => {
-    requisitionApi.confirmRequisition(requisitionId).then(({ data }) => {
-      const fetched = data?.data;
-      setRequisition(fetched);
-      setCheckedBy(fetched?.checkedBy ?? null);
-      setDateChecked(fetched?.dateChecked ?? '');
-    });
+    requisitionApi.confirmRequisition(requisitionId)
+      .then(({ data }) => {
+        const fetched = data?.data;
+        setRequisition(fetched);
+        setCheckedBy(fetched?.checkedBy ?? null);
+        setDateChecked(fetched?.dateChecked ?? '');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.errorMessage
+          || translate('react.default.errors.error.label', 'An error occurred'));
+      });
   }, [requisitionId]);
 
   const submit = async (event) => {
@@ -45,14 +51,18 @@ const RequisitionConfirm = () => {
         dateChecked: dateChecked || null,
       });
       window.location = REQUISITION_URL.transfer(requisitionId);
-    } catch (error) {
-      const message = error?.response?.data?.errorMessage;
+    } catch (err) {
+      const message = err?.response?.data?.errorMessage;
       if (message) {
         Alert.error(message);
       }
       setSaving(false);
     }
   };
+
+  if (error) {
+    return <div className="alert alert-danger m-3" role="alert">{error}</div>;
+  }
 
   if (!requisition) {
     return null;
