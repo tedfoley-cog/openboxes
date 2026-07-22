@@ -59,18 +59,29 @@ const UnitOfMeasureConversionForm = () => {
     };
   };
 
+  const emptyValues = {
+    fromUnitOfMeasure: null, toUnitOfMeasure: null, conversionRate: '', active: true,
+  };
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     mode: 'onBlur',
-    defaultValues: unitOfMeasureConversionId
-      ? getUnitOfMeasureConversion
-      : {
-        fromUnitOfMeasure: null, toUnitOfMeasure: null, conversionRate: '', active: true,
-      },
+    defaultValues: emptyValues,
   });
+
+  // Fetch and reset on every id change so the form is correctly populated
+  // even when routed between create/edit without a remount.
+  useEffect(() => {
+    if (unitOfMeasureConversionId) {
+      getUnitOfMeasureConversion().then((values) => reset(values));
+      return;
+    }
+    reset(emptyValues);
+  }, [unitOfMeasureConversionId]);
 
   const onSubmit = async (values) => {
     const payload = {

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { UNIT_OF_MEASURE_CONVERSION_API } from 'api/urls';
@@ -21,6 +22,8 @@ const UnitOfMeasureConversionList = () => {
 
   const history = useHistory();
   const translate = useTranslate();
+  // The legacy GSP showed the create button only to admins (<g:isUserAdmin>)
+  const isUserAdmin = useSelector((state) => state.session.isUserAdmin);
 
   const getParams = ({ offset, state, sortingParams }) => ({
     offset: `${offset}`,
@@ -115,12 +118,14 @@ const UnitOfMeasureConversionList = () => {
           <Translate id="react.unitOfMeasureConversion.list.label" defaultMessage="List Uom Conversions" />
         </span>
         <div className="d-flex justify-content-end buttons align-items-center">
-          <Button
-            defaultLabel="Add Uom Conversion"
-            label="react.unitOfMeasureConversion.add.label"
-            variant="primary"
-            onClick={() => history.push(UNIT_OF_MEASURE_CONVERSION_URL.create())}
-          />
+          {isUserAdmin && (
+            <Button
+              defaultLabel="Add Uom Conversion"
+              label="react.unitOfMeasureConversion.add.label"
+              variant="primary"
+              onClick={() => history.push(UNIT_OF_MEASURE_CONVERSION_URL.create())}
+            />
+          )}
         </div>
       </div>
       <div className="list-page-list-section">
