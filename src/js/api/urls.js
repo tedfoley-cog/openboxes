@@ -79,6 +79,15 @@ export const PREPAYMENT_INVOICE_ITEM_BY_ID = (id) => `${PREPAYMENT_INVOICE_ITEM_
 
 // PRODUCT
 export const PRODUCT_API = `${API}/products`;
+export const PRODUCT_DETAILS = (id) => `${PRODUCT_API}/${id}/details`;
+export const PRODUCT_DOCUMENTS = (id) => `${PRODUCT_API}/${id}/documents`;
+export const PRODUCT_DOCUMENT_BY_ID = (id, documentId) => `${PRODUCT_API}/${id}/documents/${documentId}`;
+export const PRODUCT_MERGE_LOGS = `${PRODUCT_API}/mergeLogs`;
+export const PRODUCT_BATCH_EDIT = `${PRODUCT_API}/batchEdit`;
+export const PRODUCT_VALIDATE_IMPORT = `${PRODUCT_API}/validateImport`;
+export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
+export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
+export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
 export const INVENTORY_ITEM = (productCode, lotNumber) => `${CONTEXT_PATH}/${PRODUCT_API}/${productCode}/inventoryItems/${lotNumber}`;
 export const LOT_NUMBERS_WITH_EXPIRATION_DATE = `${PRODUCT_API}/inventoryItems/lotNumbersWithExpirationDate`;
 export const AVAILABLE_ITEMS = `${PRODUCT_API}/availableItems`;
@@ -137,6 +146,14 @@ export const LOCATION_ZONE_LOCATIONS = (id) => `${LOCATION_API}/${id}/zoneLocati
 export const LOCATION_CONTENTS = (id) => `${LOCATION_API}/${id}/contents`;
 export const LOCATION_LOGO = (id) => `${LOCATION_API}/${id}/logo`;
 export const LOCATION_GROUPS_API = `${API}/locationGroups`;
+export const LOCATION_GROUP_BY_ID = (id) => `${LOCATION_GROUPS_API}/${id}`;
+export const LOCATION_GROUP_SEARCH_API = `${LOCATION_GROUPS_API}/search`;
+export const LOCATION_GROUP_DETAILS = (id) => `${LOCATION_GROUPS_API}/${id}/details`;
+
+// LOCATION TYPES
+export const LOCATION_TYPE_API = `${API}/locationTypes`;
+export const LOCATION_TYPE_BY_ID = (id) => `${LOCATION_TYPE_API}/${id}`;
+export const LOCATION_TYPE_CODE_OPTIONS = `${API}/locationTypeCodeOptions`;
 
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
@@ -272,6 +289,17 @@ export const TRANSACTION_LOCATION_OPTIONS = `${TRANSACTION_API}/locationOptions`
 export const TRANSACTION_BY_ID = (id) => `${TRANSACTION_API}/${id}`;
 export const TRANSACTION_ENTRY_BY_ID = (id, entryId) => `${TRANSACTION_API}/${id}/entries/${entryId}`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
+export const INVENTORY_BROWSE = `${API}/inventories/browse`;
+export const INVENTORY_TRANSACTION_CANDIDATES = `${API}/inventories/transactionCandidates`;
+export const INVENTORY_BIN_LOCATION_DETAILS = `${API}/inventories/binLocationDetails`;
+export const INVENTORY_ADJUST_STOCK = `${API}/inventories/adjustStock`;
+
+// CONSUMPTION
+export const CONSUMPTION_AGGREGATE = `${API}/consumption/aggregate`;
+export const CONSUMPTION_SUMMARY = `${API}/consumption/summary`;
+
+// STOCK ADJUSTMENTS
+export const STOCK_ADJUSTMENTS_API = `${API}/stockAdjustments`;
 
 // ATTRIBUTES
 export const ATTRIBUTE_BY_ID = (id) => `${ATTRIBUTES}/${id}`;

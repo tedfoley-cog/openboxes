@@ -80,6 +80,16 @@ class UrlMappings {
             action = [GET: "list", POST: "create"]
         }
 
+        "/api/locationGroups/search"(parseRequest: true) {
+            controller = { "locationGroupApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/locationGroups/$id/details"(parseRequest: true) {
+            controller = { "locationGroupApi" }
+            action = [GET: "details"]
+        }
+
         "/api/locationGroups/$id"(parseRequest: true) {
             controller = { "locationGroupApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
@@ -109,6 +119,22 @@ class UrlMappings {
             action = [GET: "glAccountTypeOptions"]
         }
 
+        // Location type code options for the location type form
+        "/api/locationTypeCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "locationTypeCodeOptions"]
+        }
+
+        "/api/locationTypes"(parseRequest: true) {
+            controller = { "locationTypeApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/locationTypes/$id"(parseRequest: true) {
+            controller = { "locationTypeApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         "/api/paymentTermOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "paymentTermOptions"]
@@ -134,6 +160,16 @@ class UrlMappings {
             action = [GET: "handlingRequirementsOptions"]
         }
 
+        "/api/productTypeOptions" {
+            controller = { "selectOptionsApi" }
+            action = [GET: "productTypeOptions"]
+        }
+
+        "/api/documentTypeOptions" {
+            controller = { "selectOptionsApi" }
+            action = [GET: "documentTypeOptions"]
+        }
+
         "/api/stockMovements/shipmentStatusCodes" {
             controller = { "selectOptionsApi" }
             action = [GET: "shipmentStatusCodesOptions"]
@@ -147,6 +183,36 @@ class UrlMappings {
         "/api/products/search"(parseRequest: true) {
             controller = { "productApi" }
             action = [GET: "search"]
+        }
+
+        "/api/products/mergeLogs"(parseRequest: true) {
+            controller = { "productApi" }
+            action = [GET: "mergeLogs"]
+        }
+
+        "/api/products/batchEdit"(parseRequest: true) {
+            controller = { "productApi" }
+            action = [GET: "batchEdit", POST: "batchSave"]
+        }
+
+        "/api/products/validateImport" {
+            controller = { "productApi" }
+            action = [POST: "validateImport"]
+        }
+
+        "/api/products/$id/details"(parseRequest: true) {
+            controller = { "productApi" }
+            action = [GET: "details", PUT: "updateDetails"]
+        }
+
+        "/api/products/$id/documents" {
+            controller = { "productApi" }
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/products/$id/documents/$documentId" {
+            controller = { "productApi" }
+            action = [DELETE: "deleteDocument"]
         }
 
         "/api/products/$id/$action" {
@@ -1304,6 +1370,41 @@ class UrlMappings {
             controller = { "inventoryApi" }
             action = [GET: "getExpirationHistoryReport"]
         }
+
+        "/api/inventories/browse" {
+            controller = { "inventoryApi" }
+            action = [GET: "browse"]
+        }
+
+        "/api/inventories/transactionCandidates" {
+            controller = { "inventoryApi" }
+            action = [GET: "getTransactionCandidates"]
+        }
+
+        "/api/inventories/binLocationDetails" {
+            controller = { "inventoryApi" }
+            action = [GET: "getBinLocationDetails"]
+        }
+
+        "/api/inventories/adjustStock"(parseRequest: true) {
+            controller = { "inventoryApi" }
+            action = [POST: "adjustStock"]
+        }
+
+        /**
+         * Consumption API endpoints
+         */
+
+        "/api/consumption/aggregate" {
+            controller = { "consumptionApi" }
+            action = [GET: "aggregate"]
+        }
+
+        "/api/consumption/summary" {
+            controller = { "consumptionApi" }
+            action = [GET: "summary"]
+        }
+
 
         // Error handling
 
