@@ -259,6 +259,7 @@ const LocalizationList = () => {
               value={locale}
               onChange={(e) => setLocale(e.target.value)}
             >
+              <option value="">{translate('react.localization.allLocales.label', 'All locales')}</option>
               {localeOptions.map((option) => (
                 <option key={option.id} value={option.id}>{option.label}</option>
               ))}
