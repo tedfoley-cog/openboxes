@@ -354,8 +354,6 @@ export const SHIPMENT_RECEIPT = (id) => `${SHIPMENT_BY_ID(id)}/receipt`;
 export const SHIPMENT_RECEIPT_ITEM = (id, receiptItemId) => `${SHIPMENT_RECEIPT(id)}/items/${receiptItemId}`;
 export const SHIPMENT_RECEIPT_ITEM_SPLIT = (id, receiptItemId) => `${SHIPMENT_RECEIPT_ITEM(id, receiptItemId)}/split`;
 export const SHIPMENT_RECEIPT_ITEM_PUTAWAY_LOCATIONS = (id, receiptItemId) => `${SHIPMENT_RECEIPT_ITEM(id, receiptItemId)}/putawayLocations`;
-export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
-export const SHIPMENT_ITEM_CREATE_OPTIONS = `${SHIPMENT_ITEM_API}/createOptions`;
 export const SHIPMENT_OUTBOUND_RETURN_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/outboundReturnPrint`;
 export const SHIPMENT_GOODS_RECEIPT_NOTE_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/goodsReceiptNotePrint`;
 
@@ -363,6 +361,7 @@ export const SHIPMENT_GOODS_RECEIPT_NOTE_PRINT = (id) => `${SHIPMENT_BY_ID(id)}/
 export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
 export const SHIPMENT_ITEM_API_BY_ID = (id) => `${SHIPMENT_ITEM_API}/${id}`;
 export const SHIPMENT_ITEM_OPTIONS = `${SHIPMENT_ITEM_API}/options`;
+export const SHIPMENT_ITEM_CREATE_OPTIONS = `${SHIPMENT_ITEM_API}/createOptions`;
 export const SHIPMENT_ITEM_PICK_CONTEXT = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/pick`;
 export const SHIPMENT_ITEM_SPLIT_BY_ID = (id) => `${SHIPMENT_ITEM_API_BY_ID(id)}/split`;
 
