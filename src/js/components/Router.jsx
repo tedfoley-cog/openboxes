@@ -308,6 +308,31 @@ const AsyncGlAccountForm = Loadable({
   loading: Loading,
 });
 
+const AsyncGlAccountTypeList = Loadable({
+  loader: () => import('components/glAccountType/GlAccountTypeList'),
+  loading: Loading,
+});
+
+const AsyncGlAccountTypeForm = Loadable({
+  loader: () => import('components/glAccountType/GlAccountTypeForm'),
+  loading: Loading,
+});
+
+const AsyncInvoiceShow = Loadable({
+  loader: () => import('components/invoice/show/InvoiceShow'),
+  loading: Loading,
+});
+
+const AsyncInvoiceAddDocument = Loadable({
+  loader: () => import('components/invoice/addDocument/InvoiceAddDocument'),
+  loading: Loading,
+});
+
+const AsyncOrderAddComment = Loadable({
+  loader: () => import('components/order/OrderAddComment'),
+  loading: Loading,
+});
+
 const AsyncAttributeList = Loadable({
   loader: () => import('components/attribute/AttributeList'),
   loading: Loading,
@@ -404,6 +429,36 @@ const AsyncDailyTransactionsList = Loadable({
 
 const AsyncEditTransactionPage = Loadable({
   loader: () => import('components/inventory/EditTransactionPage'),
+  loading: Loading,
+});
+
+const AsyncInventoryBrowserList = Loadable({
+  loader: () => import('components/inventory/InventoryBrowserList'),
+  loading: Loading,
+});
+
+const AsyncStockCardPage = Loadable({
+  loader: () => import('components/inventory/stockCard/StockCardPage'),
+  loading: Loading,
+});
+
+const AsyncLotNumbersPage = Loadable({
+  loader: () => import('components/inventory/stockCard/LotNumbersPage'),
+  loading: Loading,
+});
+
+const AsyncRecordStockPage = Loadable({
+  loader: () => import('components/inventory/stockCard/RecordStockPage'),
+  loading: Loading,
+});
+
+const AsyncStockGraphPage = Loadable({
+  loader: () => import('components/inventory/stockCard/StockGraphPage'),
+  loading: Loading,
+});
+
+const AsyncEditInventoryLevelPage = Loadable({
+  loader: () => import('components/inventory/stockCard/EditInventoryLevelPage'),
   loading: Loading,
 });
 
@@ -507,6 +562,13 @@ const Router = () => {
             <MainLayoutRoute path="**/inventory/listDailyTransactions" component={AsyncDailyTransactionsList} />
             <MainLayoutRoute path="**/inventory/list" component={AsyncInventorySummaryList} />
             <MainLayoutRoute path="**/inventory/editTransaction/:id" component={AsyncEditTransactionPage} />
+            <MainLayoutRoute path="**/inventoryBrowser/list" component={AsyncInventoryBrowserList} />
+            <MainLayoutRoute path="**/inventoryBrowser/index" component={AsyncInventoryBrowserList} />
+            <MainLayoutRoute path="**/inventoryItem/showStockCard/:id?" component={AsyncStockCardPage} />
+            <MainLayoutRoute path="**/inventoryItem/showLotNumbers/:id?" component={AsyncLotNumbersPage} />
+            <MainLayoutRoute path="**/inventoryItem/showRecordInventory/:id?" component={AsyncRecordStockPage} />
+            <MainLayoutRoute path="**/inventoryItem/showGraph/:id?" component={AsyncStockGraphPage} />
+            <MainLayoutRoute path="**/inventoryItem/editInventoryLevel/:id?" component={AsyncEditInventoryLevelPage} />
             <MainLayoutRoute path="**/inventory/cycleCount/count" component={AsyncCycleCountCountStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/resolve" component={AsyncCycleCountResolveStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/reporting" component={AsyncCycleCountReporting} />
@@ -520,6 +582,9 @@ const Router = () => {
             <MainLayoutRoute path="**/stocklistManagement/index/:productId?" component={AsyncManagement} />
             <MainLayoutRoute path="**/invoice/create/:invoiceId?" component={AsyncInvoice} />
             <MainLayoutRoute path="**/invoice/list" component={AsyncInvoiceList} />
+            <MainLayoutRoute path="**/invoice/show/:invoiceId" component={AsyncInvoiceShow} />
+            <MainLayoutRoute path="**/invoice/addDocument/:invoiceId" component={AsyncInvoiceAddDocument} />
+            <MainLayoutRoute path="**/order/addComment/:orderId" component={AsyncOrderAddComment} />
             <MainLayoutRoute path="**/stockTransfer/create/:stockTransferId?" component={AsyncStockTransfer} />
             <MainLayoutRoute path="**/stockTransfer/createOutboundReturn/:outboundReturnId?" component={AsyncOutboundReturns} />
             <MainLayoutRoute path="**/stockTransfer/createInboundReturn/:inboundReturnId?" component={AsyncInboundReturns} />
@@ -568,6 +633,9 @@ const Router = () => {
             <MainLayoutRoute path="**/glAccount/list" component={AsyncGlAccountList} />
             <MainLayoutRoute path="**/glAccount/create" component={AsyncGlAccountForm} />
             <MainLayoutRoute path="**/glAccount/edit/:glAccountId" component={AsyncGlAccountForm} />
+            <MainLayoutRoute path="**/glAccountType/list" component={AsyncGlAccountTypeList} />
+            <MainLayoutRoute path="**/glAccountType/create" component={AsyncGlAccountTypeForm} />
+            <MainLayoutRoute path="**/glAccountType/edit/:glAccountTypeId" component={AsyncGlAccountTypeForm} />
             <MainLayoutRoute path="**/attribute/list" component={AsyncAttributeList} />
             <MainLayoutRoute path="**/attribute/create" component={AsyncAttributeForm} />
             <MainLayoutRoute path="**/attribute/edit/:id" component={AsyncAttributeForm} />
