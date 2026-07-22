@@ -8,6 +8,7 @@ import {
   SHIPMENT_CONTAINERS,
   SHIPMENT_DETAILS,
   SHIPMENT_EVENTS,
+  SHIPMENT_GOODS_RECEIPT_NOTE_PRINT,
   SHIPMENT_ITEM_API,
   SHIPMENT_ITEM_BY_ID,
   SHIPMENT_ITEM_CREATE_OPTIONS,
@@ -15,6 +16,7 @@ import {
   SHIPMENT_ITEM_SPLIT,
   SHIPMENT_ITEMS,
   SHIPMENT_LIST_OPTIONS,
+  SHIPMENT_OUTBOUND_RETURN_PRINT,
   SHIPMENT_PACKING,
   SHIPMENT_PACKING_LIST,
   SHIPMENT_PICKLIST,
@@ -69,4 +71,8 @@ export default {
     apiClient.get(SHIPMENT_RECEIPT_ITEM_PUTAWAY_LOCATIONS(id, receiptItemId)),
   getItemCreateOptions: () => apiClient.get(SHIPMENT_ITEM_CREATE_OPTIONS),
   createStandaloneItem: (payload) => apiClient.post(SHIPMENT_ITEM_API, payload),
+  getOutboundReturnPrintData: (id, config) =>
+    apiClient.get(SHIPMENT_OUTBOUND_RETURN_PRINT(id), config),
+  getGoodsReceiptNotePrintData: (id, config) =>
+    apiClient.get(SHIPMENT_GOODS_RECEIPT_NOTE_PRINT(id), config),
 };
