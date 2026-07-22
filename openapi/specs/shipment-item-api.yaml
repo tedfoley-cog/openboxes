@@ -208,12 +208,10 @@ paths:
                       shipmentId:
                         $ref: '../components/common.yaml#/components/schemas/Id'
                       previousItemId:
-                        allOf:
-                          - $ref: '../components/common.yaml#/components/schemas/Id'
+                        type: string
                         nullable: true
                       nextItemId:
-                        allOf:
-                          - $ref: '../components/common.yaml#/components/schemas/Id'
+                        type: string
                         nullable: true
                       binLocations:
                         type: array
@@ -249,8 +247,7 @@ paths:
               required: [inventoryItemId, splitQuantity]
               properties:
                 binLocationId:
-                  allOf:
-                    - $ref: '../components/common.yaml#/components/schemas/Id'
+                  type: string
                   nullable: true
                 inventoryItemId:
                   $ref: '../components/common.yaml#/components/schemas/Id'
@@ -400,9 +397,9 @@ components:
         field.
       properties:
         container:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
         product:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
         lotNumber:
           type: string
           nullable: true
@@ -417,13 +414,13 @@ components:
             - type: string
               nullable: true
         recipient:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
         inventoryItem:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
         donor:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
         shipment:
-          nullable: true
+          description: Either an object with an "id" key or a bare id string.
   securitySchemes:
     cookieAuth:
       $ref: '../components/common.yaml#/components/securitySchemes/cookieAuth'

@@ -102,7 +102,6 @@ components:
           type: string
           nullable: true
         shipmentType:
-          nullable: true
           description: >
             Either an object with an "id" key or a bare id string.
         excludedFields:
