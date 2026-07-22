@@ -133,6 +133,12 @@ const INVENTORY_URL = {
   createTransaction: () => `${INVENTORY_URL.base}/create`,
 };
 
+const CONSUMPTION_URL = {
+  base: `${CONTEXT_PATH}/consumption`,
+  list: () => `${CONSUMPTION_URL.base}/list`,
+  pivot: () => `${CONSUMPTION_URL.base}/pivot`,
+};
+
 const REQUISITION_TEMPLATE_URL = {
   base: `${CONTEXT_PATH}/requisitionTemplate`,
   create: () => `${REQUISITION_TEMPLATE_URL.base}/create`,
@@ -179,6 +185,21 @@ const GL_ACCOUNT_TYPE_URL = {
 const DOCUMENT_URL = {
   base: `${CONTEXT_PATH}/document`,
   download: (id) => `${DOCUMENT_URL.base}/download/${id}`,
+};
+
+const LOCATION_GROUP_URL = {
+  base: `${CONTEXT_PATH}/locationGroup`,
+  list: () => `${LOCATION_GROUP_URL.base}/list`,
+  create: () => `${LOCATION_GROUP_URL.base}/create`,
+  edit: (id) => `${LOCATION_GROUP_URL.base}/edit/${id}`,
+  show: (id) => `${LOCATION_GROUP_URL.base}/show/${id}`,
+};
+
+const LOCATION_TYPE_URL = {
+  base: `${CONTEXT_PATH}/locationType`,
+  list: () => `${LOCATION_TYPE_URL.base}/list`,
+  create: () => `${LOCATION_TYPE_URL.base}/create`,
+  edit: (id) => `${LOCATION_TYPE_URL.base}/edit/${id}`,
 };
 
 const CATEGORY_URL = {
@@ -253,6 +274,7 @@ export {
   BARCODE_URL,
   BUDGET_CODE_URL,
   CATEGORY_URL,
+  CONSUMPTION_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
   DOCUMENT_URL,
@@ -262,6 +284,8 @@ export {
   INVENTORY_URL,
   INVOICE_URL,
   LOCATION_CONFIGURATION_URL,
+  LOCATION_GROUP_URL,
+  LOCATION_TYPE_URL,
   LOCATION_URL,
   ORDER_URL,
   PICKLIST_URL,

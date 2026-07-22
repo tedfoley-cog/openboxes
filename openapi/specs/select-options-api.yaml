@@ -8,7 +8,8 @@ info:
     "/api/productGroupOptions", "/api/tagOptions", "/api/glAccountOptions",
     "/api/paymentTermOptions", "/api/users", "/api/preferenceTypeOptions",
     "/api/ratingTypeCodeOptions", "/api/handlingRequirementsOptions" and
-    "/api/stockMovements/shipmentStatusCodes", "/api/glAccountTypeOptions").
+    "/api/stockMovements/shipmentStatusCodes", "/api/glAccountTypeOptions",
+    "/api/locationTypeCodeOptions").
     All endpoints are GET-only and
     render an option list under a "data" envelope; the option shape varies
     slightly per endpoint (some include "value" and/or "variant").
@@ -59,6 +60,17 @@ paths:
                           type: string
                         label:
                           type: string
+  /api/locationTypeCodeOptions:
+    get:
+      operationId: listLocationTypeCodeOptions
+      summary: Location type code options
+      description: >
+        Returns every LocationTypeCode enum value as {id, label} pairs (both
+        the enum name). Added in Phase 2 (Batch 32) for the React
+        locationType form.
+      responses:
+        '200':
+          $ref: '#/components/responses/IdLabelOptionsOk'
   /api/glAccountOptions:
     get:
       operationId: glAccountOptions

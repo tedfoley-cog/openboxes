@@ -80,6 +80,16 @@ class UrlMappings {
             action = [GET: "list", POST: "create"]
         }
 
+        "/api/locationGroups/search"(parseRequest: true) {
+            controller = { "locationGroupApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/locationGroups/$id/details"(parseRequest: true) {
+            controller = { "locationGroupApi" }
+            action = [GET: "details"]
+        }
+
         "/api/locationGroups/$id"(parseRequest: true) {
             controller = { "locationGroupApi" }
             action = [GET: "read", PUT: "update", DELETE: "delete"]
@@ -113,6 +123,22 @@ class UrlMappings {
         "/api/glAccountTypeCodeOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "glAccountTypeCodeOptions"]
+        }
+
+        // Location type code options for the location type form
+        "/api/locationTypeCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "locationTypeCodeOptions"]
+        }
+
+        "/api/locationTypes"(parseRequest: true) {
+            controller = { "locationTypeApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/locationTypes/$id"(parseRequest: true) {
+            controller = { "locationTypeApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
         }
 
         "/api/paymentTermOptions"(parseRequest: true) {
@@ -1306,6 +1332,41 @@ class UrlMappings {
             controller = { "inventoryApi" }
             action = [GET: "getExpirationHistoryReport"]
         }
+
+        "/api/inventories/browse" {
+            controller = { "inventoryApi" }
+            action = [GET: "browse"]
+        }
+
+        "/api/inventories/transactionCandidates" {
+            controller = { "inventoryApi" }
+            action = [GET: "getTransactionCandidates"]
+        }
+
+        "/api/inventories/binLocationDetails" {
+            controller = { "inventoryApi" }
+            action = [GET: "getBinLocationDetails"]
+        }
+
+        "/api/inventories/adjustStock"(parseRequest: true) {
+            controller = { "inventoryApi" }
+            action = [POST: "adjustStock"]
+        }
+
+        /**
+         * Consumption API endpoints
+         */
+
+        "/api/consumption/aggregate" {
+            controller = { "consumptionApi" }
+            action = [GET: "aggregate"]
+        }
+
+        "/api/consumption/summary" {
+            controller = { "consumptionApi" }
+            action = [GET: "summary"]
+        }
+
 
         // Error handling
 
