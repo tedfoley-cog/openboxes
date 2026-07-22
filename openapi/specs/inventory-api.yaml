@@ -125,13 +125,13 @@ paths:
           required: false
           schema:
             type: string
-          description: LocalDate bound (e.g. "2024-12-31" or "12/31/2024").
+          description: ISO LocalDate bound (yyyy-MM-dd, e.g. "2024-12-31").
         - name: endDate
           in: query
           required: false
           schema:
             type: string
-          description: LocalDate bound (e.g. "2024-12-31" or "12/31/2024").
+          description: ISO LocalDate bound (yyyy-MM-dd, e.g. "2024-12-31").
       responses:
         '200':
           description: Expired stock rows.
@@ -176,13 +176,13 @@ paths:
           required: false
           schema:
             type: string
-          description: LocalDate bound (e.g. "2024-12-31" or "12/31/2024").
+          description: ISO LocalDate bound (yyyy-MM-dd, e.g. "2024-12-31").
         - name: endDate
           in: query
           required: false
           schema:
             type: string
-          description: LocalDate bound (e.g. "2024-12-31" or "12/31/2024").
+          description: ISO LocalDate bound (yyyy-MM-dd, e.g. "2024-12-31").
       responses:
         '200':
           description: Expiring stock rows.
