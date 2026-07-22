@@ -1253,6 +1253,23 @@ class UrlMappings {
             action = [GET: "printData"]
         }
 
+        // Receive order API (migrated receiveOrderWorkflow screens)
+        "/api/orders/$id/receiveOrder"(parseRequest: true) {
+            controller = "receiveOrderApi"
+            action = [GET: "read", POST: "save"]
+        }
+
+        // Shipment print API (migrated deliveryNote/goodsReceiptNote print screens)
+        "/api/shipments/$id/outboundReturnPrint"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "outboundReturnPrintData"]
+        }
+
+        "/api/shipments/$id/goodsReceiptNotePrint"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "goodsReceiptNotePrintData"]
+        }
+
         // Order adjustment type API (migrated orderAdjustmentType screens)
         "/api/orderAdjustmentTypes"(parseRequest: true) {
             controller = "orderAdjustmentTypeApi"
@@ -1983,6 +2000,41 @@ class UrlMappings {
         "/api/reports/inventory-transactions-summary(.$format)?" {
             controller = "inventoryTransactionSummaryApi"
             action = [GET: "getInventoryTransactionsSummary"]
+        }
+
+        "/api/reports/on-order-summary" {
+            controller = "reportApi"
+            action = [GET: "onOrderSummary"]
+        }
+
+        "/api/reports/on-order-details" {
+            controller = "reportApi"
+            action = [GET: "onOrderDetails"]
+        }
+
+        "/api/reports/request-details" {
+            controller = "reportApi"
+            action = [GET: "requestDetails"]
+        }
+
+        "/api/reports/request-reason-codes" {
+            controller = "reportApi"
+            action = [GET: "requestReasonCodes"]
+        }
+
+        "/api/reports/inventory-by-location" {
+            controller = "reportApi"
+            action = [GET: "inventoryByLocation"]
+        }
+
+        "/api/reports/packing-list" {
+            controller = "reportApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/reports/packing-list-shipments" {
+            controller = "reportApi"
+            action = [GET: "packingListShipments"]
         }
 
         "/api/reports/indicators/productsInventoried" {

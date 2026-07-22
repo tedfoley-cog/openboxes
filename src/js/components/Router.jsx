@@ -348,6 +348,36 @@ const AsyncExpirationHistoryReport = Loadable({
   loading: Loading,
 });
 
+const AsyncForecastReport = Loadable({
+  loader: () => import('components/reporting/forecastReport/ForecastReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryByLocationReport = Loadable({
+  loader: () => import('components/reporting/inventoryByLocationReport/InventoryByLocationReport'),
+  loading: Loading,
+});
+
+const AsyncInventoryReport = Loadable({
+  loader: () => import('components/reporting/inventoryReport/InventoryReport'),
+  loading: Loading,
+});
+
+const AsyncOnOrderReport = Loadable({
+  loader: () => import('components/reporting/onOrderReport/OnOrderReport'),
+  loading: Loading,
+});
+
+const AsyncPaginatedPackingListReport = Loadable({
+  loader: () => import('components/reporting/packingListReport/PaginatedPackingListReport'),
+  loading: Loading,
+});
+
+const AsyncRequestDetailReport = Loadable({
+  loader: () => import('components/reporting/requestDetailReport/RequestDetailReport'),
+  loading: Loading,
+});
+
 const AsyncLocationGroupList = Loadable({
   loader: () => import('components/locationGroup/LocationGroupList'),
   loading: Loading,
@@ -550,6 +580,21 @@ const AsyncOrderShow = Loadable({
 
 const AsyncOrderPrint = Loadable({
   loader: () => import('components/order/OrderPrint'),
+  loading: Loading,
+});
+
+const AsyncOutboundReturnPrint = Loadable({
+  loader: () => import('components/deliveryNote/OutboundReturnPrint'),
+  loading: Loading,
+});
+
+const AsyncGoodsReceiptNotePrint = Loadable({
+  loader: () => import('components/goodsReceiptNote/GoodsReceiptNotePrint'),
+  loading: Loading,
+});
+
+const AsyncReceiveOrderPage = Loadable({
+  loader: () => import('components/receiveOrder/ReceiveOrderPage'),
   loading: Loading,
 });
 
@@ -1007,6 +1052,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/createOutbound/:stockMovementId?" component={AsyncStockMovement} />
             <MainLayoutRoute path="**/stockMovement/importOutboundStockMovement" component={AsyncOutboundImport} />
             <MainLayoutRoute path="**/report/expirationHistoryReport" component={AsyncExpirationHistoryReport} />
+            <MainLayoutRoute path="**/report/showForecastReport" component={AsyncForecastReport} />
+            <MainLayoutRoute path="**/report/showInventoryByLocationReport" component={AsyncInventoryByLocationReport} />
+            <MainLayoutRoute path="**/report/showInventoryReport" component={AsyncInventoryReport} />
+            <MainLayoutRoute path="**/report/showOnOrderReport" component={AsyncOnOrderReport} />
+            <MainLayoutRoute path="**/report/showPaginatedPackingListReport" component={AsyncPaginatedPackingListReport} />
+            <MainLayoutRoute path="**/report/showRequestDetailReport" component={AsyncRequestDetailReport} />
             <MainLayoutRoute path="**/inventory/reorderReport" component={AsyncReorderReport} />
             <MainLayoutRoute path="**/inventory/browse" component={AsyncInventoryBrowse} />
             <MainLayoutRoute path="**/inventory/createTransaction" component={AsyncCreateTransaction} />
@@ -1075,6 +1126,9 @@ const Router = () => {
             <MainLayoutRoute path="**/order/orderItemDetails" component={OrderItemDetailsList} />
             <MainLayoutRoute path="**/order/show/:orderId" component={AsyncOrderShow} />
             <MainLayoutRoute path="**/order/print/:orderId" component={AsyncOrderPrint} />
+            <MainLayoutRoute path="**/deliveryNote/printOutboundReturn/:id?" component={AsyncOutboundReturnPrint} />
+            <MainLayoutRoute path="**/goodsReceiptNote/print/:id?" component={AsyncGoodsReceiptNotePrint} />
+            <MainLayoutRoute path="**/receiveOrderWorkflow/receiveOrder/:orderId?" component={AsyncReceiveOrderPage} />
             <MainLayoutRoute path="**/orderAdjustmentType/list" component={AsyncOrderAdjustmentTypeList} />
             <MainLayoutRoute path="**/orderAdjustmentType/create" component={AsyncOrderAdjustmentTypeForm} />
             <MainLayoutRoute path="**/orderAdjustmentType/edit/:orderAdjustmentTypeId" component={AsyncOrderAdjustmentTypeForm} />
