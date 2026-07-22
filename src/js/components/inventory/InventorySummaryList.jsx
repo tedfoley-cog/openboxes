@@ -8,7 +8,9 @@ import { useSelector } from 'react-redux';
 import { INVENTORY_SUMMARY } from 'api/urls';
 import DataTable from 'components/DataTable';
 import { INVENTORY_ITEM_URL, INVENTORY_URL } from 'consts/applicationUrls';
+import RoleType from 'consts/roleType';
 import useTranslation from 'hooks/useTranslation';
+import useUserHasPermissions from 'hooks/useUserHasPermissions';
 import apiClient from 'utils/apiClient';
 import { fetchProductsCategories } from 'utils/option-utils';
 import Select from 'utils/Select';
@@ -26,13 +28,12 @@ const InventorySummaryList = ({ lowStock }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { currentLocation, currentLocationRoles, translate } = useSelector((state) => ({
+  const { currentLocation, translate } = useSelector((state) => ({
     currentLocation: state.session.currentLocation,
-    currentLocationRoles: state.session.currentLocationRoles,
     translate: translateWithDefaultMessage(getTranslate(state.localize)),
   }));
 
-  const hasRoleFinance = currentLocationRoles?.includes('ROLE_FINANCE');
+  const hasRoleFinance = useUserHasPermissions({ minRequiredRole: RoleType.ROLE_FINANCE });
 
   const fetchData = async (categoriesToFilter = selectedCategories) => {
     setLoading(true);

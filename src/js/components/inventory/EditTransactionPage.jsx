@@ -53,6 +53,13 @@ const EditTransactionPage = () => {
   };
 
   const save = async () => {
+    if (transaction.transactionEntries.some((entry) => entry.quantity == null)) {
+      setMessage({
+        type: 'danger',
+        text: translate('react.inventory.transaction.quantityRequired.label', 'Please enter a quantity for every line'),
+      });
+      return;
+    }
     setSaving(true);
     setMessage(null);
     try {
