@@ -65,14 +65,17 @@ class CategoryApiController {
         render category.toJson() as JSON
     }
 
+    // Fields the category create/edit screens are allowed to bind
+    static final List<String> BINDABLE_PROPERTIES =
+            ["name", "description", "sortOrder", "isRoot", "parentCategory"]
+
     def save() {
         log.debug "Save category " + params
         def category = Category.get(params.id)
         if (!category) {
-            category = new Category(request.JSON)
-        } else {
-            category.properties = request.JSON ?: params
+            category = new Category()
         }
+        bindData(category, request.JSON ?: params, [include: BINDABLE_PROPERTIES])
 
         if (!category.hasErrors() && category.save()) {
             render category.toJson() as JSON
