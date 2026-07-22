@@ -640,7 +640,7 @@ class ReportController {
             def latestInventoryDate = row?.product?.latestInventoryDate(location.id) ?: row?.product.earliestReceivingDate(location.id)
             Map dataRow = [
                             "Product code"        : StringEscapeUtils.escapeCsv(row?.product?.productCode),
-                            "Product name"        : product.displayNameWithLocaleCode,
+                            "Product name"        : product?.displayNameWithLocaleCode,
                             "Lot number"          : StringEscapeUtils.escapeCsv(row?.inventoryItem.lotNumber ?: ""),
                             "Expiration date"     : row?.inventoryItem.expirationDate ? row?.inventoryItem.expirationDate.format(Constants.EXPIRATION_DATE_FORMAT) : "",
                             "Bin location"        : StringEscapeUtils.escapeCsv(row?.binLocation?.name ?: ""),
@@ -649,7 +649,7 @@ class ReportController {
                             "Comment"             : "",
                             "Product family"      : product?.productFamily ?: "",
                             "Category"            : StringEscapeUtils.escapeCsv(product?.category?.name ?: ""),
-                            "Formularies"         : product.productCatalogs.join(", ") ?: "",
+                            "Formularies"         : product?.productCatalogs?.join(", ") ?: "",
                             "ABC Classification"  : StringEscapeUtils.escapeCsv(row?.product.getAbcClassification(location.id) ?: ""),
                             "Status"              : g.message(code: "binLocationSummary.${row?.status}.label"),
                             "Last Inventory Date" : latestInventoryDate ? latestInventoryDate.format(Constants.EXPIRATION_DATE_FORMAT) : "",

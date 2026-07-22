@@ -92,7 +92,7 @@ class ReportApiController {
                     productName      : row?.product.name ?: "",
                     productFamily    : product?.productFamily?.toString() ?: "",
                     category         : StringEscapeUtils.escapeCsv(product?.category?.name ?: ""),
-                    formularies      : product.productCatalogs.join(", ") ?: "",
+                    formularies      : product?.productCatalogs?.join(", ") ?: "",
                     lotNumber        : StringEscapeUtils.escapeCsv(row?.inventoryItem.lotNumber ?: ""),
                     expirationDate   : row?.inventoryItem.expirationDate ? row?.inventoryItem.expirationDate.format(Constants.EXPIRATION_DATE_FORMAT) : "",
                     abcClassification: StringEscapeUtils.escapeCsv(row?.product.getAbcClassification(location.id) ?: ""),

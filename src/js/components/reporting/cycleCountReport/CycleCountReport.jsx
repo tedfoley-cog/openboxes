@@ -6,6 +6,7 @@ import { hideSpinner, showSpinner } from 'actions';
 import reportApi from 'api/services/ReportApi';
 import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
+import ReportPagination from 'components/reporting/ReportPagination';
 import { REPORT_URL } from 'consts/applicationUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
@@ -14,12 +15,15 @@ import Translate from 'utils/Translate';
 import HeaderWrapper from 'wrappers/HeaderWrapper';
 import PageWrapper from 'wrappers/PageWrapper';
 
+const PAGE_SIZE = 25;
+
 const CycleCountReport = () => {
   useTranslation('cycleCountReport', 'default');
 
   const dispatch = useDispatch();
   const translate = useTranslate();
   const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +31,7 @@ const CycleCountReport = () => {
       try {
         const response = await reportApi.getCycleCountReport();
         setRows(response?.data?.data ?? []);
+        setPage(0);
       } catch (error) {
         notification(NotificationType.ERROR)({
           message: translate('react.cycleCountReport.fetchError.label', 'Unable to load cycle count report'),
@@ -80,7 +85,7 @@ const CycleCountReport = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, index) => (
+              {rows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((row, index) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <tr key={`${row.productCode}-${row.lotNumber}-${row.binLocation}-${index}`}>
                   <td>{row.productCode}</td>
@@ -106,6 +111,12 @@ const CycleCountReport = () => {
               )}
             </tbody>
           </table>
+          <ReportPagination
+            page={page}
+            pageSize={PAGE_SIZE}
+            total={rows.length}
+            onPageChange={setPage}
+          />
         </Section>
       </div>
     </PageWrapper>

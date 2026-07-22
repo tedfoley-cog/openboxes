@@ -8,6 +8,7 @@ import locationApi from 'api/services/LocationApi';
 import reportApi from 'api/services/ReportApi';
 import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
+import ReportPagination from 'components/reporting/ReportPagination';
 import { INVENTORY_ITEM_URL, REPORT_URL } from 'consts/applicationUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
@@ -17,6 +18,7 @@ import HeaderWrapper from 'wrappers/HeaderWrapper';
 import PageWrapper from 'wrappers/PageWrapper';
 
 const STATUSES = ['inStock', 'outOfStock'];
+const PAGE_SIZE = 100;
 
 const BinLocationReport = () => {
   useTranslation('binLocationReport', 'default');
@@ -32,6 +34,7 @@ const BinLocationReport = () => {
   const [status, setStatus] = useState(search.get('status') || '');
   const [rows, setRows] = useState([]);
   const [fetched, setFetched] = useState(false);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     locationApi.getLocations()
@@ -44,6 +47,7 @@ const BinLocationReport = () => {
     try {
       const response = await reportApi.getBinLocationReport({ params });
       setRows(response?.data?.data ?? []);
+      setPage(0);
       setFetched(true);
     } catch (error) {
       notification(NotificationType.ERROR)({
@@ -55,10 +59,16 @@ const BinLocationReport = () => {
   };
 
   useEffect(() => {
-    if (locationId) {
+    if (!locationId && currentLocationId) {
+      setLocationId(currentLocationId);
+    }
+  }, [currentLocationId]);
+
+  useEffect(() => {
+    if (locationId && !fetched) {
       runReport({ 'location.id': locationId, status: status || undefined });
     }
-  }, []);
+  }, [locationId]);
 
   const onRunReport = (event) => {
     event.preventDefault();
@@ -173,7 +183,7 @@ const BinLocationReport = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, index) => (
+              {rows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((row, index) => (
                 <tr
                   // eslint-disable-next-line react/no-array-index-key
                   key={`${row.id}-${row.binLocation}-${row.lotNumber}-${index}`}
@@ -217,6 +227,12 @@ const BinLocationReport = () => {
               )}
             </tbody>
           </table>
+          <ReportPagination
+            page={page}
+            pageSize={PAGE_SIZE}
+            total={rows.length}
+            onPageChange={setPage}
+          />
         </Section>
       </div>
     </PageWrapper>

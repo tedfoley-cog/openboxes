@@ -67,8 +67,9 @@ test('report/showBinLocationReport renders the React inventory details report', 
   await captureStep(page, FLOW, 'report');
 
   if (data.length) {
+    // table paginates 100 rows per page (matching the legacy DataTable page size)
     const rows = page.locator('[data-testid="bin-location-report-table"] tbody tr');
-    await expect(rows).toHaveCount(data.length);
+    await expect(rows).toHaveCount(Math.min(data.length, 100));
     await expect(rows.first()).toContainText(data[0].productCode);
   }
 
@@ -99,8 +100,9 @@ test('report/showCycleCountReport renders the React cycle count report', async (
   await captureStep(page, FLOW, 'report');
 
   if (data.length) {
+    // table paginates 25 rows per page (matching the legacy DataTable page size)
     const rows = page.locator('[data-testid="cycle-count-report-table"] tbody tr');
-    await expect(rows).toHaveCount(data.length);
+    await expect(rows).toHaveCount(Math.min(data.length, 25));
     await expect(rows.first()).toContainText(data[0].productCode);
   }
 });
