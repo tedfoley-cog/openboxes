@@ -45,16 +45,22 @@ const CreateShipmentDetails = () => {
   }, []);
 
   useEffect(() => {
+    if (shipmentId) {
+      return;
+    }
+    const type = new URLSearchParams(search).get('type');
+    // mirror the legacy default: outbound starts at the current warehouse,
+    // inbound is destined for the current warehouse
+    if (type === 'OUTGOING' && currentLocation?.id) {
+      setOrigin({ id: currentLocation.id, name: currentLocation.name });
+    }
+    if (type === 'INCOMING' && currentLocation?.id) {
+      setDestination({ id: currentLocation.id, name: currentLocation.name });
+    }
+  }, [shipmentId, currentLocation?.id, search]);
+
+  useEffect(() => {
     if (!shipmentId) {
-      const type = new URLSearchParams(search).get('type');
-      // mirror the legacy default: outbound starts at the current warehouse,
-      // inbound is destined for the current warehouse
-      if (type === 'OUTGOING' && currentLocation?.id) {
-        setOrigin({ id: currentLocation.id, name: currentLocation.name });
-      }
-      if (type === 'INCOMING' && currentLocation?.id) {
-        setDestination({ id: currentLocation.id, name: currentLocation.name });
-      }
       return;
     }
     shipmentApi.getShipment(shipmentId)
@@ -72,7 +78,7 @@ const CreateShipmentDetails = () => {
         setError(err?.response?.data?.errorMessage
           || translate('react.default.errors.error.label', 'An error occurred'));
       });
-  }, [shipmentId, currentLocation?.id]);
+  }, [shipmentId]);
 
   const save = async (nextStep) => {
     setSaving(true);

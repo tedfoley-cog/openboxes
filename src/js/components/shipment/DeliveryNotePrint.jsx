@@ -89,7 +89,10 @@ const DeliveryNotePrint = () => {
       <tbody>
         {!items.length && (
           <tr>
-            <td colSpan="13" className="text-center text-muted">
+            <td
+              colSpan={11 + (data.hasPackLevel1 ? 1 : 0) + (data.hasPackLevel2 ? 1 : 0)}
+              className="text-center text-muted"
+            >
               {translate('react.default.none.label', 'None')}
             </td>
           </tr>

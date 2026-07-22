@@ -350,6 +350,8 @@ paths:
           $ref: '#/components/responses/ItemData'
         '400':
           $ref: '#/components/responses/ValidationError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -366,6 +368,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ItemData'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -450,6 +454,8 @@ paths:
                         type: array
                         items:
                           type: string
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -463,18 +469,7 @@ paths:
         '200':
           $ref: '#/components/responses/ShipmentIdData'
         '403':
-          description: Only superusers can clear the picklist.
-          content:
-            application/json:
-              schema:
-                type: object
-                required: [errorCode, errorMessage]
-                properties:
-                  errorCode:
-                    type: integer
-                    enum: [403]
-                  errorMessage:
-                    type: string
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -511,6 +506,8 @@ paths:
           $ref: '#/components/responses/WizardDetails'
         '400':
           $ref: '#/components/responses/ValidationError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -537,6 +534,19 @@ components:
       description: Shipment item id.
 
   responses:
+    Forbidden:
+      description: The user does not have the role required for this action.
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [errorCode, errorMessage]
+            properties:
+              errorCode:
+                type: integer
+                enum: [403]
+              errorMessage:
+                type: string
     ControllerNotFound:
       description: >
         Unknown shipment (or container/item) id. Rendered directly by the

@@ -97,10 +97,10 @@ class ShipmentApiController {
                 shipment.destination = jsonObject.destinationId ? Location.get(jsonObject.destinationId) : null
             }
             if (jsonObject.containsKey("expectedShippingDate")) {
-                shipment.expectedShippingDate = parseDate(jsonObject.expectedShippingDate as String)
+                shipment.expectedShippingDate = parseDate(jsonObject.expectedShippingDate)
             }
             if (jsonObject.containsKey("expectedDeliveryDate")) {
-                shipment.expectedDeliveryDate = parseDate(jsonObject.expectedDeliveryDate as String)
+                shipment.expectedDeliveryDate = parseDate(jsonObject.expectedDeliveryDate)
             }
             if (shipment.hasErrors() || !shipment.validate()) {
                 renderValidationErrors(shipment)
@@ -358,6 +358,9 @@ class ShipmentApiController {
      * inventory item and quantity of a picklist row.
      */
     def pickItem() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         ShipmentItem shipmentItem = ShipmentItem.get(params.itemId)
         if (!shipment || !shipmentItem || shipmentItem.shipment?.id != shipment.id) {
@@ -367,13 +370,13 @@ class ShipmentApiController {
         def jsonObject = request.JSON
         try {
             InventoryItem inventoryItem = jsonObject.inventoryItemId ?
-                    InventoryItem.load(jsonObject.inventoryItemId) : null
+                    InventoryItem.get(jsonObject.inventoryItemId) : null
             if (!inventoryItem) {
                 renderError("Inventory item is a required field")
                 return
             }
             shipmentItem.inventoryItem = inventoryItem
-            shipmentItem.binLocation = jsonObject.binLocationId ? Location.load(jsonObject.binLocationId) : null
+            shipmentItem.binLocation = jsonObject.binLocationId ? Location.get(jsonObject.binLocationId) : null
             shipmentItem.quantity = jsonObject.quantity as Integer
             shipmentService.validateShipmentItem(shipmentItem)
             shipmentItem.save(flush: true)
@@ -394,6 +397,9 @@ class ShipmentApiController {
      * with quantity zero so a second bin/lot can be picked.
      */
     def splitItem() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         ShipmentItem shipmentItem = ShipmentItem.get(params.itemId)
         if (!shipment || !shipmentItem || shipmentItem.shipment?.id != shipment.id) {
@@ -412,6 +418,9 @@ class ShipmentApiController {
      * errors keyed by shipment item id.
      */
     def validatePicklist() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -451,6 +460,9 @@ class ShipmentApiController {
      * emails to the selected recipients.
      */
     def send() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -613,8 +625,24 @@ class ShipmentApiController {
         ]
     }
 
-    private Date parseDate(String value) {
-        return value ? Date.parse("yyyy-MM-dd", value) : null
+    private Date parseDate(value) {
+        return value ? Date.parse("yyyy-MM-dd", value as String) : null
+    }
+
+    /**
+     * The legacy webflow controller required the manager role for every
+     * action (RoleInterceptor treats all *Workflow controllers as manager
+     * only). Actions whose names match the interceptor's change-action
+     * prefixes (save*, create*, delete*, add*, update*) are already covered;
+     * this guard applies the same requirement to the remaining ones.
+     */
+    private boolean requireManager() {
+        if (!userService.isUserManager(session?.user)) {
+            response.status = 403
+            render([errorCode: 403, errorMessage: "Manager role required"] as JSON)
+            return false
+        }
+        return true
     }
 
     private void renderNotFound() {
