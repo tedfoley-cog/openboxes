@@ -84,8 +84,8 @@ class InventoryLevelApiController {
             }
         }
 
-        if (params.format == "csv" && inventoryLevels) {
-            String text = inventoryLevelImportDataService.exportInventoryLevels(inventoryLevels)
+        if (params.format == "csv") {
+            String text = inventoryLevels ? inventoryLevelImportDataService.exportInventoryLevels(inventoryLevels) : ""
             response.contentType = "text/csv"
             response.setHeader("Content-disposition", "attachment; filename=\"inventoryLevels.csv\"")
             render(contentType: "text/csv", text: text)
@@ -140,7 +140,14 @@ class InventoryLevelApiController {
         InventoryLevel inventoryLevel = new InventoryLevel()
         inventoryLevel.inventory = location.inventory
         inventoryLevel.product = product
-        bindProperties(inventoryLevel, json)
+        try {
+            bindProperties(inventoryLevel, json)
+        }
+        catch (IllegalArgumentException e) {
+            response.status = 400
+            render([errorMessage: e.message] as JSON)
+            return
+        }
 
         if (!inventoryLevel.hasErrors() && inventoryLevel.save(flush: true)) {
             render([data: toDetailJson(inventoryLevel)] as JSON)
@@ -168,7 +175,14 @@ class InventoryLevelApiController {
             render([errorMessage: "Another user has updated this inventory level while you were editing"] as JSON)
             return
         }
-        bindProperties(inventoryLevel, json)
+        try {
+            bindProperties(inventoryLevel, json)
+        }
+        catch (IllegalArgumentException e) {
+            response.status = 400
+            render([errorMessage: e.message] as JSON)
+            return
+        }
 
         if (!inventoryLevel.hasErrors() && inventoryLevel.save(flush: true)) {
             render([data: toDetailJson(inventoryLevel)] as JSON)
@@ -198,7 +212,11 @@ class InventoryLevelApiController {
 
     private void bindProperties(InventoryLevel inventoryLevel, def json) {
         if (json?.containsKey("status")) {
-            inventoryLevel.status = json.status ? InventoryStatus.values().find { it.name() == json.status } : null
+            InventoryStatus status = json.status ? InventoryStatus.values().find { it.name() == json.status } : null
+            if (json.status && !status) {
+                throw new IllegalArgumentException("Invalid inventory status '${json.status}'")
+            }
+            inventoryLevel.status = status
         }
         if (json?.containsKey("internalLocation")) {
             inventoryLevel.internalLocation = json.internalLocation?.id ? Location.get(json.internalLocation.id) : null
