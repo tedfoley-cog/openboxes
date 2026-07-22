@@ -40,6 +40,8 @@ const InventorySnapshotList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [reloadCounter, setReloadCounter] = useState(0);
 
   const { currentLocation, translate } = useSelector((state) => ({
     currentLocation: state.session.currentLocation,
@@ -54,10 +56,29 @@ const InventorySnapshotList = () => {
     setError(null);
     apiClient.get(INVENTORY_SNAPSHOT_API, { params: { date, 'location.id': currentLocation.id } })
       .then((response) => setData(response.data.data))
-      .catch((err) => setError(err.response?.data?.errorMessage
-        || translate('react.default.errors.error.label', 'An error occurred')))
+      .catch((err) => {
+        setData([]);
+        setError(err.response?.data?.errorMessage
+          || translate('react.default.errors.error.label', 'An error occurred'));
+      })
       .finally(() => setLoading(false));
-  }, [date, currentLocation?.id]);
+  }, [date, currentLocation?.id, reloadCounter]);
+
+  const triggerSnapshotRefresh = async () => {
+    setRefreshing(true);
+    setError(null);
+    try {
+      await apiClient.post(`${INVENTORY_SNAPSHOT_URL.base}/update`, null, {
+        params: { date, 'location.id': currentLocation?.id },
+      });
+      setReloadCounter((counter) => counter + 1);
+    } catch (err) {
+      setError(err.response?.data?.message
+        || translate('react.default.errors.error.label', 'An error occurred'));
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const columns = useMemo(() => [
     {
@@ -106,9 +127,20 @@ const InventorySnapshotList = () => {
           {currentLocation?.name && ` — ${currentLocation.name}`}
           {` — ${date}`}
         </h5>
-        <a href={downloadUrl} className="btn btn-outline-secondary btn-sm" data-testid="snapshot-download-button">
-          <Translate id="react.default.button.download.label" defaultMessage="Download" />
-        </a>
+        <div>
+          <button
+            type="button"
+            className="btn btn-outline-secondary btn-sm mr-2"
+            disabled={refreshing}
+            onClick={triggerSnapshotRefresh}
+            data-testid="snapshot-refresh-button"
+          >
+            <Translate id="react.inventorySnapshot.refresh.label" defaultMessage="Refresh snapshot" />
+          </button>
+          <a href={downloadUrl} className="btn btn-outline-secondary btn-sm" data-testid="snapshot-download-button">
+            <Translate id="react.default.button.download.label" defaultMessage="Download" />
+          </a>
+        </div>
       </div>
       {error && (
         <div className="alert alert-danger mx-3 mt-3" role="alert">{error}</div>

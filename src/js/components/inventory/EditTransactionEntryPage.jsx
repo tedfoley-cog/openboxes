@@ -21,7 +21,7 @@ const EditTransactionEntryPage = () => {
 
   const [entry, setEntry] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [notFound, setNotFound] = useState(false);
+  const [loadError, setLoadError] = useState(null);
   const [message, setMessage] = useState(null);
 
   const { translate } = useSelector((state) => ({
@@ -31,7 +31,7 @@ const EditTransactionEntryPage = () => {
   useEffect(() => {
     apiClient.get(TRANSACTION_ENTRY_API_BY_ID(id))
       .then((response) => setEntry(response.data.data))
-      .catch(() => setNotFound(true));
+      .catch((error) => setLoadError(error.response?.status === 404 ? 'notFound' : 'error'));
   }, [id]);
 
   const save = async () => {
@@ -84,11 +84,17 @@ const EditTransactionEntryPage = () => {
     return (
       <PageWrapper className="inventory-list-page">
         <div className="p-3">
-          {notFound ? (
+          {loadError === 'notFound' && (
             <div className="alert alert-danger" role="alert">
               <Translate id="react.inventory.transactionEntry.notFound.label" defaultMessage="Transaction entry not found" />
             </div>
-          ) : (
+          )}
+          {loadError === 'error' && (
+            <div className="alert alert-danger" role="alert">
+              <Translate id="react.default.errors.error.label" defaultMessage="An error occurred" />
+            </div>
+          )}
+          {!loadError && (
             <Translate id="react.default.loading.label" defaultMessage="Loading..." />
           )}
         </div>
