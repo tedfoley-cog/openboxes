@@ -54,10 +54,11 @@ class ShipmentItemController {
     }
 
     // The pick/split GSPs stay reachable for the legacy createShipment
-    // webflow, whose pickShipmentItems screen still opens them as dialogs
-    // mid-flow (with an execution key); direct visits get the React screen.
+    // webflow, whose pickShipmentItems screen loads them mid-flow as an
+    // inline editor panel (an AJAX load without an execution key) and as
+    // dialogs (with an execution key); direct visits get the React screen.
     def pick() {
-        if (!params.execution) {
+        if (!params.execution && !request.xhr) {
             render(view: "/common/react", params: params)
             return
         }
@@ -77,7 +78,7 @@ class ShipmentItemController {
 
     def split() {
         log.info "Split " + params
-        if (!params.execution) {
+        if (!params.execution && !request.xhr) {
             render(view: "/common/react", params: params)
             return
         }
