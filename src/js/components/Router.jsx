@@ -622,8 +622,8 @@ const Router = () => {
             <MainLayoutRoute path="**/order/addDocument/:orderId" component={AsyncOrderAddDocument} />
             <MainLayoutRoute path="**/order/addAdjustment/:orderId" component={AsyncOrderEditAdjustment} />
             <MainLayoutRoute path="**/order/editAdjustment/:adjustmentId" component={AsyncOrderEditAdjustment} />
-            <MainLayoutRoute path="**/order/list" component={AsyncOrderList} />
             <MainLayoutRoute path="**/order/listOrderItems" component={AsyncOrderPendingItemsList} />
+            <MainLayoutRoute path="**/order/list" component={AsyncOrderList} />
             <MainLayoutRoute path="**/order/orderSummaryList" component={AsyncOrderSummaryList} />
             <MainLayoutRoute path="**/order/orderItemSummary" component={AsyncOrderItemSummaryList} />
             <MainLayoutRoute path="**/order/orderItemDetails" component={OrderItemDetailsList} />

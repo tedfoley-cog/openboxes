@@ -28,7 +28,9 @@ const OrderList = () => {
 
   const [statusOptions, setStatusOptions] = useState([]);
   const [q, setQ] = useState(initialParams.q || '');
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState(initialParams.status
+    ? { id: initialParams.status, value: initialParams.status, label: initialParams.status }
+    : null);
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [orderedBy, setOrderedBy] = useState(null);
@@ -64,15 +66,14 @@ const OrderList = () => {
   const buildParams = useCallback((extraParams = {}) => ({
     q: q || null,
     orderType: orderType || null,
-    status: status?.id || initialParams.status || null,
+    status: status?.id || null,
     origin: origin?.id || null,
     destination: destination?.id || undefined,
     orderedBy: orderedBy?.id || null,
     statusStartDate: statusStartDate || null,
     statusEndDate: statusEndDate || null,
     ...extraParams,
-  }), [q, orderType, status, origin, destination, orderedBy, statusStartDate, statusEndDate,
-    initialParams.status]);
+  }), [q, orderType, status, origin, destination, orderedBy, statusStartDate, statusEndDate]);
 
   const fetchData = useCallback(async (page = pageRef.current) => {
     pageRef.current = page;
@@ -95,7 +96,13 @@ const OrderList = () => {
 
   useEffect(() => {
     apiClient.get('/api/orderStatusOptions')
-      .then((response) => setStatusOptions(response.data.data));
+      .then((response) => {
+        setStatusOptions(response.data.data);
+        const preselected = response.data.data.find((it) => it.id === initialParams.status);
+        if (preselected) {
+          setStatus(preselected);
+        }
+      });
   }, []);
 
   useEffect(() => {
