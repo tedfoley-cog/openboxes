@@ -151,14 +151,14 @@ class TagApiController {
                 id         : tag.id,
                 tag        : tag.tag,
                 isActive   : tag.isActive,
-                createdBy  : tag.createdBy?.toString(),
-                updatedBy  : tag.updatedBy?.toString(),
+                createdBy  : tag.createdBy ? [id: tag.createdBy.id, name: tag.createdBy.toString()] : null,
+                updatedBy  : tag.updatedBy ? [id: tag.updatedBy.id, name: tag.updatedBy.toString()] : null,
                 version    : tag.version,
                 dateCreated: tag.dateCreated,
                 lastUpdated: tag.lastUpdated,
                 products   : (tag.products ?: []).collect {
                     [id: it.id, productCode: it.productCode, name: it.name]
-                }.sort { it.name },
+                }.sort { it.productCode ?: '' },
         ]
     }
 }

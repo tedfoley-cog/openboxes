@@ -255,11 +255,9 @@ components:
         isActive:
           type: boolean
         createdBy:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/UserSummary'
         updatedBy:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/UserSummary'
         version:
           type: integer
         dateCreated:
@@ -279,6 +277,14 @@ components:
                 type: string
               name:
                 type: string
+    UserSummary:
+      type: object
+      nullable: true
+      properties:
+        id:
+          $ref: '../components/common.yaml#/components/schemas/Id'
+        name:
+          type: string
     TagResponse:
       type: object
       required: [data]

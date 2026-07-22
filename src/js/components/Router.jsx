@@ -223,6 +223,21 @@ const AsyncTagEdit = Loadable({
   loading: Loading,
 });
 
+const AsyncTagShow = Loadable({
+  loader: () => import('components/tag/TagShow'),
+  loading: Loading,
+});
+
+const AsyncUnitOfMeasureConversionList = Loadable({
+  loader: () => import('components/unitOfMeasureConversion/UnitOfMeasureConversionList'),
+  loading: Loading,
+});
+
+const AsyncUnitOfMeasureConversionForm = Loadable({
+  loader: () => import('components/unitOfMeasureConversion/UnitOfMeasureConversionForm'),
+  loading: Loading,
+});
+
 const AsyncProductSupplierCreatePage = Loadable({
   loader: () => import('components/productSupplier/create/ProductSupplierForm'),
   loading: Loading,
@@ -388,6 +403,31 @@ const AsyncPartyRoleForm = Loadable({
   loading: Loading,
 });
 
+const AsyncPartyRoleList = Loadable({
+  loader: () => import('components/partyRole/PartyRoleList'),
+  loading: Loading,
+});
+
+const AsyncPartyRoleShow = Loadable({
+  loader: () => import('components/partyRole/PartyRoleShow'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeList = Loadable({
+  loader: () => import('components/partyType/PartyTypeList'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeForm = Loadable({
+  loader: () => import('components/partyType/PartyTypeForm'),
+  loading: Loading,
+});
+
+const AsyncPartyTypeShow = Loadable({
+  loader: () => import('components/partyType/PartyTypeShow'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -485,6 +525,21 @@ const AsyncOrderAdjustmentTypeForm = Loadable({
 
 const AsyncPaymentTermForm = Loadable({
   loader: () => import('components/paymentTerm/PaymentTermForm'),
+  loading: Loading,
+});
+
+const AsyncPaymentTermList = Loadable({
+  loader: () => import('components/paymentTerm/PaymentTermList'),
+  loading: Loading,
+});
+
+const AsyncPreferenceTypeList = Loadable({
+  loader: () => import('components/preferenceType/PreferenceTypeList'),
+  loading: Loading,
+});
+
+const AsyncPreferenceTypeForm = Loadable({
+  loader: () => import('components/preferenceType/PreferenceTypeForm'),
   loading: Loading,
 });
 
@@ -947,7 +1002,12 @@ const Router = () => {
             <MainLayoutRoute path="**/orderAdjustmentType/list" component={AsyncOrderAdjustmentTypeList} />
             <MainLayoutRoute path="**/orderAdjustmentType/create" component={AsyncOrderAdjustmentTypeForm} />
             <MainLayoutRoute path="**/orderAdjustmentType/edit/:orderAdjustmentTypeId" component={AsyncOrderAdjustmentTypeForm} />
+            <MainLayoutRoute path="**/paymentTerm/list" component={AsyncPaymentTermList} />
             <MainLayoutRoute path="**/paymentTerm/create" component={AsyncPaymentTermForm} />
+            <MainLayoutRoute path="**/paymentTerm/edit/:paymentTermId" component={AsyncPaymentTermForm} />
+            <MainLayoutRoute path="**/preferenceType/list" component={AsyncPreferenceTypeList} />
+            <MainLayoutRoute path="**/preferenceType/create" component={AsyncPreferenceTypeForm} />
+            <MainLayoutRoute path="**/preferenceType/edit/:preferenceTypeId" component={AsyncPreferenceTypeForm} />
             <MainLayoutRoute path="**/stockTransfer/create/:stockTransferId?" component={AsyncStockTransfer} />
             <MainLayoutRoute path="**/stockTransfer/createOutboundReturn/:outboundReturnId?" component={AsyncOutboundReturns} />
             <MainLayoutRoute path="**/stockTransfer/createInboundReturn/:inboundReturnId?" component={AsyncInboundReturns} />
@@ -1025,8 +1085,14 @@ const Router = () => {
             <MainLayoutRoute path="**/party/create" component={AsyncPartyForm} />
             <MainLayoutRoute path="**/party/edit/:partyId" component={AsyncPartyForm} />
             <MainLayoutRoute path="**/party/show/:partyId" component={AsyncPartyShow} />
+            <MainLayoutRoute path="**/partyRole/list" component={AsyncPartyRoleList} />
             <MainLayoutRoute path="**/partyRole/create" component={AsyncPartyRoleForm} />
             <MainLayoutRoute path="**/partyRole/edit/:partyRoleId" component={AsyncPartyRoleForm} />
+            <MainLayoutRoute path="**/partyRole/show/:partyRoleId" component={AsyncPartyRoleShow} />
+            <MainLayoutRoute path="**/partyType/list" component={AsyncPartyTypeList} />
+            <MainLayoutRoute path="**/partyType/create" component={AsyncPartyTypeForm} />
+            <MainLayoutRoute path="**/partyType/edit/:partyTypeId" component={AsyncPartyTypeForm} />
+            <MainLayoutRoute path="**/partyType/show/:partyTypeId" component={AsyncPartyTypeShow} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />
@@ -1063,6 +1129,10 @@ const Router = () => {
             <MainLayoutRoute path="**/tag/list" component={AsyncTagList} />
             <MainLayoutRoute path="**/tag/create" component={AsyncTagCreate} />
             <MainLayoutRoute path="**/tag/edit/:tagId" component={AsyncTagEdit} />
+            <MainLayoutRoute path="**/tag/show/:tagId" component={AsyncTagShow} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/list" component={AsyncUnitOfMeasureConversionList} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/create" component={AsyncUnitOfMeasureConversionForm} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/edit/:unitOfMeasureConversionId" component={AsyncUnitOfMeasureConversionForm} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
             <MainLayoutRoute path="**/" component={Dashboard} />
           </Switch>

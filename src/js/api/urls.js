@@ -176,12 +176,16 @@ export const SHIPMENT_TYPES = `${GENERIC_API}/shipmentType`;
 // PAYMENT TERMS
 export const PAYMENT_TERMS_OPTION = `${API}/paymentTermOptions`;
 export const PAYMENT_TERM_API = `${API}/paymentTerms`;
+export const PAYMENT_TERM_BY_ID = (id) => `${PAYMENT_TERM_API}/${id}`;
 
 // USERS
 export const USERS_OPTIONS = `${API}/users`;
 
 // PREFERENCE TYPES
 export const PREFERENCE_TYPE_OPTIONS = `${API}/preferenceTypeOptions`;
+export const PREFERENCE_TYPE_API = `${API}/preferenceTypes`;
+export const PREFERENCE_TYPE_BY_ID = (id) => `${PREFERENCE_TYPE_API}/${id}`;
+export const VALIDATION_CODE_OPTIONS = `${API}/validationCodeOptions`;
 
 // RATING TYPES
 export const RATING_TYPE_OPTIONS = `${API}/ratingTypeCodeOptions`;
@@ -241,6 +245,7 @@ export const ORGANIZATION_BY_ID = (id) => `${ORGANIZATION_API}/${id}`;
 export const ORGANIZATION_SEARCH_API = `${ORGANIZATION_API}/search`;
 export const ORGANIZATION_DETAILS = (id) => `${ORGANIZATION_API}/${id}/details`;
 export const PARTY_TYPE_OPTIONS = `${API}/partyTypeOptions`;
+export const PARTY_TYPE_CODE_OPTIONS = `${API}/partyTypeCodeOptions`;
 export const ORGANIZATION_ROLE_TYPE_OPTIONS = `${API}/organizationRoleTypeOptions`;
 
 // PARTIES
@@ -252,6 +257,8 @@ export const PARTY_ROLE_API = `${API}/partyRoles`;
 export const PARTY_ROLE_BY_ID = (id) => `${PARTY_ROLE_API}/${id}`;
 export const PARTY_ROLE_DETAILS = (id) => `${PARTY_ROLE_API}/${id}/details`;
 export const PARTY_OPTIONS = `${API}/partyOptions`;
+export const PARTY_TYPE_API = `${API}/partyTypes`;
+export const PARTY_TYPE_BY_ID = (id) => `${PARTY_TYPE_API}/${id}`;
 export const ROLE_TYPE_OPTIONS = `${API}/roleTypeOptions`;
 
 // PRODUCT SUPPLIER
@@ -264,6 +271,9 @@ export const PRODUCT_SUPPLIER_DETAILS = (id) => `${PRODUCT_SUPPLIER_API}/${id}/d
 
 // UNIT OF MEASURE
 export const UNIT_OF_MEASURE_API = `${API}/unitOfMeasures`;
+export const UNIT_OF_MEASURE_GENERIC_LIST = `${GENERIC_API}/unitOfMeasure/`;
+export const UNIT_OF_MEASURE_CONVERSION_API = `${API}/unitOfMeasureConversions`;
+export const UNIT_OF_MEASURE_CONVERSION_BY_ID = (id) => `${UNIT_OF_MEASURE_CONVERSION_API}/${id}`;
 export const UNIT_OF_MEASURE_OPTIONS = `${UNIT_OF_MEASURE_API}/options`;
 // Currencies don't use url in plural form, do not change it to UNIT_OF_MEASURE_API!
 export const CURRENCIES_OPTIONS = `${API}/unitOfMeasure/currencies`;

@@ -38,15 +38,8 @@ class TagController {
         render(view: "/common/react", params: params)
     }
 
-    // Still a GSP screen (migrates in Batch 13)
     def show() {
-        def tagInstance = Tag.get(params.id)
-        if (!tagInstance) {
-            flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'tag.label', default: 'Tag'), params.id])}"
-            redirect(action: "list")
-        } else {
-            [tagInstance: tagInstance]
-        }
+        render(view: "/common/react", params: params)
     }
 
     // Kept for the legacy show screen's delete button

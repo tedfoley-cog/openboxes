@@ -158,6 +158,13 @@ const PAYMENT_TERM_URL = {
   edit: (id) => `${PAYMENT_TERM_URL.base}/edit/${id}`,
 };
 
+const PREFERENCE_TYPE_URL = {
+  base: `${CONTEXT_PATH}/preferenceType`,
+  list: () => `${PREFERENCE_TYPE_URL.base}/list`,
+  create: () => `${PREFERENCE_TYPE_URL.base}/create`,
+  edit: (id) => `${PREFERENCE_TYPE_URL.base}/edit/${id}`,
+};
+
 const PURCHASE_ORDER_URL = {
   base: `${CONTEXT_PATH}/purchaseOrder`,
   create: () => `${PURCHASE_ORDER_URL.base}/create`,
@@ -338,6 +345,9 @@ const PARTY_ROLE_URL = {
 
 const PARTY_TYPE_URL = {
   base: `${CONTEXT_PATH}/partyType`,
+  list: () => `${PARTY_TYPE_URL.base}/list`,
+  create: () => `${PARTY_TYPE_URL.base}/create`,
+  edit: (id) => `${PARTY_TYPE_URL.base}/edit/${id}`,
   show: (id) => `${PARTY_TYPE_URL.base}/show/${id}`,
 };
 
@@ -379,6 +389,18 @@ const TAG_URL = {
   create: () => `${TAG_URL.base}/create`,
   edit: (id) => `${TAG_URL.base}/edit/${id}`,
   show: (id) => `${TAG_URL.base}/show/${id}`,
+};
+
+const UNIT_OF_MEASURE_CONVERSION_URL = {
+  base: `${CONTEXT_PATH}/unitOfMeasureConversion`,
+  list: () => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/list`,
+  create: () => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/create`,
+  edit: (id) => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/edit/${id}`,
+};
+
+const USER_URL = {
+  base: `${CONTEXT_PATH}/user`,
+  show: (id) => `${USER_URL.base}/show/${id}`,
 };
 
 const REQUISITION_URL = {
@@ -482,6 +504,7 @@ export {
   PARTY_URL,
   PAYMENT_TERM_URL,
   PICKLIST_URL,
+  PREFERENCE_TYPE_URL,
   PRODUCT_ASSOCIATION_URL,
   PRODUCT_CATALOG_URL,
   PRODUCT_CONFIGURATION_URL,
@@ -500,4 +523,6 @@ export {
   STOCKLIST_URL,
   TAG_URL,
   TRANSACTION_ENTRY_URL,
+  UNIT_OF_MEASURE_CONVERSION_URL,
+  USER_URL,
 };
