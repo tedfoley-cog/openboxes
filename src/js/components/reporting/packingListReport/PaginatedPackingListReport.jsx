@@ -91,6 +91,7 @@ const PaginatedPackingListReport = () => {
             </label>
             <Select
               id="shipment-select"
+              dataTestId="shipment-select"
               options={shipments}
               value={shipment}
               onChange={(value) => setShipment(value)}

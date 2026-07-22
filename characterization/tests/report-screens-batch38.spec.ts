@@ -20,7 +20,7 @@ async function skipUnlessBatch38(page: Page): Promise<void> {
 
 /** Picks an option from the legacy-styled react-select (utils/Select). */
 async function pickOption(page: Page, selectId: string, optionText: string): Promise<void> {
-  await page.click(`#${selectId}-container`);
+  await page.click(`[data-testid="${selectId}"]`);
   await page
     .locator(`[data-testid="custom-select-dropdown-menu"] [role="listitem"]:has-text("${optionText}")`)
     .first()
@@ -70,7 +70,7 @@ test('report/showRequestDetailReport renders the React request detail report', a
 
   await page.goto(url('/report/showRequestDetailReport'));
   // The fulfilling location defaults to the current location once options load
-  await expect(page.locator('#origin-select-container')).toContainText(LOCATIONS.mainWarehouse.name);
+  await expect(page.locator('[data-testid="origin-select"]')).toContainText(LOCATIONS.mainWarehouse.name);
   await page.fill('#start-date-input', '2000-01-01');
   await page.fill('#end-date-input', '2050-01-01');
   await page.click('[data-testid="run-report-button"]');
@@ -90,7 +90,7 @@ test('report/showInventoryReport renders the React inventory report', async ({ p
   await skipUnlessBatch38(page);
 
   const apiRes = await page.request.get(
-    url(`/json/getQuantityOnHandByProductGroup?location.id=${LOCATIONS.mainWarehouse.id}&status[]=IN_STOCK,STOCK_OUT`),
+    url(`/json/getQuantityOnHandByProductGroup?location.id=${LOCATIONS.mainWarehouse.id}&status%5B%5D=IN_STOCK,STOCK_OUT`),
   );
   const apiRows = (await apiRes.json()).aaData;
 

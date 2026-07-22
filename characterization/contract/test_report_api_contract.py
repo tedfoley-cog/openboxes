@@ -8,11 +8,7 @@ spec = Spec("report-api.yaml")
 
 
 def _location_id(client, name="Main Warehouse"):
-    resp = client.get("/api/locations", params={"name": name})
-    resp.raise_for_status()
-    matches = [loc for loc in resp.json()["data"] if loc["name"] == name]
-    assert matches, f"seeded location {name!r} not found"
-    return matches[0]["id"]
+    return client.location_id(name)
 
 
 def test_on_order_summary(client):

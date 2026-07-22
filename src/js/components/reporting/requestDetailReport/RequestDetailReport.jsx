@@ -190,6 +190,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="origin-select"
+                dataTestId="origin-select"
                 options={origins}
                 value={selectedOrigins}
                 onChange={(value) => setSelectedOrigins(value || [])}
@@ -226,6 +227,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="product-select"
+                dataTestId="product-select"
                 async
                 loadOptions={debounceProductsFetch(500, 3, currentLocation?.id)}
                 cache={false}
@@ -240,6 +242,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="category-select"
+                dataTestId="category-select"
                 options={categories}
                 value={category}
                 onChange={(value) => setCategory(value)}
@@ -266,6 +269,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="catalogs-select"
+                dataTestId="catalogs-select"
                 options={catalogs}
                 value={selectedCatalogs}
                 onChange={(value) => setSelectedCatalogs(value || [])}
@@ -278,6 +282,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="tags-select"
+                dataTestId="tags-select"
                 options={tags}
                 value={selectedTags}
                 onChange={(value) => setSelectedTags(value || [])}
@@ -290,6 +295,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="reason-code-select"
+                dataTestId="reason-code-select"
                 options={reasonCodes}
                 value={reasonCode}
                 onChange={(value) => setReasonCode(value)}
@@ -301,6 +307,7 @@ const RequestDetailReport = () => {
               </label>
               <Select
                 id="destination-select"
+                dataTestId="destination-select"
                 options={locations}
                 value={destination}
                 onChange={(value) => setDestination(value)}

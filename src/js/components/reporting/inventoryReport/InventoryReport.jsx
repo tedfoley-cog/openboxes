@@ -75,12 +75,12 @@ const InventoryReport = () => {
   const runReport = async () => {
     dispatch(showSpinner());
     try {
-      const response = await apiClient.get(JSON_QOH_BY_PRODUCT_GROUP, {
-        params: {
-          'location.id': currentLocation?.id,
-          'status[]': selectedStatuses.join(','),
-        },
+      // URLSearchParams encodes the brackets in "status[]" (Tomcat rejects them raw)
+      const searchParams = new URLSearchParams({
+        'location.id': currentLocation?.id,
+        'status[]': selectedStatuses.join(','),
       });
+      const response = await apiClient.get(`${JSON_QOH_BY_PRODUCT_GROUP}?${searchParams.toString()}`);
       setRows(response?.data?.aaData ?? []);
     } catch (error) {
       notification(NotificationType.ERROR)({

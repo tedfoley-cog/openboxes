@@ -110,6 +110,7 @@ const InventoryByLocationReport = () => {
                 </label>
                 <Select
                   id="locations-select"
+                  dataTestId="locations-select"
                   options={locations}
                   value={selectedLocations}
                   onChange={(value) => setSelectedLocations(value || [])}
@@ -122,6 +123,7 @@ const InventoryByLocationReport = () => {
                 </label>
                 <Select
                   id="categories-select"
+                  dataTestId="categories-select"
                   options={categories}
                   value={selectedCategories}
                   onChange={(value) => setSelectedCategories(value || [])}

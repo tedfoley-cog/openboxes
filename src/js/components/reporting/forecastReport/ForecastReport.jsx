@@ -170,6 +170,7 @@ const ForecastReport = () => {
               </label>
               <Select
                 id="locations-select"
+                dataTestId="locations-select"
                 options={locations}
                 value={selectedLocations}
                 onChange={(value) => setSelectedLocations(value || [])}
@@ -182,6 +183,7 @@ const ForecastReport = () => {
               </label>
               <Select
                 id="categories-select"
+                dataTestId="categories-select"
                 options={categories}
                 value={selectedCategories}
                 onChange={(value) => setSelectedCategories(value || [])}
@@ -194,6 +196,7 @@ const ForecastReport = () => {
               </label>
               <Select
                 id="catalogs-select"
+                dataTestId="catalogs-select"
                 options={catalogs}
                 value={selectedCatalogs}
                 onChange={(value) => setSelectedCatalogs(value || [])}
@@ -206,6 +209,7 @@ const ForecastReport = () => {
               </label>
               <Select
                 id="tags-select"
+                dataTestId="tags-select"
                 options={tags}
                 value={selectedTags}
                 onChange={(value) => setSelectedTags(value || [])}
