@@ -29,6 +29,9 @@ const columnValue = (row, dimension) => {
   if (dimension === 'yearMonth') {
     return `${row.year}-${String(row.month).padStart(2, '0')}`;
   }
+  if (dimension === 'month') {
+    return String(row.month).padStart(2, '0');
+  }
   return String(row[dimension]);
 };
 
