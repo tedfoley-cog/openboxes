@@ -229,7 +229,7 @@ const StockListTemplateEdit = () => {
               ))}
               {!items.length && (
                 <tr>
-                  <td colSpan="7" className="text-center py-3">
+                  <td colSpan={isPull ? '5' : '7'} className="text-center py-3">
                     <Translate id="react.default.noResults.label" defaultMessage="No results" />
                   </td>
                 </tr>
