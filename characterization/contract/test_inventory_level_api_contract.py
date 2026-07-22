@@ -100,11 +100,15 @@ def test_search_by_location(client, batch5_endpoints):
 
 
 def test_search_by_product(client, batch5_endpoints):
+    unfiltered = client.get_json("/api/inventoryLevels")["totalCount"]
     resp = check(client, spec, "GET", CRUD_PATH_TEMPLATE,
                  path="/api/inventoryLevels",
-                 params={"q": "Ibuprofen"})
-    for row in resp.json()["data"]:
-        assert "Ibuprofen" in row["product"]["name"]
+                 params={"q": "BF640"})
+    body = resp.json()
+    assert body["data"]
+    assert body["totalCount"] < unfiltered
+    for row in body["data"]:
+        assert row["product"]["productCode"] == "BF640"
 
 
 def test_search_csv(client, batch5_endpoints):
