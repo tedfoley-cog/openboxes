@@ -280,6 +280,16 @@ const REPLENISHMENT_URL = {
   print: (id) => `${REPLENISHMENT_URL.base}/print/${id}`,
 };
 
+const REPORT_URL = {
+  base: `${CONTEXT_PATH}/report`,
+  showForecastReport: () => `${REPORT_URL.base}/showForecastReport`,
+  showOnOrderReport: () => `${REPORT_URL.base}/showOnOrderReport`,
+  exportInventoryReport: () => `${REPORT_URL.base}/exportInventoryReport`,
+  showInventoryByLocationReport: () => `${REPORT_URL.base}/showInventoryByLocationReport`,
+  showPaginatedPackingListReport: () => `${REPORT_URL.base}/showPaginatedPackingListReport`,
+  downloadShippingReport: () => `${REPORT_URL.base}/downloadShippingReport`,
+};
+
 const BUDGET_CODE_URL = {
   base: `${CONTEXT_PATH}/budgetCode`,
   list: () => `${BUDGET_CODE_URL.base}/list`,
@@ -331,6 +341,26 @@ const ORGANIZATION_URL = {
   download: (params) => stringifyUrl({
     url: `${ORGANIZATION_URL.base}/download`,
     query: params ?? {},
+  }),
+};
+
+const PERSON_URL = {
+  base: `${CONTEXT_PATH}/person`,
+  list: () => `${PERSON_URL.base}/list`,
+  create: () => `${PERSON_URL.base}/create`,
+  edit: (id) => `${PERSON_URL.base}/edit/${id}`,
+  show: (id) => `${PERSON_URL.base}/show/${id}`,
+  convertPersonToUser: (id) => `${PERSON_URL.base}/convertPersonToUser/${id}`,
+  convertUserToPerson: (id) => `${PERSON_URL.base}/convertUserToPerson/${id}`,
+};
+
+const SUPPLIER_URL = {
+  base: `${CONTEXT_PATH}/supplier`,
+  list: () => `${SUPPLIER_URL.base}/list`,
+  show: (id) => `${SUPPLIER_URL.base}/show/${id}`,
+  downloadPriceHistory: (params) => stringifyUrl({
+    url: `${SUPPLIER_URL.base}/getPriceHistory`,
+    query: { ...(params ?? {}), format: 'text/csv' },
   }),
 };
 
@@ -483,6 +513,25 @@ const SHIPMENT_SHOW_URL = {
   addEvent: (id) => `${SHIPMENT_SHOW_URL.base}/addEvent/${id}`,
   editEvent: (eventId, shipmentId) => `${SHIPMENT_SHOW_URL.base}/editEvent/${eventId}?shipmentId=${shipmentId}`,
   addToShipment: () => `${SHIPMENT_SHOW_URL.base}/addToShipment`,
+  packingList: (id) => `${SHIPMENT_SHOW_URL.base}/showPackingList/${id}`,
+  receive: (id) => `${SHIPMENT_SHOW_URL.base}/receiveShipment/${id}`,
+  send: (id) => `${SHIPMENT_SHOW_URL.base}/sendShipment/${id}`,
+};
+
+const SHIPMENT_ITEM_URL = {
+  base: `${CONTEXT_PATH}/shipmentItem`,
+  list: () => `${SHIPMENT_ITEM_URL.base}/list`,
+  create: () => `${SHIPMENT_ITEM_URL.base}/create`,
+  show: (id) => `${SHIPMENT_ITEM_URL.base}/show/${id}`,
+  edit: (id) => `${SHIPMENT_ITEM_URL.base}/edit/${id}`,
+  pick: (id) => `${SHIPMENT_ITEM_URL.base}/pick/${id}`,
+  split: (id) => `${SHIPMENT_ITEM_URL.base}/split/${id}`,
+};
+
+const SHIPMENT_WORKFLOW_URL = {
+  base: `${CONTEXT_PATH}/shipmentWorkflow`,
+  list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
+  create: () => `${SHIPMENT_WORKFLOW_URL.base}/create`,
 };
 
 const DELIVERY_NOTE_URL = {
@@ -546,6 +595,7 @@ export {
   PARTY_TYPE_URL,
   PARTY_URL,
   PAYMENT_TERM_URL,
+  PERSON_URL,
   PICKLIST_URL,
   PREFERENCE_TYPE_URL,
   PRODUCT_ASSOCIATION_URL,
@@ -559,13 +609,17 @@ export {
   PUTAWAY_URL,
   RECEIVE_ORDER_URL,
   REPLENISHMENT_URL,
+  REPORT_URL,
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
+  SHIPMENT_ITEM_URL,
   SHIPMENT_SHOW_URL,
+  SHIPMENT_WORKFLOW_URL,
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
+  SUPPLIER_URL,
   TAG_URL,
   TRANSACTION_ENTRY_URL,
   UNIT_OF_MEASURE_CONVERSION_URL,

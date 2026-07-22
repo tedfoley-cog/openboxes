@@ -189,6 +189,34 @@ class UrlMappings {
             action = [GET: "details"]
         }
 
+        // Person endpoints for the React person screens; explicit mappings
+        // take precedence over the generic "/api/${resource}s" pattern.
+        "/api/persons/search"(parseRequest: true) {
+            controller = { "personApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/persons/$id/details"(parseRequest: true) {
+            controller = { "personApi" }
+            action = [GET: "details"]
+        }
+
+        // Supplier endpoints for the React supplier screens
+        "/api/suppliers/search"(parseRequest: true) {
+            controller = { "supplierApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/suppliers/$id/details"(parseRequest: true) {
+            controller = { "supplierApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/suppliers/$id/priceHistory"(parseRequest: true) {
+            controller = { "supplierApi" }
+            action = [GET: "priceHistory"]
+        }
+
         "/api/organizations/search"(parseRequest: true) {
             controller = { "organizationApi" }
             action = [GET: "search"]
@@ -838,7 +866,17 @@ class UrlMappings {
 
         "/api/shipments"(parseRequest: true) {
             controller = "shipmentApi"
-            action = [POST: "saveDetails"]
+            action = [POST: "saveDetails", GET: "list"]
+        }
+
+        "/api/shipments/listOptions" {
+            controller = "shipmentApi"
+            action = [GET: "listOptions"]
+        }
+
+        "/api/shipments/bulkAction"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "bulkAction"]
         }
 
         "/api/shipments/documentTypes" {
@@ -949,6 +987,77 @@ class UrlMappings {
         "/api/shipments/$id/send"(parseRequest: true) {
             controller = "shipmentApi"
             action = [POST: "send"]
+        }
+
+        // Classic shipping screens migrated to React (Phase 2, Batch 22)
+
+        "/api/shipments/$id/showDetails" {
+            controller = "shipmentApi"
+            action = [GET: "showDetails"]
+        }
+
+        "/api/shipments/$id/packingList" {
+            controller = "shipmentApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/shipments/$id/receipt"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "receipt", POST: "saveReceipt", DELETE: "deleteReceipt"]
+        }
+
+        "/api/shipments/$id/receipt/items/$receiptItemId" {
+            controller = "shipmentApi"
+            action = [DELETE: "deleteReceiptItem"]
+        }
+
+        "/api/shipments/$id/receipt/items/$receiptItemId/split"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "splitReceiptItem"]
+        }
+
+        "/api/shipments/$id/receipt/items/$receiptItemId/putawayLocations" {
+            controller = "shipmentApi"
+            action = [GET: "putawayLocations"]
+        }
+
+        "/api/shipmentItems/createOptions" {
+            controller = "shipmentApi"
+            action = [GET: "itemCreateOptions"]
+        }
+
+        // Shipment Item API (shipmentItem scaffold screens migrated to React)
+
+        "/api/shipmentItems"(parseRequest: true) {
+            controller = { request.method == "POST" ? "shipmentApi" : "shipmentItemApi" }
+            action = [GET: "list", POST: "createItem"]
+        }
+
+        "/api/shipmentItems/options" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "options"]
+        }
+
+        "/api/shipmentItems/$id"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/shipmentItems/$id/pick" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "pickContext"]
+        }
+
+        "/api/shipmentItems/$id/split"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [POST: "split"]
+        }
+
+        // Shipment Workflow API (shipmentWorkflow/create migrated to React)
+
+        "/api/shipmentWorkflows"(parseRequest: true) {
+            controller = { "shipmentWorkflowApi" }
+            action = [GET: "list", POST: "create"]
         }
 
         // Requisition Template API (requisitionTemplate screens migrated to React)
@@ -1993,6 +2102,41 @@ class UrlMappings {
         "/api/reports/inventory-transactions-summary(.$format)?" {
             controller = "inventoryTransactionSummaryApi"
             action = [GET: "getInventoryTransactionsSummary"]
+        }
+
+        "/api/reports/on-order-summary" {
+            controller = "reportApi"
+            action = [GET: "onOrderSummary"]
+        }
+
+        "/api/reports/on-order-details" {
+            controller = "reportApi"
+            action = [GET: "onOrderDetails"]
+        }
+
+        "/api/reports/request-details" {
+            controller = "reportApi"
+            action = [GET: "requestDetails"]
+        }
+
+        "/api/reports/request-reason-codes" {
+            controller = "reportApi"
+            action = [GET: "requestReasonCodes"]
+        }
+
+        "/api/reports/inventory-by-location" {
+            controller = "reportApi"
+            action = [GET: "inventoryByLocation"]
+        }
+
+        "/api/reports/packing-list" {
+            controller = "reportApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/reports/packing-list-shipments" {
+            controller = "reportApi"
+            action = [GET: "packingListShipments"]
         }
 
         "/api/reports/indicators/productsInventoried" {

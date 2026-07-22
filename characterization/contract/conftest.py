@@ -67,6 +67,15 @@ def batch21_endpoints(client):
 
 
 @pytest.fixture(scope="session")
+def batch22_endpoints(client):
+    # Same rationale as batch14_endpoints for the Batch 22 classic shipping
+    # screen endpoints.
+    if client.request("GET", "/api/shipments/listOptions").status_code == 404:
+        pytest.skip("Batch 22 shipment screen endpoints not present in target build")
+
+
+@pytest.fixture(scope="session")
+>>>>>>> origin/develop
 def batch17_endpoints(client):
     # Same rationale as batch14_endpoints for the Batch 17 requisition
     # template and canceled requisition item endpoints.
