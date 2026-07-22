@@ -11,6 +11,12 @@ rules:
   # Several legacy endpoints legitimately respond only 200 (errors surface
   # as HTML error pages or 200-with-null bodies); don't require 4xx.
   operation-4xx-response: off
+  # The legacy UrlMappings genuinely define sibling routes that differ only
+  # in whether a segment is a path variable (e.g. cycle-counts/candidates vs
+  # cycle-counts/{cycleCountId}/items vs cycle-counts/items/{id}); Grails
+  # resolves them by declaration order, and parity requires documenting all
+  # of them.
+  no-ambiguous-paths: off
   # The single documented server IS localhost - the Docker parity baseline
   # from docs/migration/RUNNING_LOCALLY.md.
   no-server-example.com: off
