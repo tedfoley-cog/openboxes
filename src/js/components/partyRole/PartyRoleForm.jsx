@@ -62,7 +62,9 @@ const PartyRoleForm = () => {
       });
   }, []);
 
-  const preselectedPartyId = new URLSearchParams(location.search).get('partyId');
+  // "party.id" is the query param the legacy GSP screens used to link here.
+  const searchParams = new URLSearchParams(location.search);
+  const preselectedPartyId = searchParams.get('partyId') ?? searchParams.get('party.id');
 
   const emptyValues = {
     party: preselectedPartyId
