@@ -33,8 +33,8 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 1.1a | Java 8→11 build/runtime | [ea699678](https://app.devin.ai/sessions/ea699678f4864796aa48a3400435a9ba) — [#9](https://github.com/tedfoley-cog/openboxes/pull/9) merged |
 | 1.1b | Dependency cleanup / Grails 4 de-risk audit | [d11e6110](https://app.devin.ai/sessions/d11e611086ee4de4840215ef5cb2f7e4) — [#19](https://github.com/tedfoley-cog/openboxes/pull/19) merged (audit in docs/migration/DEPENDENCY_AUDIT.md) |
 | 1.2 | Grails 3→4 | [f3400cd2](https://app.devin.ai/sessions/f3400cd2cb624535ab89390e465486dd) — [#27](https://github.com/tedfoley-cog/openboxes/pull/27) merged (Grails 4.1.4, GORM 7, Hibernate 5.4, Gradle 6.9.4) |
-| 1.3 | Grails 4→5 | [7943163d](https://app.devin.ai/sessions/7943163d2df74a1ea669461b357271c3) — in progress |
-| 1.4 | Grails 5→6 / Java 21 / javax→jakarta (4–6 children) | pending |
+| 1.3 | Grails 4→5 | [7943163d](https://app.devin.ai/sessions/7943163d2df74a1ea669461b357271c3) — [#34](https://github.com/tedfoley-cog/openboxes/pull/34) merged (Grails 5.3.6, Groovy 3, GORM 7.3, Boot 2.7, Gradle 7) |
+| 1.4 | Grails 5→6 / Java 21 / javax→jakarta | [24db1e26](https://app.devin.ai/sessions/24db1e2655464a0591029bb420745f63) — in progress |
 | 1.5 | Re-verify Quartz jobs, Liquibase, mail/reporting (3–4 children) | pending |
 
 ## Phase 2 — UI: GSP → React (parallel module waves; needs Phase 0)
@@ -66,6 +66,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #34 (Grails 4→5) merged. Grails 6 + Java 21 + jakarta child spawned.
 - 2026-07-22: #30 (B3), #33 (B4) merged. Phase 2 wave 3 spawned (B5,B6,B9,B16,B28,B33).
 - 2026-07-22: #28 (B32), #31 (B8), #32 (B27) merged. Grails 4→5 child running.
 - 2026-07-22: #21 (B1) and #27 (Grails 3→4) merged. B3 #30 resolving conflicts post-Grails-4 merge.
