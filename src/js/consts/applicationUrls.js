@@ -244,6 +244,9 @@ const REQUISITION_TEMPLATE_URL = {
   editHeader: (id) => `${REQUISITION_TEMPLATE_URL.base}/editHeader/${id}`,
   export: (id) => `${REQUISITION_TEMPLATE_URL.base}/export/${id}`,
   sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
+  clone: (id) => `${REQUISITION_TEMPLATE_URL.base}/clone/${id}`,
+  publish: (id) => `${REQUISITION_TEMPLATE_URL.base}/publish/${id}`,
+  unpublish: (id) => `${REQUISITION_TEMPLATE_URL.base}/unpublish/${id}`,
 };
 
 const STOCKLIST_URL = {
@@ -409,6 +412,11 @@ const REQUISITION_URL = {
 const REQUISITION_ITEM_URL = {
   base: `${CONTEXT_PATH}/requisitionItem`,
   change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
+  list: () => `${REQUISITION_ITEM_URL.base}/list`,
+  export: (params = {}) => stringifyUrl({
+    url: `${REQUISITION_ITEM_URL.base}/export`,
+    query: { ...params },
+  }),
 };
 
 const PICKLIST_URL = {
