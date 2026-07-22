@@ -343,6 +343,18 @@ export const SHIPMENT_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/picklist`;
 export const SHIPMENT_VALIDATE_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/validatePicklist`;
 export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPicklist`;
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
+export const SHIPMENT_LIST_OPTIONS = `${SHIPMENT_API}/listOptions`;
+export const SHIPMENT_BULK_ACTION = `${SHIPMENT_API}/bulkAction`;
+export const SHIPMENT_SHOW_DETAILS = (id) => `${SHIPMENT_BY_ID(id)}/showDetails`;
+export const SHIPMENT_PACKING_LIST = (id) => `${SHIPMENT_BY_ID(id)}/packingList`;
+export const SHIPMENT_COMMENTS = (id) => `${SHIPMENT_BY_ID(id)}/comments`;
+export const SHIPMENT_EVENTS = (id) => `${SHIPMENT_BY_ID(id)}/events`;
+export const SHIPMENT_RECEIPT = (id) => `${SHIPMENT_BY_ID(id)}/receipt`;
+export const SHIPMENT_RECEIPT_ITEM = (id, receiptItemId) => `${SHIPMENT_RECEIPT(id)}/items/${receiptItemId}`;
+export const SHIPMENT_RECEIPT_ITEM_SPLIT = (id, receiptItemId) => `${SHIPMENT_RECEIPT_ITEM(id, receiptItemId)}/split`;
+export const SHIPMENT_RECEIPT_ITEM_PUTAWAY_LOCATIONS = (id, receiptItemId) => `${SHIPMENT_RECEIPT_ITEM(id, receiptItemId)}/putawayLocations`;
+export const SHIPMENT_ITEM_API = `${API}/shipmentItems`;
+export const SHIPMENT_ITEM_CREATE_OPTIONS = `${SHIPMENT_ITEM_API}/createOptions`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
 
 // REQUISITION TEMPLATE (stock list template screens)
