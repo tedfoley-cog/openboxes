@@ -173,6 +173,36 @@ const AsyncProductSupplierCreatePage = Loadable({
   loading: Loading,
 });
 
+const AsyncLocationList = Loadable({
+  loader: () => import('components/location/LocationList'),
+  loading: Loading,
+});
+
+const AsyncLocationEdit = Loadable({
+  loader: () => import('components/location/LocationEdit'),
+  loading: Loading,
+});
+
+const AsyncLocationBinLocations = Loadable({
+  loader: () => import('components/location/LocationBinLocations'),
+  loading: Loading,
+});
+
+const AsyncLocationZoneLocations = Loadable({
+  loader: () => import('components/location/LocationZoneLocations'),
+  loading: Loading,
+});
+
+const AsyncLocationContents = Loadable({
+  loader: () => import('components/location/LocationContents'),
+  loading: Loading,
+});
+
+const AsyncLocationUploadLogo = Loadable({
+  loader: () => import('components/location/LocationUploadLogo'),
+  loading: Loading,
+});
+
 const AsyncOutboundImport = Loadable({
   loader: () => import('components/stock-movement-wizard/outboundImport/OutboundImport'),
   loading: Loading,
@@ -314,6 +344,12 @@ const Router = () => {
             <MainLayoutRoute path="**/glAccount/list" component={AsyncGlAccountList} />
             <MainLayoutRoute path="**/glAccount/create" component={AsyncGlAccountForm} />
             <MainLayoutRoute path="**/glAccount/edit/:glAccountId" component={AsyncGlAccountForm} />
+            <MainLayoutRoute path="**/location/list" component={AsyncLocationList} />
+            <MainLayoutRoute path="**/location/edit/:locationId?" component={AsyncLocationEdit} />
+            <MainLayoutRoute path="**/location/showBinLocations/:locationId" component={AsyncLocationBinLocations} />
+            <MainLayoutRoute path="**/location/showZoneLocations/:locationId" component={AsyncLocationZoneLocations} />
+            <MainLayoutRoute path="**/location/showContents/:locationId" component={AsyncLocationContents} />
+            <MainLayoutRoute path="**/location/uploadLogo/:locationId" component={AsyncLocationUploadLogo} />
             <MainLayoutRoute path="**/productSupplier/list" component={AsyncProductSupplierList} />
             <MainLayoutRoute path="**/productSupplier/create/:productSupplierId?" component={AsyncProductSupplierCreatePage} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
