@@ -52,10 +52,10 @@ const CreateShipmentDetails = () => {
     // mirror the legacy default: outbound starts at the current warehouse,
     // inbound is destined for the current warehouse
     if (type === 'OUTGOING' && currentLocation?.id) {
-      setOrigin({ id: currentLocation.id, name: currentLocation.name });
+      setOrigin((prev) => prev ?? { id: currentLocation.id, name: currentLocation.name });
     }
     if (type === 'INCOMING' && currentLocation?.id) {
-      setDestination({ id: currentLocation.id, name: currentLocation.name });
+      setDestination((prev) => prev ?? { id: currentLocation.id, name: currentLocation.name });
     }
   }, [shipmentId, currentLocation?.id, search]);
 
