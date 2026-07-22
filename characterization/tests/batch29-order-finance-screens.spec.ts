@@ -105,7 +105,12 @@ test.describe('batch 29 order & finance react screens', () => {
 
     await page.getByLabel('Name').fill(name);
     await page.getByLabel('Description').fill('Created by Playwright');
-    await page.getByLabel('Code').click();
+    // SelectField (v2) does not associate its label with the react-select
+    // input, so locate the wrapper by its label text instead of getByLabel.
+    const codeField = page
+      .locator('.select-wrapper-container', { hasText: 'Code' })
+      .first();
+    await codeField.locator('input').first().click({ force: true });
     await page.getByText('MISCELLANEOUS_CHARGE', { exact: true }).click();
     await page.getByRole('button', { name: 'Save' }).click();
     await page.waitForURL('**/orderAdjustmentType/list**');
