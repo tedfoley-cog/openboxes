@@ -76,6 +76,9 @@ const CreateTransaction = () => {
     const entries = rows
       .map((row, index) => ({
         inventoryItemId: row.inventoryItem?.id,
+        productId: row.product?.id,
+        lotNumber: row.inventoryItem?.lotNumber,
+        expirationDate: row.inventoryItem?.expirationDate,
         binLocationId: row.binLocation?.id,
         quantity: quantities[rowKey(row, index)],
       }))
