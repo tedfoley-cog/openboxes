@@ -152,7 +152,11 @@ paths:
         '204':
           description: Tag deleted.
         '400':
-          $ref: '../components/common.yaml#/components/responses/ValidationError'
+          description: Tag cannot be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
   /api/tags/{id}/products:
