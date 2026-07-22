@@ -70,8 +70,9 @@ def test_search_filtered(client):
 def test_search_by_role_type(client):
     resp = check(client, spec, "GET", "/api/organizations/search",
                  params={"roleType": "ROLE_SUPPLIER", "max": "100"})
+    # roles are returned as display names (RoleType.name), e.g. "Supplier"
     for row in resp.json()["data"]:
-        assert "ROLE_SUPPLIER" in row["roles"]
+        assert "Supplier" in row["roles"]
 
 
 def test_search_by_multiple_role_types_has_no_duplicates(client):
@@ -81,7 +82,7 @@ def test_search_by_multiple_role_types_has_no_duplicates(client):
     ids = [row["id"] for row in body["data"]]
     assert len(ids) == len(set(ids))
     for row in body["data"]:
-        assert "ROLE_SUPPLIER" in row["roles"] or "ROLE_MANUFACTURER" in row["roles"]
+        assert "Supplier" in row["roles"] or "Manufacturer" in row["roles"]
     if body["totalCount"] <= 100:
         assert body["totalCount"] == len(ids)
 

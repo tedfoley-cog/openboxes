@@ -51,7 +51,7 @@ test.describe('organization react screens', () => {
     const body = await (await apiResponse).json();
     await captureStep(page, 'organization', 'react-list-role-filtered');
     for (const row of body.data) {
-      expect(row.roles).toContain('ROLE_SUPPLIER');
+      expect(row.roles).toContain('Supplier');
     }
     const check = await page.request.get(url('/api/organizations/search?roleType=ROLE_SUPPLIER&max=1'));
     expect(body.totalCount).toBe((await check.json()).totalCount);

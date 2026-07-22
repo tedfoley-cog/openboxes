@@ -70,24 +70,36 @@ const OrganizationForm = () => {
     };
   };
 
+  const emptyValues = {
+    active: true,
+    code: '',
+    name: '',
+    description: '',
+    partyType: null,
+    defaultLocation: null,
+    sequences: {},
+  };
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     mode: 'onBlur',
-    defaultValues: organizationId
-      ? getOrganization
-      : {
-        active: true,
-        code: '',
-        name: '',
-        description: '',
-        partyType: null,
-        defaultLocation: null,
-        sequences: {},
-      },
+    defaultValues: emptyValues,
   });
+
+  // Fetch and reset on every organizationId change so the form is correctly
+  // populated even when routed between create/edit without a remount.
+  useEffect(() => {
+    if (organizationId) {
+      getOrganization().then((values) => reset(values));
+      return;
+    }
+    setDetails(null);
+    reset(emptyValues);
+  }, [organizationId]);
 
   const locationOptions = (details?.locations ?? []).map((location) => ({
     id: location.id,
@@ -106,7 +118,15 @@ const OrganizationForm = () => {
         defaultLocation: values.defaultLocation?.id ?? null,
         ...(details?.isSuperuser ? { sequences: values.sequences ?? {} } : {}),
       };
-      await organizationApi.updateOrganization(organizationId, payload);
+      try {
+        await organizationApi.updateOrganization(organizationId, payload);
+      } catch (error) {
+        notification(NotificationType.ERROR)({
+          message: error?.response?.data?.errorMessage
+            || translate('react.organization.update.error.label', 'Organization could not be updated'),
+        });
+        return;
+      }
       notification(NotificationType.SUCCESS)({
         message: translate('react.organization.update.success.label', 'Organization has been updated successfully'),
       });
@@ -119,7 +139,16 @@ const OrganizationForm = () => {
       description: values.description,
       partyType: values.partyType?.id ? { id: values.partyType.id } : null,
     };
-    const response = await organizationApi.createOrganization(payload);
+    let response;
+    try {
+      response = await organizationApi.createOrganization(payload);
+    } catch (error) {
+      notification(NotificationType.ERROR)({
+        message: error?.response?.data?.errorMessage
+          || translate('react.organization.create.error.label', 'Organization could not be created'),
+      });
+      return;
+    }
     notification(NotificationType.SUCCESS)({
       message: translate('react.organization.create.success.label', 'Organization has been created successfully'),
     });
