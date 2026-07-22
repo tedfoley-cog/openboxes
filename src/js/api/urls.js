@@ -122,6 +122,14 @@ export const LOCATION_TYPES = `${LOCATION_API}/locationTypes`;
 export const LOCATION_TEMPLATE = `${CONTEXT_PATH}${LOCATION_API}/template`;
 export const LOCATION_IMPORT = `${CONTEXT_PATH}${LOCATION_API}/importCsv`;
 export const LOCATION = (id) => `${LOCATION_API}/${id}`;
+export const LOCATION_SEARCH_API = `${LOCATION_API}/search`;
+export const LOCATION_SUPPORTED_ACTIVITIES = `${LOCATION_API}/supportedActivities`;
+export const LOCATION_DETAILS = (id) => `${LOCATION_API}/${id}/details`;
+export const LOCATION_BIN_LOCATIONS = (id) => `${LOCATION_API}/${id}/binLocations`;
+export const LOCATION_ZONE_LOCATIONS = (id) => `${LOCATION_API}/${id}/zoneLocations`;
+export const LOCATION_CONTENTS = (id) => `${LOCATION_API}/${id}/contents`;
+export const LOCATION_LOGO = (id) => `${LOCATION_API}/${id}/logo`;
+export const LOCATION_GROUPS_API = `${API}/locationGroups`;
 
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
@@ -178,6 +186,17 @@ export const PRODUCT_CLASSIFICATIONS_API = (facilityId) => `${API}/facilities/${
 
 export const PICKLIST_API = `${API}/picklists`;
 export const PICKLIST_CLEAR = (id) => `${PICKLIST_API}/${id}/items`;
+export const PICKLIST_PRINT = (id) => `${PICKLIST_API}/print/${id}`;
+export const PICKLIST_RETURN_PRINT = (id) => `${PICKLIST_API}/returnPrint/${id}`;
+
+// REQUISITION (classic requisition flow)
+export const REQUISITION_API = `${API}/requisitions`;
+export const REQUISITION_BY_ID = (id) => `${REQUISITION_API}/${id}`;
+export const REQUISITION_TEMPLATES = `${REQUISITION_API}/templates`;
+export const REQUISITION_CONFIRM = (id) => `${REQUISITION_BY_ID(id)}/confirm`;
+export const REQUISITION_DETAILS = (id) => `${REQUISITION_BY_ID(id)}/details`;
+export const REQUISITION_DOCUMENTS = (id) => `${REQUISITION_BY_ID(id)}/documents`;
+export const REQUISITION_DOCUMENT_TYPES = `${REQUISITION_API}/documentTypes`;
 
 // FULL OUTBOUND IMPORT FEATURE
 export const FULFILLMENT_API = `${API}/fulfillments`;
