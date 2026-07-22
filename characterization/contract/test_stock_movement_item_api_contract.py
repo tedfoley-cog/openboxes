@@ -13,6 +13,17 @@ spec = Spec("stock-movement-item-api.yaml")
 movement_spec = Spec("stock-movement-api.yaml")
 
 
+@pytest.fixture(scope="module", autouse=True)
+def cleanup_leftovers(client):
+    listing = client.get_json(
+        "/api/stockMovements",
+        params={"direction": "OUTBOUND", "origin": client.location_id("Main Warehouse")},
+    )["data"]
+    for sm in listing:
+        if (sm.get("description") or "").startswith("ZZ Contract"):
+            client.request("DELETE", f"/api/stockMovements/{sm['id']}")
+
+
 @pytest.fixture(scope="module")
 def movement(client):
     resp = check(
