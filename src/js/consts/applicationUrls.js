@@ -173,6 +173,13 @@ const PAYMENT_TERM_URL = {
   edit: (id) => `${PAYMENT_TERM_URL.base}/edit/${id}`,
 };
 
+const PREFERENCE_TYPE_URL = {
+  base: `${CONTEXT_PATH}/preferenceType`,
+  list: () => `${PREFERENCE_TYPE_URL.base}/list`,
+  create: () => `${PREFERENCE_TYPE_URL.base}/create`,
+  edit: (id) => `${PREFERENCE_TYPE_URL.base}/edit/${id}`,
+};
+
 const PURCHASE_ORDER_URL = {
   base: `${CONTEXT_PATH}/purchaseOrder`,
   create: () => `${PURCHASE_ORDER_URL.base}/create`,
@@ -251,14 +258,14 @@ const CONSUMPTION_URL = {
 
 const REQUISITION_TEMPLATE_URL = {
   base: `${CONTEXT_PATH}/requisitionTemplate`,
+  list: () => `${REQUISITION_TEMPLATE_URL.base}/list`,
   create: () => `${REQUISITION_TEMPLATE_URL.base}/create`,
   show: (id) => `${REQUISITION_TEMPLATE_URL.base}/show/${id}`,
   edit: (id) => `${REQUISITION_TEMPLATE_URL.base}/edit/${id}`,
   batch: (id) => `${REQUISITION_TEMPLATE_URL.base}/batch/${id}`,
   editHeader: (id) => `${REQUISITION_TEMPLATE_URL.base}/editHeader/${id}`,
-  list: () => `${REQUISITION_TEMPLATE_URL.base}/list`,
-  sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
   export: (id) => `${REQUISITION_TEMPLATE_URL.base}/export/${id}`,
+  sendMail: (id) => `${REQUISITION_TEMPLATE_URL.base}/sendMail/${id}`,
   clone: (id) => `${REQUISITION_TEMPLATE_URL.base}/clone/${id}`,
   publish: (id) => `${REQUISITION_TEMPLATE_URL.base}/publish/${id}`,
   unpublish: (id) => `${REQUISITION_TEMPLATE_URL.base}/unpublish/${id}`,
@@ -389,6 +396,25 @@ const PRODUCT_TYPE_URL = {
   create: () => `${PRODUCT_TYPE_URL.base}/create`,
 };
 
+const TAG_URL = {
+  base: `${CONTEXT_PATH}/tag`,
+  list: () => `${TAG_URL.base}/list`,
+  edit: (id) => `${TAG_URL.base}/edit/${id}`,
+  show: (id) => `${TAG_URL.base}/show/${id}`,
+};
+
+const UNIT_OF_MEASURE_CONVERSION_URL = {
+  base: `${CONTEXT_PATH}/unitOfMeasureConversion`,
+  list: () => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/list`,
+  create: () => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/create`,
+  edit: (id) => `${UNIT_OF_MEASURE_CONVERSION_URL.base}/edit/${id}`,
+};
+
+const USER_URL = {
+  base: `${CONTEXT_PATH}/user`,
+  show: (id) => `${USER_URL.base}/show/${id}`,
+};
+
 const REQUISITION_URL = {
   base: `${CONTEXT_PATH}/requisition`,
   list: () => `${REQUISITION_URL.base}/list`,
@@ -492,6 +518,7 @@ export {
   PARTY_URL,
   PAYMENT_TERM_URL,
   PICKLIST_URL,
+  PREFERENCE_TYPE_URL,
   PRODUCT_ASSOCIATION_URL,
   PRODUCT_CATALOG_URL,
   PRODUCT_CONFIGURATION_URL,
@@ -509,5 +536,8 @@ export {
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
+  TAG_URL,
   TRANSACTION_ENTRY_URL,
+  UNIT_OF_MEASURE_CONVERSION_URL,
+  USER_URL,
 };

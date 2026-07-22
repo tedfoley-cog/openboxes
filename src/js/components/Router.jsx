@@ -188,8 +188,33 @@ const AsyncProductGroupShow = Loadable({
   loading: Loading,
 });
 
+const AsyncRequisitionTemplateShow = Loadable({
+  loader: () => import('components/requisitionTemplate/RequisitionTemplateShow'),
+  loading: Loading,
+});
+
+const AsyncStockListLocationShow = Loadable({
+  loader: () => import('components/stock-list/StockListLocationShow'),
+  loading: Loading,
+});
+
 const AsyncProductTypeForm = Loadable({
   loader: () => import('components/productType/ProductTypeForm'),
+  loading: Loading,
+});
+
+const AsyncTagShow = Loadable({
+  loader: () => import('components/tag/TagShow'),
+  loading: Loading,
+});
+
+const AsyncUnitOfMeasureConversionList = Loadable({
+  loader: () => import('components/unitOfMeasureConversion/UnitOfMeasureConversionList'),
+  loading: Loading,
+});
+
+const AsyncUnitOfMeasureConversionForm = Loadable({
+  loader: () => import('components/unitOfMeasureConversion/UnitOfMeasureConversionForm'),
   loading: Loading,
 });
 
@@ -495,6 +520,21 @@ const AsyncOrderAdjustmentTypeForm = Loadable({
 
 const AsyncPaymentTermForm = Loadable({
   loader: () => import('components/paymentTerm/PaymentTermForm'),
+  loading: Loading,
+});
+
+const AsyncPaymentTermList = Loadable({
+  loader: () => import('components/paymentTerm/PaymentTermList'),
+  loading: Loading,
+});
+
+const AsyncPreferenceTypeList = Loadable({
+  loader: () => import('components/preferenceType/PreferenceTypeList'),
+  loading: Loading,
+});
+
+const AsyncPreferenceTypeForm = Loadable({
+  loader: () => import('components/preferenceType/PreferenceTypeForm'),
   loading: Loading,
 });
 
@@ -960,7 +1000,12 @@ const Router = () => {
             <MainLayoutRoute path="**/orderAdjustmentType/list" component={AsyncOrderAdjustmentTypeList} />
             <MainLayoutRoute path="**/orderAdjustmentType/create" component={AsyncOrderAdjustmentTypeForm} />
             <MainLayoutRoute path="**/orderAdjustmentType/edit/:orderAdjustmentTypeId" component={AsyncOrderAdjustmentTypeForm} />
+            <MainLayoutRoute path="**/paymentTerm/list" component={AsyncPaymentTermList} />
             <MainLayoutRoute path="**/paymentTerm/create" component={AsyncPaymentTermForm} />
+            <MainLayoutRoute path="**/paymentTerm/edit/:paymentTermId" component={AsyncPaymentTermForm} />
+            <MainLayoutRoute path="**/preferenceType/list" component={AsyncPreferenceTypeList} />
+            <MainLayoutRoute path="**/preferenceType/create" component={AsyncPreferenceTypeForm} />
+            <MainLayoutRoute path="**/preferenceType/edit/:preferenceTypeId" component={AsyncPreferenceTypeForm} />
             <MainLayoutRoute path="**/stockTransfer/create/:stockTransferId?" component={AsyncStockTransfer} />
             <MainLayoutRoute path="**/stockTransfer/createOutboundReturn/:outboundReturnId?" component={AsyncOutboundReturns} />
             <MainLayoutRoute path="**/stockTransfer/createInboundReturn/:inboundReturnId?" component={AsyncInboundReturns} />
@@ -997,6 +1042,8 @@ const Router = () => {
             <MainLayoutRoute path="**/picklist/returnPrint/:orderId" component={AsyncPicklistReturnPrint} />
             <MainLayoutRoute path="**/purchaseOrder/list" component={AsyncPurchaseOrderList} />
             <MainLayoutRoute path="**/requisitionTemplate/list" component={AsyncStockList} />
+            <MainLayoutRoute path="**/requisitionTemplate/show/:requisitionTemplateId" component={AsyncRequisitionTemplateShow} />
+            <MainLayoutRoute path="**/stocklist/show/:locationId" component={AsyncStockListLocationShow} />
             <MainLayoutRoute path="**/requisitionTemplate/create" component={AsyncStockListTemplateCreate} />
             <MainLayoutRoute path="**/requisitionTemplate/edit/:templateId" component={AsyncStockListTemplateEdit} />
             <MainLayoutRoute path="**/requisitionTemplate/editHeader/:templateId" component={AsyncStockListTemplateEditHeader} />
@@ -1076,6 +1123,10 @@ const Router = () => {
             <MainLayoutRoute path="**/productGroup/edit/:productGroupId" component={AsyncProductGroupForm} />
             <MainLayoutRoute path="**/productGroup/show/:productGroupId" component={AsyncProductGroupShow} />
             <MainLayoutRoute path="**/productType/create" component={AsyncProductTypeForm} />
+            <MainLayoutRoute path="**/tag/show/:tagId" component={AsyncTagShow} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/list" component={AsyncUnitOfMeasureConversionList} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/create" component={AsyncUnitOfMeasureConversionForm} />
+            <MainLayoutRoute path="**/unitOfMeasureConversion/edit/:unitOfMeasureConversionId" component={AsyncUnitOfMeasureConversionForm} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
             <MainLayoutRoute path="**/" component={Dashboard} />
           </Switch>

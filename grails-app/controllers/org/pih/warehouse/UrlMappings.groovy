@@ -240,6 +240,21 @@ class UrlMappings {
             action = [GET: "productFieldOptions"]
         }
 
+        "/api/tags/$id"(parseRequest: true) {
+            controller = { "tagApi" }
+            action = [GET: "read", DELETE: "delete"]
+        }
+
+        "/api/unitOfMeasureConversions"(parseRequest: true) {
+            controller = { "unitOfMeasureConversionApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/unitOfMeasureConversions/$id"(parseRequest: true) {
+            controller = { "unitOfMeasureConversionApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         "/api/locationTypes"(parseRequest: true) {
             controller = { "locationTypeApi" }
             action = [GET: "list", POST: "create"]
@@ -922,6 +937,11 @@ class UrlMappings {
             action = [POST: "sendMail"]
         }
 
+        "/api/stocklists/$id/details"(parseRequest: true) {
+            controller = "stocklistApi"
+            action = [GET: "details"]
+        }
+
         "/api/stocklists/$id/export"(parseRequest: true) {
             controller = "stocklistApi"
             action = [GET: "export"]
@@ -1113,10 +1133,31 @@ class UrlMappings {
             action = [GET: "orderAdjustmentTypeCodeOptions"]
         }
 
-        // Payment term API (migrated paymentTerm create screen)
+        // Payment term API (migrated paymentTerm screens)
         "/api/paymentTerms"(parseRequest: true) {
             controller = "paymentTermApi"
-            action = [POST: "create"]
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/paymentTerms/$id"(parseRequest: true) {
+            controller = "paymentTermApi"
+            action = [GET: "read", PUT: "update"]
+        }
+
+        // Preference type API (migrated preferenceType screens)
+        "/api/preferenceTypes"(parseRequest: true) {
+            controller = "preferenceTypeApi"
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/preferenceTypes/$id"(parseRequest: true) {
+            controller = "preferenceTypeApi"
+            action = [GET: "read", PUT: "update"]
+        }
+
+        "/api/validationCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "validationCodeOptions"]
         }
 
         "/api/orderSummaries"(parseRequest: true) {
