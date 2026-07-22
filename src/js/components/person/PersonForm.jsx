@@ -82,7 +82,10 @@ const PersonForm = () => {
     };
     if (personId) {
       try {
-        await personApi.updatePerson(personId, payload);
+        await personApi.updatePerson(personId, {
+          ...payload,
+          ...(details?.version != null ? { version: details.version } : {}),
+        });
       } catch (error) {
         // apiClient's response interceptor already notifies the user
         return;

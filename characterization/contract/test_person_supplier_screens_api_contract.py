@@ -103,6 +103,29 @@ def test_person_roundtrip(client):
         assert resp.status_code == 204
 
 
+def test_update_person_with_stale_version_conflicts(client):
+    resp = check(client, person_spec, "POST", "/api/persons",
+                 json={"firstName": "ZZ Stale", "lastName": "Version"})
+    person_id = resp.json()["data"]["id"]
+    try:
+        resp = check(client, person_spec, "PUT", "/api/persons/{id}",
+                     path=f"/api/persons/{person_id}",
+                     json={"lastName": "Version 2", "version": 0})
+        assert resp.status_code == 200
+
+        resp = check(client, person_spec, "PUT", "/api/persons/{id}",
+                     path=f"/api/persons/{person_id}",
+                     json={"lastName": "Version 3", "version": 0})
+        assert resp.status_code == 409
+
+        details = client.get_json(f"/api/persons/{person_id}/details")["data"]
+        assert details["lastName"] == "Version 2"
+    finally:
+        resp = check(client, person_spec, "DELETE", "/api/persons/{id}",
+                     path=f"/api/persons/{person_id}")
+        assert resp.status_code == 204
+
+
 def test_create_person_without_names_is_validation_error(client):
     resp = check(client, person_spec, "POST", "/api/persons", json={})
     assert resp.status_code == 400

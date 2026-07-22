@@ -100,7 +100,14 @@ class PersonApiController extends BaseDomainApiController {
         if (!person) {
             throw new ObjectNotFoundException(params.id, Person.class.toString())
         }
-        bindPerson(person, request.JSON)
+        def jsonObject = request.JSON
+        if (jsonObject.containsKey("version") && person.version > (jsonObject.version as Long)) {
+            String message = "${warehouse.message(code: 'default.optimistic.locking.failure', default: 'Another user has updated this Person while you were editing')}"
+            response.status = HttpStatus.CONFLICT.value()
+            render([errorCode: HttpStatus.CONFLICT.value(), errorMessage: message] as JSON)
+            return
+        }
+        bindPerson(person, jsonObject)
         if (!person.validate() || !person.save(flush: true)) {
             throw new ValidationException("Invalid person", person.errors)
         }

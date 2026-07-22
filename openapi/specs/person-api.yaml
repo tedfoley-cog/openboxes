@@ -192,7 +192,10 @@ paths:
       summary: Update a person
       description: >
         Partially updates a person from the JSON body (only keys present in
-        the body are bound). Added in Phase 2 (Batch 36).
+        the body are bound). When the body includes a version that is
+        older than the persisted one, responds 409 without saving
+        (optimistic locking, mirroring the legacy person edit screen).
+        Added in Phase 2 (Batch 36).
       parameters:
         - name: id
           in: path
@@ -216,6 +219,17 @@ paths:
           $ref: '../components/common.yaml#/components/responses/ValidationError'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
+        '409':
+          description: Stale version; the person was updated by someone else.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                  errorMessage:
+                    type: string
     delete:
       operationId: deletePerson
       summary: Delete a person
@@ -292,6 +306,12 @@ components:
         active:
           type: boolean
           nullable: true
+        version:
+          type: integer
+          nullable: true
+          description: >
+            Optimistic-locking version from GET details; ignored on create.
+            On update, a stale value causes a 409.
       additionalProperties: true
     PersonDetails:
       type: object
