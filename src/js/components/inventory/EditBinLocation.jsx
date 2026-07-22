@@ -34,6 +34,7 @@ const EditBinLocation = () => {
 
   useEffect(() => {
     if (!currentLocation?.id) {
+      setLoading(false);
       return;
     }
     setLoading(true);

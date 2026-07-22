@@ -17,6 +17,8 @@ import { fetchLocations } from 'utils/option-utils';
 import PageWrapper from 'wrappers/PageWrapper';
 
 const TRANSFER_IN_CODE = 'CREDIT';
+// Transfer In / Transfer Out (see Constants.TRANSFER_IN/OUT_TRANSACTION_TYPE_ID)
+const TRANSFER_TYPE_IDS = ['8', '9'];
 
 const CreateTransaction = () => {
   useTranslation('inventory');
@@ -60,8 +62,7 @@ const CreateTransaction = () => {
     fetchLocations({ activityCodes: undefined }).then(setLocations);
   }, [currentLocation?.id]);
 
-  const isTransfer = transactionType
-    && ['Transfer In', 'Transfer Out'].includes(transactionType.name);
+  const isTransfer = TRANSFER_TYPE_IDS.includes(transactionType?.id);
   const isTransferIn = transactionType?.transactionCode === TRANSFER_IN_CODE;
 
   const rowKey = (row, index) => `${row.inventoryItem?.id ?? 'none'}-${row.binLocation?.id ?? 'none'}-${index}`;
