@@ -315,7 +315,6 @@ class TransactionApiController {
             (Constants.TRANSFER_OUT_TRANSACTION_TYPE_ID)     : ActivityCode.SEND_STOCK,
     ].asImmutable()
 
-    def inventoryService
     def adjustInventoryService
     def transactionIdentifierService
 
