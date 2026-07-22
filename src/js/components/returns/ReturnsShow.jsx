@@ -79,9 +79,11 @@ const ReturnsShow = () => {
             </span>
           </div>
           <div>
-            <a className="btn btn-sm btn-outline-secondary mr-2" href={`${STOCK_MOVEMENT_URL.base}/addDocument/${data.id}`}>
-              <Translate id="react.stockMovement.uploadDocuments.label" defaultMessage="Upload documents" />
-            </a>
+            {(data.documents ?? []).length > 0 && (
+              <a className="btn btn-sm btn-outline-secondary mr-2" href={`${STOCK_MOVEMENT_URL.base}/addDocument/${data.id}`}>
+                <Translate id="react.stockMovement.uploadDocuments.label" defaultMessage="Upload documents" />
+              </a>
+            )}
             {visibleDocuments.length > 0 && (
               <div className="btn-group mr-2">
                 <button type="button" className="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-testid="documents-download-button">

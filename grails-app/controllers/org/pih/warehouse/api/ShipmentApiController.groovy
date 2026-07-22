@@ -717,6 +717,7 @@ class ShipmentApiController {
         comment.save()
         shipment.addToComments(comment)
         if (shipment.hasErrors() || !shipment.save(flush: true)) {
+            transactionStatus.setRollbackOnly()
             renderValidationErrors(shipment)
             return
         }
