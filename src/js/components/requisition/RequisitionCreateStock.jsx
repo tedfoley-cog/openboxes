@@ -118,7 +118,9 @@ const RequisitionCreateStock = () => {
             <span className="col-sm-3 col-form-label font-weight-bold">
               <Translate id="react.requisition.origin.label" defaultMessage="Origin" />
             </span>
-            <div className="col-sm-6 col-form-label">{currentLocation?.name}</div>
+            <div className="col-sm-6 col-form-label">
+              {template?.origin?.name ?? currentLocation?.name}
+            </div>
           </div>
           <div className="form-group row">
             <label className="col-sm-3 col-form-label" htmlFor="requisition-destination-select">

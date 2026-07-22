@@ -33,9 +33,11 @@ const RequisitionPick = () => {
 
   const debouncedPeopleFetch = useMemo(() => debouncePeopleFetch(500, 2), []);
 
-  const applyDetails = (data) => {
+  // syncPicklistFields is false when refreshing after a pick-line save so
+  // unsaved "Picked by" / "Date picked" input is preserved
+  const applyDetails = (data, syncPicklistFields = true) => {
     setRequisition(data);
-    if (data?.picklist) {
+    if (syncPicklistFields && data?.picklist) {
       setPicker(data.picklist.picker ?? null);
       setDatePicked(data.picklist.datePicked ?? '');
     }
@@ -82,7 +84,7 @@ const RequisitionPick = () => {
       });
       // re-fetch so item quantities and available bin locations stay current
       const { data } = await requisitionApi.pickRequisition(requisitionId);
-      applyDetails(data?.data);
+      applyDetails(data?.data, false);
       setSelectedItem(null);
     } catch (err) {
       const message = err?.response?.data?.errorMessage;
