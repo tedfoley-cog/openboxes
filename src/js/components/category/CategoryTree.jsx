@@ -139,6 +139,8 @@ const CategoryTree = () => {
       const { data } = await categoryApi
         .updateAssigningParentToProduct(!assigningParentToProductEnabled);
       setAssigningParentToProductEnabled(!!data?.data?.assigningParentToProductEnabled);
+    } catch (error) {
+      Alert.error(error.response?.data?.errorMessage ?? 'Unable to update setting');
     } finally {
       spinner.hide();
     }
