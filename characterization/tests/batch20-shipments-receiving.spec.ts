@@ -115,12 +115,18 @@ test.describe('batch 20 shipments & receiving react screens', () => {
     await page.getByTestId('receive-order-shipment-type').locator('input').first().focus();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    const today = new Date();
-    const dateText = `${today.toLocaleString('en-US', { month: 'short' })} ${String(today.getDate()).padStart(2, '0')}, ${today.getFullYear()}`;
-    await page.getByTestId('receive-order-shipped-on').locator('input').fill(dateText);
-    await page.keyboard.press('Escape');
-    await page.getByTestId('receive-order-delivered-on').locator('input').fill(dateText);
-    await page.keyboard.press('Escape');
+    // The v2 DateField renders a div-based custom input, so open the
+    // datepicker and pick today from the calendar instead of filling text
+    const day = String(new Date().getDate()).padStart(2, '0');
+    const pickToday = async (testId: string) => {
+      await page.getByTestId(testId).locator('.date-field-input').click();
+      await page
+        .locator(`.react-datepicker__day--0${day}:not(.react-datepicker__day--outside-month)`)
+        .first()
+        .click();
+    };
+    await pickToday('receive-order-shipped-on');
+    await pickToday('receive-order-delivered-on');
     await page.getByTestId('receive-order-recipient').locator('input').first().fill('admin');
     await page.waitForTimeout(1500);
     await page.keyboard.press('ArrowDown');

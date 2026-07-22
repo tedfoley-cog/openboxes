@@ -115,6 +115,13 @@ class ReceiveOrderApiController {
         }
         orderCommand.orderItems = orderItemCommands
 
+        // OrderService.saveOrderShipment clears the Hibernate session mid-save,
+        // so eagerly initialize the order type proxies that
+        // ShipmentService.validateShipment reads afterwards via shipment.orders
+        orderItemCommands.each { OrderItemCommand orderItemCommand ->
+            orderItemCommand.orderItem?.order?.orderType?.isReturnOrder()
+        }
+
         List<String> errorMessages = []
         // Validate only the fields the receive order flow collects; the
         // shipment/shipmentItem properties are populated later by
