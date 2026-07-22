@@ -17,8 +17,15 @@ UNKNOWN = "doesnotexist0000"
 @pytest.fixture(scope="module", autouse=True)
 def require_endpoint(client):
     # The pinned released image predates this endpoint; only source builds
-    # of this branch expose it.
-    if client.request("GET", f"/api/tags/{UNKNOWN}").status_code not in (200, 404):
+    # of this branch expose it. A 404 on an unknown id cannot distinguish
+    # "endpoint missing" from "tag missing", so probe with a real tag.
+    resp = client.request("POST", "/api/generic/tag",
+                          json={"tag": f"{TEST_TAG} probe"})
+    assert resp.status_code == 201
+    probe_id = resp.json()["data"]["id"]
+    exists = client.request("GET", f"/api/tags/{probe_id}").status_code == 200
+    client.request("DELETE", f"/api/generic/tag/{probe_id}")
+    if not exists:
         pytest.skip("app build does not expose /api/tags/{id}")
 
 

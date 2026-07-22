@@ -9,7 +9,7 @@ import tagApi from 'api/services/TagApi';
 import Button from 'components/form-elements/Button';
 import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
-import { INVENTORY_ITEM_URL, TAG_URL, USER_URL } from 'consts/applicationUrls';
+import { PRODUCT_URL, TAG_URL, USER_URL } from 'consts/applicationUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
@@ -30,7 +30,12 @@ const TagShow = () => {
 
   useEffect(() => {
     tagApi.getTag(tagId)
-      .then((response) => setTag(response?.data?.data));
+      .then((response) => setTag(response?.data?.data))
+      .catch(() => {
+        // Unknown/deleted tag: return to the (legacy GSP) tag list, like the
+        // legacy show action did.
+        window.location.href = TAG_URL.list();
+      });
   }, [tagId]);
 
   const deleteTag = async () => {
@@ -137,7 +142,7 @@ const TagShow = () => {
               <li key={product.id}>
                 {product.productCode}
                 {' '}
-                <a href={INVENTORY_ITEM_URL.showStockCard(product.id)}>
+                <a href={PRODUCT_URL.show(product.id)}>
                   {product.name}
                 </a>
               </li>

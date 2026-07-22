@@ -12,6 +12,10 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 
+// useTableData only fetches when filterParams is non-empty, and its
+// callbacks depend on the reference, so use a stable module-level constant.
+const FILTER_PARAMS = { initialized: true };
+
 const UnitOfMeasureConversionList = () => {
   useTranslation('unitOfMeasureConversion', 'reactTable', 'default');
 
@@ -30,7 +34,7 @@ const UnitOfMeasureConversionList = () => {
     tableData,
     onFetchHandler,
   } = useTableData({
-    filterParams: {},
+    filterParams: FILTER_PARAMS,
     url: UNIT_OF_MEASURE_CONVERSION_API,
     errorMessageId: 'react.unitOfMeasureConversion.fetch.fail.label',
     defaultErrorMessage: 'Unable to fetch unit of measure conversions',

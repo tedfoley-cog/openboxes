@@ -63,7 +63,7 @@ class TagApiController {
                 lastUpdated: tag.lastUpdated,
                 products   : (tag.products ?: []).collect { Product product ->
                     [id: product.id, productCode: product.productCode, name: product.name]
-                }.sort { it.productCode },
+                }.sort { it.productCode ?: '' },
         ]
     }
 }
