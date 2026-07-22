@@ -383,6 +383,23 @@ const PARTY_ROLE_URL = {
   show: (id) => `${PARTY_ROLE_URL.base}/show/${id}`,
 };
 
+const LOCALIZATION_URL = {
+  base: `${CONTEXT_PATH}/localization`,
+  list: () => `${LOCALIZATION_URL.base}/list`,
+  edit: (id) => `${LOCALIZATION_URL.base}/edit/${id}`,
+  show: (id) => `${LOCALIZATION_URL.base}/show/${id}`,
+};
+
+const MIGRATION_URL = {
+  base: `${CONTEXT_PATH}/migration`,
+  index: () => `${MIGRATION_URL.base}/index`,
+  dataQuality: () => `${MIGRATION_URL.base}/dataQuality`,
+  dataMigration: () => `${MIGRATION_URL.base}/dataMigration`,
+  dimensionTables: () => `${MIGRATION_URL.base}/dimensionTables`,
+  factTables: () => `${MIGRATION_URL.base}/factTables`,
+  legacy: () => `${MIGRATION_URL.base}/legacy`,
+};
+
 const PARTY_TYPE_URL = {
   base: `${CONTEXT_PATH}/partyType`,
   list: () => `${PARTY_TYPE_URL.base}/list`,
@@ -578,10 +595,12 @@ export {
   INVENTORY_SNAPSHOT_URL,
   INVENTORY_URL,
   INVOICE_URL,
+  LOCALIZATION_URL,
   LOCATION_CONFIGURATION_URL,
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
   LOCATION_URL,
+  MIGRATION_URL,
   ORDER_ADJUSTMENT_TYPE_URL,
   ORDER_URL,
   ORGANIZATION_URL,
