@@ -129,7 +129,7 @@ const ReceiveOrderPage = () => {
           productName: item.product?.name || item.description,
           unitOfMeasure: item.product?.unitOfMeasure,
           quantityOrdered: item.quantityOrdered,
-          quantityRemaining: item.quantityOrdered - item.quantityFulfilled,
+          quantityRemaining: Math.max(0, item.quantityOrdered - item.quantityFulfilled),
           isCompletelyFulfilled: item.isCompletelyFulfilled,
           productReceived: item.product ? {
             id: item.product.id,
