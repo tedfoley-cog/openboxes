@@ -43,6 +43,7 @@ class RoleInterceptor {
 
     def static adminControllers = ['createProduct', 'createProductFromTemplate', 'admin']
     def static adminActions = [
+        'adminApi'       : ['upgrade', 'upgradeDownload', 'upgradeDeploy'],
         'product'        : ['create'],
         'person'         : ['list'],
         'user'           : ['list'],
