@@ -36,11 +36,12 @@ const StockMovementShow = () => {
         const fetchedDetails = data?.data;
         setDetails(fetchedDetails);
         // Mirrors the legacy show.gsp tab selection: Request Details is the
-        // initial tab only for pending, same-origin movements and is hidden
-        // entirely for supplier-origin movements.
+        // initial tab only for pending-shipment, same-origin movements and is
+        // hidden entirely for supplier-origin movements.
         const showRequestDetails = !fetchedDetails?.origin?.isSupplier;
         const defaultToRequestDetails = showRequestDetails
-          && fetchedDetails?.flags?.isPending && fetchedDetails?.flags?.isSameOrigin;
+          && fetchedDetails?.shipment?.currentStatus === 'PENDING'
+          && fetchedDetails?.flags?.isSameOrigin;
         setActiveTab(defaultToRequestDetails ? 'requestDetails' : 'packingList');
       })
       .catch((err) => {
@@ -113,7 +114,7 @@ const StockMovementShow = () => {
               <td>{item.statusCode}</td>
               <td>{item.productCode}</td>
               <td>{item.product?.name}</td>
-              <td>{item.product?.unitOfMeasure || 'EA'}</td>
+              <td>{item.unitOfMeasure || item.product?.unitOfMeasure || 'EA'}</td>
               <td className="text-center">{item.quantityRequested}</td>
               <td className="text-center">{item.quantityPicked}</td>
             </tr>
@@ -301,11 +302,17 @@ const StockMovementShow = () => {
               <td>{document.name}</td>
               <td>{document.documentType?.name ?? document.documentType}</td>
               <td>
-                {document.uri && (
-                  <a href={document.uri} target="_blank" rel="noopener noreferrer">
-                    <Translate id="react.default.button.download.label" defaultMessage="Download" />
-                  </a>
-                )}
+                {document.downloadOptions?.length > 0
+                  ? document.downloadOptions.map((option) => (
+                    <a key={option.uri} className="mr-2" href={option.uri} target="_blank" rel="noopener noreferrer">
+                      {option.name}
+                    </a>
+                  ))
+                  : document.uri && (
+                    <a href={document.uri} target="_blank" rel="noopener noreferrer">
+                      <Translate id="react.default.button.download.label" defaultMessage="Download" />
+                    </a>
+                  )}
               </td>
             </tr>
           ))}
