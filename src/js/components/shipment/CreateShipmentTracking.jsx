@@ -137,7 +137,7 @@ const CreateShipmentTracking = () => {
               </div>
             </div>
           )}
-          {!isExcluded(shipment, 'shipmentMethod') && (
+          {!isExcluded(shipment, 'shipmentMethod.shipper') && (
             <div className="form-group row">
               <label className="col-sm-3 col-form-label" htmlFor="shipment-shipper-select">
                 <Translate id="react.shipment.shipper.label" defaultMessage="Shipper" />

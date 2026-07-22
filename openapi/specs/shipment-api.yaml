@@ -55,6 +55,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/NamedReference'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /api/shipments:
     post:
@@ -84,6 +86,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/WizardDetails'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -188,6 +192,8 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/ItemDetails'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 
@@ -426,6 +432,8 @@ paths:
                                     type: integer
                           isOrigin:
                             type: boolean
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/ControllerNotFound'
 

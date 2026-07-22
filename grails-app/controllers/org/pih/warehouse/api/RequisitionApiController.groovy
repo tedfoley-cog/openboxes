@@ -454,9 +454,9 @@ class RequisitionApiController extends BaseApiController {
                     status            : requisitionItem.status?.toString(),
                     quantity          : requisitionItem.quantity ?: 0,
                     totalQuantityPicked: requisitionItem.totalQuantityPicked() ?: 0,
-                    cancelReasonCode  : requisitionItem.cancelReasonCode,
+                    cancelReasonCode  : reasonCodeLabel(requisitionItem.cancelReasonCode),
                     cancelComments    : requisitionItem.cancelComments,
-                    pickReasonCode    : requisitionItem.pickReasonCode,
+                    pickReasonCode    : reasonCodeLabel(requisitionItem.pickReasonCode),
                     isCanceled        : requisitionItem.isCanceled(),
                     parentItem        : parent ? [
                             productCode     : parent.product?.productCode,
@@ -465,7 +465,7 @@ class RequisitionApiController extends BaseApiController {
                             unitOfMeasure   : parent.product?.unitOfMeasure ?: "EA",
                             isSubstituted   : parent.isSubstituted(),
                             isChanged       : parent.isChanged(),
-                            cancelReasonCode: parent.cancelReasonCode,
+                            cancelReasonCode: reasonCodeLabel(parent.cancelReasonCode),
                             cancelComments  : parent.cancelComments,
                     ] : null,
                     rows              : rows,
@@ -839,6 +839,19 @@ class RequisitionApiController extends BaseApiController {
                        filename: documentInstance.filename,
                        documentNumber: documentInstance.documentNumber,
                        documentType: documentType ? [id: documentType.id, name: documentType.name] : null]] as JSON)
+    }
+
+    /**
+     * Localizes a reason code like the legacy delivery note GSP: the message
+     * key uses the token inside parentheses when present (e.g.
+     * "SUBSTITUTION(CANCELED)" -> enum.ReasonCode.CANCELED).
+     */
+    private String reasonCodeLabel(String reasonCode) {
+        if (!reasonCode) {
+            return reasonCode
+        }
+        String code = reasonCode.contains("(") ? reasonCode.split("\\(", 2)[1].replace(")", "") : reasonCode
+        return g.message(code: "enum.ReasonCode." + code, default: reasonCode)
     }
 
     private Map getDetails(Requisition requisition) {

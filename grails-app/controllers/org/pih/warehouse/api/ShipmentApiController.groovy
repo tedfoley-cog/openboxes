@@ -42,6 +42,9 @@ class ShipmentApiController {
      * and the ShipmentType/ContainerType select boxes on the legacy GSPs).
      */
     def wizardOptions() {
+        if (!requireManager()) {
+            return
+        }
         render([data: [
                 shipmentTypes: ShipmentType.list().collect { [id: it.id, name: it.name] },
                 origins      : locationService.getShipmentOrigins().sort { it?.name?.toLowerCase() }.collect {
@@ -59,6 +62,9 @@ class ShipmentApiController {
      * Shipment details + workflow metadata for the wizard screens.
      */
     def read() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -183,6 +189,9 @@ class ShipmentApiController {
      * Containers and items for the packing screen (enterContainerDetails).
      */
     def packing() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -324,6 +333,9 @@ class ShipmentApiController {
      * bin location at the origin.
      */
     def picklist() {
+        if (!requireManager()) {
+            return
+        }
         Shipment shipment = Shipment.get(params.id)
         if (!shipment) {
             renderNotFound()
@@ -378,8 +390,9 @@ class ShipmentApiController {
             shipmentItem.inventoryItem = inventoryItem
             shipmentItem.binLocation = jsonObject.binLocationId ? Location.get(jsonObject.binLocationId) : null
             shipmentItem.quantity = jsonObject.quantity as Integer
-            shipmentService.validateShipmentItem(shipmentItem)
-            shipmentItem.save(flush: true)
+            if (shipmentService.validateShipmentItem(shipmentItem)) {
+                shipmentItem.save(flush: true)
+            }
         } catch (ValidationException e) {
             shipmentItem.discard()
             renderValidationException(e)
@@ -634,7 +647,8 @@ class ShipmentApiController {
      * action (RoleInterceptor treats all *Workflow controllers as manager
      * only). Actions whose names match the interceptor's change-action
      * prefixes (save*, create*, delete*, add*, update*) are already covered;
-     * this guard applies the same requirement to the remaining ones.
+     * this guard applies the same requirement to the remaining actions,
+     * including the read-only ones the legacy workflow also gated.
      */
     private boolean requireManager() {
         if (!userService.isUserManager(session?.user)) {
