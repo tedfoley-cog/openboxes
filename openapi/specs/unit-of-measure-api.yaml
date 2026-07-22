@@ -108,7 +108,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [QUANTITY, CURRENCY, DIMENSION, TIME, VOLUME, WEIGHT, TEMPERATURE]
+            enum: [AREA, CURRENCY, LENGTH, MASS, PACKAGE, QUANTITY, VOLUME]
       responses:
         '200':
           description: Dropdown options for units of measure of the given type.
