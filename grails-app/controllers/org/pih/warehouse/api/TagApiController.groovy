@@ -92,7 +92,9 @@ class TagApiController {
             def productIds = tag.products?.collect { it.id } ?: []
             productIds.each { productId ->
                 Product product = Product.get(productId)
-                tag.removeFromProducts(product)
+                if (product) {
+                    tag.removeFromProducts(product)
+                }
             }
             tag.delete(flush: true)
         } catch (DataIntegrityViolationException ignored) {
