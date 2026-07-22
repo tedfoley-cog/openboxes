@@ -151,7 +151,7 @@ docker compose up -d     # re-runs migrations from scratch
   needs ~1.5–2 GB total. Increase via `JAVA_TOOL_OPTIONS` in `docker/.env`
   if you see OOM kills.
 - **No local Java toolchain needed for running** — the compose setup uses the
-  released image. Building the WAR from source requires JDK 11
+  released image. Building the WAR from source requires JDK 21
   (see `.github/workflows/backend-tests.yml` for the CI toolchain).
 - **Demo-data loader needs internet** — the app fetches the demo CSVs from
   `raw.githubusercontent.com/openboxes/openboxes/develop/...` at import time.
