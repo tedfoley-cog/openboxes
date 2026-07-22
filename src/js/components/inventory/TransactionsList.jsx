@@ -31,6 +31,7 @@ const TransactionsList = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const pageRef = useRef(0);
+  const sortedRef = useRef([]);
 
   const { currentLocation, isSuperuser, translate } = useSelector((state) => ({
     currentLocation: state.session.currentLocation,
@@ -38,14 +39,18 @@ const TransactionsList = () => {
     translate: translateWithDefaultMessage(getTranslate(state.localize)),
   }));
 
-  const fetchData = useCallback(async (page = pageRef.current) => {
+  const fetchData = useCallback(async (page = pageRef.current, sorted = sortedRef.current) => {
     pageRef.current = page;
+    sortedRef.current = sorted;
     setLoading(true);
+    const sortColumn = sorted?.[0];
     try {
       const response = await apiClient.get(TRANSACTION_API, {
         params: {
           max: PAGE_SIZE,
           offset: page * PAGE_SIZE,
+          sort: sortColumn?.id || null,
+          order: sortColumn ? (sortColumn.desc && 'desc') || 'asc' : null,
           transactionNumber: transactionNumber || null,
           transactionTypeId: transactionType?.id || null,
           transactionDateFrom: transactionDateFrom || null,
@@ -120,6 +125,7 @@ const TransactionsList = () => {
       accessor: 'entryCount',
       className: 'text-right',
       maxWidth: 70,
+      sortable: false,
     },
     {
       Header: <Translate id="react.inventory.transactions.transactionNumber.label" defaultMessage="Transaction number" />,
@@ -139,14 +145,17 @@ const TransactionsList = () => {
     {
       Header: <Translate id="react.inventory.transactions.type.label" defaultMessage="Transaction type" />,
       accessor: 'transactionType.name',
+      sortable: false,
     },
     {
       Header: <Translate id="react.inventory.transactions.inventory.label" defaultMessage="Inventory" />,
       accessor: 'inventory.name',
+      sortable: false,
     },
     {
       Header: <Translate id="react.inventory.transactions.sourceOrDestination.label" defaultMessage="Source / Destination" />,
       accessor: 'source.name',
+      sortable: false,
       Cell: (row) => (
         <span>
           {row.original.source?.name
@@ -158,6 +167,7 @@ const TransactionsList = () => {
     {
       Header: <Translate id="react.inventory.transactions.createdBy.label" defaultMessage="Created by" />,
       accessor: 'createdBy.name',
+      sortable: false,
       Cell: (row) => (
         <span>
           {row.value || translate('react.default.nobody.label', 'Nobody')}
@@ -254,6 +264,7 @@ const TransactionsList = () => {
         defaultPageSize={PAGE_SIZE}
         showPageSizeOptions={false}
         onPageChange={(page) => fetchData(page)}
+        onSortedChange={(sorted) => fetchData(0, sorted)}
         totalData={totalCount}
         noDataText={translate('react.inventory.transactions.empty.label', 'No transactions')}
       />

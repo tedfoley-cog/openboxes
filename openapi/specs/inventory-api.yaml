@@ -244,7 +244,8 @@ paths:
       description: >
         Creates a blank-lot InventoryItem for every product returned by
         findProductsWithoutEmptyLotNumber, mirroring the legacy
-        inventory/createDefaultInventoryItems action.
+        inventory/createDefaultInventoryItems action. Requires an admin
+        (or superuser); returns 403 otherwise.
       responses:
         '200':
           description: Number of inventory items created.
@@ -259,6 +260,15 @@ paths:
                     properties:
                       created:
                         type: integer
+        '403':
+          description: Caller is not an admin.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
   /api/facilities/{facilityId}/inventories/expiredStock:
     get:
       operationId: getExpiredStock

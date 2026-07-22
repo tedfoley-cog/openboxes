@@ -31,6 +31,7 @@ import org.pih.warehouse.core.UserService
 import org.pih.warehouse.report.InventoryReportCommand
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
+import org.apache.commons.io.FilenameUtils
 import org.pih.warehouse.importer.InventoryExcelImporter
 
 class InventoryApiController {
@@ -227,6 +228,11 @@ class InventoryApiController {
     }
 
     def createDefaultInventoryItems() {
+        if (!userService.isUserAdmin(session?.user)) {
+            response.status = 403
+            render([errorMessage: "You are not authorized to create default inventory items"] as JSON)
+            return
+        }
         Integer created = inventoryService.createDefaultInventoryItems()
         render([data: [created: created]] as JSON)
     }
@@ -244,7 +250,8 @@ class InventoryApiController {
             return
         }
 
-        File localFile = uploadService.createLocalFile(uploadFile.originalFilename)
+        String filename = FilenameUtils.getName(uploadFile.originalFilename)
+        File localFile = uploadService.createLocalFile(filename)
         uploadFile.transferTo(localFile)
 
         InventoryExcelImporter excelImporter = new InventoryExcelImporter(localFile.absolutePath)

@@ -43,6 +43,7 @@ const ProductsWithoutDefaultItemList = () => {
       Alert.success(translate(
         'react.inventory.showProducts.created.label',
         `Created ${response.data.data.created} default inventory items`,
+        { count: response.data.data.created },
       ));
       fetchData();
     } finally {
