@@ -88,12 +88,18 @@ class InventoryController {
     }
 
     def editBinLocation() {
-        Product product = Product.findByProductCode(params.productCode)
-        Location location = Location.get(session.warehouse.id)
-        Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
-        InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber)
-        Integer quantity = inventoryService.getQuantityFromBinLocation(location, binLocation, inventoryItem)
-        [location: location, binLocation: binLocation, inventoryItem: inventoryItem, quantity: quantity]
+        // The inventory/manage screen still loads this action as an AJAX dialog,
+        // so keep serving the GSP for XHR requests; direct navigation gets the
+        // React screen.
+        if (request.xhr) {
+            Product product = Product.findByProductCode(params.productCode)
+            Location location = Location.get(session.warehouse.id)
+            Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
+            InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber)
+            Integer quantity = inventoryService.getQuantityFromBinLocation(location, binLocation, inventoryItem)
+            return [location: location, binLocation: binLocation, inventoryItem: inventoryItem, quantity: quantity]
+        }
+        render(view: "/common/react", params: params)
     }
 
     def saveInventoryChanges(ManageInventoryCommand command) {
@@ -141,20 +147,7 @@ class InventoryController {
      */
     //@Cacheable("inventoryControllerCache")
     def browse(InventoryCommand command) {
-        if (!params.max) params.max = 10
-        if (!params.offset) params.offset = 0
-
-        // Set defaults
-        command.location = command?.location ?: Location.get(session.warehouse.id)
-        def category = params.categoryId ? Category.get(params.categoryId) : productService.getRootCategory()
-        command.category = category?.id ? category : null
-        command.catalogs = params.catalogs ? command.catalogs : null
-        command.tags = params.tags ? command.tags : null
-        command.maxResults = params?.max as Integer
-        command.offset = params?.offset as Integer
-        command.searchResults = productAvailabilityService.searchProducts(command)
-
-        [commandInstance: command]
+        render(view: "/common/react", params: params)
     }
 
     /**
@@ -826,51 +819,9 @@ class InventoryController {
     }
 
     def createTransaction() {
-        def command = new TransactionCommand()
-        def warehouseInstance = Location.get(session?.warehouse?.id)
-        def transactionInstance = new Transaction(params)
-
-        def products = []
-
-        // Process productId parameters from inventory browser
-        if (params?.product?.id) {
-            def productIds = params.list('product.id')
-            productIds = productIds.collect { String.valueOf(it) }
-            if (productIds) {
-                products = Product.getAll(productIds)
-                command.productInventoryItems = inventoryService.getInventoryItemsByProducts(warehouseInstance, productIds)
-
-                command.binLocations = inventoryService.getProductQuantityByBinLocation(warehouseInstance, products)
-            }
-        }
-        // If given a list of inventory items, we just return those inventory items
-        else if (params?.inventoryItem?.id) {
-            def inventoryItemIds = params.list('inventoryItem.id')
-            def inventoryItems = inventoryItemIds.collect { InventoryItem.get(String.valueOf(it)) }
-
-            def productIds = inventoryItems.collect { it?.product?.id }
-            if (productIds) {
-                products = Product.getAll(productIds)
-            }
-            command.binLocations = inventoryService.getBinLocationsByInventoryItems(warehouseInstance, inventoryItems)
-        } else {
-            throw new RuntimeException("You must select at least one product or inventory item")
-        }
-
-        println "Product inventory items " + command?.productInventoryItems
-
-        command.transactionInstance = transactionInstance
-        command.warehouseInstance = warehouseInstance
-
-        command.quantityMap = inventoryService.getQuantityForInventory(warehouseInstance?.inventory, products)
-
-        [command: command]
-
+        render(view: "/common/react", params: params)
     }
 
-    /**
-     * Save a transaction that sets the current inventory level for stock.
-     */
     def saveAdjustmentTransaction(TransactionCommand command) {
         log.info("Saving inventory adjustment " + params)
         log.info "Command: " + command

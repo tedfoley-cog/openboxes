@@ -229,3 +229,17 @@ export const INDICATORS_INVENTORY_ACCURACY = `${INDICATORS_REPORT}/inventoryAccu
 export const INVENTORY_API = (id) => `${API}/facilities/${id}/inventories`;
 export const REORDER_REPORT = (id) => `${INVENTORY_API(id)}/reorderReport`;
 export const EXPIRATION_HISTORY_REPORT = `${API}/inventories/expirationHistoryReport`;
+export const INVENTORY_BROWSE = `${API}/inventories/browse`;
+export const INVENTORY_TRANSACTION_CANDIDATES = `${API}/inventories/transactionCandidates`;
+export const INVENTORY_BIN_LOCATION_DETAILS = `${API}/inventories/binLocationDetails`;
+export const INVENTORY_ADJUST_STOCK = `${API}/inventories/adjustStock`;
+
+// CONSUMPTION
+export const CONSUMPTION_AGGREGATE = `${API}/consumption/aggregate`;
+export const CONSUMPTION_SUMMARY = `${API}/consumption/summary`;
+
+// TRANSACTIONS
+export const TRANSACTION_API = `${API}/transactions`;
+
+// STOCK ADJUSTMENTS
+export const STOCK_ADJUSTMENTS_API = `${API}/stockAdjustments`;

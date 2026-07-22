@@ -198,6 +198,36 @@ const AsyncCycleCountReporting = Loadable({
   loading: Loading,
 });
 
+const AsyncConsumptionList = Loadable({
+  loader: () => import('components/consumption/ConsumptionList'),
+  loading: Loading,
+});
+
+const AsyncConsumptionPivot = Loadable({
+  loader: () => import('components/consumption/ConsumptionPivot'),
+  loading: Loading,
+});
+
+const AsyncConsumptionShow = Loadable({
+  loader: () => import('components/consumption/ConsumptionShow'),
+  loading: Loading,
+});
+
+const AsyncInventoryBrowse = Loadable({
+  loader: () => import('components/inventory/InventoryBrowse'),
+  loading: Loading,
+});
+
+const AsyncCreateTransaction = Loadable({
+  loader: () => import('components/inventory/CreateTransaction'),
+  loading: Loading,
+});
+
+const AsyncEditBinLocation = Loadable({
+  loader: () => import('components/inventory/EditBinLocation'),
+  loading: Loading,
+});
+
 const AsyncReorderReport = Loadable({
   loader: () => import('components/reporting/reorderReport/ReorderReport'),
   loading: Loading,
@@ -257,6 +287,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/importOutboundStockMovement" component={AsyncOutboundImport} />
             <MainLayoutRoute path="**/report/expirationHistoryReport" component={AsyncExpirationHistoryReport} />
             <MainLayoutRoute path="**/inventory/reorderReport" component={AsyncReorderReport} />
+            <MainLayoutRoute path="**/inventory/browse" component={AsyncInventoryBrowse} />
+            <MainLayoutRoute path="**/inventory/createTransaction" component={AsyncCreateTransaction} />
+            <MainLayoutRoute path="**/inventory/editBinLocation" component={AsyncEditBinLocation} />
+            <MainLayoutRoute path="**/consumption/list" component={AsyncConsumptionList} />
+            <MainLayoutRoute path="**/consumption/pivot" component={AsyncConsumptionPivot} />
+            <MainLayoutRoute path="**/consumption/show" component={AsyncConsumptionShow} />
             <MainLayoutRoute path="**/inventory/cycleCount/count" component={AsyncCycleCountCountStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/resolve" component={AsyncCycleCountResolveStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/reporting" component={AsyncCycleCountReporting} />

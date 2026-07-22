@@ -9,19 +9,30 @@ import org.pih.warehouse.core.Location
 import org.pih.warehouse.importer.CSVUtils
 import org.pih.warehouse.importer.ImportDataCommand
 import org.pih.warehouse.importer.InventoryImportDataService
+import org.pih.warehouse.core.ReasonCode
+import org.pih.warehouse.inventory.AdjustStockCommand
 import org.pih.warehouse.inventory.ExpirationHistoryReportFilterCommand
 import org.pih.warehouse.inventory.ExpirationHistoryReportRow
+import org.pih.warehouse.inventory.InventoryCommand
+import org.pih.warehouse.inventory.InventoryItem
 import org.pih.warehouse.inventory.InventoryService
 import org.pih.warehouse.inventory.ReorderReportFilterCommand
 import org.pih.warehouse.inventory.ReorderReportItemDto
 import org.pih.warehouse.inventory.TransactionEntry
+import org.pih.warehouse.inventory.TransactionType
 import org.pih.warehouse.inventory.product.ExpirationHistoryReport
+import org.pih.warehouse.core.Tag
+import org.pih.warehouse.product.Category
+import org.pih.warehouse.product.Product
+import org.pih.warehouse.product.ProductCatalog
 
 class InventoryApiController {
 
     InventoryImportDataService inventoryImportDataService
     DashboardService dashboardService
     InventoryService inventoryService
+    def productAvailabilityService
+    def productService
 
     def importCsv() {
         String fileData = request.inputStream.text
@@ -65,6 +76,149 @@ class InventoryApiController {
                 render([data: reorderReport] as JSON)
             }
         }
+    }
+
+    /**
+     * Paginated product search with quantity on hand for the React
+     * inventory browser (mirrors InventoryController.browse).
+     */
+    def browse() {
+        Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+
+        InventoryCommand command = new InventoryCommand()
+        command.location = location
+        command.searchTerms = params.searchTerms ?: null
+        def category = params.categoryId ? Category.get(params.categoryId) : productService.getRootCategory()
+        command.category = category?.id ? category : null
+        command.tags = params.list("tags") ? Tag.getAll(params.list("tags")) : null
+        command.catalogs = params.list("catalogs") ? ProductCatalog.getAll(params.list("catalogs")) : null
+        command.maxResults = params.max ? params.int("max") : 10
+        command.offset = params.offset ? params.int("offset") : 0
+
+        PaginatedList searchResults = productAvailabilityService.searchProducts(command)
+
+        def data = searchResults.list.collect { result ->
+            Product product = result.product
+            [
+                    id            : product.id,
+                    productCode   : product.productCode,
+                    name          : product.name,
+                    displayName   : product.displayNameOrDefaultName,
+                    color         : product.color,
+                    productType   : product.productType?.name,
+                    category      : [id: product.category?.id, name: product.category?.name],
+                    tags          : product.tags?.collect { [id: it.id, tag: it.tag] } ?: [],
+                    catalogs      : product.productCatalogs?.collect { [id: it.id, name: it.name] } ?: [],
+                    quantityOnHand: result.quantityOnHand,
+            ]
+        }
+        render([data: data, totalCount: searchResults.totalCount] as JSON)
+    }
+
+    /**
+     * Returns per-bin inventory item rows for the given products, used by the
+     * React record-transaction screen (mirrors InventoryController.createTransaction).
+     */
+    def getTransactionCandidates() {
+        Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        TransactionType transactionType = TransactionType.get(params.transactionTypeId)
+
+        List<String> productIds = params.list("product.id").collect { String.valueOf(it) }
+        if (!productIds) {
+            throw new IllegalArgumentException("You must select at least one product")
+        }
+        List<Product> products = Product.getAll(productIds)
+        def binLocationEntries = inventoryService.getProductQuantityByBinLocation(location, products)
+
+        def data = binLocationEntries.collect { entry ->
+            [
+                    product      : [
+                            id           : entry.product?.id,
+                            productCode  : entry.product?.productCode,
+                            name         : entry.product?.name,
+                            unitOfMeasure: entry.product?.unitOfMeasure,
+                    ],
+                    binLocation  : entry.binLocation ? [id: entry.binLocation.id, name: entry.binLocation.name] : null,
+                    inventoryItem: entry.inventoryItem ? [
+                            id            : entry.inventoryItem.id,
+                            lotNumber     : entry.inventoryItem.lotNumber,
+                            expirationDate: entry.inventoryItem.expirationDate?.format("MM/dd/yyyy"),
+                    ] : null,
+                    quantityOnHand: entry.quantity ?: 0,
+            ]
+        }
+
+        render([
+                transactionType: transactionType ? [
+                        id             : transactionType.id,
+                        name           : transactionType.name,
+                        transactionCode: transactionType.transactionCode?.name(),
+                ] : null,
+                data           : data,
+                totalCount     : data.size(),
+        ] as JSON)
+    }
+
+    /**
+     * Returns details for a single bin location / lot pairing, used by the
+     * React edit-bin-location (adjust stock) screen
+     * (mirrors InventoryController.editBinLocation).
+     */
+    def getBinLocationDetails() {
+        Location location = Location.get(params.locationId ?: session?.warehouse?.id)
+        Product product = Product.findByProductCode(params.productCode)
+        Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
+        InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber ?: null)
+        Integer quantity = inventoryService.getQuantityFromBinLocation(location, binLocation, inventoryItem)
+
+        render([data: [
+                location      : [id: location?.id, name: location?.name],
+                binLocation   : binLocation ? [id: binLocation.id, name: binLocation.name] : null,
+                product       : product ? [
+                        id           : product.id,
+                        productCode  : product.productCode,
+                        name         : product.name,
+                        unitOfMeasure: product.unitOfMeasure,
+                ] : null,
+                inventoryItem : inventoryItem ? [
+                        id            : inventoryItem.id,
+                        lotNumber     : inventoryItem.lotNumber,
+                        expirationDate: inventoryItem.expirationDate?.format("MM/dd/yyyy"),
+                ] : null,
+                quantityOnHand: quantity ?: 0,
+        ]] as JSON)
+    }
+
+    /**
+     * Adjusts the stock level for a single inventory item / bin location
+     * (mirrors InventoryItemController.adjustStock, used by the React
+     * edit-bin-location screen).
+     */
+    def adjustStock() {
+        def json = request.JSON
+        Location location = Location.get(json.locationId ?: session?.warehouse?.id)
+        InventoryItem inventoryItem = InventoryItem.get(json.inventoryItemId as String)
+
+        AdjustStockCommand command = new AdjustStockCommand()
+        command.location = location
+        command.binLocation = json.binLocationId ? Location.get(json.binLocationId as String) : null
+        command.inventoryItem = inventoryItem
+        command.currentQuantity = json.currentQuantity != null ? json.currentQuantity as Integer : null
+        command.newQuantity = json.newQuantity as Integer
+        command.reasonCode = json.reasonCode ? ReasonCode.valueOf(json.reasonCode as String) : null
+        command.comment = json.comment ?: null
+
+        inventoryService.adjustStock(command)
+
+        if (command.hasErrors()) {
+            throw new ValidationException("Invalid stock adjustment", command.errors)
+        }
+
+        render([data: [
+                inventoryItemId: inventoryItem?.id,
+                productId      : inventoryItem?.product?.id,
+                newQuantity    : command.newQuantity,
+        ]] as JSON)
     }
 
     def getExpirationHistoryReport(ExpirationHistoryReportFilterCommand command) {
