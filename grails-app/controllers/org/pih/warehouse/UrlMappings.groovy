@@ -109,6 +109,12 @@ class UrlMappings {
             action = [GET: "glAccountTypeOptions"]
         }
 
+        // Gl account type code (enum) options for the GL account type form
+        "/api/glAccountTypeCodeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "glAccountTypeCodeOptions"]
+        }
+
         "/api/paymentTermOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "paymentTermOptions"]
@@ -632,6 +638,32 @@ class UrlMappings {
         }
 
         // Invoice API
+        "/api/invoices/$id/details"(parseRequest: true) {
+            controller = "invoiceApi"
+            action = [GET: "details"]
+        }
+
+        "/api/invoices/documentTypes"(parseRequest: true) {
+            controller = "invoiceApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/invoices/$id/documents"(parseRequest: false) {
+            controller = "invoiceApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/invoices/$id/documents/$documentId"(parseRequest: true) {
+            controller = "invoiceApi"
+            action = [DELETE: "deleteDocument"]
+        }
+
+        // Order API (comments for the migrated add comment screen)
+        "/api/orders/$id/comments"(parseRequest: true) {
+            controller = "orderApi"
+            action = [POST: "createComment"]
+        }
+
         "/api/invoices/$id/items"(parseRequest: true) {
             controller = "invoiceApi"
             action = [POST: "updateItems", GET: "getInvoiceItems"]
