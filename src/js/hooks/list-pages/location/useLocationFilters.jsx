@@ -56,22 +56,29 @@ const useLocationFilters = () => {
     const queryProps = queryString.parse(history.location.search);
     const types = await fetchLocationTypes();
 
-    if (queryProps.searchTerm) {
-      defaultValues.searchTerm = queryProps.searchTerm;
+    // Legacy list.gsp links used dotted keys (locationType.id, etc.)
+    const locationTypeId = queryProps.locationType ?? queryProps['locationType.id'];
+    const locationGroupId = queryProps.locationGroup ?? queryProps['locationGroup.id'];
+    const organizationId = queryProps.organization ?? queryProps['organization.id'];
+
+    const searchTerm = queryProps.searchTerm ?? queryProps.q;
+
+    if (searchTerm) {
+      defaultValues.searchTerm = searchTerm;
     }
-    if (queryProps.locationType) {
+    if (locationTypeId) {
       defaultValues.locationType = types
-        .find(({ id }) => id === queryProps.locationType);
+        .find(({ id }) => id === locationTypeId);
     } else {
       // The legacy location list defaults to filtering by the Depot location type
       defaultValues.locationType = types
         .find(({ locationTypeCode }) => locationTypeCode === DEPOT);
     }
-    if (queryProps.locationGroup) {
-      defaultValues.locationGroup = await fetchLocationGroupById(queryProps.locationGroup);
+    if (locationGroupId) {
+      defaultValues.locationGroup = await fetchLocationGroupById(locationGroupId);
     }
-    if (queryProps.organization) {
-      const organization = await fetchOrganization(queryProps.organization);
+    if (organizationId) {
+      const organization = await fetchOrganization(organizationId);
       if (organization) {
         organization.label = organization.displayName ?? organization.name;
         defaultValues.organization = organization;
