@@ -24,6 +24,7 @@ class TransactionApiController {
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
 
     InventoryService inventoryService
+    def userService
 
     def list() {
         Location location = Location.get(params.facilityId ?: session?.warehouse?.id)
@@ -145,6 +146,11 @@ class TransactionApiController {
     }
 
     def delete() {
+        if (!userService.isSuperuser(session?.user)) {
+            response.status = 403
+            render([errorMessage: "You are not authorized to delete transactions"] as JSON)
+            return
+        }
         Transaction transaction = Transaction.get(params.id)
         if (!transaction) {
             response.status = 404

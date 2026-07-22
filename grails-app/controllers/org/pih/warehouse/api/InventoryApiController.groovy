@@ -215,15 +215,8 @@ class InventoryApiController {
     }
 
     def createDefaultInventoryItems() {
-        List<Product> products = inventoryService.findProductsWithoutEmptyLotNumber()
-        products.each { Product product ->
-            InventoryItem inventoryItem = new InventoryItem()
-            inventoryItem.product = product
-            inventoryItem.lotNumber = null
-            inventoryItem.expirationDate = null
-            inventoryItem.save()
-        }
-        render([data: [created: products.size()]] as JSON)
+        Integer created = inventoryService.createDefaultInventoryItems()
+        render([data: [created: created]] as JSON)
     }
 
     def uploadInventory() {

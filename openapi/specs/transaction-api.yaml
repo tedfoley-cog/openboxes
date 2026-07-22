@@ -297,8 +297,9 @@ paths:
       summary: Delete a transaction and its entries
       description: >
         Deletes the transaction via InventoryService.deleteTransaction,
-        mirroring the legacy inventory/deleteTransaction action. Returns 400
-        when the transaction cannot be deleted due to integrity constraints.
+        mirroring the legacy inventory/deleteTransaction action. Requires a
+        superuser; returns 403 otherwise. Returns 400 when the transaction
+        cannot be deleted due to integrity constraints.
       parameters:
         - $ref: '#/components/parameters/transactionId'
       responses:
@@ -317,6 +318,15 @@ paths:
                         type: string
         '400':
           description: Transaction could not be deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+        '403':
+          description: Caller is not a superuser.
           content:
             application/json:
               schema:
