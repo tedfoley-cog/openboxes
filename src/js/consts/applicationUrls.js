@@ -116,6 +116,19 @@ const INVENTORY_ITEM_URL = {
     url: `${INVENTORY_ITEM_URL.base}/showStockCard/${id}`,
     query: { ...params },
   }),
+  showLotNumbers: (id) => `${INVENTORY_ITEM_URL.base}/showLotNumbers/${id}`,
+  showRecordInventory: (id) => `${INVENTORY_ITEM_URL.base}/showRecordInventory/${id}`,
+  showGraph: (id) => `${INVENTORY_ITEM_URL.base}/showGraph/${id}`,
+  editInventoryLevel: (id) => `${INVENTORY_ITEM_URL.base}/editInventoryLevel/${id}`,
+  showTransactionLog: (id) => stringifyUrl({
+    url: `${INVENTORY_ITEM_URL.base}/showTransactionLog`,
+    query: { 'product.id': id },
+  }),
+};
+
+const INVENTORY_BROWSER_URL = {
+  base: `${CONTEXT_PATH}/inventoryBrowser`,
+  list: () => `${INVENTORY_BROWSER_URL.base}/list`,
 };
 
 const INVENTORY_URL = {
@@ -250,6 +263,7 @@ export {
   CYCLE_COUNT,
   DASHBOARD_URL,
   GL_ACCOUNT_URL,
+  INVENTORY_BROWSER_URL,
   INVENTORY_ITEM_URL,
   INVENTORY_URL,
   INVOICE_URL,
