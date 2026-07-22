@@ -164,6 +164,12 @@ export const PRODUCT_TYPE_BY_ID = (id) => `${PRODUCT_TYPE_API}/${id}`;
 export const PRODUCT_ACTIVITY_CODE_OPTIONS = `${API}/productActivityCodeOptions`;
 export const PRODUCT_FIELD_OPTIONS = `${API}/productFieldOptions`;
 
+// TAGS
+export const TAG_API = `${API}/tags`;
+export const TAG_BY_ID = (id) => `${TAG_API}/${id}`;
+export const TAG_PRODUCTS = (id) => `${TAG_API}/${id}/products`;
+export const TAG_PRODUCT_BY_ID = (id, productId) => `${TAG_PRODUCTS(id)}/${productId}`;
+
 // SHIPMENT TYPES
 export const SHIPMENT_TYPES = `${GENERIC_API}/shipmentType`;
 
