@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Alert from 'react-s-alert';
 
 import stockMovementApi from 'api/services/StockMovementApi';
-import { RECEIVING_URL, STOCK_MOVEMENT_URL } from 'consts/applicationUrls';
+import { RECEIVING_URL, STOCK_MOVEMENT_URL, STOCK_REQUEST_URL } from 'consts/applicationUrls';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
@@ -389,6 +389,73 @@ const StockMovementShow = () => {
             {!details?.flags?.isApprovalRequired && details?.shipment?.id && (
               <a className="btn btn-outline-primary btn-sm mr-2" href={RECEIVING_URL.createPartialReceiving(details.shipment.id)} data-testid="stock-movement-receive-button">
                 <Translate id="react.default.button.receive.label" defaultMessage="Receive" />
+              </a>
+            )}
+            {!details?.flags?.isApprovalRequired && details?.permissions?.isUserAdmin
+              && (details?.flags?.hasBeenReceived || details?.flags?.hasBeenPartiallyReceived)
+              && details?.shipment?.id && (
+              <a className="btn btn-outline-primary btn-sm mr-2" href={RECEIVING_URL.rollbackLastReceipt(details.shipment.id)} data-testid="stock-movement-rollback-last-receipt-button">
+                <Translate id="react.stockMovement.rollbackLastReceipt.label" defaultMessage="Rollback Last Receipt" />
+              </a>
+            )}
+            {!details?.flags?.isApprovalRequired && details?.permissions?.isUserAdmin
+              && !(details?.flags?.hasBeenReceived || details?.flags?.hasBeenPartiallyReceived)
+              && (details?.flags?.hasBeenIssued
+                || ((details?.flags?.hasBeenShipped || details?.flags?.hasBeenPartiallyReceived)
+                  && details?.isFromOrder)) && (
+                  <a className="btn btn-outline-primary btn-sm mr-2" href={STOCK_MOVEMENT_URL.rollback(stockMovementId)} data-testid="stock-movement-rollback-button">
+                    <Translate id="react.default.button.rollback.label" defaultMessage="Rollback" />
+                  </a>
+            )}
+            {!details?.flags?.isApprovalRequired && details?.flags?.isPending
+              && !details?.isElectronicType
+              && (details?.flags?.isSameOrigin || !details?.flags?.originIsDepot) && (
+              <a
+                className="btn btn-outline-danger btn-sm mr-2"
+                href={STOCK_MOVEMENT_URL.remove(stockMovementId)}
+                onClick={(e) => {
+                  if (!window.confirm(translate('react.default.button.delete.confirm.message', 'Are you sure?'))) {
+                    e.preventDefault();
+                  }
+                }}
+                data-testid="stock-movement-delete-button"
+              >
+                <Translate id="react.default.button.delete.label" defaultMessage="Delete" />
+              </a>
+            )}
+            {!details?.flags?.isApprovalRequired && details?.flags?.isPending
+              && details?.isElectronicType
+              && (details?.flags?.isSameOrigin || details?.flags?.isSameDestination
+                || !details?.flags?.originIsDepot) && (
+                <a
+                  className="btn btn-outline-danger btn-sm mr-2"
+                  href={STOCK_REQUEST_URL.remove(stockMovementId)}
+                  onClick={(e) => {
+                    if (!window.confirm(translate('react.default.button.delete.confirm.message', 'Are you sure?'))) {
+                      e.preventDefault();
+                    }
+                  }}
+                  data-testid="stock-movement-delete-button"
+                >
+                  <Translate id="react.default.button.delete.label" defaultMessage="Delete" />
+                </a>
+            )}
+            {details?.flags?.isApprovalRequired && details?.permissions?.supportsApproveRequest
+              && details?.flags?.isRequisitionPendingApproval
+              && details?.permissions?.userHasRequestApproverRole && (
+              <>
+                <a className="btn btn-outline-success btn-sm mr-2" href={STOCK_MOVEMENT_URL.updateStatus(stockMovementId, 'APPROVED')} data-testid="stock-movement-approve-button">
+                  <Translate id="react.stockMovement.approve.label" defaultMessage="Approve" />
+                </a>
+                <a className="btn btn-outline-danger btn-sm mr-2" href={STOCK_REQUEST_URL.reject(stockMovementId)} data-testid="stock-movement-reject-button">
+                  <Translate id="react.stockMovement.reject.label" defaultMessage="Reject" />
+                </a>
+              </>
+            )}
+            {details?.flags?.isApprovalRequired && details?.permissions?.supportsApproveRequest
+              && details?.permissions?.canRollbackApproval && (
+              <a className="btn btn-outline-primary btn-sm mr-2" href={STOCK_REQUEST_URL.rollbackApproval(stockMovementId)} data-testid="stock-movement-rollback-approval-button">
+                <Translate id="react.stockMovement.rollbackApproval.label" defaultMessage="Rollback Approval" />
               </a>
             )}
             <a className="btn btn-outline-primary btn-sm mr-2" href={STOCK_MOVEMENT_URL.addComment(stockMovementId)} data-testid="stock-movement-add-comment-button">

@@ -98,11 +98,22 @@ const STOCK_MOVEMENT_URL = {
   uploadDocuments: (id) => `${STOCK_MOVEMENT_URL.base}/uploadDocuments/${id}`,
   addComment: (id) => `${STOCK_MOVEMENT_URL.base}/addComment/${id}`,
   addDocument: (id) => `${STOCK_MOVEMENT_URL.base}/addDocument/${id}`,
+  rollback: (id) => `${STOCK_MOVEMENT_URL.base}/rollback/${id}`,
+  remove: (id) => `${STOCK_MOVEMENT_URL.base}/remove/${id}?show=true`,
+  updateStatus: (id, status) => `${STOCK_MOVEMENT_URL.base}/updateStatus/${id}?status=${status}`,
+};
+
+const STOCK_REQUEST_URL = {
+  base: `${CONTEXT_PATH}/stockRequest`,
+  remove: (id) => `${STOCK_REQUEST_URL.base}/remove/${id}?show=true`,
+  reject: (id) => `${STOCK_REQUEST_URL.base}/reject/${id}`,
+  rollbackApproval: (id) => `${STOCK_REQUEST_URL.base}/rollbackApproval/${id}`,
 };
 
 const RECEIVING_URL = {
   base: `${CONTEXT_PATH}/partialReceiving`,
   createPartialReceiving: (shipmentId) => `${RECEIVING_URL.base}/create/${shipmentId}`,
+  rollbackLastReceipt: (shipmentId) => `${RECEIVING_URL.base}/rollbackLastReceipt/${shipmentId}`,
 };
 
 const SHIPMENT_WORKFLOW_URL = {
@@ -597,6 +608,7 @@ export {
   SHIPMENT_SHOW_URL,
   SHIPMENT_WORKFLOW_URL,
   STOCK_MOVEMENT_URL,
+  STOCK_REQUEST_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
   TAG_URL,
