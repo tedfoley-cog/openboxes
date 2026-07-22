@@ -97,7 +97,7 @@ const RequisitionTemplateShow = () => {
           <span className="font-weight-normal" data-testid="template-summary">
             {`${translate('react.requisitionTemplate.origin.label', 'Origin')}: ${template?.origin?.name ?? translate('react.default.none.label', 'None')} | `}
             {`${translate('react.requisitionTemplate.destination.label', 'Destination')}: ${template?.destination?.name ?? translate('react.default.none.label', 'None')} | `}
-            {`${translate('react.requisitionTemplate.requisitionItems.label', 'Requested items')}: ${items.length}`}
+            {`${translate('react.requisitionTemplate.requisitionItems.label', 'Requested items')}: ${template?.requisitionItemCount ?? items.length}`}
           </span>
         </div>
       </HeaderWrapper>

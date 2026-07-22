@@ -89,6 +89,7 @@ class StocklistApiController {
                 description        : requisition.description,
                 isPublished        : requisition.isPublished,
                 replenishmentPeriod: requisition.replenishmentPeriod,
+                requisitionItemCount: requisition.requisitionItemCount,
                 origin             : requisition.origin ? [id: requisition.origin.id, name: requisition.origin.name] : null,
                 destination        : requisition.destination ? [id: requisition.destination.id, name: requisition.destination.name] : null,
                 requestedBy        : requisition.requestedBy ? [id: requisition.requestedBy.id, name: requisition.requestedBy.name] : null,

@@ -379,6 +379,10 @@ components:
         replenishmentPeriod:
           type: integer
           nullable: true
+        requisitionItemCount:
+          type: integer
+          nullable: true
+          description: Count of ORIGINAL-type items only (legacy summary parity).
         origin:
           $ref: '#/components/schemas/NamedReference'
         destination:

@@ -24,9 +24,13 @@ const fetchAllInventoryLevels = async (locationId) => {
     const response = await apiClient.get(INVENTORY_LEVELS_API, {
       params: { locationId, max: PAGE_SIZE, offset },
     });
-    levels.push(...(response?.data?.data ?? []));
+    const page = response?.data?.data ?? [];
+    levels.push(...page);
     totalCount = response?.data?.totalCount ?? 0;
     offset += PAGE_SIZE;
+    if (page.length < PAGE_SIZE) {
+      break;
+    }
   } while (levels.length < totalCount);
   return levels;
 };
