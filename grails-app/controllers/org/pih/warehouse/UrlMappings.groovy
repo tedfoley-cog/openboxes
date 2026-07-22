@@ -698,6 +698,58 @@ class UrlMappings {
             action = [GET: "getDocuments"]
         }
 
+        // Stock movement detail API (migrated stockMovement show / addComment / addDocument screens)
+        "/api/stockMovements/documentTypes" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/stockMovements/$id/details" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "details"]
+        }
+
+        "/api/stockMovements/$id/packingList" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "packingList"]
+        }
+
+        "/api/stockMovements/$id/receiptItems" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "receiptItems"]
+        }
+
+        "/api/stockMovements/$id/events" {
+            controller = "stockMovementDetailApi"
+            action = [GET: "events"]
+        }
+
+        "/api/stockMovements/$id/comments"(parseRequest: true) {
+            controller = "stockMovementDetailApi"
+            action = [GET: "listComments", POST: "createComment"]
+        }
+
+        "/api/stockMovements/$id/uploadDocument" {
+            controller = "stockMovementDetailApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        // Shipment workflow API (migrated shipmentWorkflow list/show/edit screens)
+        "/api/shipmentWorkflows"(parseRequest: true) {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "list"]
+        }
+
+        "/api/shipmentWorkflows/options" {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "options"]
+        }
+
+        "/api/shipmentWorkflows/$id"(parseRequest: true) {
+            controller = "shipmentWorkflowApi"
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         "/api/picklists/$id/items" {
             controller = "picklistApi"
             action = [DELETE: "clearPicklist"]

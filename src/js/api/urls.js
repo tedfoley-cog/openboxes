@@ -343,6 +343,20 @@ export const SHIPMENT_CLEAR_PICKLIST = (id) => `${SHIPMENT_BY_ID(id)}/clearPickl
 export const SHIPMENT_SEND = (id) => `${SHIPMENT_BY_ID(id)}/send`;
 export const REQUISITION_DELIVERY_NOTE = (id) => `${REQUISITION_BY_ID(id)}/deliveryNote`;
 
+// SHIPMENT WORKFLOW (migrated shipmentWorkflow list/show/edit screens)
+export const SHIPMENT_WORKFLOW_API = `${API}/shipmentWorkflows`;
+export const SHIPMENT_WORKFLOW_BY_ID = (id) => `${SHIPMENT_WORKFLOW_API}/${id}`;
+export const SHIPMENT_WORKFLOW_OPTIONS = `${SHIPMENT_WORKFLOW_API}/options`;
+
+// STOCK MOVEMENT DETAIL (migrated stockMovement show/addComment/addDocument screens)
+export const STOCK_MOVEMENT_DETAILS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/details`;
+export const STOCK_MOVEMENT_PACKING_LIST = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/packingList`;
+export const STOCK_MOVEMENT_RECEIPT_ITEMS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/receiptItems`;
+export const STOCK_MOVEMENT_EVENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/events`;
+export const STOCK_MOVEMENT_COMMENTS = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/comments`;
+export const STOCK_MOVEMENT_UPLOAD_DOCUMENT = (id) => `${STOCK_MOVEMENT_BY_ID(id)}/uploadDocument`;
+export const STOCK_MOVEMENT_DOCUMENT_TYPES = `${STOCK_MOVEMENT_API}/documentTypes`;
+
 // REQUISITION TEMPLATE (stock list template screens)
 export const REQUISITION_TEMPLATE_API = `${API}/requisitionTemplates`;
 export const REQUISITION_TEMPLATE_BY_ID = (id) => `${REQUISITION_TEMPLATE_API}/${id}`;

@@ -172,11 +172,7 @@ class StockMovementController {
         if (stockMovement?.order) {
             render(view: "/returns/show", model: [stockMovement: stockMovement, currentLocation: currentLocation])
         } else {
-            render(view: "show", model: [
-                    stockMovement: stockMovement,
-                    currentLocation: currentLocation,
-                    latestHistoryItem: latestHistoryItem,
-            ])
+            render(view: "/common/react", params: params)
         }
     }
 
@@ -371,11 +367,7 @@ class StockMovementController {
     }
 
     def addComment() {
-        def stockMovement = outboundStockMovementService.getStockMovement(params.id)
-        if (!stockMovement) {
-            stockMovement = stockMovementService.getStockMovement(params.id)
-        }
-        [stockMovement: stockMovement, comment: new Comment()]
+        render(view: "/common/react", params: params)
     }
 
     def reject() {
@@ -505,28 +497,7 @@ class StockMovementController {
     }
 
     def addDocument() {
-        log.info "params " + params
-        def stockMovement = outboundStockMovementService.getStockMovement(params.id)
-        if (!stockMovement) {
-            stockMovement =  stockMovementService.getStockMovement(params.id)
-        }
-        List<DocumentType> documentTypes = documentService.getNonTemplateDocumentTypes()
-
-        Shipment shipmentInstance = stockMovement.shipment
-        def documentInstance = Document.get(params?.document?.id)
-        if (!documentInstance) {
-            documentInstance = new Document()
-        }
-        if (!shipmentInstance) {
-            flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'shipment.label', default: 'Shipment'), params.id])}"
-            redirect(action: "list")
-        }
-        render(view: "addDocument", model: [
-                shipmentInstance: shipmentInstance,
-                documentInstance: documentInstance,
-                stockMovementInstance: stockMovement,
-                documentTypes: documentTypes
-        ])
+        render(view: "/common/react", params: params)
     }
 
     def exportCsv() {

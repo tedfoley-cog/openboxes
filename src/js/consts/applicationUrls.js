@@ -96,6 +96,16 @@ const STOCK_MOVEMENT_URL = {
   importCsv: (id) => `${STOCK_MOVEMENT_URL.base}/importCsv/${id}`,
   exportCsv: (id) => `${STOCK_MOVEMENT_URL.base}/exportCsv/${id}`,
   uploadDocuments: (id) => `${STOCK_MOVEMENT_URL.base}/uploadDocuments/${id}`,
+  addComment: (id) => `${STOCK_MOVEMENT_URL.base}/addComment/${id}`,
+  addDocument: (id) => `${STOCK_MOVEMENT_URL.base}/addDocument/${id}`,
+};
+
+const SHIPMENT_WORKFLOW_URL = {
+  base: `${CONTEXT_PATH}/shipmentWorkflow`,
+  list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
+  show: (id) => `${SHIPMENT_WORKFLOW_URL.base}/show/${id}`,
+  edit: (id) => `${SHIPMENT_WORKFLOW_URL.base}/edit/${id}`,
+  create: () => `${SHIPMENT_WORKFLOW_URL.base}/create`,
 };
 
 const INVOICE_URL = {
@@ -541,6 +551,7 @@ export {
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
   SHIPMENT_SHOW_URL,
+  SHIPMENT_WORKFLOW_URL,
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
