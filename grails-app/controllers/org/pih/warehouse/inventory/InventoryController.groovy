@@ -778,7 +778,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support receipt transactions")
         }
         params.transactionType = Constants.TRANSFER_IN_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createOutboundTransfer() {
@@ -787,7 +787,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support transfer transactions")
         }
         params.transactionType = Constants.TRANSFER_OUT_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createAdjustment() {
@@ -796,7 +796,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support adjustment transactions")
         }
         params.transactionType = Constants.ADJUSTMENT_CREDIT_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createConsumed() {
@@ -805,30 +805,33 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support consumption transactions")
         }
         params.transactionType = Constants.CONSUMPTION_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createExpired() {
         params.transactionType = Constants.EXPIRATION_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createDamaged() {
         params.transactionType = Constants.DAMAGE_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
+    }
+
+    // The legacy shortcut actions above and the expiring/expired stock list
+    // forms carry their selection in POST bodies or non-routable URLs, so
+    // normalize everything into query parameters the React screen can read.
+    private Map createTransactionRedirectParams() {
+        [
+                'transactionType.id': params['transactionType.id'] ?: params.transactionType,
+                'product.id'        : params.list('product.id'),
+                'inventoryItem.id'  : params.list('inventoryItem.id'),
+        ].findAll { it.value }
     }
 
     def createTransaction() {
-        // Legacy screens (expiring/expired stock lists) POST their selection;
-        // redirect to a GET so the React screen can read the selection from
-        // the query string.
-        if (request.post) {
-            Map redirectParams = [
-                    'transactionType.id': params['transactionType.id'] ?: params.transactionType,
-                    'product.id'        : params.list('product.id'),
-                    'inventoryItem.id'  : params.list('inventoryItem.id'),
-            ].findAll { it.value }
-            redirect(action: "createTransaction", params: redirectParams)
+        if (request.method == "POST") {
+            redirect(action: "createTransaction", params: createTransactionRedirectParams())
             return
         }
         render(view: "/common/react", params: params)

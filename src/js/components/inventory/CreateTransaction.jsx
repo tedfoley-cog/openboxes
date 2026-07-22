@@ -17,6 +17,9 @@ import { fetchLocations } from 'utils/option-utils';
 import PageWrapper from 'wrappers/PageWrapper';
 
 const TRANSFER_IN_CODE = 'CREDIT';
+// The legacy GSP fell back to the "consumed" template when no transaction
+// type was given (e.g. the record-stock link on the product page)
+const CONSUMPTION_TYPE_ID = '2';
 // Transfer In / Transfer Out (see Constants.TRANSFER_IN/OUT_TRANSACTION_TYPE_ID)
 const TRANSFER_TYPE_IDS = ['8', '9'];
 
@@ -28,7 +31,7 @@ const CreateTransaction = () => {
   const history = useHistory();
 
   const params = queryString.parse(location.search);
-  const transactionTypeId = params['transactionType.id'];
+  const transactionTypeId = params['transactionType.id'] || CONSUMPTION_TYPE_ID;
   const productIds = [].concat(params['product.id'] || []);
   const inventoryItemIds = [].concat(params['inventoryItem.id'] || []);
 
