@@ -141,6 +141,14 @@ paths:
       responses:
         '204':
           description: Deleted; no content.
+        '400':
+          description: >
+            Budget code is referenced by other records (foreign key
+            constraint) and cannot be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common.yaml#/components/schemas/ValidationErrorResponse'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
         '500':

@@ -10,7 +10,15 @@ TEST_CODE = "ZZCONTRACTBC"
 
 
 @pytest.fixture(scope="module", autouse=True)
-def cleanup_leftovers(client):
+def require_endpoint(client):
+    # The pinned released image predates the budget code API; only source
+    # builds of this branch expose it.
+    if client.request("GET", "/api/budgetCodes", params={"max": "1"}).status_code == 404:
+        pytest.skip("app build does not expose /api/budgetCodes")
+
+
+@pytest.fixture(scope="module", autouse=True)
+def cleanup_leftovers(client, require_endpoint):
     for bc in client.get_json("/api/budgetCodes",
                               params={"q": TEST_CODE, "max": "100"})["data"]:
         if bc.get("code") == TEST_CODE:

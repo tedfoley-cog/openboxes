@@ -13,6 +13,8 @@ import useTranslation from 'hooks/useTranslation';
 import StatusIndicator from 'utils/StatusIndicator';
 import Translate from 'utils/Translate';
 
+const FILTER_PARAMS = { initialized: true };
+
 const GlAccountList = () => {
   useTranslation('glAccount', 'reactTable', 'default');
 
@@ -30,7 +32,7 @@ const GlAccountList = () => {
     tableData,
     onFetchHandler,
   } = useTableData({
-    filterParams: { initialized: true },
+    filterParams: FILTER_PARAMS,
     url: GL_ACCOUNT_API,
     errorMessageId: 'react.glAccount.fetch.fail.label',
     defaultErrorMessage: 'Unable to fetch GL accounts',

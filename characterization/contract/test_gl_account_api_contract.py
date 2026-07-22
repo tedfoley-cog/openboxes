@@ -12,7 +12,15 @@ TEST_CODE = "ZZCONTRACTGL"
 
 
 @pytest.fixture(scope="module", autouse=True)
-def cleanup_leftovers(client):
+def require_endpoint(client):
+    # The pinned released image predates the GL account API; only source
+    # builds of this branch expose it.
+    if client.request("GET", "/api/glAccounts", params={"max": "1"}).status_code == 404:
+        pytest.skip("app build does not expose /api/glAccounts")
+
+
+@pytest.fixture(scope="module", autouse=True)
+def cleanup_leftovers(client, require_endpoint):
     for gl in client.get_json("/api/glAccounts")["data"]:
         if gl.get("code") == TEST_CODE:
             client.request("DELETE", f"/api/glAccounts/{gl['id']}")

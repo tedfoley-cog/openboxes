@@ -56,6 +56,17 @@ jobs:
         working-directory: docker
         run: ./load-demo-data.sh
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # New-endpoint contract tests skip on the pinned released image (see
+      # characterization-tests.yml), so exercise them here against the
+      # source build that actually contains the endpoints.
+      - name: Run contract tests for source-only endpoints
+        run: ./characterization/contract/run.sh test_budget_code_api_contract.py test_gl_account_api_contract.py
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:

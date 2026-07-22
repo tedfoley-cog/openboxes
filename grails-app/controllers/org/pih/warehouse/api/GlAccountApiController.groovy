@@ -14,6 +14,7 @@ import grails.gorm.PagedResultList
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
 import org.hibernate.ObjectNotFoundException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 
 import org.pih.warehouse.core.GlAccount
@@ -77,7 +78,14 @@ class GlAccountApiController {
         if (!glAccount) {
             throw new ObjectNotFoundException(params.id, GlAccount.class.toString())
         }
-        glAccount.delete(flush: true)
+        try {
+            glAccount.delete(flush: true)
+        } catch (DataIntegrityViolationException ignored) {
+            String message = "${warehouse.message(code: 'default.not.deleted.message', args: [warehouse.message(code: 'glAccount.label', default: 'GL Account'), params.id])}"
+            response.status = HttpStatus.BAD_REQUEST.value()
+            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)
+            return
+        }
         render status: HttpStatus.NO_CONTENT.value()
     }
 
