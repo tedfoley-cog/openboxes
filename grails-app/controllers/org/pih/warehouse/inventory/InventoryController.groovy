@@ -88,12 +88,18 @@ class InventoryController {
     }
 
     def editBinLocation() {
-        Product product = Product.findByProductCode(params.productCode)
-        Location location = Location.get(session.warehouse.id)
-        Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
-        InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber)
-        Integer quantity = inventoryService.getQuantityFromBinLocation(location, binLocation, inventoryItem)
-        [location: location, binLocation: binLocation, inventoryItem: inventoryItem, quantity: quantity]
+        // The inventory/manage screen still loads this action as an AJAX dialog,
+        // so keep serving the GSP for XHR requests; direct navigation gets the
+        // React screen.
+        if (request.xhr) {
+            Product product = Product.findByProductCode(params.productCode)
+            Location location = Location.get(session.warehouse.id)
+            Location binLocation = Location.findByParentLocationAndName(location, params.binLocation)
+            InventoryItem inventoryItem = inventoryService.findInventoryItemByProductAndLotNumber(product, params.lotNumber)
+            Integer quantity = inventoryService.getQuantityFromBinLocation(location, binLocation, inventoryItem)
+            return [location: location, binLocation: binLocation, inventoryItem: inventoryItem, quantity: quantity]
+        }
+        render(view: "/common/react", params: params)
     }
 
     def saveInventoryChanges(ManageInventoryCommand command) {
@@ -141,20 +147,7 @@ class InventoryController {
      */
     //@Cacheable("inventoryControllerCache")
     def browse(InventoryCommand command) {
-        if (!params.max) params.max = 10
-        if (!params.offset) params.offset = 0
-
-        // Set defaults
-        command.location = command?.location ?: Location.get(session.warehouse.id)
-        def category = params.categoryId ? Category.get(params.categoryId) : productService.getRootCategory()
-        command.category = category?.id ? category : null
-        command.catalogs = params.catalogs ? command.catalogs : null
-        command.tags = params.tags ? command.tags : null
-        command.maxResults = params?.max as Integer
-        command.offset = params?.offset as Integer
-        command.searchResults = productAvailabilityService.searchProducts(command)
-
-        [commandInstance: command]
+        render(view: "/common/react", params: params)
     }
 
     /**
@@ -420,16 +413,7 @@ class InventoryController {
     }
 
     def listDailyTransactions() {
-        def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
-        def dateSelected = (params.date) ? dateFormat.parse(params.date) : new Date()
-
-        def transactionsByDate = Transaction.list().groupBy {
-            DateUtil.clearTime(it?.transactionDate)
-        }?.entrySet()?.sort { it.key }?.reverse()
-
-        def transactions = Transaction.findAllByTransactionDate(dateSelected)
-
-        [transactions: transactions, transactionsByDate: transactionsByDate, dateSelected: dateSelected]
+        render(view: "/common/react")
     }
 
     private def determineCategories(params) {
@@ -462,7 +446,11 @@ class InventoryController {
     }
 
     def list() {
-        this.listStock(params, "getInventoryItems", "")
+        if (params.button == "download") {
+            this.listStock(params, "getInventoryItems", "")
+            return
+        }
+        render(view: "/common/react")
     }
 
     def listReconditionedStock() {
@@ -478,7 +466,11 @@ class InventoryController {
     }
 
     def listLowStock() {
-        this.listStock(params, "getLowStock", "Low stock - ")
+        if (params.button == "download") {
+            this.listStock(params, "getLowStock", "Low stock - ")
+            return
+        }
+        render(view: "/common/react")
     }
 
     def listReorderStock() {
@@ -518,64 +510,52 @@ class InventoryController {
 
 
     def listExpiredStock(InventoryReportCommand command) {
-        command.location = Location.get(session.warehouse.id)
-        Boolean withBinLocation = params.boolean("withBinLocation")
-
-        List<InventoryItem> inventoryItems = dashboardService.getExpiredStock(command)
-        List<Category> categories = inventoryItems?.collect { it.product.category }?.unique()
-
-        List<Map> data = []
-        if (!inventoryItems.isEmpty()) {
-            data = withBinLocation
-                    ? productAvailabilityService.getAvailableQuantityOnHandByBinLocation(command.location, inventoryItems)
-                    : productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
-                    .collect{ key, val -> [ inventoryItem: key, quantity: val ] }
-        }
-
         if (params.format == "csv") {
+            command.location = Location.get(session.warehouse.id)
+            Boolean withBinLocation = params.boolean("withBinLocation")
+
+            List<InventoryItem> inventoryItems = dashboardService.getExpiredStock(command)
+
+            List<Map> data = []
+            if (!inventoryItems.isEmpty()) {
+                data = withBinLocation
+                        ? productAvailabilityService.getAvailableQuantityOnHandByBinLocation(command.location, inventoryItems)
+                        : productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
+                        .collect{ key, val -> [ inventoryItem: key, quantity: val ] }
+            }
+
             def filename = "Expired stock | " + command.location?.name + ".csv"
             response.setHeader("Content-disposition", "attachment; filename=\"${filename}\"")
             render(contentType: "text/csv", text: getCsvForInventoryMap(data, withBinLocation))
             return
         }
 
-        [
-                data: data,
-                categories: categories,
-                command: command,
-        ]
+        render(view: "/common/react")
     }
 
 
     def listExpiringStock(InventoryReportCommand command) {
-        command.location = Location.get(session.warehouse.id)
-        Boolean withBinLocation = params.boolean("withBinLocation")
-
-        List<InventoryItem> inventoryItems = dashboardService.getExpiringStock(command)
-        List<Category> categories = inventoryItems?.collect { it?.product?.category }?.unique().sort {
-            it.name
-        }
-
-        List<Map> data = []
-        if (!inventoryItems?.isEmpty()) {
-            data = withBinLocation
-                    ? productAvailabilityService.getAvailableQuantityOnHandByBinLocation(command.location, inventoryItems)
-                    : productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
-                    .collect{ key, val -> [ inventoryItem: key, quantity: val ] }
-        }
-
         if (params.format == "csv") {
+            command.location = Location.get(session.warehouse.id)
+            Boolean withBinLocation = params.boolean("withBinLocation")
+
+            List<InventoryItem> inventoryItems = dashboardService.getExpiringStock(command)
+
+            List<Map> data = []
+            if (!inventoryItems?.isEmpty()) {
+                data = withBinLocation
+                        ? productAvailabilityService.getAvailableQuantityOnHandByBinLocation(command.location, inventoryItems)
+                        : productAvailabilityService.getQuantityOnHandByInventoryItem(command.location, inventoryItems)
+                        .collect{ key, val -> [ inventoryItem: key, quantity: val ] }
+            }
+
             def filename = "Expiring stock | " + command.location.name + ".csv"
             response.setHeader("Content-disposition", "attachment; filename=\"${filename}\"")
             render(contentType: "text/csv", text: getCsvForInventoryMap(data, withBinLocation))
             return
         }
 
-        [
-                data: data,
-                categories: categories,
-                command: command
-        ]
+        render(view: "/common/react")
     }
 
     def exportLatestInventoryDate() {
@@ -785,7 +765,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support receipt transactions")
         }
         params.transactionType = Constants.TRANSFER_IN_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createOutboundTransfer() {
@@ -794,7 +774,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support transfer transactions")
         }
         params.transactionType = Constants.TRANSFER_OUT_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createAdjustment() {
@@ -803,7 +783,7 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support adjustment transactions")
         }
         params.transactionType = Constants.ADJUSTMENT_CREDIT_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createConsumed() {
@@ -812,65 +792,38 @@ class InventoryController {
             throw new UnsupportedOperationException("Location ${location.name} does not support consumption transactions")
         }
         params.transactionType = Constants.CONSUMPTION_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createExpired() {
         params.transactionType = Constants.EXPIRATION_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
     }
 
     def createDamaged() {
         params.transactionType = Constants.DAMAGE_TRANSACTION_TYPE_ID
-        forward(action: "createTransaction")
+        redirect(action: "createTransaction", params: createTransactionRedirectParams())
+    }
+
+    // The legacy shortcut actions above and the expiring/expired stock list
+    // forms carry their selection in POST bodies or non-routable URLs, so
+    // normalize everything into query parameters the React screen can read.
+    private Map createTransactionRedirectParams() {
+        [
+                'transactionType.id': params['transactionType.id'] ?: params.transactionType,
+                'product.id'        : params.list('product.id'),
+                'inventoryItem.id'  : params.list('inventoryItem.id'),
+        ].findAll { it.value }
     }
 
     def createTransaction() {
-        def command = new TransactionCommand()
-        def warehouseInstance = Location.get(session?.warehouse?.id)
-        def transactionInstance = new Transaction(params)
-
-        def products = []
-
-        // Process productId parameters from inventory browser
-        if (params?.product?.id) {
-            def productIds = params.list('product.id')
-            productIds = productIds.collect { String.valueOf(it) }
-            if (productIds) {
-                products = Product.getAll(productIds)
-                command.productInventoryItems = inventoryService.getInventoryItemsByProducts(warehouseInstance, productIds)
-
-                command.binLocations = inventoryService.getProductQuantityByBinLocation(warehouseInstance, products)
-            }
+        if (request.method == "POST") {
+            redirect(action: "createTransaction", params: createTransactionRedirectParams())
+            return
         }
-        // If given a list of inventory items, we just return those inventory items
-        else if (params?.inventoryItem?.id) {
-            def inventoryItemIds = params.list('inventoryItem.id')
-            def inventoryItems = inventoryItemIds.collect { InventoryItem.get(String.valueOf(it)) }
-
-            def productIds = inventoryItems.collect { it?.product?.id }
-            if (productIds) {
-                products = Product.getAll(productIds)
-            }
-            command.binLocations = inventoryService.getBinLocationsByInventoryItems(warehouseInstance, inventoryItems)
-        } else {
-            throw new RuntimeException("You must select at least one product or inventory item")
-        }
-
-        println "Product inventory items " + command?.productInventoryItems
-
-        command.transactionInstance = transactionInstance
-        command.warehouseInstance = warehouseInstance
-
-        command.quantityMap = inventoryService.getQuantityForInventory(warehouseInstance?.inventory, products)
-
-        [command: command]
-
+        render(view: "/common/react", params: params)
     }
 
-    /**
-     * Save a transaction that sets the current inventory level for stock.
-     */
     def saveAdjustmentTransaction(TransactionCommand command) {
         log.info("Saving inventory adjustment " + params)
         log.info "Command: " + command
@@ -1127,8 +1080,6 @@ class InventoryController {
     }
 
     def editTransaction() {
-        def startTime = System.currentTimeMillis()
-        log.info "edit transaction: " + params
         def transactionInstance = Transaction.get(params?.id)
         if (!transactionInstance) {
             flash.message = "${warehouse.message(code: 'inventory.noTransactionWithId.message', args: [params.id])}"
@@ -1136,22 +1087,7 @@ class InventoryController {
             return
         }
 
-        def warehouseInstance = Location.get(session?.warehouse?.id)
-        def products = transactionInstance?.transactionEntries.collect { it.inventoryItem.product }
-        def inventoryItems = InventoryItem.findAllByProductInList(products)
-        def model = [
-                inventoryItemsMap   : inventoryItems.groupBy { it.product?.id },
-                transactionInstance : transactionInstance ?: new Transaction(),
-                transactionTypeList : TransactionType.list(),
-                locationInstanceList: Location.findAllByParentLocationIsNull(),
-                quantityMap         : [:],
-                warehouseInstance   : warehouseInstance
-        ]
-
-        println "Edit transaction " + (System.currentTimeMillis() - startTime) + " ms"
-
-        render(view: "editTransaction", model: model)
-
+        render(view: "/common/react")
     }
 
 

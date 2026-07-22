@@ -46,6 +46,18 @@ class UrlMappings {
             controller = { "categoryApi" }
             action = [GET: "list", POST: "save"]
         }
+        "/api/categories/tree"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [GET: "tree"]
+        }
+        "/api/categories/assigningParentToProduct"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [PUT: "updateAssigningParentToProduct"]
+        }
+        "/api/categories/$id/details"(parseRequest: true) {
+            controller = { "categoryApi" }
+            action = [GET: "details"]
+        }
         "/api/categories/$id"(parseRequest: true) {
             controller = { "categoryApi" }
             action = [GET: "read", POST: "save", PUT: "save", DELETE: "delete"]
@@ -89,6 +101,12 @@ class UrlMappings {
         "/api/glAccountOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "glAccountOptions"]
+        }
+
+        // Gl account type options for the GL account form
+        "/api/glAccountTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "glAccountTypeOptions"]
         }
 
         "/api/paymentTermOptions"(parseRequest: true) {
@@ -198,6 +216,36 @@ class UrlMappings {
         "/api/locations/importCsv" {
             controller = { "locationApi" }
             action = [POST: "importCsv"]
+        }
+
+        "/api/locations/search" {
+            controller = { "locationApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/locations/$id/details" {
+            controller = { "locationApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/locations/$id/binLocations" {
+            controller = { "locationApi" }
+            action = [GET: "binLocations"]
+        }
+
+        "/api/locations/$id/zoneLocations" {
+            controller = { "locationApi" }
+            action = [GET: "zoneLocations"]
+        }
+
+        "/api/locations/$id/contents" {
+            controller = { "locationApi" }
+            action = [GET: "contents"]
+        }
+
+        "/api/locations/$id/logo" {
+            controller = { "locationApi" }
+            action = [DELETE: "deleteLogo"]
         }
 
         "/api/locations/$id/$action" {
@@ -407,6 +455,53 @@ class UrlMappings {
         "/api/picklists/$id/items" {
             controller = "picklistApi"
             action = [DELETE: "clearPicklist"]
+        }
+
+        "/api/picklists/print/$id" {
+            controller = "picklistApi"
+            action = [GET: "print"]
+        }
+
+        "/api/picklists/returnPrint/$id" {
+            controller = "picklistApi"
+            action = [GET: "returnPrint"]
+        }
+
+        // Requisition API (classic requisition flow screens migrated to React)
+
+        "/api/requisitions"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "create"]
+        }
+
+        "/api/requisitions/templates" {
+            controller = "requisitionApi"
+            action = [GET: "templates"]
+        }
+
+        "/api/requisitions/$id" {
+            controller = "requisitionApi"
+            action = [GET: "read"]
+        }
+
+        "/api/requisitions/$id/confirm"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "confirm"]
+        }
+
+        "/api/requisitions/$id/details"(parseRequest: true) {
+            controller = "requisitionApi"
+            action = [POST: "saveDetails"]
+        }
+
+        "/api/requisitions/$id/documents" {
+            controller = "requisitionApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/requisitions/documentTypes" {
+            controller = "requisitionApi"
+            action = [GET: "documentTypes"]
         }
 
         // Partial Receiving API
@@ -855,6 +950,50 @@ class UrlMappings {
             action = [GET: "getReorderReport"]
         }
 
+        "/api/facilities/$facilityId/inventories/summary" {
+            controller = { "inventoryApi" }
+            action = [GET: "getInventorySummary"]
+        }
+
+        "/api/facilities/$facilityId/inventories/expiredStock" {
+            controller = { "inventoryApi" }
+            action = [GET: "getExpiredStock"]
+        }
+
+        "/api/facilities/$facilityId/inventories/expiringStock" {
+            controller = { "inventoryApi" }
+            action = [GET: "getExpiringStock"]
+        }
+
+        /**
+         * Transaction API endpoints
+         */
+
+        "/api/transactions/daily" {
+            controller = { "transactionApi" }
+            action = [GET: "listDaily"]
+        }
+
+        "/api/transactions/types" {
+            controller = { "transactionApi" }
+            action = [GET: "transactionTypes"]
+        }
+
+        "/api/transactions/locationOptions" {
+            controller = { "transactionApi" }
+            action = [GET: "locationOptions"]
+        }
+
+        "/api/transactions/$id"(parseRequest: false) {
+            controller = { "transactionApi" }
+            action = [GET: "read", PUT: "update"]
+        }
+
+        "/api/transactions/$id/entries/$entryId"(parseRequest: false) {
+            controller = { "transactionApi" }
+            action = [DELETE: "deleteEntry"]
+        }
+
         /**
         * Purchase Orders API endpoints
         */
@@ -1135,6 +1274,41 @@ class UrlMappings {
             controller = { "inventoryApi" }
             action = [GET: "getExpirationHistoryReport"]
         }
+
+        "/api/inventories/browse" {
+            controller = { "inventoryApi" }
+            action = [GET: "browse"]
+        }
+
+        "/api/inventories/transactionCandidates" {
+            controller = { "inventoryApi" }
+            action = [GET: "getTransactionCandidates"]
+        }
+
+        "/api/inventories/binLocationDetails" {
+            controller = { "inventoryApi" }
+            action = [GET: "getBinLocationDetails"]
+        }
+
+        "/api/inventories/adjustStock"(parseRequest: true) {
+            controller = { "inventoryApi" }
+            action = [POST: "adjustStock"]
+        }
+
+        /**
+         * Consumption API endpoints
+         */
+
+        "/api/consumption/aggregate" {
+            controller = { "consumptionApi" }
+            action = [GET: "aggregate"]
+        }
+
+        "/api/consumption/summary" {
+            controller = { "consumptionApi" }
+            action = [GET: "summary"]
+        }
+
 
         // Error handling
 

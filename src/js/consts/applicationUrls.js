@@ -32,6 +32,14 @@ const PRODUCT_URL = {
 const LOCATION_URL = {
   base: `${CONTEXT_PATH}/location`,
   list: () => `${LOCATION_URL.base}/list`,
+  create: () => `${LOCATION_URL.base}/edit`,
+  edit: (id) => `${LOCATION_URL.base}/edit/${id}`,
+  showBinLocations: (id) => `${LOCATION_URL.base}/showBinLocations/${id}`,
+  showZoneLocations: (id) => `${LOCATION_URL.base}/showZoneLocations/${id}`,
+  showContents: (id) => `${LOCATION_URL.base}/showContents/${id}`,
+  uploadLogo: (id) => `${LOCATION_URL.base}/uploadLogo/${id}`,
+  viewLogo: (id) => `${LOCATION_URL.base}/viewLogo/${id}`,
+  exportBinLocations: (id) => `${LOCATION_URL.base}/exportBinLocations/${id}`,
 };
 
 const STOCK_MOVEMENT_URL = {
@@ -113,6 +121,21 @@ const INVENTORY_ITEM_URL = {
 const INVENTORY_URL = {
   base: `${CONTEXT_PATH}/inventory`,
   showTransaction: (id) => `${INVENTORY_URL.base}/showTransaction/${id}`,
+  list: () => `${INVENTORY_URL.base}/list`,
+  listLowStock: () => `${INVENTORY_URL.base}/listLowStock`,
+  listExpiredStock: () => `${INVENTORY_URL.base}/listExpiredStock`,
+  listExpiringStock: () => `${INVENTORY_URL.base}/listExpiringStock`,
+  listDailyTransactions: () => `${INVENTORY_URL.base}/listDailyTransactions`,
+  listTransactions: () => `${INVENTORY_URL.base}/listTransactions`,
+  editTransaction: (id) => `${INVENTORY_URL.base}/editTransaction/${id}`,
+  browse: () => `${INVENTORY_URL.base}/browse`,
+  createTransaction: () => `${INVENTORY_URL.base}/create`,
+};
+
+const CONSUMPTION_URL = {
+  base: `${CONTEXT_PATH}/consumption`,
+  list: () => `${CONSUMPTION_URL.base}/list`,
+  pivot: () => `${CONSUMPTION_URL.base}/pivot`,
 };
 
 const REQUISITION_TEMPLATE_URL = {
@@ -137,9 +160,33 @@ const REPLENISHMENT_URL = {
   print: (id) => `${REPLENISHMENT_URL.base}/print/${id}`,
 };
 
+const BUDGET_CODE_URL = {
+  base: `${CONTEXT_PATH}/budgetCode`,
+  list: () => `${BUDGET_CODE_URL.base}/list`,
+  create: () => `${BUDGET_CODE_URL.base}/create`,
+  edit: (id) => `${BUDGET_CODE_URL.base}/edit/${id}`,
+};
+
+const GL_ACCOUNT_URL = {
+  base: `${CONTEXT_PATH}/glAccount`,
+  list: () => `${GL_ACCOUNT_URL.base}/list`,
+  create: () => `${GL_ACCOUNT_URL.base}/create`,
+  edit: (id) => `${GL_ACCOUNT_URL.base}/edit/${id}`,
+};
+
 const CATEGORY_URL = {
   base: `${CONTEXT_PATH}/category`,
-  tree: () => `${CATEGORY_URL.base}/tree`,
+  tree: (id) => (id ? `${CATEGORY_URL.base}/tree?id=${id}` : `${CATEGORY_URL.base}/tree`),
+  create: () => `${CATEGORY_URL.base}/create`,
+  edit: (id) => `${CATEGORY_URL.base}/edit/${id}`,
+};
+
+const ATTRIBUTE_URL = {
+  base: `${CONTEXT_PATH}/attribute`,
+  list: () => `${ATTRIBUTE_URL.base}/list`,
+  create: () => `${ATTRIBUTE_URL.base}/create`,
+  edit: (id) => `${ATTRIBUTE_URL.base}/edit/${id}`,
+  show: (id) => `${ATTRIBUTE_URL.base}/show/${id}`,
 };
 
 const PRODUCT_SUPPLIER_URL = {
@@ -150,6 +197,43 @@ const PRODUCT_SUPPLIER_URL = {
   export: () => `${PRODUCT_SUPPLIER_URL.base}/export?format=xls`,
 };
 
+const REQUISITION_URL = {
+  base: `${CONTEXT_PATH}/requisition`,
+  list: () => `${REQUISITION_URL.base}/list`,
+  create: (type) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/create`,
+    query: type ? { type } : {},
+  }),
+  chooseTemplate: () => `${REQUISITION_URL.base}/chooseTemplate`,
+  createStockFromTemplate: (id) => stringifyUrl({
+    url: `${REQUISITION_URL.base}/createStockFromTemplate`,
+    query: { id },
+  }),
+  show: (id) => `${REQUISITION_URL.base}/show/${id}`,
+  edit: (id) => `${REQUISITION_URL.base}/edit/${id}`,
+  pick: (id) => `${REQUISITION_URL.base}/pick/${id}`,
+  confirm: (id) => `${REQUISITION_URL.base}/confirm/${id}`,
+  transfer: (id) => `${REQUISITION_URL.base}/transfer/${id}`,
+  addDocument: (id) => `${REQUISITION_URL.base}/addDocument/${id}`,
+};
+
+const PICKLIST_URL = {
+  base: `${CONTEXT_PATH}/picklist`,
+  print: (id) => `${PICKLIST_URL.base}/print/${id}`,
+  returnPrint: (id) => `${PICKLIST_URL.base}/returnPrint/${id}`,
+  pdf: (id) => `${PICKLIST_URL.base}/renderPdf/${id}`,
+  returnPdf: (id) => `${PICKLIST_URL.base}/renderReturnPdf/${id}`,
+};
+
+const BARCODE_URL = {
+  render: (data) => stringifyUrl({
+    url: `${CONTEXT_PATH}/product/barcode`,
+    query: {
+      data, width: 100, height: 30, format: 'CODE_128',
+    },
+  }),
+};
+
 const CYCLE_COUNT = {
   base: `${CONTEXT_PATH}/inventory/cycleCount`,
   list: (tab) => `${CYCLE_COUNT.base}?tab=${tab}`,
@@ -158,15 +242,21 @@ const CYCLE_COUNT = {
 };
 
 export {
+  ATTRIBUTE_URL,
+  BARCODE_URL,
+  BUDGET_CODE_URL,
   CATEGORY_URL,
+  CONSUMPTION_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  GL_ACCOUNT_URL,
   INVENTORY_ITEM_URL,
   INVENTORY_URL,
   INVOICE_URL,
   LOCATION_CONFIGURATION_URL,
   LOCATION_URL,
   ORDER_URL,
+  PICKLIST_URL,
   PRODUCT_CONFIGURATION_URL,
   PRODUCT_SUPPLIER_URL,
   PRODUCT_URL,
@@ -174,6 +264,7 @@ export {
   PUTAWAY_URL,
   REPLENISHMENT_URL,
   REQUISITION_TEMPLATE_URL,
+  REQUISITION_URL,
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
