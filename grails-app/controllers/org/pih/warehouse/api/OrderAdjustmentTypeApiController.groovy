@@ -47,10 +47,10 @@ class OrderAdjustmentTypeApiController {
     @Transactional
     def create() {
         def jsonObject = request.JSON
-        String glAccountError = validateAccountingRequirement(jsonObject)
-        if (glAccountError) {
+        String validationError = validateAccountingRequirement(jsonObject) ?: validateCode(jsonObject)
+        if (validationError) {
             response.status = HttpStatus.BAD_REQUEST.value()
-            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: glAccountError] as JSON)
+            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: validationError] as JSON)
             return
         }
         OrderAdjustmentType orderAdjustmentType = new OrderAdjustmentType()
@@ -69,10 +69,10 @@ class OrderAdjustmentTypeApiController {
             throw new ObjectNotFoundException(params.id, OrderAdjustmentType.class.toString())
         }
         def jsonObject = request.JSON
-        String glAccountError = validateAccountingRequirement(jsonObject)
-        if (glAccountError) {
+        String validationError = validateAccountingRequirement(jsonObject) ?: validateCode(jsonObject)
+        if (validationError) {
             response.status = HttpStatus.BAD_REQUEST.value()
-            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: glAccountError] as JSON)
+            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: validationError] as JSON)
             return
         }
         bindOrderAdjustmentType(orderAdjustmentType, jsonObject)
@@ -90,6 +90,14 @@ class OrderAdjustmentTypeApiController {
         Location currentLocation = Location.get(session.warehouse.id)
         if (currentLocation.isAccountingRequired() && !jsonObject.glAccount?.id) {
             return "GL account is required"
+        }
+        return null
+    }
+
+    private static String validateCode(jsonObject) {
+        String code = jsonObject.containsKey("code") ? jsonObject.code as String : null
+        if (code && !OrderAdjustmentTypeCode.values().any { it.name() == code }) {
+            return "Invalid order adjustment type code '${code}'"
         }
         return null
     }

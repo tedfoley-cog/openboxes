@@ -67,7 +67,7 @@ const OrderPrint = () => {
   }
 
   const { currencyCode } = order;
-  const columnCount = 7
+  const columnCount = 8
     + (order.hasSupplierCode ? 1 : 0)
     + (order.hasManufacturerName ? 1 : 0)
     + (order.hasManufacturerCode ? 1 : 0);
@@ -144,6 +144,7 @@ const OrderPrint = () => {
                 <th>{translate('react.order.show.column.quantity.label', 'Quantity')}</th>
                 <th>{translate('react.order.show.column.uom.label', 'UOM')}</th>
                 <th>{translate('react.order.show.column.unitPrice.label', 'Unit price')}</th>
+                <th>{translate('react.order.show.subtotal.label', 'Subtotal')}</th>
                 <th>{translate('react.order.show.column.totalPrice.label', 'Total price')}</th>
               </tr>
             </thead>
@@ -166,6 +167,7 @@ const OrderPrint = () => {
                   <td>{item.quantity}</td>
                   <td>{item.unitOfMeasure}</td>
                   <td>{formatCurrency(item.unitPrice, currencyCode)}</td>
+                  <td>{formatCurrency(item.subtotal, currencyCode)}</td>
                   <td>{formatCurrency(item.total, currencyCode)}</td>
                 </tr>
               ))}
@@ -180,8 +182,12 @@ const OrderPrint = () => {
               {(order.orderAdjustments ?? []).map((adjustment) => (
                 <tr key={adjustment.id}>
                   <td colSpan={columnCount - 1} className="text-right">
-                    {adjustment.description || adjustment.orderAdjustmentType}
-                    {adjustment.percentage != null && ` (${adjustment.percentage}%)`}
+                    {adjustment.description || (
+                      <>
+                        {adjustment.orderAdjustmentType}
+                        {adjustment.percentage ? ` (${adjustment.percentage}%)` : ''}
+                      </>
+                    )}
                   </td>
                   <td>{formatCurrency(adjustment.totalAdjustments, currencyCode)}</td>
                 </tr>

@@ -63,28 +63,32 @@ const OrderShow = () => {
         setLoadError(err?.response?.data?.errorMessage || 'Unable to load order');
         showError(err);
       });
+    // Errors on the tab requests are surfaced through the details request
+    // above to avoid duplicate toasts for the same unknown order
     orderApi.getOrderItems(orderId)
       .then(({ data }) => setItems(data?.data))
-      .catch(showError);
+      .catch(() => {});
     orderApi.getOrderAdjustments(orderId)
       .then(({ data }) => setAdjustments(data?.data))
-      .catch(showError);
+      .catch(() => {});
     orderApi.getOrderShipments(orderId)
       .then(({ data }) => setShipments(data?.data ?? []))
-      .catch(showError);
+      .catch(() => {});
     orderApi.getOrderInvoices(orderId)
       .then(({ data }) => setInvoices(data?.data ?? []))
-      .catch(showError);
+      .catch(() => {});
     orderApi.getOrderDocuments(orderId)
       .then(({ data }) => setDocuments(data?.data))
-      .catch(showError);
+      .catch(() => {});
     orderApi.getOrderComments(orderId)
       .then(({ data }) => setComments(data?.data ?? []))
-      .catch(showError);
+      .catch(() => {});
   }, [orderId]);
 
   const currencyCode = order?.currencyCode;
   const activeItems = items?.orderItems?.filter((item) => !item.canceled) ?? [];
+  // Legacy summary shows canceled items (highlighted) on purchase orders
+  const summaryItems = items?.isPurchaseOrder ? (items?.orderItems ?? []) : activeItems;
 
   const renderItemsTable = (columns, rows) => (
     <table className="table table-sm table-bordered mb-0" data-testid={`order-show-${activeTab}-table`}>
@@ -105,7 +109,7 @@ const OrderShow = () => {
         )}
         {rows.map((row, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <tr key={row.id ?? index}>
+          <tr key={row.id ?? index} style={row.canceled ? { backgroundColor: '#ffcccb' } : undefined}>
             {columns.map((column) => (
               <td key={column.key}>{column.render(row, index)}</td>
             ))}
@@ -234,7 +238,7 @@ const OrderShow = () => {
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'summary':
-        return renderItemsTable(summaryColumns, activeItems);
+        return renderItemsTable(summaryColumns, summaryItems);
       case 'itemStatus':
         return renderItemsTable(itemStatusColumns, activeItems);
       case 'itemDetails':
