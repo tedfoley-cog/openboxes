@@ -49,6 +49,13 @@ const RequisitionTemplateShow = () => {
     try {
       const response = await stockListApi.getStockListDetails(requisitionTemplateId);
       setTemplate(response?.data?.data);
+    } catch (error) {
+      if (error?.response?.status === 404) {
+        notification(NotificationType.ERROR)({
+          message: translate('react.requisitionTemplate.notFound.label', 'Stock list template not found'),
+        });
+        window.location.assign(REQUISITION_TEMPLATE_URL.list());
+      }
     } finally {
       dispatch(hideSpinner());
     }

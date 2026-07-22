@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { hideSpinner, showSpinner } from 'actions';
 import locationApi from 'api/services/LocationApi';
 import { INVENTORY_LEVELS_API } from 'api/urls';
 import Section from 'components/Layout/v2/Section';
@@ -39,16 +41,27 @@ const StockListLocationShow = () => {
   useTranslation('stockListShow', 'default');
 
   const { locationId } = useParams();
+  const dispatch = useDispatch();
   const translate = useTranslate();
 
   const [location, setLocation] = useState(null);
   const [inventoryLevels, setInventoryLevels] = useState([]);
 
   useEffect(() => {
-    locationApi.getLocation(locationId)
-      .then((response) => setLocation(response?.data?.data));
-    fetchAllInventoryLevels(locationId)
-      .then((levels) => setInventoryLevels(levels));
+    const fetchData = async () => {
+      dispatch(showSpinner());
+      try {
+        const [locationResponse, levels] = await Promise.all([
+          locationApi.getLocation(locationId),
+          fetchAllInventoryLevels(locationId),
+        ]);
+        setLocation(locationResponse?.data?.data);
+        setInventoryLevels(levels);
+      } finally {
+        dispatch(hideSpinner());
+      }
+    };
+    fetchData();
   }, [locationId]);
 
   return (
