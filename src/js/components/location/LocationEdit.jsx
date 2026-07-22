@@ -306,7 +306,13 @@ const LocationEdit = () => {
             label: location.locationGroup.name,
           }
           : '',
-        manager: location.manager ? location.manager : '',
+        manager: location.manager
+          ? {
+            ...location.manager,
+            value: location.manager.id,
+            label: location.manager.name,
+          }
+          : '',
         parentLocation: location.parentLocation
           ? {
             ...location.parentLocation,
