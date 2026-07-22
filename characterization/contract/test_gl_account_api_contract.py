@@ -21,7 +21,7 @@ def require_endpoint(client):
 
 @pytest.fixture(scope="module", autouse=True)
 def cleanup_leftovers(client, require_endpoint):
-    for gl in client.get_json("/api/glAccounts")["data"]:
+    for gl in client.get_json("/api/glAccounts?max=100&sort=code&order=desc")["data"]:
         if gl.get("code") == TEST_CODE:
             client.request("DELETE", f"/api/glAccounts/{gl['id']}")
 

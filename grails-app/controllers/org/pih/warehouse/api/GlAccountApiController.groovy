@@ -26,6 +26,7 @@ class GlAccountApiController {
     def glAccountService
 
     def list() {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         def glAccounts = glAccountService.getGlAccounts(params)
         Integer totalCount = glAccounts instanceof PagedResultList ? glAccounts.totalCount : glAccounts.size()
         render([data: glAccounts.collect { toJson(it) }, totalCount: totalCount] as JSON)
