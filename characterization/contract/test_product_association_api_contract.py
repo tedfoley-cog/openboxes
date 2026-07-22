@@ -122,6 +122,35 @@ def test_create_read_update_delete(client):
         assert resp.status_code == 204
 
 
+def test_create_with_mutual_association(client):
+    pid = _product_id_by_name(client, PRODUCT_NAME)
+    apid = _product_id_by_name(client, ASSOCIATED_PRODUCT_NAME)
+
+    resp = check(client, spec, "POST", "/api/productAssociations",
+                 json={"code": "SUBSTITUTE",
+                       "product": {"id": pid},
+                       "associatedProduct": {"id": apid},
+                       "quantity": 2,
+                       "comments": TEST_COMMENT,
+                       "hasMutualAssociation": True})
+    assert resp.status_code == 200
+    data = resp.json()["data"]
+    pa_id = data["id"]
+    try:
+        assert data["hasMutualAssociation"] is True
+        mutual = [pa for pa in client.get_json(
+            "/api/productAssociations", params={"max": "100"})["data"]
+            if pa["product"]["id"] == apid
+            and pa["associatedProduct"]["id"] == pid
+            and str(pa.get("comments") or "").startswith(TEST_COMMENT)]
+        assert mutual and float(mutual[0]["quantity"]) == 0.5
+    finally:
+        resp = check(client, spec, "DELETE", "/api/productAssociations/{id}",
+                     path=f"/api/productAssociations/{pa_id}",
+                     params={"mutualDelete": "true"})
+        assert resp.status_code == 204
+
+
 def test_type_code_options(client):
     options_spec = Spec("select-options-api.yaml")
     resp = check(client, options_spec, "GET",
