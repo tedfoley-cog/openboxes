@@ -714,6 +714,11 @@ class UrlMappings {
             action = [GET: "getDocuments"]
         }
 
+        "/api/stockMovements/$id/returnsShow" {
+            controller = "stockMovementApi"
+            action = [GET: "returnsShow"]
+        }
+
         "/api/picklists/$id/items" {
             controller = "picklistApi"
             action = [DELETE: "clearPicklist"]
@@ -836,9 +841,49 @@ class UrlMappings {
             action = [POST: "saveDetails"]
         }
 
+        "/api/shipments/documentTypes" {
+            controller = "shipmentApi"
+            action = [GET: "documentTypes"]
+        }
+
+        "/api/shipments/eventOptions" {
+            controller = "shipmentApi"
+            action = [GET: "eventOptions"]
+        }
+
+        "/api/shipments/addToShipmentCandidates" {
+            controller = "shipmentApi"
+            action = [GET: "addToShipmentCandidates"]
+        }
+
+        "/api/shipments/addToShipment"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "addToShipment"]
+        }
+
         "/api/shipments/$id" {
             controller = "shipmentApi"
-            action = [GET: "read"]
+            action = [GET: "read", DELETE: "delete"]
+        }
+
+        "/api/shipments/$id/comments"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "createComment"]
+        }
+
+        "/api/shipments/$id/documents" {
+            controller = "shipmentApi"
+            action = [POST: "uploadDocument"]
+        }
+
+        "/api/shipments/$id/events"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [POST: "saveEvent"]
+        }
+
+        "/api/shipments/$id/events/$eventId"(parseRequest: true) {
+            controller = "shipmentApi"
+            action = [GET: "readEvent", POST: "saveEvent", DELETE: "deleteEvent"]
         }
 
         "/api/shipments/$id/details"(parseRequest: true) {

@@ -467,6 +467,12 @@ const SHIPMENT_SHOW_URL = {
   base: `${CONTEXT_PATH}/shipment`,
   show: (id) => `${SHIPMENT_SHOW_URL.base}/showDetails/${id}`,
   list: () => `${SHIPMENT_SHOW_URL.base}/list`,
+  addComment: (id) => `${SHIPMENT_SHOW_URL.base}/addComment/${id}`,
+  addDocument: (id) => `${SHIPMENT_SHOW_URL.base}/addDocument/${id}`,
+  deleteShipment: (id) => `${SHIPMENT_SHOW_URL.base}/deleteShipment/${id}`,
+  addEvent: (id) => `${SHIPMENT_SHOW_URL.base}/addEvent/${id}`,
+  editEvent: (eventId, shipmentId) => `${SHIPMENT_SHOW_URL.base}/editEvent/${eventId}?shipmentId=${shipmentId}`,
+  addToShipment: () => `${SHIPMENT_SHOW_URL.base}/addToShipment`,
 };
 
 const DELIVERY_NOTE_URL = {

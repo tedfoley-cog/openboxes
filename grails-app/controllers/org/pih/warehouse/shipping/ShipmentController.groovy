@@ -354,7 +354,8 @@ class ShipmentController {
                 return
             }
         }
-        [shipmentInstance: shipmentInstance]
+        // Confirmation screen migrated to React (Phase 2, Batch 21)
+        render(view: "/common/react")
     }
 
     def markAsReceived() {
@@ -815,21 +816,14 @@ class ShipmentController {
 
     def addDocument() {
         Shipment shipmentInstance = Shipment.get(params.id)
-        Document documentInstance = Document.get(params?.document?.id)
-        List<DocumentType> documentTypes = documentService.getNonTemplateDocumentTypes()
-
-        if (!documentInstance) {
-            documentInstance = new Document()
-        }
         if (!shipmentInstance) {
             flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'shipment.label', default: 'Shipment'), params.id])}"
             redirect(action: "list")
+            return
         }
-        render(view: "addDocument", model: [
-                shipmentInstance: shipmentInstance,
-                documentInstance: documentInstance,
-                documentTypes: documentTypes
-        ])
+        // Screen migrated to React (Phase 2, Batch 21). The addDocument GSP is
+        // still rendered by editDocument for existing documents.
+        render(view: "/common/react")
     }
 
     def editDocument() {
@@ -854,9 +848,8 @@ class ShipmentController {
 
 
     def addComment() {
-        log.debug "params " + params
-        def shipmentInstance = Shipment.get(params.id)
-        render(view: "addComment", model: [shipmentInstance: shipmentInstance, comment: new Comment()])
+        // Screen migrated to React (Phase 2, Batch 21)
+        render(view: "/common/react")
     }
 
     /**
@@ -996,14 +989,15 @@ class ShipmentController {
 
     def editEvent() {
         def eventInstance = Event.get(params.id)
-        def shipmentInstance = Shipment.get(params.shipmentId)
 
         if (!eventInstance) {
             flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'shipmentEvent.label', default: 'ShipmentEvent'), params.id])}"
             redirect(action: "showDetails", id: params.shipmentId)
+            return
         }
 
-        render(view: "editEvent", model: [shipmentInstance: shipmentInstance, eventInstance: eventInstance])
+        // Screen migrated to React (Phase 2, Batch 21)
+        render(view: "/common/react")
     }
 
 
@@ -1013,10 +1007,11 @@ class ShipmentController {
         if (!shipmentInstance) {
             flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'shipmentEvent.label', default: 'ShipmentEvent'), params.id])}"
             redirect(action: "list")
+            return
         }
 
-        def eventInstance = new Event(params)
-        render(view: "editEvent", model: [shipmentInstance: shipmentInstance, eventInstance: eventInstance])
+        // Screen migrated to React (Phase 2, Batch 21)
+        render(view: "/common/react")
     }
 
     def saveEvent() {
@@ -1101,15 +1096,16 @@ class ShipmentController {
 
 
     def addToShipment() {
-
-        // Get product IDs and convert them to String
-        def productIds = params.list('product.id')
-        productIds = productIds.collect { String.valueOf(it) }
-
-        Location location = Location.get(session.warehouse.id)
-        def commandInstance = shipmentService.getAddToShipmentCommand(productIds, location)
-
-        [commandInstance: commandInstance]
+        // Screen migrated to React (Phase 2, Batch 21). The inventory browser
+        // posts the selected product ids here, so forward them to the React
+        // route as query parameters.
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            def productIds = params.list('product.id').collect { String.valueOf(it) }
+            String query = productIds.collect { "product.id=${it.encodeAsURL()}" }.join("&")
+            redirect(uri: "/shipment/addToShipment" + (query ? "?" + query : ""))
+            return
+        }
+        render(view: "/common/react")
     }
 
 

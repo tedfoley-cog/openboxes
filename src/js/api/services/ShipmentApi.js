@@ -1,10 +1,18 @@
 import {
+  SHIPMENT_ADD_TO_SHIPMENT,
+  SHIPMENT_ADD_TO_SHIPMENT_CANDIDATES,
   SHIPMENT_API,
   SHIPMENT_BY_ID,
   SHIPMENT_CLEAR_PICKLIST,
+  SHIPMENT_COMMENTS,
   SHIPMENT_CONTAINER_BY_ID,
   SHIPMENT_CONTAINERS,
   SHIPMENT_DETAILS,
+  SHIPMENT_DOCUMENT_TYPES,
+  SHIPMENT_DOCUMENTS,
+  SHIPMENT_EVENT_BY_ID,
+  SHIPMENT_EVENT_OPTIONS,
+  SHIPMENT_EVENTS,
   SHIPMENT_ITEM_BY_ID,
   SHIPMENT_ITEM_PICK,
   SHIPMENT_ITEM_SPLIT,
@@ -39,4 +47,23 @@ export default {
   validatePicklist: (id) => apiClient.post(SHIPMENT_VALIDATE_PICKLIST(id)),
   clearPicklist: (id) => apiClient.post(SHIPMENT_CLEAR_PICKLIST(id)),
   sendShipment: (id, payload) => apiClient.post(SHIPMENT_SEND(id), payload),
+  deleteShipment: (id) => apiClient.delete(SHIPMENT_BY_ID(id)),
+  createComment: (id, payload) => apiClient.post(SHIPMENT_COMMENTS(id), payload),
+  getDocumentTypeOptions: () => apiClient.get(SHIPMENT_DOCUMENT_TYPES),
+  uploadDocument: (id, formData) => apiClient.post(SHIPMENT_DOCUMENTS(id), formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }),
+  getEventOptions: () => apiClient.get(SHIPMENT_EVENT_OPTIONS),
+  getEvent: (id, eventId) => apiClient.get(SHIPMENT_EVENT_BY_ID(id, eventId)),
+  createEvent: (id, payload) => apiClient.post(SHIPMENT_EVENTS(id), payload),
+  updateEvent: (id, eventId, payload) => apiClient.post(SHIPMENT_EVENT_BY_ID(id, eventId), payload),
+  deleteEvent: (id, eventId) => apiClient.delete(SHIPMENT_EVENT_BY_ID(id, eventId)),
+  getAddToShipmentCandidates: (productIds) => apiClient.get(SHIPMENT_ADD_TO_SHIPMENT_CANDIDATES, {
+    params: { 'product.id': productIds },
+    paramsSerializer: (params) => Object.entries(params)
+      .flatMap(([key, values]) => [].concat(values ?? [])
+        .map((value) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`))
+      .join('&'),
+  }),
+  addToShipment: (payload) => apiClient.post(SHIPMENT_ADD_TO_SHIPMENT, payload),
 };

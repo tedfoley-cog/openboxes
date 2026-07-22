@@ -3,6 +3,7 @@ import {
   STOCK_MOVEMENT_BY_ID,
   STOCK_MOVEMENT_DOCUMENTS,
   STOCK_MOVEMENT_ITEMS,
+  STOCK_MOVEMENT_RETURNS_SHOW,
   STOCK_MOVEMENT_ROLLBACK_APPROVAL,
   STOCK_MOVEMENT_UPDATE_REQUISITION,
   STOCK_MOVEMENT_UPDATE_SHIPMENT,
@@ -51,4 +52,5 @@ export default {
       headers: { 'Content-Type': 'multipart/form-data' },
     }),
   getDocuments: (id) => apiClient.get(STOCK_MOVEMENT_DOCUMENTS(id)),
+  getReturnsShow: (id) => apiClient.get(STOCK_MOVEMENT_RETURNS_SHOW(id)),
 };
