@@ -10,6 +10,7 @@
 package org.pih.warehouse.api
 
 import grails.converters.JSON
+import org.pih.warehouse.core.DocumentType
 import org.pih.warehouse.core.GlAccount
 import org.pih.warehouse.core.GlAccountType
 import org.pih.warehouse.core.PaymentTerm
@@ -24,6 +25,7 @@ import org.pih.warehouse.product.Category
 import org.pih.warehouse.product.ProductCatalog
 import org.pih.warehouse.product.ProductField
 import org.pih.warehouse.product.ProductGroup
+import org.pih.warehouse.product.ProductType
 import org.pih.warehouse.shipping.ShipmentService
 
 class SelectOptionsApiController {
@@ -32,6 +34,7 @@ class SelectOptionsApiController {
     GlAccountService glAccountService;
     ShipmentService shipmentService
     UserService userService
+    def documentService
 
     def glAccountOptions() {
         List<GlAccount> glAccounts = glAccountService.getGlAccounts(params)
@@ -152,6 +155,23 @@ class SelectOptionsApiController {
         List<String> excludedStatuses = params.list("excludedStatuses")
         List<Map<String, String>> options = shipmentService.getShipmentStatusCodes(excludedStatuses)
         render([data: options] as JSON)
+    }
+
+    def productTypeOptions() {
+        List<ProductType> productTypes = genericApiService.getList(ProductType.class.simpleName, [sort: "name"])
+                .findAll { it?.name }
+                .collect {
+                    [id: it.id, label: it.name]
+                }
+        render([data: productTypes] as JSON)
+    }
+
+    def documentTypeOptions() {
+        List<DocumentType> documentTypes = documentService.getNonTemplateDocumentTypes()
+                .collect {
+                    [id: it.id, label: it.name]
+                }
+        render([data: documentTypes] as JSON)
     }
 
     def handlingRequirementsOptions() {
