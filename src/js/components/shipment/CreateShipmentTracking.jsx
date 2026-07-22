@@ -85,8 +85,6 @@ const CreateShipmentTracking = () => {
       });
       if (nextStep === 'packing') {
         history.push(CREATE_SHIPMENT_URL.packing(shipmentId));
-      } else if (nextStep === 'details') {
-        history.push(CREATE_SHIPMENT_URL.details(shipmentId));
       } else {
         window.location.assign(SHIPMENT_SHOW_URL.show(shipmentId));
       }
@@ -261,7 +259,7 @@ const CreateShipmentTracking = () => {
               type="button"
               className="btn btn-outline-secondary mr-2"
               disabled={saving}
-              onClick={() => save('details')}
+              onClick={() => history.push(CREATE_SHIPMENT_URL.details(shipmentId))}
             >
               <Translate id="react.default.button.back.label" defaultMessage="Back" />
             </button>
