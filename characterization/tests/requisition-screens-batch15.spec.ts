@@ -35,7 +35,7 @@ async function createRequisition(page): Promise<string> {
 
 async function productId(page, productCode: string): Promise<string> {
   const res = await page.request.get(
-    url(`/api/products/search?productCode=${productCode}&location.id=${LOCATIONS.mainWarehouse.id}`),
+    url(`/api/products/search?name=${productCode}&productCode=${productCode}&location.id=${LOCATIONS.mainWarehouse.id}`),
   );
   expect(res.status()).toBe(200);
   const match = (await res.json()).data.find((p) => p.productCode === productCode);

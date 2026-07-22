@@ -21,6 +21,8 @@ const REQUISITION_STATUSES = [
 
 const REQUISITION_TYPES = ['STOCK', 'NON_STOCK', 'ADHOC', 'DEFAULT'];
 
+const PAGE_SIZE = 25;
+
 const prettyDate = (value) => {
   if (!value) {
     return null;
@@ -71,6 +73,7 @@ const RequisitionList = () => {
   const [createdBy, setCreatedBy] = useState(null);
   const [updatedBy, setUpdatedBy] = useState(null);
   const [relatedToMe, setRelatedToMe] = useState(query.relatedToMe === 'true');
+  const [offset, setOffset] = useState(0);
 
   useTranslation('requisition', 'default');
 
@@ -82,7 +85,7 @@ const RequisitionList = () => {
   const debouncedUsersFetch = useMemo(() => debounceUsersFetch(500, 2), []);
   const debouncedLocationsFetch = useMemo(() => debounceLocationsFetch(500, 2, null, true), []);
 
-  const fetchRequisitions = () => {
+  const fetchRequisitions = (fetchOffset = offset) => {
     setLoading(true);
     const params = {
       q: q || undefined,
@@ -93,7 +96,8 @@ const RequisitionList = () => {
       createdById: createdBy?.id || undefined,
       updatedById: updatedBy?.id || undefined,
       relatedToMe: relatedToMe || undefined,
-      max: 25,
+      max: PAGE_SIZE,
+      offset: fetchOffset,
     };
     requisitionApi.getRequisitions(params)
       .then(({ data }) => {
@@ -110,15 +114,20 @@ const RequisitionList = () => {
 
   useEffect(() => {
     fetchRequisitions();
-  }, [status, relatedToMe]);
+  }, [status, relatedToMe, offset]);
 
   const search = (event) => {
     event.preventDefault();
-    fetchRequisitions();
+    if (offset !== 0) {
+      setOffset(0);
+    } else {
+      fetchRequisitions(0);
+    }
   };
 
   const selectStatus = (value) => {
     setStatus(value);
+    setOffset(0);
     history.replace({
       pathname: location.pathname,
       search: queryString.stringify({ ...query, status: value || undefined }),
@@ -312,6 +321,32 @@ const RequisitionList = () => {
                 ))}
               </tbody>
             </table>
+            {totalCount > PAGE_SIZE && (
+              <div
+                className="d-flex justify-content-between align-items-center"
+                data-testid="requisition-list-pagination"
+              >
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-sm"
+                  disabled={offset === 0}
+                  onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}
+                >
+                  <Translate id="react.default.button.previous.label" defaultMessage="Previous" />
+                </button>
+                <span className="text-muted">
+                  {`${offset + 1} - ${Math.min(offset + PAGE_SIZE, totalCount)} / ${totalCount}`}
+                </span>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-sm"
+                  disabled={offset + PAGE_SIZE >= totalCount}
+                  onClick={() => setOffset(offset + PAGE_SIZE)}
+                >
+                  <Translate id="react.default.button.next.label" defaultMessage="Next" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

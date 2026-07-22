@@ -150,9 +150,15 @@ class RequisitionApiController extends BaseApiController {
         requisition.requestNumber = requisitionIdentifierService.generate(requisition)
         jsonObject.requisitionItems?.eachWithIndex { itemData, index ->
             RequisitionItem requisitionItem = new RequisitionItem()
+            RequisitionItem templateItem = itemData.templateItemId ?
+                    RequisitionItem.get(itemData.templateItemId) : null
             requisitionItem.product = Product.get(itemData.productId)
             requisitionItem.quantity = itemData.quantity as Integer
             requisitionItem.orderIndex = itemData.orderIndex != null ? itemData.orderIndex as Integer : index
+            if (templateItem) {
+                requisitionItem.inventoryItem = templateItem.inventoryItem
+                requisitionItem.productPackage = templateItem.productPackage
+            }
             requisition.addToRequisitionItems(requisitionItem)
         }
         requisition = requisitionService.saveRequisition(requisition)
@@ -576,6 +582,7 @@ class RequisitionApiController extends BaseApiController {
                     [
                             id               : requisitionItem.id,
                             status           : requisitionItem.status?.name(),
+                            orderIndex       : requisitionItem.orderIndex,
                             product          : [
                                     id           : requisitionItem.product?.id,
                                     productCode  : requisitionItem.product?.productCode,

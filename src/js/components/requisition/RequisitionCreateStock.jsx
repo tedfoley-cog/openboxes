@@ -46,12 +46,13 @@ const RequisitionCreateStock = () => {
         setTemplate(fetched);
         setDestination(fetched?.destination ?? null);
         setItems((fetched?.requisitionItems ?? []).map((item, index) => ({
+          templateItemId: item.id,
           productId: item.product?.id,
           productCode: item.product?.productCode,
           productName: item.product?.name,
           maxQuantity: item.quantity,
           quantity: item.quantity,
-          orderIndex: index,
+          orderIndex: item.orderIndex ?? index,
         })));
       })
       .catch((err) => {
@@ -79,6 +80,7 @@ const RequisitionCreateStock = () => {
         dateRequested: dateRequested || null,
         description: description || null,
         requisitionItems: items.map((item) => ({
+          templateItemId: item.templateItemId,
           productId: item.productId,
           quantity: parseInt(item.quantity, 10) || 0,
           orderIndex: item.orderIndex,

@@ -185,6 +185,13 @@ paths:
                       productId: { type: string }
                       quantity: { type: integer }
                       orderIndex: { type: integer, nullable: true }
+                      templateItemId:
+                        type: string
+                        nullable: true
+                        description: >
+                          Id of the stock list template item this item was
+                          created from; the inventory item and product package
+                          are copied from it.
       responses:
         '201':
           description: Requisition created.
@@ -776,6 +783,9 @@ components:
                 $ref: '../components/common.yaml#/components/schemas/Id'
               status:
                 type: string
+                nullable: true
+              orderIndex:
+                type: integer
                 nullable: true
               product:
                 type: object
