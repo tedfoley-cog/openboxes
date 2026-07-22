@@ -71,20 +71,20 @@ test('stocklist/show renders the React location inventory levels screen', async 
   const FLOW = 'stocklist-show-react';
   await login(page);
   await skipUnlessBatch18(page);
-  const bostonId = await locationId(page, LOCATIONS.bostonWarehouse.name);
+  const mainId = await locationId(page, LOCATIONS.mainWarehouse.name);
 
   const levelsRes = await page.request.get(
-    url(`/api/inventoryLevels?locationId=${bostonId}&max=100`),
+    url(`/api/inventoryLevels?locationId=${mainId}&max=100`),
   );
   expect(levelsRes.status()).toBe(200);
   const { totalCount } = await levelsRes.json();
 
-  await page.goto(url(`/stocklist/show/${bostonId}`));
+  await page.goto(url(`/stocklist/show/${mainId}`));
   await page.waitForSelector('[data-testid="stocklist-inventory-levels"]');
   await captureStep(page, FLOW, 'show');
 
   await expect(page.locator('[data-testid="stocklist-location"] td[aria-label="Name"]'))
-    .toHaveText(LOCATIONS.bostonWarehouse.name);
+    .toHaveText(LOCATIONS.mainWarehouse.name);
   await expect(page.locator('[data-testid="stocklist-item-count"]'))
     .toContainText(`${totalCount} `);
   if (totalCount > 0 && totalCount <= 100) {
