@@ -24,7 +24,11 @@ const DocumentList = () => {
   useEffect(() => {
     documentApi.getDocumentTypeOptions({ params: { includeTemplates: true } })
       .then((response) => {
-        setDocumentTypes(response?.data?.data ?? []);
+        setDocumentTypes(response?.data?.data?.map((option) => ({
+          id: option.id,
+          value: option.id,
+          label: option.label,
+        })) ?? []);
       });
   }, []);
 

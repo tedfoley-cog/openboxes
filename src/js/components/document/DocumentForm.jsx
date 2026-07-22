@@ -44,29 +44,32 @@ const DocumentForm = () => {
       });
   }, []);
 
+  const toFormValues = (document) => ({
+    name: document?.name ?? '',
+    documentType: document?.documentType
+      ? {
+        id: document.documentType.id,
+        value: document.documentType.id,
+        label: document.documentType.name,
+      }
+      : null,
+    extension: document?.extension ?? '',
+    contentType: document?.contentType ?? '',
+    fileUri: document?.fileUri ?? '',
+    documentNumber: document?.documentNumber ?? '',
+  });
+
   const getDocument = async () => {
     const response = await documentApi.getDocument(documentId);
     const document = response?.data?.data;
     setDocumentDetails(document);
-    return {
-      name: document?.name ?? '',
-      documentType: document?.documentType
-        ? {
-          id: document.documentType.id,
-          value: document.documentType.id,
-          label: document.documentType.name,
-        }
-        : null,
-      extension: document?.extension ?? '',
-      contentType: document?.contentType ?? '',
-      fileUri: document?.fileUri ?? '',
-      documentNumber: document?.documentNumber ?? '',
-    };
+    return toFormValues(document);
   };
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     mode: 'onBlur',
@@ -137,7 +140,9 @@ const DocumentForm = () => {
     formData.append('fileContents', file);
     try {
       const response = await documentApi.uploadDocumentContent(documentId, formData);
-      setDocumentDetails(response?.data?.data);
+      const updatedDocument = response?.data?.data;
+      setDocumentDetails(updatedDocument);
+      reset(toFormValues(updatedDocument));
       notification(NotificationType.SUCCESS)({
         message: translate('react.document.upload.success.label', 'File has been uploaded successfully'),
       });
