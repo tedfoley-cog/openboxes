@@ -342,6 +342,14 @@ class OrderService {
             }
         }
 
+        // The session.flush()/session.clear() calls above detach the order
+        // graph, leaving uninitialized proxies (order type, destination
+        // location type) that later lazy access fails on, so re-attach the
+        // order before continuing
+        if (orderCommand?.order?.id) {
+            orderCommand.order = Order.get(orderCommand.order.id)
+        }
+
         // Validate the shipment and save it if there are no errors
         if (shipmentInstance.validate() && !shipmentInstance.hasErrors()) {
             shipmentService.saveShipment(shipmentInstance)

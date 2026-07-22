@@ -142,8 +142,32 @@ test.describe('batch 20 shipments & receiving react screens', () => {
         .toHaveCount(orderData.orderItems.length);
     }
 
+    // Receive one unit of the first receivable item so Finish exercises the
+    // full save path (shipment + receipt creation and redirect to the order)
+    const receivable = orderData.orderItems.some((item: any) => !item.isCompletelyFulfilled);
+    if (receivable) {
+      const quantityInput = page
+        .getByTestId('receive-order-quantity-input')
+        .locator('input')
+        .first();
+      await quantityInput.fill('1');
+      await page
+        .getByTestId('receive-order-lot-input')
+        .locator('input')
+        .first()
+        .fill(`E2E-LOT-${Date.now()}`);
+    }
+
     await page.getByTestId('receive-order-next-button').click();
     await expect(page.getByTestId('receive-order-confirm')).toBeVisible();
     await captureStep(page, 'receive-order', 'react-confirm');
+
+    if (receivable) {
+      await expect(page.locator('[data-testid="receive-order-confirm-item-row"]')).toHaveCount(1);
+      await page.getByTestId('receive-order-finish-button').click();
+      // Successful receive redirects to the legacy order show page
+      await page.waitForURL(`**/order/show/${orderId}**`, { timeout: 30000 });
+      await captureStep(page, 'receive-order', 'legacy-order-show-after-receive');
+    }
   });
 });
