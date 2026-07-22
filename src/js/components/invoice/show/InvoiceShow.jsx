@@ -48,12 +48,16 @@ const InvoiceShow = () => {
 
   const [invoice, setInvoice] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingError, setLoadingError] = useState(false);
 
   const fetchInvoice = async () => {
     setLoading(true);
     try {
       const response = await invoiceApi.getInvoiceDetails(invoiceId);
       setInvoice(response?.data?.data);
+      setLoadingError(false);
+    } catch (error) {
+      setLoadingError(true);
     } finally {
       setLoading(false);
     }
@@ -88,6 +92,22 @@ const InvoiceShow = () => {
     () => (invoice?.documents ?? []).filter((document) => document.fileUri),
     [invoice],
   );
+
+  if (loadingError || (!loading && !invoice)) {
+    return (
+      <div className="invoice-show p-3">
+        <div className="pb-2">
+          <Translate
+            id="react.invoice.notFound.label"
+            defaultMessage="Unable to find the requested invoice"
+          />
+        </div>
+        <a href={INVOICE_URL.list()} className="btn btn-outline-secondary btn-xs">
+          <Translate id="react.invoice.list.label" defaultMessage="List Invoices" />
+        </a>
+      </div>
+    );
+  }
 
   if (loading || !invoice) {
     return (
