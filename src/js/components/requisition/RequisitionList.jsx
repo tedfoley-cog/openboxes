@@ -209,7 +209,7 @@ const RequisitionList = () => {
                 </label>
                 <Select
                   options={REQUISITION_TYPES.map((value) => ({ value, label: value }))}
-                  value={type}
+                  value={type ? { value: type, label: type } : null}
                   onChange={(value) => setType(value?.value ?? value ?? null)}
                   id="requisition-type-select"
                 />
