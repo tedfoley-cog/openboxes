@@ -13,6 +13,7 @@ import { INVENTORY_ITEM_URL, REPORT_URL } from 'consts/applicationUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
+import renderHandlingIcons from 'utils/product-handling-icons';
 import Translate from 'utils/Translate';
 import HeaderWrapper from 'wrappers/HeaderWrapper';
 import PageWrapper from 'wrappers/PageWrapper';
@@ -204,6 +205,7 @@ const BinLocationReport = () => {
                     <a href={INVENTORY_ITEM_URL.showStockCard(row.id)}>
                       {row.displayName ?? row.productName}
                     </a>
+                    {renderHandlingIcons(row.handlingIcons)}
                   </td>
                   <td>{row.zone}</td>
                   <td>{row.binLocation}</td>
