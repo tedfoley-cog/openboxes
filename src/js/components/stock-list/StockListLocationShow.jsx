@@ -6,8 +6,10 @@ import { useParams } from 'react-router-dom';
 import { hideSpinner, showSpinner } from 'actions';
 import locationApi from 'api/services/LocationApi';
 import { INVENTORY_LEVELS_API } from 'api/urls';
+import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
 import { INVENTORY_ITEM_URL } from 'consts/applicationUrls';
+import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import apiClient from 'utils/apiClient';
@@ -24,7 +26,9 @@ const fetchAllInventoryLevels = async (locationId) => {
   do {
     // eslint-disable-next-line no-await-in-loop
     const response = await apiClient.get(INVENTORY_LEVELS_API, {
-      params: { locationId, max: PAGE_SIZE, offset },
+      params: {
+        locationId, max: PAGE_SIZE, offset, sort: 'id',
+      },
     });
     const page = response?.data?.data ?? [];
     levels.push(...page);
@@ -57,6 +61,10 @@ const StockListLocationShow = () => {
         ]);
         setLocation(locationResponse?.data?.data);
         setInventoryLevels(levels);
+      } catch (error) {
+        notification(NotificationType.ERROR)({
+          message: translate('react.stockListShow.fetchError.label', 'Unable to load stock list for location'),
+        });
       } finally {
         dispatch(hideSpinner());
       }
