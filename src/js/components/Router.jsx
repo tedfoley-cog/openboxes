@@ -318,6 +318,36 @@ const AsyncExpirationHistoryReport = Loadable({
   loading: Loading,
 });
 
+const AsyncBinLocationReport = Loadable({
+  loader: () => import('components/reporting/binLocationReport/BinLocationReport'),
+  loading: Loading,
+});
+
+const AsyncCycleCountReport = Loadable({
+  loader: () => import('components/reporting/cycleCountReport/CycleCountReport'),
+  loading: Loading,
+});
+
+const AsyncDataExportList = Loadable({
+  loader: () => import('components/reporting/dataExport/DataExportList'),
+  loading: Loading,
+});
+
+const AsyncPrintShippingReport = Loadable({
+  loader: () => import('components/reporting/shippingReport/PrintShippingReport'),
+  loading: Loading,
+});
+
+const AsyncPrintPickListReport = Loadable({
+  loader: () => import('components/reporting/shippingReport/PrintPickListReport'),
+  loading: Loading,
+});
+
+const AsyncPrintPaginatedPackingListReport = Loadable({
+  loader: () => import('components/reporting/shippingReport/PrintPaginatedPackingListReport'),
+  loading: Loading,
+});
+
 const AsyncLocationGroupList = Loadable({
   loader: () => import('components/locationGroup/LocationGroupList'),
   loading: Loading,
@@ -947,6 +977,12 @@ const Router = () => {
             <MainLayoutRoute path="**/stockMovement/createOutbound/:stockMovementId?" component={AsyncStockMovement} />
             <MainLayoutRoute path="**/stockMovement/importOutboundStockMovement" component={AsyncOutboundImport} />
             <MainLayoutRoute path="**/report/expirationHistoryReport" component={AsyncExpirationHistoryReport} />
+            <MainLayoutRoute path="**/report/showBinLocationReport" component={AsyncBinLocationReport} />
+            <MainLayoutRoute path="**/report/showCycleCountReport" component={AsyncCycleCountReport} />
+            <MainLayoutRoute path="**/report/printShippingReport" component={AsyncPrintShippingReport} />
+            <MainLayoutRoute path="**/report/printPickListReport" component={AsyncPrintPickListReport} />
+            <MainLayoutRoute path="**/report/printPaginatedPackingListReport" component={AsyncPrintPaginatedPackingListReport} />
+            <MainLayoutRoute path="**/dataExport/index" component={AsyncDataExportList} />
             <MainLayoutRoute path="**/inventory/reorderReport" component={AsyncReorderReport} />
             <MainLayoutRoute path="**/inventory/browse" component={AsyncInventoryBrowse} />
             <MainLayoutRoute path="**/inventory/createTransaction" component={AsyncCreateTransaction} />

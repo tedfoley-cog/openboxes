@@ -488,6 +488,26 @@ const BARCODE_URL = {
   }),
 };
 
+const REPORT_URL = {
+  base: `${CONTEXT_PATH}/report`,
+  showBinLocationReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showBinLocationReport`,
+    query: params,
+  }),
+  showCycleCountReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showCycleCountReport`,
+    query: params,
+  }),
+};
+
+const DATA_EXPORT_URL = {
+  base: `${CONTEXT_PATH}/dataExport`,
+  render: (id, format) => stringifyUrl({
+    url: `${DATA_EXPORT_URL.base}/render/${id}`,
+    query: { format },
+  }),
+};
+
 const CYCLE_COUNT = {
   base: `${CONTEXT_PATH}/inventory/cycleCount`,
   list: (tab) => `${CYCLE_COUNT.base}?tab=${tab}`,
@@ -504,6 +524,7 @@ export {
   CREATE_SHIPMENT_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  DATA_EXPORT_URL,
   DELIVERY_NOTE_URL,
   DOCUMENT_URL,
   GL_ACCOUNT_TYPE_URL,
@@ -537,6 +558,7 @@ export {
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
   REPLENISHMENT_URL,
+  REPORT_URL,
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
