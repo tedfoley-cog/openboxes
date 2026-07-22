@@ -258,6 +258,31 @@ const AsyncGlAccountForm = Loadable({
   loading: Loading,
 });
 
+const AsyncAttributeList = Loadable({
+  loader: () => import('components/attribute/AttributeList'),
+  loading: Loading,
+});
+
+const AsyncAttributeForm = Loadable({
+  loader: () => import('components/attribute/AttributeForm'),
+  loading: Loading,
+});
+
+const AsyncAttributeShow = Loadable({
+  loader: () => import('components/attribute/AttributeShow'),
+  loading: Loading,
+});
+
+const AsyncCategoryTree = Loadable({
+  loader: () => import('components/category/CategoryTree'),
+  loading: Loading,
+});
+
+const AsyncCategoryForm = Loadable({
+  loader: () => import('components/category/CategoryForm'),
+  loading: Loading,
+});
+
 const StockMovementList = (props) => {
   const parsedSearchQuery = queryString.parse(props?.location?.search);
   const direction = parsedSearchQuery?.direction?.toUpperCase();
@@ -380,6 +405,13 @@ const Router = () => {
             <MainLayoutRoute path="**/glAccount/list" component={AsyncGlAccountList} />
             <MainLayoutRoute path="**/glAccount/create" component={AsyncGlAccountForm} />
             <MainLayoutRoute path="**/glAccount/edit/:glAccountId" component={AsyncGlAccountForm} />
+            <MainLayoutRoute path="**/attribute/list" component={AsyncAttributeList} />
+            <MainLayoutRoute path="**/attribute/create" component={AsyncAttributeForm} />
+            <MainLayoutRoute path="**/attribute/edit/:id" component={AsyncAttributeForm} />
+            <MainLayoutRoute path="**/attribute/show/:id" component={AsyncAttributeShow} />
+            <MainLayoutRoute path="**/category/tree" component={AsyncCategoryTree} />
+            <MainLayoutRoute path="**/category/create" component={AsyncCategoryForm} />
+            <MainLayoutRoute path="**/category/edit/:id" component={AsyncCategoryForm} />
             <MainLayoutRoute path="**/location/list" component={AsyncLocationList} />
             <MainLayoutRoute path="**/location/edit/:locationId?" component={AsyncLocationEdit} />
             <MainLayoutRoute path="**/location/showBinLocations/:locationId" component={AsyncLocationBinLocations} />
