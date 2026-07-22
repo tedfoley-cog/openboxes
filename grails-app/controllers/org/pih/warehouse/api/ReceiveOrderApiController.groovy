@@ -45,8 +45,11 @@ class ReceiveOrderApiController {
             render([errorCode: HttpStatus.NOT_FOUND.value(), errorMessage: "Order ${params.id} not found"] as JSON)
             return
         }
+        // The legacy webflow preset the recipient to the current user
+        Person defaultRecipient = session.user?.id ? Person.get(session.user.id) : null
         render([data: [
-                id         : order.id,
+                id              : order.id,
+                defaultRecipient: defaultRecipient ? [id: defaultRecipient.id, name: defaultRecipient.name] : null,
                 orderNumber: order.orderNumber,
                 name       : order.name,
                 dateOrdered: order.dateOrdered,

@@ -119,6 +119,14 @@ const ReceiveOrderPage = () => {
       .then(({ data }) => {
         const fetchedOrder = data?.data;
         setOrder(fetchedOrder);
+        if (fetchedOrder?.defaultRecipient) {
+          setRecipient((prev) => prev ?? {
+            id: fetchedOrder.defaultRecipient.id,
+            value: fetchedOrder.defaultRecipient.id,
+            label: fetchedOrder.defaultRecipient.name,
+            name: fetchedOrder.defaultRecipient.name,
+          });
+        }
         setRows((fetchedOrder?.orderItems ?? []).map((item, index) => ({
           key: `${item.id}-${index}`,
           orderItemId: item.id,
@@ -229,7 +237,7 @@ const ReceiveOrderPage = () => {
         shippedOn: toIsoDate(shippedOn),
         deliveredOn: toIsoDate(deliveredOn),
         orderItems: rows
-          .filter((row) => row.quantityReceived && row.productReceived)
+          .filter((row) => Number(row.quantityReceived) > 0 && row.productReceived)
           .map((row) => ({
             orderItem: { id: row.orderItemId },
             primary: row.primary,

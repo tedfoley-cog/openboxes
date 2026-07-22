@@ -124,6 +124,18 @@ components:
       properties:
         id:
           $ref: '../components/common.yaml#/components/schemas/Id'
+        defaultRecipient:
+          description: >-
+            Suggested recipient (the current user), matching the recipient the
+            legacy webflow preselected.
+          type: object
+          nullable: true
+          properties:
+            id:
+              $ref: '../components/common.yaml#/components/schemas/Id'
+            name:
+              type: string
+              nullable: true
         orderNumber:
           type: string
           nullable: true
