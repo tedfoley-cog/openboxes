@@ -965,9 +965,34 @@ class UrlMappings {
             action = [GET: "getExpiringStock"]
         }
 
+        "/api/facilities/$facilityId/inventories/binLocations" {
+            controller = { "inventoryApi" }
+            action = [GET: "getBinLocations"]
+        }
+
+        "/api/facilities/$facilityId/inventories/upload"(parseRequest: false) {
+            controller = { "inventoryApi" }
+            action = [POST: "uploadInventory"]
+        }
+
+        "/api/inventories/productsWithoutDefaultInventoryItem" {
+            controller = { "inventoryApi" }
+            action = [GET: "getProductsWithoutDefaultInventoryItem"]
+        }
+
+        "/api/inventories/createDefaultInventoryItems" {
+            controller = { "inventoryApi" }
+            action = [POST: "createDefaultInventoryItems"]
+        }
+
         /**
          * Transaction API endpoints
          */
+
+        "/api/transactions" {
+            controller = { "transactionApi" }
+            action = [GET: "list"]
+        }
 
         "/api/transactions/daily" {
             controller = { "transactionApi" }
@@ -986,7 +1011,7 @@ class UrlMappings {
 
         "/api/transactions/$id"(parseRequest: false) {
             controller = { "transactionApi" }
-            action = [GET: "read", PUT: "update"]
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
         }
 
         "/api/transactions/$id/entries/$entryId"(parseRequest: false) {
