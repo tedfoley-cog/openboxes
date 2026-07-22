@@ -488,8 +488,10 @@ class ShipmentApiController {
             shipmentService.validatePicklist(shipment)
             Date actualShippingDate = jsonObject.actualShippingDate ?
                     Date.parse("yyyy-MM-dd HH:mm", jsonObject.actualShippingDate as String) : new Date()
+            boolean debitStockOnSend = jsonObject.containsKey("debitStockOnSend") ?
+                    jsonObject.debitStockOnSend as Boolean : true
             shipmentService.sendShipment(shipment, jsonObject.comments as String, userInstance,
-                    warehouseInstance, actualShippingDate, true)
+                    warehouseInstance, actualShippingDate, debitStockOnSend)
             // notification failures must never surface as a send failure
             // because the shipment has already been sent at this point
             try {

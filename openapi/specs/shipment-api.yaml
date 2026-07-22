@@ -505,6 +505,12 @@ paths:
                 comments:
                   type: string
                   nullable: true
+                debitStockOnSend:
+                  type: boolean
+                  default: true
+                  description: >
+                    Whether sending debits stock from the origin warehouse
+                    (mirrors the legacy debitStockOnSend flag).
                 emailRecipientIds:
                   type: array
                   items:

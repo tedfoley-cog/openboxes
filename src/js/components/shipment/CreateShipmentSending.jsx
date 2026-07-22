@@ -23,6 +23,7 @@ const CreateShipmentSending = () => {
   const [data, setData] = useState(null);
   const [actualShippingDate, setActualShippingDate] = useState(defaultShippingDate());
   const [comments, setComments] = useState('');
+  const [debitStockOnSend, setDebitStockOnSend] = useState(true);
   const [emailRecipients, setEmailRecipients] = useState({});
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -48,6 +49,7 @@ const CreateShipmentSending = () => {
       await shipmentApi.sendShipment(shipmentId, {
         actualShippingDate: actualShippingDate ? actualShippingDate.replace('T', ' ') : null,
         comments: comments || null,
+        debitStockOnSend,
         emailRecipientIds: Object.keys(emailRecipients).filter((id) => emailRecipients[id]),
       });
       window.location.assign(SHIPMENT_SHOW_URL.show(shipmentId));
@@ -147,6 +149,26 @@ const CreateShipmentSending = () => {
                     value={comments}
                     onChange={(event) => setComments(event.target.value)}
                   />
+                </div>
+              </div>
+              <div className="form-group row">
+                <span className="col-sm-3 col-form-label" />
+                <div className="col-sm-6 col-form-label">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="shipment-debit-stock-checkbox"
+                      checked={debitStockOnSend}
+                      onChange={(event) => setDebitStockOnSend(event.target.checked)}
+                    />
+                    <label className="form-check-label" htmlFor="shipment-debit-stock-checkbox">
+                      <Translate
+                        id="react.shipment.wizard.debitStockOnSend.label"
+                        defaultMessage="Debit stock upon sending shipment"
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
               {recipients.length > 0 && (

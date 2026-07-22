@@ -465,7 +465,7 @@ class RequisitionApiController extends BaseApiController {
                             unitOfMeasure   : parent.product?.unitOfMeasure ?: "EA",
                             isSubstituted   : parent.isSubstituted(),
                             isChanged       : parent.isChanged(),
-                            cancelReasonCode: reasonCodeLabel(parent.cancelReasonCode),
+                            cancelReasonCode: reasonCodeLabel(parent.cancelReasonCode, true),
                             cancelComments  : parent.cancelComments,
                     ] : null,
                     rows              : rows,
@@ -843,14 +843,16 @@ class RequisitionApiController extends BaseApiController {
 
     /**
      * Localizes a reason code like the legacy delivery note GSP: the message
-     * key uses the token inside parentheses when present (e.g.
+     * key uses the raw code (item-level codes) or, when splitParenthetical is
+     * set (parent cancel reason), the token inside parentheses (e.g.
      * "SUBSTITUTION(CANCELED)" -> enum.ReasonCode.CANCELED).
      */
-    private String reasonCodeLabel(String reasonCode) {
+    private String reasonCodeLabel(String reasonCode, boolean splitParenthetical = false) {
         if (!reasonCode) {
             return reasonCode
         }
-        String code = reasonCode.contains("(") ? reasonCode.split("\\(", 2)[1].replace(")", "") : reasonCode
+        String code = splitParenthetical && reasonCode.contains("(") ?
+                reasonCode.split("\\(", 2)[1].replace(")", "") : reasonCode
         return g.message(code: "enum.ReasonCode." + code, default: reasonCode)
     }
 
