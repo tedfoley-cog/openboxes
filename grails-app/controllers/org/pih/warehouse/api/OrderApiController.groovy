@@ -359,9 +359,7 @@ class OrderApiController {
             documentInstance = new Document(
                     size: 0,
                     name: params.name ?: fileUri,
-                    filename: params.name ?: fileUri,
                     fileUri: fileUri,
-                    contentType: "-",
                     documentNumber: params.documentNumber,
                     documentType: documentType)
         }
