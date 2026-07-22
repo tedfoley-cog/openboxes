@@ -51,6 +51,7 @@ const OrderShow = () => {
   const [documents, setDocuments] = useState(null);
   const [comments, setComments] = useState(null);
   const [activeTab, setActiveTab] = useState('summary');
+  const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
     if (!orderId) {
@@ -58,7 +59,10 @@ const OrderShow = () => {
     }
     orderApi.getOrderDetails(orderId)
       .then(({ data }) => setOrder(data?.data))
-      .catch(showError);
+      .catch((err) => {
+        setLoadError(err?.response?.data?.errorMessage || 'Unable to load order');
+        showError(err);
+      });
     orderApi.getOrderItems(orderId)
       .then(({ data }) => setItems(data?.data))
       .catch(showError);
@@ -155,7 +159,16 @@ const OrderShow = () => {
     { key: 'type', header: <Translate id="react.order.adjustment.type.label" defaultMessage="Adjustment type" />, render: (row) => row.orderAdjustmentType?.name },
     { key: 'description', header: <Translate id="react.order.adjustment.description.label" defaultMessage="Description" />, render: (row) => row.description },
     { key: 'percentage', header: <Translate id="react.order.adjustment.percentage.label" defaultMessage="Percentage" />, render: (row) => (row.percentage != null ? `${row.percentage}%` : '') },
-    { key: 'amount', header: <Translate id="react.order.adjustment.amount.label" defaultMessage="Amount" />, render: (row) => formatCurrency(row.amount ?? row.totalAdjustments, currencyCode) },
+    {
+      key: 'amount',
+      header: <Translate id="react.order.adjustment.amount.label" defaultMessage="Amount" />,
+      render: (row) => {
+        if (row.amount) {
+          return formatCurrency(row.amount, currencyCode);
+        }
+        return row.percentage ? formatCurrency(row.totalAdjustments, currencyCode) : '';
+      },
+    },
     { key: 'budgetCode', header: <Translate id="react.order.show.column.budgetCode.label" defaultMessage="Budget code" />, render: (row) => row.budgetCode },
     { key: 'status', header: <Translate id="react.order.show.column.status.label" defaultMessage="Status" />, render: (row) => (row.canceled ? 'CANCELED' : row.derivedPaymentStatus) },
   ];
@@ -247,6 +260,14 @@ const OrderShow = () => {
         return null;
     }
   };
+
+  if (loadError) {
+    return (
+      <div className="d-flex flex-column m-3" data-testid="order-show-error">
+        <div className="alert alert-danger">{loadError}</div>
+      </div>
+    );
+  }
 
   if (!order) {
     return (
