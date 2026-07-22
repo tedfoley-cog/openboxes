@@ -284,6 +284,12 @@ class ReportApiController {
                     handlingIcons             : it.product?.getHandlingIcons()
             ]
         }
+
+        // Default sort of the legacy DataTable: zone desc, then bin location desc
+        data = data.sort { a, b ->
+            (b.zone <=> a.zone) ?: (b.binLocation <=> a.binLocation)
+        }
+
         render([data: data, location: [id: location.id, name: location.name]] as JSON)
     }
 
