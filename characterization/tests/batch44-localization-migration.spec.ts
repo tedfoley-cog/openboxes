@@ -86,8 +86,9 @@ test.describe('batch 44 react screens', () => {
 
   test('localization show renders record details and deletes', async ({ page }) => {
     // Create a record through the legacy save action, then view it in React.
+    const code = `e2e.test.batch44.${Date.now()}.label`;
     const save = await page.request.post(url('/localization/save'), {
-      form: { code: 'e2e.test.batch44.label', locale: 'en', text: 'E2E Test' },
+      form: { code, locale: 'en', text: 'E2E Test' },
       maxRedirects: 0,
     });
     expect(save.status()).toBe(302);
@@ -95,8 +96,8 @@ test.describe('batch 44 react screens', () => {
     const localizationId = location.replace(/\/$/, '').split('/').pop();
 
     await page.goto(url(`/localization/show/${localizationId}`));
-    await expect(page.getByText('Localization: e2e.test.batch44.label')).toBeVisible();
-    await expect(page.getByLabel('Code')).toHaveText('e2e.test.batch44.label');
+    await expect(page.getByText(`Localization: ${code}`)).toBeVisible();
+    await expect(page.getByLabel('Code')).toHaveText(code);
     await expect(page.getByLabel('Locale')).toHaveText('en');
     await expect(page.getByLabel('Text')).toHaveText('E2E Test');
     await captureStep(page, 'batch44', 'react-localization-show');
@@ -106,7 +107,8 @@ test.describe('batch 44 react screens', () => {
     await page.getByRole('button', { name: 'Yes' }).click();
     await page.waitForURL('**/localization/list**');
     const details = await page.request.get(
-      url(`/api/localizations/${localizationId}/details`));
+      url(`/api/localizations/${localizationId}/details`),
+      { headers: { Accept: 'application/json' } });
     expect(details.status()).toBe(404);
   });
 });

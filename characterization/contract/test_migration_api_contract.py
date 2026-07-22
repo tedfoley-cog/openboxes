@@ -2,6 +2,8 @@
 (/api/migration/* in openapi/specs/migration-api.yaml) and the localization
 record endpoints added to openapi/specs/localization-api.yaml."""
 
+import time
+
 import pytest
 
 from oas import Spec, check
@@ -91,8 +93,9 @@ def test_localization_delete_unknown(client):
 def test_localization_details_and_delete_roundtrip(client):
     # There is no create API for Localization records; create one through the
     # legacy save action (it redirects to the show screen with the new id).
+    code = f"contract.test.batch44.{int(time.time() * 1000)}.label"
     resp = client.request("POST", "/localization/save",
-                          data={"code": "contract.test.batch44.label",
+                          data={"code": code,
                                 "locale": "en",
                                 "text": "Contract Test"},
                           allow_redirects=False)
@@ -104,7 +107,7 @@ def test_localization_details_and_delete_roundtrip(client):
                  path=f"/api/localizations/{localization_id}/details")
     data = resp.json()["data"]
     assert data["id"] == localization_id
-    assert data["code"] == "contract.test.batch44.label"
+    assert data["code"] == code
     assert data["locale"] == "en"
     assert data["text"] == "Contract Test"
 
