@@ -82,7 +82,10 @@ test.describe('partyType react screens', () => {
     await page.getByRole('button', { name: 'Delete' }).click();
     await page.getByRole('button', { name: 'Yes' }).click();
     await page.waitForURL('**/partyType/list**');
-    const gone = await page.request.get(url(`/api/partyTypes/${partyTypeId}`));
+    // Not-found responses are only 404 for JSON/AJAX requests
+    const gone = await page.request.get(url(`/api/partyTypes/${partyTypeId}`), {
+      headers: { Accept: 'application/json' },
+    });
     expect(gone.status()).toBe(404);
   });
 });
@@ -131,7 +134,10 @@ test.describe('partyRole react list/show screens', () => {
       await page.getByRole('button', { name: 'Delete' }).click();
       await page.getByRole('button', { name: 'Yes' }).click();
       await page.waitForURL('**/partyRole/list**');
-      const gone = await page.request.get(url(`/api/partyRoles/${roleId}/details`));
+      // Not-found responses are only 404 for JSON/AJAX requests
+      const gone = await page.request.get(url(`/api/partyRoles/${roleId}/details`), {
+        headers: { Accept: 'application/json' },
+      });
       expect(gone.status()).toBe(404);
     } finally {
       await page.request.delete(url(`/api/parties/${partyId}`));

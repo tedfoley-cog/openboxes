@@ -12,6 +12,10 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 
+// useTableData only fetches when filterParams is non-empty and refetches
+// whenever its reference changes, so keep a stable module-level object
+const FILTER_PARAMS = { includeAll: true };
+
 const PartyRoleList = () => {
   useTranslation('partyRole', 'reactTable', 'default');
 
@@ -29,7 +33,7 @@ const PartyRoleList = () => {
     tableData,
     onFetchHandler,
   } = useTableData({
-    filterParams: {},
+    filterParams: FILTER_PARAMS,
     url: PARTY_ROLE_API,
     errorMessageId: 'react.partyRole.fetch.fail.label',
     defaultErrorMessage: 'Unable to fetch party roles',
