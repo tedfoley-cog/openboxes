@@ -47,14 +47,15 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | # | Task | Status |
 |---|------|--------|
 | 3.1 | OpenAPI harness + specs: Api, Attribute, BinLocation, Category, CombineShipment, CombinedShipmentItem | [893ec63d](https://app.devin.ai/sessions/893ec63d5d5744ad9ffc28c4539856f7) — [#8](https://github.com/tedfoley-cog/openboxes/pull/8) merged (harness + 6 specs, contract suite 28/28) |
-| 3.2 | Base, BaseDomain, CycleCount, Dashboard, Fulfillment, Generic | [016e8528](https://app.devin.ai/sessions/016e8528fa6246f1bb58ef003407f4af) — [#15](https://github.com/tedfoley-cog/openboxes/pull/15) resolving conflicts |
+| 3.2 | Base, BaseDomain, CycleCount, Dashboard, Fulfillment, Generic | [016e8528](https://app.devin.ai/sessions/016e8528fa6246f1bb58ef003407f4af) — [#15](https://github.com/tedfoley-cog/openboxes/pull/15) merged |
 | 3.3 | HelpScout, Indicator, InternalLocation, Inventory, InventoryLevel, InventoryTransactionSummary | [3bf3df8f](https://app.devin.ai/sessions/3bf3df8f6f2a4cd98ee684297991a1d2) — [#10](https://github.com/tedfoley-cog/openboxes/pull/10) merged |
-| 3.4 | Invoice, LoadData, Localization, Location, LocationGroup, Noop | [2c36091e](https://app.devin.ai/sessions/2c36091e7182440e822171e141f1e874) — [#14](https://github.com/tedfoley-cog/openboxes/pull/14) resolving conflicts |
+| 3.4 | Invoice, LoadData, Localization, Location, LocationGroup, Noop | [2c36091e](https://app.devin.ai/sessions/2c36091e7182440e822171e141f1e874) — [#14](https://github.com/tedfoley-cog/openboxes/pull/14) merged |
 | 3.5 | Organization, PackList, PartialReceiving, Person, Picklist, PrepaymentInvoice | [e07843a8](https://app.devin.ai/sessions/e07843a8d87d44919fa71b89a58888bc) — [#12](https://github.com/tedfoley-cog/openboxes/pull/12) merged |
 | 3.6 | PrepaymentInvoiceItem, Product, ProductClassification, ProductPackage, ProductSupplier, ProductSupplierAttribute | [7b9334a7](https://app.devin.ai/sessions/7b9334a78d01402fb40b345350092d1c) — [#11](https://github.com/tedfoley-cog/openboxes/pull/11) merged |
 | 3.7 | ProductSupplierPreference, ProductsConfiguration, PurchaseOrder, Putaway, PutawayItem, ReasonCode | [3592a490](https://app.devin.ai/sessions/3592a49054e14f71b143ac843c0e8c51) — [#16](https://github.com/tedfoley-cog/openboxes/pull/16) merged |
-| 3.8 | RecordStock, Replenishment, SelectOptions, StockAdjustment, StockMovement, StockMovementItem | [9b23fb73](https://app.devin.ai/sessions/9b23fb7380d44cb1b702689d20b11d4d) — in progress |
+| 3.8 | RecordStock, Replenishment, SelectOptions, StockAdjustment, StockMovement, StockMovementItem | [9b23fb73](https://app.devin.ai/sessions/9b23fb7380d44cb1b702689d20b11d4d) — [#17](https://github.com/tedfoley-cog/openboxes/pull/17) merged |
 | 3.9 | StockTransfer, Stocklist, StocklistItem, UnitOfMeasure | [ac15c4c2](https://app.devin.ai/sessions/ac15c4c2986a4235a4aaf68c4448a88d) — [#13](https://github.com/tedfoley-cog/openboxes/pull/13) merged |
+| 3.10 | Make contract suite re-run-safe (KNOWN_ISSUES_CONTRACT_SUITE.md) | [d87216b4](https://app.devin.ai/sessions/d87216b44c06463da4b70581970390bc) — in progress |
 
 ## Phase 4 — Validation & cutover
 | # | Task | Status |
@@ -68,5 +69,6 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 - 2026-07-21: Coordinator initialized; tracking branch created; Phase 0 wave 1 spawned.
 - 2026-07-21: PR #1 (Docker baseline + fork CI) and PR #2 (dead-screen audit) merged; wave 2 spawned (0.2a, 0.3a, 0.3b). 0.2b/0.2c queued behind 0.2a harness.
 - 2026-07-21: PR #5 (0.2a Playwright flows) and PR #4 (0.3b API snapshots M–Z) merged. 0.3a PR #3 conflicted with #4's harness — child instructed to rebase/unify. 0.2b + 0.2c spawned.
+- 2026-07-22: **Phase 3 complete** — all 9 OpenAPI spec/contract PRs merged (52/52 controllers). Known issue: some contract modules not re-run-safe (docs/migration/KNOWN_ISSUES_CONTRACT_SUITE.md) — P3.10 spawned to fix.
 - 2026-07-22: PR #9 (Java 11) + PR #18 (React 18) merged. Phase 3 PRs #10–13, #16 merged; #14/#15 resolving conflicts; 3.8 still running. Note from 1.1a: 18/191 API snapshots drift between pinned release image and source builds — re-baselined for source builds. Wave: 1.1b + Phase 2 batches B1,B2,B7,B14,B26,B31 spawned.
 - 2026-07-22: PRs #3, #6, #7 merged — **Phase 0 complete**. Parity oracle in place: 9 Playwright golden-path flows + 191 API snapshots across all 52 controllers, all wired into CI. Phase 1 wave 1 (Java 8→11) starting; Phase 2/3 waves to interleave.
