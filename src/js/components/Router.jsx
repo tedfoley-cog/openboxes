@@ -338,6 +338,26 @@ const AsyncOrganizationShow = Loadable({
   loading: Loading,
 });
 
+const AsyncPartyList = Loadable({
+  loader: () => import('components/party/PartyList'),
+  loading: Loading,
+});
+
+const AsyncPartyForm = Loadable({
+  loader: () => import('components/party/PartyForm'),
+  loading: Loading,
+});
+
+const AsyncPartyShow = Loadable({
+  loader: () => import('components/party/PartyShow'),
+  loading: Loading,
+});
+
+const AsyncPartyRoleForm = Loadable({
+  loader: () => import('components/partyRole/PartyRoleForm'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -607,6 +627,31 @@ const AsyncEditInventoryLevelPage = Loadable({
   loading: Loading,
 });
 
+const AsyncTransactionLogPage = Loadable({
+  loader: () => import('components/inventory/stockCard/TransactionLogPage'),
+  loading: Loading,
+});
+
+const AsyncInventoryLevelList = Loadable({
+  loader: () => import('components/inventory/inventoryLevel/InventoryLevelList'),
+  loading: Loading,
+});
+
+const AsyncInventoryLevelShowPage = Loadable({
+  loader: () => import('components/inventory/inventoryLevel/InventoryLevelShowPage'),
+  loading: Loading,
+});
+
+const AsyncInventoryLevelFormPage = Loadable({
+  loader: () => import('components/inventory/inventoryLevel/InventoryLevelFormPage'),
+  loading: Loading,
+});
+
+const AsyncInventorySnapshotEditPage = Loadable({
+  loader: () => import('components/inventory/InventorySnapshotEditPage'),
+  loading: Loading,
+});
+
 const InventoryLowStockList = (props) => <AsyncInventorySummaryList {...props} lowStock />;
 const InventoryReorderStockList = (props) => <AsyncInventorySummaryList {...props} reorderStock />;
 
@@ -755,6 +800,14 @@ const Router = () => {
             <MainLayoutRoute path="**/inventoryItem/showRecordInventory/:id?" component={AsyncRecordStockPage} />
             <MainLayoutRoute path="**/inventoryItem/showGraph/:id?" component={AsyncStockGraphPage} />
             <MainLayoutRoute path="**/inventoryItem/editInventoryLevel/:id?" component={AsyncEditInventoryLevelPage} />
+            <MainLayoutRoute path="**/inventoryItem/showTransactionLog/:id?" component={AsyncTransactionLogPage} />
+            <MainLayoutRoute path="**/inventoryLevel/list" component={AsyncInventoryLevelList} />
+            <MainLayoutRoute path="**/inventoryLevel/index" component={AsyncInventoryLevelList} />
+            <MainLayoutRoute path="**/inventoryLevel/show/:id" component={AsyncInventoryLevelShowPage} />
+            <MainLayoutRoute path="**/inventoryLevel/create" component={AsyncInventoryLevelFormPage} />
+            <MainLayoutRoute path="**/inventoryLevel/edit/:id?" component={AsyncInventoryLevelFormPage} />
+            <MainLayoutRoute path="**/inventorySnapshot/edit" component={AsyncInventorySnapshotEditPage} />
+            <MainLayoutRoute path="**/snapshot/edit" component={AsyncInventorySnapshotEditPage} />
             <MainLayoutRoute path="**/inventory/cycleCount/count" component={AsyncCycleCountCountStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/resolve" component={AsyncCycleCountResolveStep} />
             <MainLayoutRoute path="**/inventory/cycleCount/reporting" component={AsyncCycleCountReporting} />
@@ -840,6 +893,12 @@ const Router = () => {
             <MainLayoutRoute path="**/organization/create" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/edit/:organizationId" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/show/:organizationId" component={AsyncOrganizationShow} />
+            <MainLayoutRoute path="**/party/list" component={AsyncPartyList} />
+            <MainLayoutRoute path="**/party/create" component={AsyncPartyForm} />
+            <MainLayoutRoute path="**/party/edit/:partyId" component={AsyncPartyForm} />
+            <MainLayoutRoute path="**/party/show/:partyId" component={AsyncPartyShow} />
+            <MainLayoutRoute path="**/partyRole/create" component={AsyncPartyRoleForm} />
+            <MainLayoutRoute path="**/partyRole/edit/:partyRoleId" component={AsyncPartyRoleForm} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />
