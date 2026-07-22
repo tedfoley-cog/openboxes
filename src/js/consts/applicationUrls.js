@@ -27,6 +27,10 @@ const PRODUCT_URL = {
   create: () => `${PRODUCT_URL.base}/create`,
   edit: (id) => `${PRODUCT_URL.base}/edit/${id}`,
   importCSV: () => `${PRODUCT_URL.base}/importAsCsv`,
+  addDocument: (id) => `${PRODUCT_URL.base}/addDocument/${id}`,
+  batchEdit: () => `${PRODUCT_URL.base}/batchEdit`,
+  batchEditProperties: () => `${PRODUCT_URL.base}/batchEditProperties`,
+  mergeLogs: () => `${PRODUCT_URL.base}/productMergeLogs`,
 };
 
 const LOCATION_URL = {
@@ -66,6 +70,7 @@ const STOCK_MOVEMENT_URL = {
 
 const INVOICE_URL = {
   base: `${CONTEXT_PATH}/invoice`,
+  list: () => `${INVOICE_URL.base}/list`,
   create: () => `${INVOICE_URL.base}/create`,
   edit: (id) => `${INVOICE_URL.create()}/${id}`,
   show: (id) => `${INVOICE_URL.base}/show/${id}`,
@@ -116,6 +121,19 @@ const INVENTORY_ITEM_URL = {
     url: `${INVENTORY_ITEM_URL.base}/showStockCard/${id}`,
     query: { ...params },
   }),
+  showLotNumbers: (id) => `${INVENTORY_ITEM_URL.base}/showLotNumbers/${id}`,
+  showRecordInventory: (id) => `${INVENTORY_ITEM_URL.base}/showRecordInventory/${id}`,
+  showGraph: (id) => `${INVENTORY_ITEM_URL.base}/showGraph/${id}`,
+  editInventoryLevel: (id) => `${INVENTORY_ITEM_URL.base}/editInventoryLevel/${id}`,
+  showTransactionLog: (id) => stringifyUrl({
+    url: `${INVENTORY_ITEM_URL.base}/showTransactionLog`,
+    query: { 'product.id': id },
+  }),
+};
+
+const INVENTORY_BROWSER_URL = {
+  base: `${CONTEXT_PATH}/inventoryBrowser`,
+  list: () => `${INVENTORY_BROWSER_URL.base}/list`,
 };
 
 const INVENTORY_URL = {
@@ -180,6 +198,33 @@ const GL_ACCOUNT_URL = {
   list: () => `${GL_ACCOUNT_URL.base}/list`,
   create: () => `${GL_ACCOUNT_URL.base}/create`,
   edit: (id) => `${GL_ACCOUNT_URL.base}/edit/${id}`,
+};
+
+const GL_ACCOUNT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/glAccountType`,
+  list: () => `${GL_ACCOUNT_TYPE_URL.base}/list`,
+  create: () => `${GL_ACCOUNT_TYPE_URL.base}/create`,
+  edit: (id) => `${GL_ACCOUNT_TYPE_URL.base}/edit/${id}`,
+};
+
+const DOCUMENT_URL = {
+  base: `${CONTEXT_PATH}/document`,
+  download: (id) => `${DOCUMENT_URL.base}/download/${id}`,
+};
+
+const LOCATION_GROUP_URL = {
+  base: `${CONTEXT_PATH}/locationGroup`,
+  list: () => `${LOCATION_GROUP_URL.base}/list`,
+  create: () => `${LOCATION_GROUP_URL.base}/create`,
+  edit: (id) => `${LOCATION_GROUP_URL.base}/edit/${id}`,
+  show: (id) => `${LOCATION_GROUP_URL.base}/show/${id}`,
+};
+
+const LOCATION_TYPE_URL = {
+  base: `${CONTEXT_PATH}/locationType`,
+  list: () => `${LOCATION_TYPE_URL.base}/list`,
+  create: () => `${LOCATION_TYPE_URL.base}/create`,
+  edit: (id) => `${LOCATION_TYPE_URL.base}/edit/${id}`,
 };
 
 const CATEGORY_URL = {
@@ -257,11 +302,16 @@ export {
   CONSUMPTION_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  DOCUMENT_URL,
+  GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
+  INVENTORY_BROWSER_URL,
   INVENTORY_ITEM_URL,
   INVENTORY_URL,
   INVOICE_URL,
   LOCATION_CONFIGURATION_URL,
+  LOCATION_GROUP_URL,
+  LOCATION_TYPE_URL,
   LOCATION_URL,
   ORDER_URL,
   PICKLIST_URL,

@@ -63,6 +63,15 @@ export const INVOICE_SUBMIT = (id) => `${INVOICE_BY_ID(id)}/submit`;
 export const INVOICE_ORDERS = (id) => `${INVOICE_BY_ID(id)}/orders`;
 export const INVOICE_SHIPMENTS = (id) => `${INVOICE_BY_ID(id)}/shipments`;
 export const REMOVE_INVOICE_ITEM = (id) => `${INVOICE_API}/${id}/removeItem`;
+export const INVOICE_DETAILS = (id) => `${INVOICE_BY_ID(id)}/details`;
+export const INVOICE_DOCUMENT_TYPES = `${INVOICE_API}/documentTypes`;
+export const INVOICE_DOCUMENTS = (id) => `${INVOICE_BY_ID(id)}/documents`;
+export const INVOICE_DOCUMENT_BY_ID = (id, documentId) => `${INVOICE_DOCUMENTS(id)}/${documentId}`;
+
+// ORDER
+export const ORDER_API = `${API}/orders`;
+export const ORDER_BY_ID = (id) => `${ORDER_API}/${id}`;
+export const ORDER_COMMENTS = (id) => `${ORDER_BY_ID(id)}/comments`;
 
 // INVOICE ITEM
 export const INVOICE_ITEM_API = `${API}/invoiceItems`;
@@ -79,6 +88,15 @@ export const PREPAYMENT_INVOICE_ITEM_BY_ID = (id) => `${PREPAYMENT_INVOICE_ITEM_
 
 // PRODUCT
 export const PRODUCT_API = `${API}/products`;
+export const PRODUCT_DETAILS = (id) => `${PRODUCT_API}/${id}/details`;
+export const PRODUCT_DOCUMENTS = (id) => `${PRODUCT_API}/${id}/documents`;
+export const PRODUCT_DOCUMENT_BY_ID = (id, documentId) => `${PRODUCT_API}/${id}/documents/${documentId}`;
+export const PRODUCT_MERGE_LOGS = `${PRODUCT_API}/mergeLogs`;
+export const PRODUCT_BATCH_EDIT = `${PRODUCT_API}/batchEdit`;
+export const PRODUCT_VALIDATE_IMPORT = `${PRODUCT_API}/validateImport`;
+export const PRODUCT_IMPORT_CSV = `${PRODUCT_API}/import`;
+export const PRODUCT_TYPE_OPTIONS = `${API}/productTypeOptions`;
+export const DOCUMENT_TYPE_OPTIONS = `${API}/documentTypeOptions`;
 export const INVENTORY_ITEM = (productCode, lotNumber) => `${CONTEXT_PATH}/${PRODUCT_API}/${productCode}/inventoryItems/${lotNumber}`;
 export const LOT_NUMBERS_WITH_EXPIRATION_DATE = `${PRODUCT_API}/inventoryItems/lotNumbersWithExpirationDate`;
 export const AVAILABLE_ITEMS = `${PRODUCT_API}/availableItems`;
@@ -97,6 +115,9 @@ export const GL_ACCOUNTS_OPTION = `${API}/glAccountOptions`;
 export const GL_ACCOUNT_API = `${API}/glAccounts`;
 export const GL_ACCOUNT_BY_ID = (id) => `${GL_ACCOUNT_API}/${id}`;
 export const GL_ACCOUNT_TYPE_OPTIONS = `${API}/glAccountTypeOptions`;
+export const GL_ACCOUNT_TYPE_API = `${API}/glAccountTypes`;
+export const GL_ACCOUNT_TYPE_BY_ID = (id) => `${GL_ACCOUNT_TYPE_API}/${id}`;
+export const GL_ACCOUNT_TYPE_CODE_OPTIONS = `${API}/glAccountTypeCodeOptions`;
 
 // BUDGET CODES
 export const BUDGET_CODE_API = `${API}/budgetCodes`;
@@ -137,6 +158,14 @@ export const LOCATION_ZONE_LOCATIONS = (id) => `${LOCATION_API}/${id}/zoneLocati
 export const LOCATION_CONTENTS = (id) => `${LOCATION_API}/${id}/contents`;
 export const LOCATION_LOGO = (id) => `${LOCATION_API}/${id}/logo`;
 export const LOCATION_GROUPS_API = `${API}/locationGroups`;
+export const LOCATION_GROUP_BY_ID = (id) => `${LOCATION_GROUPS_API}/${id}`;
+export const LOCATION_GROUP_SEARCH_API = `${LOCATION_GROUPS_API}/search`;
+export const LOCATION_GROUP_DETAILS = (id) => `${LOCATION_GROUPS_API}/${id}/details`;
+
+// LOCATION TYPES
+export const LOCATION_TYPE_API = `${API}/locationTypes`;
+export const LOCATION_TYPE_BY_ID = (id) => `${LOCATION_TYPE_API}/${id}`;
+export const LOCATION_TYPE_CODE_OPTIONS = `${API}/locationTypeCodeOptions`;
 
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
@@ -261,6 +290,34 @@ export const INVENTORY_BIN_LOCATIONS = (id) => `${INVENTORY_API(id)}/binLocation
 export const INVENTORY_UPLOAD = (id) => `${INVENTORY_API(id)}/upload`;
 export const PRODUCTS_WITHOUT_DEFAULT_INVENTORY_ITEM = `${API}/inventories/productsWithoutDefaultInventoryItem`;
 export const CREATE_DEFAULT_INVENTORY_ITEMS = `${API}/inventories/createDefaultInventoryItems`;
+export const PRODUCT_GROUP_SUMMARY = (id) => `${INVENTORY_API(id)}/productGroupSummary`;
+
+// STOCK CARD
+export const STOCK_CARD_API = (id) => `${API}/stockCard/${id}`;
+export const STOCK_CARD_SUMMARY = (id) => `${STOCK_CARD_API(id)}/summary`;
+export const STOCK_CARD_STOCK_HISTORY = (id) => `${STOCK_CARD_API(id)}/stockHistory`;
+export const STOCK_CARD_ALL_LOCATIONS = (id) => `${STOCK_CARD_API(id)}/allLocations`;
+export const STOCK_CARD_PENDING_INBOUND = (id) => `${STOCK_CARD_API(id)}/pendingInbound`;
+export const STOCK_CARD_PENDING_OUTBOUND = (id) => `${STOCK_CARD_API(id)}/pendingOutbound`;
+export const STOCK_CARD_DEMAND = (id) => `${STOCK_CARD_API(id)}/demand`;
+export const STOCK_CARD_SNAPSHOTS = (id) => `${STOCK_CARD_API(id)}/snapshots`;
+export const STOCK_CARD_SUPPLIERS = (id) => `${STOCK_CARD_API(id)}/suppliers`;
+export const STOCK_CARD_DOCUMENTS = (id) => `${STOCK_CARD_API(id)}/documents`;
+export const STOCK_CARD_ASSOCIATIONS = (id) => `${STOCK_CARD_API(id)}/associations`;
+
+// INVENTORY ITEMS (LOT NUMBERS)
+export const INVENTORY_ITEMS_API = `${API}/inventoryItems`;
+export const INVENTORY_ITEM_BY_ID = (id) => `${INVENTORY_ITEMS_API}/${id}`;
+export const INVENTORY_ITEM_RECALL = (id) => `${INVENTORY_ITEMS_API}/${id}/recall`;
+export const INVENTORY_ITEM_REVERT_RECALL = (id) => `${INVENTORY_ITEMS_API}/${id}/revertRecall`;
+export const PRODUCT_INVENTORY_ITEMS = (productId) => `${API}/products/${productId}/allInventoryItems`;
+
+// INVENTORY LEVEL
+export const PRODUCT_INVENTORY_LEVEL = (facilityId, productId) => `${API}/facilities/${facilityId}/products/${productId}/inventoryLevel`;
+
+// RECORD STOCK
+export const RECORD_STOCK = (facilityId) => `${API}/facilities/${facilityId}/inventory/record-stock`;
+export const RECORD_STOCK_SAVE = (facilityId) => `${RECORD_STOCK(facilityId)}/save`;
 
 // TRANSACTIONS
 export const TRANSACTION_API = `${API}/transactions`;
