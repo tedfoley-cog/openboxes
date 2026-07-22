@@ -891,7 +891,14 @@ components:
           type: string
           nullable: true
         transaction:
-          $ref: '#/components/schemas/TransactionReference'
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            transactionNumber:
+              type: string
+              nullable: true
         product:
           type: object
           nullable: true
