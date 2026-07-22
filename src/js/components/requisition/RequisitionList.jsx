@@ -170,7 +170,7 @@ const RequisitionList = () => {
         <button
           type="button"
           className={`btn btn-sm mr-1 mb-1 ${relatedToMe ? 'btn-primary' : 'btn-outline-secondary'}`}
-          onClick={() => setRelatedToMe(!relatedToMe)}
+          onClick={() => { setRelatedToMe(!relatedToMe); setOffset(0); }}
         >
           <Translate id="react.requisition.relatedToMe.label" defaultMessage="My requisitions" />
           {` (${statistics.MINE ?? 0})`}
