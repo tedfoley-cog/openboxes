@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 import { login } from '../fixtures/auth';
-import { LOCATIONS, PRODUCTS, runId, url } from '../fixtures/constants';
+import { LOCATIONS, PRODUCTS, url } from '../fixtures/constants';
 import { findProductId } from '../fixtures/api';
 import { captureStep, resetStepCounter } from '../fixtures/screenshots';
 
@@ -128,15 +128,24 @@ async function searchFor(page: Page, text: string): Promise<void> {
   const search = page.locator('input[placeholder*="Search"], input[type="search"]').first();
   await search.waitFor();
   await search.fill(text);
+  // The search box only filters on submit (Enter): wait for the filtered
+  // candidates/requests response before asserting on rows.
+  await Promise.all([
+    page.waitForResponse((res) => res.url().includes('searchTerm=')),
+    search.press('Enter'),
+  ]);
   await page.waitForLoadState('networkidle');
 }
 
-/** Fills the counted-quantity input on the row for the given lot. */
+/** Fills the counted-quantity input on the row for the given lot (and bin, if any). */
 async function fillLotQuantity(page: Page, lot: Lot, quantity: number): Promise<void> {
-  const row = page
+  let row = page
     .locator('[role="row"], tr, div[class*="rt-tr"]')
-    .filter({ hasText: lot.lotNumber })
-    .first();
+    .filter({ hasText: lot.lotNumber });
+  if (lot.binLocation?.name) {
+    row = row.filter({ hasText: lot.binLocation.name });
+  }
+  row = row.first();
   await row.waitFor();
   await row.locator('input[type="number"], input[inputmode="numeric"]').first().fill(String(quantity));
 }
@@ -152,10 +161,13 @@ async function selectPerson(page: Page, label: string, name: string): Promise<vo
 
 /** Selects the root cause on the discrepant lot's row during the resolve step. */
 async function selectRootCause(page: Page, lot: Lot, rootCause: string): Promise<void> {
-  const row = page
+  let row = page
     .locator('[role="row"], tr, div[class*="rt-tr"]')
-    .filter({ hasText: lot.lotNumber })
-    .first();
+    .filter({ hasText: lot.lotNumber });
+  if (lot.binLocation?.name) {
+    row = row.filter({ hasText: lot.binLocation.name });
+  }
+  row = row.first();
   await row.getByText('Select', { exact: true }).first().click();
   await page
     .locator(`.react-select__option:has-text("${rootCause}"), [role="option"]:has-text("${rootCause}")`)
@@ -176,7 +188,8 @@ async function cancelPendingCycleCount(page: Page, productName: string): Promise
   }>;
   const candidate = candidates.find((c) => c.product.name === productName);
   const requestId = candidate?.cycleCountRequest?.id;
-  if (candidate?.status && requestId) {
+  // Only cancel counts that never finished; completed counts are history.
+  if (candidate?.status && candidate.status !== 'COMPLETED' && requestId) {
     const del = await page.request.delete(
       url(`/api/facilities/${LOCATIONS.mainWarehouse.id}/cycle-counts/requests/batch?id=${requestId}`),
     );

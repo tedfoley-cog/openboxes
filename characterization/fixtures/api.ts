@@ -15,7 +15,15 @@ export async function newApiSession(
   locationId: string = LOCATIONS.mainWarehouse.id,
 ): Promise<APIRequestContext> {
   const ctx = await playwrightRequest.newContext({ baseURL: BASE_URL });
-  await ctx.post(url('/auth/handleLogin'), { form: { username, password } });
+  const loginRes = await ctx.post(url('/auth/handleLogin'), {
+    form: { username, password },
+    maxRedirects: 0,
+  });
+  const redirect = loginRes.headers()['location'] ?? '';
+  expect(
+    loginRes.status() === 302 && !redirect.includes('/auth/login'),
+    `login as ${username} should succeed`,
+  ).toBeTruthy();
   const session = await ctx.get(url(`/dashboard/chooseLocation/${locationId}`));
   expect(session.ok()).toBeTruthy();
   return ctx;
@@ -48,7 +56,11 @@ export async function ensureUserActive(username: string, password: string): Prom
   const admin = await newApiSession(ADMIN.username, ADMIN.password);
   try {
     const listHtml = await (await admin.get(url(`/user/list?q=${username}`))).text();
-    const match = listHtml.match(/\/user\/(?:show|edit)\/([0-9a-f]+)/);
+    // The list row links the user's edit page with the username as link text
+    // (the page also links the *current* user's edit page in the navbar).
+    const match = listHtml.match(
+      new RegExp(`/user/(?:show|edit)/([0-9a-f]+)"[^>]*>\\s*${username}\\b`),
+    );
     expect(match, `user ${username} should exist in the demo dataset`).toBeTruthy();
     const userId = match![1];
     const res = await admin.post(url('/user/update'), {
