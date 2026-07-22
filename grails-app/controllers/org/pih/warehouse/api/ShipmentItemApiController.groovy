@@ -187,7 +187,10 @@ class ShipmentItemApiController {
         shipmentItem.shipment.addToShipmentItems(splitItem)
         if (!shipmentItem.shipment.save(flush: true)) {
             transactionStatus.setRollbackOnly()
-            renderError("Failed to split shipment item due to an unknown error")
+            List<String> errorMessages = shipmentItem.shipment.errors.allErrors.collect {
+                g.message(error: it) as String
+            }
+            renderError(errorMessages ? errorMessages.join("; ") : "Failed to split shipment item due to an unknown error")
             return
         }
         render([data: [
