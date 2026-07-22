@@ -168,6 +168,15 @@ const INVENTORY_BROWSER_URL = {
   list: () => `${INVENTORY_BROWSER_URL.base}/list`,
 };
 
+const INVENTORY_LEVEL_URL = {
+  base: `${CONTEXT_PATH}/inventoryLevel`,
+  list: () => `${INVENTORY_LEVEL_URL.base}/list`,
+  create: () => `${INVENTORY_LEVEL_URL.base}/create`,
+  show: (id) => `${INVENTORY_LEVEL_URL.base}/show/${id}`,
+  edit: (id) => `${INVENTORY_LEVEL_URL.base}/edit/${id}`,
+  exportCsv: () => `${INVENTORY_LEVEL_URL.base}/list?format=csv`,
+};
+
 const INVENTORY_URL = {
   base: `${CONTEXT_PATH}/inventory`,
   showTransaction: (id) => `${INVENTORY_URL.base}/showTransaction/${id}`,
@@ -283,6 +292,30 @@ const ORGANIZATION_URL = {
   }),
 };
 
+const PARTY_URL = {
+  base: `${CONTEXT_PATH}/party`,
+  list: () => `${PARTY_URL.base}/list`,
+  create: () => `${PARTY_URL.base}/create`,
+  edit: (id) => `${PARTY_URL.base}/edit/${id}`,
+  show: (id) => `${PARTY_URL.base}/show/${id}`,
+};
+
+const PARTY_ROLE_URL = {
+  base: `${CONTEXT_PATH}/partyRole`,
+  list: () => `${PARTY_ROLE_URL.base}/list`,
+  create: (partyId) => stringifyUrl({
+    url: `${PARTY_ROLE_URL.base}/create`,
+    query: partyId ? { partyId } : {},
+  }),
+  edit: (id) => `${PARTY_ROLE_URL.base}/edit/${id}`,
+  show: (id) => `${PARTY_ROLE_URL.base}/show/${id}`,
+};
+
+const PARTY_TYPE_URL = {
+  base: `${CONTEXT_PATH}/partyType`,
+  show: (id) => `${PARTY_TYPE_URL.base}/show/${id}`,
+};
+
 const CATEGORY_URL = {
   base: `${CONTEXT_PATH}/category`,
   tree: (id) => (id ? `${CATEGORY_URL.base}/tree?id=${id}` : `${CATEGORY_URL.base}/tree`),
@@ -386,6 +419,7 @@ export {
   GL_ACCOUNT_URL,
   INVENTORY_BROWSER_URL,
   INVENTORY_ITEM_URL,
+  INVENTORY_LEVEL_URL,
   INVENTORY_SNAPSHOT_URL,
   INVENTORY_URL,
   INVOICE_URL,
@@ -396,6 +430,9 @@ export {
   ORDER_ADJUSTMENT_TYPE_URL,
   ORDER_URL,
   ORGANIZATION_URL,
+  PARTY_ROLE_URL,
+  PARTY_TYPE_URL,
+  PARTY_URL,
   PAYMENT_TERM_URL,
   PICKLIST_URL,
   PRODUCT_ASSOCIATION_URL,

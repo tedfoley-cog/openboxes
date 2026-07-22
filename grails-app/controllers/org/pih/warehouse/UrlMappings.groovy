@@ -143,6 +143,46 @@ class UrlMappings {
             action = [GET: "organizationRoleTypeOptions"]
         }
 
+        // Role type options for the party role form
+        "/api/roleTypeOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "roleTypeOptions"]
+        }
+
+        // Party options for the party role form
+        "/api/partyOptions"(parseRequest: true) {
+            controller = { "selectOptionsApi" }
+            action = [GET: "partyOptions"]
+        }
+
+        // Party endpoints for the React party screens; explicit mappings
+        // because the generic "/api/${resource}s" pattern cannot derive
+        // "partyApi" from the irregular plural "parties".
+        "/api/parties"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [POST: "create"]
+        }
+
+        "/api/parties/search"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [GET: "search"]
+        }
+
+        "/api/parties/$id/details"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [GET: "details"]
+        }
+
+        "/api/parties/$id"(parseRequest: true) {
+            controller = { "partyApi" }
+            action = [POST: "update", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/partyRoles/$id/details"(parseRequest: true) {
+            controller = { "partyRoleApi" }
+            action = [GET: "details"]
+        }
+
         "/api/organizations/search"(parseRequest: true) {
             controller = { "organizationApi" }
             action = [GET: "search"]
@@ -1701,6 +1741,11 @@ class UrlMappings {
             action = [GET: "getAssociations"]
         }
 
+        "/api/stockCard/$id/transactionLog" {
+            controller = "stockCardApi"
+            action = [GET: "getTransactionLog"]
+        }
+
         /**
          * Inventory item (lot number) API endpoints
          */
@@ -1733,6 +1778,16 @@ class UrlMappings {
         "/api/facilities/$facilityId/products/$productId/inventoryLevel"(parseRequest: true) {
             controller = "inventoryLevelApi"
             action = [GET: "read", PUT: "update"]
+        }
+
+        "/api/inventoryLevels"(parseRequest: true) {
+            controller = "inventoryLevelApi"
+            action = [GET: "search", POST: "create"]
+        }
+
+        "/api/inventoryLevels/$id"(parseRequest: true) {
+            controller = "inventoryLevelApi"
+            action = [GET: "getById", PUT: "updateById", DELETE: "deleteById"]
         }
 
         "/api/facilities/$facilityId/inventories/productGroupSummary" {
