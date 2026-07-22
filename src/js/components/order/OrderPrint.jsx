@@ -43,20 +43,32 @@ const OrderPrint = () => {
   const translate = useTranslate();
 
   const [order, setOrder] = useState(null);
+  const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
     if (!orderId) {
       return;
     }
+    setOrder(null);
+    setLoadError(null);
     orderApi.getOrderPrintData(orderId)
       .then(({ data }) => setOrder(data?.data))
       .catch((err) => {
         const message = err?.response?.data?.errorMessage;
+        setLoadError(message || 'Unable to load order');
         if (message) {
           Alert.error(message);
         }
       });
   }, [orderId]);
+
+  if (loadError) {
+    return (
+      <div className="d-flex flex-column m-3" data-testid="order-print-error">
+        <div className="alert alert-danger">{loadError}</div>
+      </div>
+    );
+  }
 
   if (!order) {
     return (
