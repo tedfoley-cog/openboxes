@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #62 (B25) merged. 36/49 Phase 2 batches done.
 - 2026-07-22: #59 (B24) merged. 35/49 Phase 2 batches done.
 - 2026-07-22: Wave 7 spawned (B39-B44 reports/admin/docs/localization): 4f84612e, 7c525d48, ce28cedf, c807a61b, e31890cc, 6fda6ebd.
 - 2026-07-22: #58 (B36), #63 (B22) merged. 34/49 Phase 2 batches done.
