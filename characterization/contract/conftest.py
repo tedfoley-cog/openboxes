@@ -51,6 +51,14 @@ def batch15_endpoints(client):
 
 
 @pytest.fixture(scope="session")
+def batch19_endpoints(client):
+    # Same rationale as batch14_endpoints for the Batch 19 create-shipment
+    # wizard endpoints.
+    if client.request("GET", "/api/shipments/wizardOptions").status_code == 404:
+        pytest.skip("Batch 19 shipment wizard endpoints not present in target build")
+
+
+@pytest.fixture(scope="session")
 def batch4_endpoints(client):
     # The api-snapshot job runs against the pinned released image, which
     # predates the Batch 4 inventory/stock-card endpoints. Skip their tests

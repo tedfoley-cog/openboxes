@@ -5,6 +5,7 @@ import {
   REQUISITION_API,
   REQUISITION_BY_ID,
   REQUISITION_CONFIRM,
+  REQUISITION_DELIVERY_NOTE,
   REQUISITION_DETAILS,
   REQUISITION_DOCUMENT_TYPES,
   REQUISITION_DOCUMENTS,
@@ -50,6 +51,7 @@ export default {
   getRequisitionProcess: (id) => apiClient.get(REQUISITION_PROCESS(id)),
   issueRequisition: (id, payload) => apiClient.post(REQUISITION_ISSUE(id), payload),
   getRequisitionPrintDraft: (id) => apiClient.get(REQUISITION_PRINT_DRAFT(id)),
+  getRequisitionDeliveryNote: (id) => apiClient.get(REQUISITION_DELIVERY_NOTE(id)),
   savePicklist: (payload) => apiClient.post(PICKLIST_SAVE, payload),
   getRequisitionItem: (id) => apiClient.get(REQUISITION_ITEM_BY_ID(id)),
   changeRequisitionItemQuantity: (id, payload) =>

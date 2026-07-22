@@ -344,6 +344,29 @@ const REQUISITION_ITEM_URL = {
   change: (id) => `${REQUISITION_ITEM_URL.base}/change/${id}`,
 };
 
+const CREATE_SHIPMENT_URL = {
+  base: `${CONTEXT_PATH}/createShipmentWorkflow`,
+  details: (id, type) => stringifyUrl({
+    url: id ? `${CREATE_SHIPMENT_URL.base}/details/${id}` : `${CREATE_SHIPMENT_URL.base}/details`,
+    query: type ? { type } : {},
+  }),
+  tracking: (id) => `${CREATE_SHIPMENT_URL.base}/tracking/${id}`,
+  packing: (id) => `${CREATE_SHIPMENT_URL.base}/packing/${id}`,
+  picking: (id) => `${CREATE_SHIPMENT_URL.base}/picking/${id}`,
+  sending: (id) => `${CREATE_SHIPMENT_URL.base}/sending/${id}`,
+};
+
+const SHIPMENT_SHOW_URL = {
+  base: `${CONTEXT_PATH}/shipment`,
+  show: (id) => `${SHIPMENT_SHOW_URL.base}/showDetails/${id}`,
+  list: () => `${SHIPMENT_SHOW_URL.base}/list`,
+};
+
+const DELIVERY_NOTE_URL = {
+  base: `${CONTEXT_PATH}/deliveryNote`,
+  print: (id) => `${DELIVERY_NOTE_URL.base}/print/${id}`,
+};
+
 const PICKLIST_URL = {
   base: `${CONTEXT_PATH}/picklist`,
   print: (id) => `${PICKLIST_URL.base}/print/${id}`,
@@ -374,8 +397,10 @@ export {
   BUDGET_CODE_URL,
   CATEGORY_URL,
   CONSUMPTION_URL,
+  CREATE_SHIPMENT_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  DELIVERY_NOTE_URL,
   DOCUMENT_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
@@ -402,6 +427,7 @@ export {
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
+  SHIPMENT_SHOW_URL,
   STOCK_MOVEMENT_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
