@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { getTranslate } from 'react-localize-redux';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import requisitionApi from 'api/services/RequisitionApi';
 import { BARCODE_URL, PICKLIST_URL } from 'consts/applicationUrls';
@@ -16,7 +17,9 @@ const picklistItemComparator = (a, b) =>
   (a.binLocation?.name ?? '').localeCompare(b.binLocation?.name ?? '')
   || (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
 
-const ItemsTable = ({ items, testId, translate }) => (
+const ItemsTable = ({
+  items, testId, translate, sorted,
+}) => (
   <table className="table table-sm table-bordered picklist-items-table" data-testid={testId}>
     <thead>
       <tr>
@@ -31,9 +34,10 @@ const ItemsTable = ({ items, testId, translate }) => (
     </thead>
     <tbody>
       {items.map((item) => {
-        const picklistItems = [...(item.picklistItems ?? [])]
-          .filter((picklistItem) => picklistItem.quantity > 0)
-          .sort(picklistItemComparator);
+        // matches legacy _returnPrintPage.gsp: bin-location ordering only when sorted
+        const filtered = (item.picklistItems ?? [])
+          .filter((picklistItem) => picklistItem.quantity > 0);
+        const picklistItems = sorted ? [...filtered].sort(picklistItemComparator) : filtered;
         if (!picklistItems.length) {
           return (
             <tr key={item.id}>
@@ -79,10 +83,17 @@ ItemsTable.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   testId: PropTypes.string.isRequired,
   translate: PropTypes.func.isRequired,
+  sorted: PropTypes.bool,
+};
+
+ItemsTable.defaultProps = {
+  sorted: false,
 };
 
 const PicklistReturnPrint = () => {
   const { orderId } = useParams();
+  const location = useLocation();
+  const sorted = queryString.parse(location.search)?.sorted;
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const translate = useSelector(
@@ -186,25 +197,25 @@ const PicklistReturnPrint = () => {
       {groups.coldChain.length > 0 && (
         <>
           <h5><Translate id="react.picklist.coldChain.label" defaultMessage="Cold chain" /></h5>
-          <ItemsTable items={groups.coldChain} testId="picklist-cold-chain-items" translate={translate} />
+          <ItemsTable items={groups.coldChain} testId="picklist-cold-chain-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.controlledSubstance.length > 0 && (
         <>
           <h5><Translate id="react.picklist.controlledSubstance.label" defaultMessage="Controlled substance" /></h5>
-          <ItemsTable items={groups.controlledSubstance} testId="picklist-controlled-substance-items" translate={translate} />
+          <ItemsTable items={groups.controlledSubstance} testId="picklist-controlled-substance-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.hazardousMaterial.length > 0 && (
         <>
           <h5><Translate id="react.picklist.hazardousMaterial.label" defaultMessage="Hazardous material" /></h5>
-          <ItemsTable items={groups.hazardousMaterial} testId="picklist-hazardous-material-items" translate={translate} />
+          <ItemsTable items={groups.hazardousMaterial} testId="picklist-hazardous-material-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.general.length > 0 && (
         <>
           <h5><Translate id="react.picklist.general.label" defaultMessage="General" /></h5>
-          <ItemsTable items={groups.general} testId="picklist-general-items" translate={translate} />
+          <ItemsTable items={groups.general} testId="picklist-general-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       <table className="table table-sm table-bordered mt-4 signature-table" data-testid="picklist-signature-table">

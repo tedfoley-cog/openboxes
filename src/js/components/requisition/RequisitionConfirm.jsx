@@ -46,16 +46,23 @@ const RequisitionConfirm = () => {
     event.preventDefault();
     setSaving(true);
     try {
-      await requisitionApi.saveRequisitionDetails(requisitionId, {
+      const { data } = await requisitionApi.saveRequisitionDetails(requisitionId, {
         checkedById: checkedBy?.id || null,
         dateChecked: dateChecked || null,
       });
-      window.location = REQUISITION_URL.transfer(requisitionId);
+      const saved = data?.data;
+      setRequisition((previous) => ({
+        ...previous,
+        checkedBy: saved?.checkedBy ?? null,
+        dateChecked: saved?.dateChecked ?? null,
+      }));
+      Alert.success(translate('react.default.alert.saveSuccess.label', 'Saved successfully'));
     } catch (err) {
       const message = err?.response?.data?.errorMessage;
       if (message) {
         Alert.error(message);
       }
+    } finally {
       setSaving(false);
     }
   };
@@ -113,7 +120,7 @@ const RequisitionConfirm = () => {
               <Translate id="react.default.button.back.label" defaultMessage="Back" />
             </a>
             <button type="submit" className="btn btn-primary" disabled={saving} data-testid="requisition-confirm-button">
-              <Translate id="react.default.button.next.label" defaultMessage="Next" />
+              <Translate id="react.default.button.save.label" defaultMessage="Save" />
             </button>
           </div>
         </form>

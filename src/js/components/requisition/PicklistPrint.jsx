@@ -17,7 +17,9 @@ const picklistItemComparator = (a, b) =>
   (a.binLocation?.name ?? '').localeCompare(b.binLocation?.name ?? '')
   || (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
 
-const ItemsTable = ({ items, testId, translate }) => (
+const ItemsTable = ({
+  items, testId, translate, sorted,
+}) => (
   <table className="table table-sm table-bordered picklist-items-table" data-testid={testId}>
     <thead>
       <tr>
@@ -32,9 +34,10 @@ const ItemsTable = ({ items, testId, translate }) => (
     </thead>
     <tbody>
       {items.map((item) => {
-        const picklistItems = [...(item.picklistItems ?? [])]
-          .filter((picklistItem) => picklistItem.quantity > 0)
-          .sort(picklistItemComparator);
+        // matches legacy _printPage.gsp: bin-location ordering only when sorted
+        const filtered = (item.picklistItems ?? [])
+          .filter((picklistItem) => picklistItem.quantity > 0);
+        const picklistItems = sorted ? [...filtered].sort(picklistItemComparator) : filtered;
         if (!picklistItems.length) {
           return (
             <tr key={item.id}>
@@ -80,6 +83,11 @@ ItemsTable.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   testId: PropTypes.string.isRequired,
   translate: PropTypes.func.isRequired,
+  sorted: PropTypes.bool,
+};
+
+ItemsTable.defaultProps = {
+  sorted: false,
 };
 
 const PicklistPrint = () => {
@@ -198,31 +206,31 @@ const PicklistPrint = () => {
       {groups.coldChain.length > 0 && (
         <>
           <h5><Translate id="react.picklist.coldChain.label" defaultMessage="Cold chain" /></h5>
-          <ItemsTable items={groups.coldChain} testId="picklist-cold-chain-items" translate={translate} />
+          <ItemsTable items={groups.coldChain} testId="picklist-cold-chain-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.controlledSubstance.length > 0 && (
         <>
           <h5><Translate id="react.picklist.controlledSubstance.label" defaultMessage="Controlled substance" /></h5>
-          <ItemsTable items={groups.controlledSubstance} testId="picklist-controlled-substance-items" translate={translate} />
+          <ItemsTable items={groups.controlledSubstance} testId="picklist-controlled-substance-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.hazardousMaterial.length > 0 && (
         <>
           <h5><Translate id="react.picklist.hazardousMaterial.label" defaultMessage="Hazardous material" /></h5>
-          <ItemsTable items={groups.hazardousMaterial} testId="picklist-hazardous-material-items" translate={translate} />
+          <ItemsTable items={groups.hazardousMaterial} testId="picklist-hazardous-material-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.general.length > 0 && (
         <>
           <h5><Translate id="react.picklist.general.label" defaultMessage="General" /></h5>
-          <ItemsTable items={groups.general} testId="picklist-general-items" translate={translate} />
+          <ItemsTable items={groups.general} testId="picklist-general-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       {groups.canceled.length > 0 && (
         <>
           <h5><Translate id="react.picklist.canceled.label" defaultMessage="Canceled" /></h5>
-          <ItemsTable items={groups.canceled} testId="picklist-canceled-items" translate={translate} />
+          <ItemsTable items={groups.canceled} testId="picklist-canceled-items" translate={translate} sorted={!!sorted} />
         </>
       )}
       <table className="table table-sm table-bordered mt-4 signature-table" data-testid="picklist-signature-table">
