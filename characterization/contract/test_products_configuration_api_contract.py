@@ -53,8 +53,10 @@ def test_download_categories(client):
 
 def test_import_category_csv(client):
     csv = f"Category Name,Parent Category Name\n{TEST_CATEGORY},ROOT\n"
-    check(client, spec, "POST", "/api/productsConfiguration/importCategoryCsv",
-          files={"importFile": ("categories.csv", csv.encode(), "text/csv")})
+    resp = check(client, spec, "POST",
+                 "/api/productsConfiguration/importCategoryCsv",
+                 files={"importFile": ("categories.csv", csv.encode(), "text/csv")})
+    assert resp.status_code == 200
     created = [c for c in client.get_json("/api/categories")["data"]
                if c.get("name") == TEST_CATEGORY]
     assert created, "imported category should exist"
@@ -80,5 +82,6 @@ def test_import_category_csv_wrong_content_type(client):
 def test_import_products_without_option_is_noop(client):
     # admin is a superuser in the seeded dataset; without a productOption the
     # import is a no-op but still responds 200.
-    check(client, spec, "POST", "/api/productsConfiguration/importProducts",
-          json={})
+    resp = check(client, spec, "POST",
+                 "/api/productsConfiguration/importProducts", json={})
+    assert resp.status_code == 200

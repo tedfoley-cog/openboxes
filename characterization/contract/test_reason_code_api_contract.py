@@ -25,8 +25,9 @@ def test_list_cycle_count(client):
 
 
 def test_list_invalid_activity_code(client):
-    check(client, spec, "GET", "/api/reasonCodes",
-          params={"activityCode": "NOT_AN_ACTIVITY"})
+    resp = check(client, spec, "GET", "/api/reasonCodes",
+                 params={"activityCode": "NOT_AN_ACTIVITY"})
+    assert resp.status_code == 500
 
 
 def test_read(client):
