@@ -59,6 +59,7 @@ const RequisitionItemList = () => {
   );
 
   const fetchItems = (newOffset = 0) => {
+    setError(null);
     requisitionApi.getCanceledRequisitionItems({
       dateRequestedFrom: dateRequestedFrom || null,
       dateRequestedTo: dateRequestedTo || null,
@@ -92,12 +93,9 @@ const RequisitionItemList = () => {
       ? { cancelReasonCode: cancelReasonCodes.map((option) => option.value) } : {}),
   };
 
-  if (error) {
-    return <div className="alert alert-danger m-3" role="alert">{error}</div>;
-  }
-
   return (
     <div className="d-flex flex-column m-3">
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
       <div className="card mb-3">
         <div className="card-header d-flex justify-content-between align-items-center">
           <Translate id="react.requisitionItem.list.label" defaultMessage="Canceled requisition items" />
