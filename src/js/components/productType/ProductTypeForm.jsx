@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
 
 import productTypeApi from 'api/services/ProductTypeApi';
 import Button from 'components/form-elements/Button';
@@ -23,7 +22,6 @@ const REQUIRED_FIELDS = ['PRODUCT_CODE', 'NAME', 'CATEGORY', 'GL_ACCOUNT'];
 const ProductTypeForm = () => {
   useTranslation('productType', 'default');
 
-  const history = useHistory();
   const translate = useTranslate();
 
   const [supportedActivityOptions, setSupportedActivityOptions] = useState([]);
@@ -78,7 +76,9 @@ const ProductTypeForm = () => {
     notification(NotificationType.SUCCESS)({
       message: translate('react.productType.create.success.label', 'Product type has been created successfully'),
     });
-    history.push(PRODUCT_TYPE_URL.list());
+    // The product type list is still a legacy GSP screen, so a full
+    // browser navigation is needed.
+    window.location.href = PRODUCT_TYPE_URL.list();
   };
 
   return (
@@ -207,7 +207,7 @@ const ProductTypeForm = () => {
             defaultLabel="Cancel"
             label="react.default.button.cancel.label"
             variant="primary-outline"
-            onClick={() => history.push(PRODUCT_TYPE_URL.list())}
+            onClick={() => { window.location.href = PRODUCT_TYPE_URL.list(); }}
           />
         </div>
       </form>
