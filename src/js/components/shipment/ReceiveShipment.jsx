@@ -101,6 +101,7 @@ const ReceiveShipment = () => {
   const deleteItem = async (receiptItemId) => {
     setSaving(true);
     try {
+      await shipmentApi.saveReceipt(shipmentId, buildPayload('save'));
       await shipmentApi.deleteReceiptItem(shipmentId, receiptItemId);
       fetchReceipt();
     } catch (err) {
