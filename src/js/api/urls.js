@@ -81,6 +81,12 @@ export const ORDER_ITEMS = (id) => `${ORDER_BY_ID(id)}/items`;
 export const ORDER_SHIPMENTS = (id) => `${ORDER_BY_ID(id)}/shipments`;
 export const ORDER_INVOICES = (id) => `${ORDER_BY_ID(id)}/invoices`;
 export const ORDER_PRINT = (id) => `${ORDER_BY_ID(id)}/print`;
+export const ORDER_RECEIVE = (id) => `${ORDER_BY_ID(id)}/receiveOrder`;
+
+// SHIPMENT
+export const SHIPMENT_API = `${API}/shipments`;
+export const SHIPMENT_OUTBOUND_RETURN_PRINT = (id) => `${SHIPMENT_API}/${id}/outboundReturnPrint`;
+export const SHIPMENT_GOODS_RECEIPT_NOTE_PRINT = (id) => `${SHIPMENT_API}/${id}/goodsReceiptNotePrint`;
 export const ORDER_ADJUSTMENTS = (id) => `${ORDER_BY_ID(id)}/adjustments`;
 export const ORDER_ADJUSTMENT_BY_ID = (id, adjustmentId) => `${ORDER_ADJUSTMENTS(id)}/${adjustmentId}`;
 export const ORDER_SUMMARIES = `${API}/orderSummaries`;
