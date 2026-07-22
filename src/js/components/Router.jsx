@@ -423,6 +423,31 @@ const AsyncOrganizationShow = Loadable({
   loading: Loading,
 });
 
+const AsyncPersonList = Loadable({
+  loader: () => import('components/person/PersonList'),
+  loading: Loading,
+});
+
+const AsyncPersonForm = Loadable({
+  loader: () => import('components/person/PersonForm'),
+  loading: Loading,
+});
+
+const AsyncPersonShow = Loadable({
+  loader: () => import('components/person/PersonShow'),
+  loading: Loading,
+});
+
+const AsyncSupplierList = Loadable({
+  loader: () => import('components/supplier/SupplierList'),
+  loading: Loading,
+});
+
+const AsyncSupplierShow = Loadable({
+  loader: () => import('components/supplier/SupplierShow'),
+  loading: Loading,
+});
+
 const AsyncPartyList = Loadable({
   loader: () => import('components/party/PartyList'),
   loading: Loading,
@@ -993,6 +1018,36 @@ const AsyncCreateShipmentSending = Loadable({
   loading: Loading,
 });
 
+const AsyncShipmentList = Loadable({
+  loader: () => import('components/shipment/ShipmentList'),
+  loading: Loading,
+});
+
+const AsyncShipmentShowDetails = Loadable({
+  loader: () => import('components/shipment/ShipmentShowDetails'),
+  loading: Loading,
+});
+
+const AsyncShipmentPackingList = Loadable({
+  loader: () => import('components/shipment/ShipmentPackingList'),
+  loading: Loading,
+});
+
+const AsyncReceiveShipment = Loadable({
+  loader: () => import('components/shipment/ReceiveShipment'),
+  loading: Loading,
+});
+
+const AsyncSendShipment = Loadable({
+  loader: () => import('components/shipment/SendShipment'),
+  loading: Loading,
+});
+
+const AsyncShipmentItemCreate = Loadable({
+  loader: () => import('components/shipment/ShipmentItemCreate'),
+  loading: Loading,
+});
+
 const AsyncShipmentItemList = Loadable({
   loader: () => import('components/shipmentItem/ShipmentItemList'),
   loading: Loading,
@@ -1215,6 +1270,12 @@ const Router = () => {
             <MainLayoutRoute path="**/shipmentItem/split/:shipmentItemId" component={AsyncShipmentItemSplit} />
             <MainLayoutRoute path="**/shipmentWorkflow/create" component={AsyncShipmentWorkflowCreate} />
             <MainLayoutRoute path="**/deliveryNote/print/:requisitionId" component={AsyncDeliveryNotePrint} />
+            <MainLayoutRoute path="**/shipment/list" component={AsyncShipmentList} />
+            <MainLayoutRoute path="**/shipment/showDetails/:shipmentId" component={AsyncShipmentShowDetails} />
+            <MainLayoutRoute path="**/shipment/showPackingList/:shipmentId" component={AsyncShipmentPackingList} />
+            <MainLayoutRoute path="**/shipment/receiveShipment/:shipmentId" component={AsyncReceiveShipment} />
+            <MainLayoutRoute path="**/shipment/sendShipment/:shipmentId" component={AsyncSendShipment} />
+            <MainLayoutRoute path="**/shipmentItem/create" component={AsyncShipmentItemCreate} />
             <MainLayoutRoute path="**/purchaseOrder/list" component={AsyncPurchaseOrderList} />
             <MainLayoutRoute path="**/requisitionTemplate/list" component={AsyncStockList} />
             <MainLayoutRoute path="**/requisitionTemplate/show/:requisitionTemplateId" component={AsyncRequisitionTemplateShow} />
@@ -1256,6 +1317,12 @@ const Router = () => {
             <MainLayoutRoute path="**/organization/create" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/edit/:organizationId" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/show/:organizationId" component={AsyncOrganizationShow} />
+            <MainLayoutRoute path="**/person/list" component={AsyncPersonList} />
+            <MainLayoutRoute path="**/person/create" component={AsyncPersonForm} />
+            <MainLayoutRoute path="**/person/edit/:personId" component={AsyncPersonForm} />
+            <MainLayoutRoute path="**/person/show/:personId" component={AsyncPersonShow} />
+            <MainLayoutRoute path="**/supplier/list" component={AsyncSupplierList} />
+            <MainLayoutRoute path="**/supplier/show/:supplierId" component={AsyncSupplierShow} />
             <MainLayoutRoute path="**/party/list" component={AsyncPartyList} />
             <MainLayoutRoute path="**/party/create" component={AsyncPartyForm} />
             <MainLayoutRoute path="**/party/edit/:partyId" component={AsyncPartyForm} />
