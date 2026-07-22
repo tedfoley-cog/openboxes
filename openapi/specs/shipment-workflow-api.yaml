@@ -45,6 +45,32 @@ paths:
                       $ref: '#/components/schemas/ShipmentWorkflow'
                   totalCount:
                     type: integer
+    post:
+      operationId: createShipmentWorkflow
+      summary: Create a shipment workflow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShipmentWorkflowRequest'
+      responses:
+        '201':
+          description: Created shipment workflow.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ShipmentWorkflow'
+        '400':
+          description: Validation errors (missing name or shipment type).
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
   /api/shipmentWorkflows/options:
     get:
       operationId: getShipmentWorkflowOptions
@@ -200,6 +226,21 @@ components:
       properties:
         id:
           $ref: '../components/common.yaml#/components/schemas/Id'
+    CreateShipmentWorkflowRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        shipmentType:
+          description: >
+            Either an object with an "id" key or a bare id string.
+        excludedFields:
+          type: string
+          nullable: true
+        documentTemplate:
+          type: string
+          nullable: true
     ShipmentWorkflowRequest:
       type: object
       properties:

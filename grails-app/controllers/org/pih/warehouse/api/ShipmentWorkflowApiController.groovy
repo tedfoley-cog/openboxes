@@ -11,6 +11,7 @@ package org.pih.warehouse.api
 
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import grails.validation.ValidationException
 import org.springframework.http.HttpStatus
 
 import org.pih.warehouse.core.Document
@@ -38,6 +39,37 @@ class ShipmentWorkflowApiController {
         params.order = params.order ?: "asc"
         List<ShipmentWorkflow> shipmentWorkflows = ShipmentWorkflow.list(params)
         render([data: shipmentWorkflows.collect { toJson(it) }, totalCount: ShipmentWorkflow.count()] as JSON)
+    }
+
+    /**
+     * Mirrors the legacy ShipmentWorkflowController.save action (used by the
+     * migrated shipmentWorkflow/create screen, Phase 2 Batch 23).
+     */
+    @Transactional
+    def create() {
+        ShipmentWorkflow shipmentWorkflow = new ShipmentWorkflow()
+        def jsonObject = request.JSON
+        if (jsonObject.containsKey("name")) {
+            shipmentWorkflow.name = jsonObject.name ?: null
+        }
+        if (jsonObject.containsKey("shipmentType")) {
+            String shipmentTypeId = jsonObject.shipmentType instanceof Map
+                    ? jsonObject.shipmentType.id
+                    : jsonObject.shipmentType
+            shipmentWorkflow.shipmentType = shipmentTypeId ? ShipmentType.get(shipmentTypeId) : null
+        }
+        if (jsonObject.containsKey("excludedFields")) {
+            shipmentWorkflow.excludedFields = jsonObject.excludedFields ?: null
+        }
+        if (jsonObject.containsKey("documentTemplate")) {
+            shipmentWorkflow.documentTemplate = jsonObject.documentTemplate ?: null
+        }
+        shipmentWorkflow.validate()
+        if (shipmentWorkflow.hasErrors() || !shipmentWorkflow.save(flush: true)) {
+            throw new ValidationException("Invalid shipment workflow", shipmentWorkflow.errors)
+        }
+        response.status = HttpStatus.CREATED.value()
+        render([data: toJson(shipmentWorkflow)] as JSON)
     }
 
     def read() {

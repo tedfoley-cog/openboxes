@@ -750,10 +750,10 @@ class UrlMappings {
             action = [POST: "uploadDocument"]
         }
 
-        // Shipment workflow API (migrated shipmentWorkflow list/show/edit screens)
+        // Shipment workflow API (migrated shipmentWorkflow create/list/show/edit screens)
         "/api/shipmentWorkflows"(parseRequest: true) {
             controller = "shipmentWorkflowApi"
-            action = [GET: "list"]
+            action = [GET: "list", POST: "create"]
         }
 
         "/api/shipmentWorkflows/options" {
@@ -956,6 +956,33 @@ class UrlMappings {
         "/api/shipments/$id/send"(parseRequest: true) {
             controller = "shipmentApi"
             action = [POST: "send"]
+        }
+
+        // Shipment Item API (shipmentItem scaffold screens migrated to React)
+
+        "/api/shipmentItems"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [GET: "list"]
+        }
+
+        "/api/shipmentItems/options" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "options"]
+        }
+
+        "/api/shipmentItems/$id"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
+        "/api/shipmentItems/$id/pick" {
+            controller = { "shipmentItemApi" }
+            action = [GET: "pickContext"]
+        }
+
+        "/api/shipmentItems/$id/split"(parseRequest: true) {
+            controller = { "shipmentItemApi" }
+            action = [POST: "split"]
         }
 
         // Requisition Template API (requisitionTemplate screens migrated to React)
