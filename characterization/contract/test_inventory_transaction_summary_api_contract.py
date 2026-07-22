@@ -31,5 +31,15 @@ def test_get_summary_csv(client):
     assert "attachment" in resp.headers.get("Content-Disposition", "")
 
 
+def test_get_summary_format_csv_query_param_ignored(client):
+    # Pins the quirk: format=csv as a query parameter is ignored on the
+    # extensionless path and plain JSON is returned.
+    main = client.location_id("Main Warehouse")
+    resp = check(client, spec, "GET", PATH,
+                 params={"facility": main, "format": "csv",
+                         "max": "10", "offset": "0"})
+    assert resp.headers.get("Content-Type", "").startswith("application/json")
+
+
 def test_get_summary_missing_facility(client):
     check(client, spec, "GET", PATH, params={"max": "10", "offset": "0"})
