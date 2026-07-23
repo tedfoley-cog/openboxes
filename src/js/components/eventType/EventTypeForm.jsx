@@ -115,6 +115,11 @@ const EventTypeForm = () => {
         });
         goToList();
       }
+    } catch (error) {
+      notification(NotificationType.ERROR_OUTLINED)({
+        message: error.response?.data?.errorMessage
+          ?? translate('react.eventType.delete.error.label', 'Event type could not be deleted'),
+      });
     } finally {
       dispatch(hideSpinner());
     }

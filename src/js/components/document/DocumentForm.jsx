@@ -108,6 +108,11 @@ const DocumentForm = () => {
         });
         history.push(DOCUMENT_URL.list());
       }
+    } catch (error) {
+      notification(NotificationType.ERROR_OUTLINED)({
+        message: error.response?.data?.errorMessage
+          ?? translate('react.document.delete.error.label', 'Document could not be deleted'),
+      });
     } finally {
       dispatch(hideSpinner());
     }
