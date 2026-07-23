@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #74 (B45) merged. 45/49 Phase 2 batches done. B46/B47/B48 remain.
 - 2026-07-22: #72 (B49) merged. 44/49 Phase 2 batches done. B45-B48 in flight.
 - 2026-07-22: #65 (B42) merged. 43/49 Phase 2 batches done. Wave 8 (B45-B49) is the final Phase 2 wave.
 - 2026-07-22: #64 (B44) merged. 42/49 Phase 2 batches done. B42 + wave 8 (B45-B49) in flight.
