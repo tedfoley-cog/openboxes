@@ -193,8 +193,10 @@ class UserApiController {
             render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)
             return
         }
-        user.photo = photo.bytes
-        user.save(flush: true)
+        User.withTransaction {
+            user.photo = photo.bytes
+            user.save(flush: true)
+        }
         sendUserPhotoChanged(user)
         render([data: toDetailsJson(user)] as JSON)
     }
