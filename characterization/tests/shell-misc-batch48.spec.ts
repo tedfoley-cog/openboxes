@@ -27,6 +27,14 @@ test.describe('batch 48 shell & misc react screens', () => {
     await captureStep(page, 'errors', 'react-not-found');
   });
 
+  test('record-not-found 404 shows the resource-with-id message', async ({ page }) => {
+    // ObjectNotFoundException is mapped to handleNotFound; the record id must
+    // survive the redirect so the id-specific message renders.
+    await page.goto(url('/document/exportZebraTemplate/bogus-id-batch48'));
+    await expect(page).toHaveURL(/\/errors\/handleNotFound/);
+    await expect(page.getByTestId('not-found-summary')).toContainText('bogus-id-batch48');
+  });
+
   test('mobile error screen renders captured error details', async ({ page }) => {
     // Stash 404 details by visiting an unknown page, then confirm the
     // shared error-details screen renders them at /mobile/error.

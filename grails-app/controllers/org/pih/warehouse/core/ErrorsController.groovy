@@ -57,15 +57,23 @@ class ErrorsController {
             }
             render([errorCode: 404, errorMessage: errorMessage] as JSON)
         } else {
+            // Present on a servlet error dispatch (404 status or exception mapped to this
+            // action) but never on the redirect follow-up request, so no redirect loop.
             String errorUri = request.getAttribute('jakarta.servlet.error.request_uri')
+                    ?: (request.exception ? request.forwardURI : null)
             if (errorUri) {
                 session.lastError = [
                         errorCode   : 404,
                         errorMessage: request?.exception?.message,
                         uri         : errorUri,
                 ]
+                Throwable rootCause = request.exception ? ExceptionUtils.getRootCause(request.exception) : null
                 Map redirectParams = [:]
-                if (params.id) redirectParams.id = params.id
+                if (params.id) {
+                    redirectParams.id = params.id
+                } else if (rootCause instanceof org.hibernate.ObjectNotFoundException) {
+                    redirectParams.id = rootCause.identifier
+                }
                 if (params.resource) redirectParams.resource = params.resource
                 redirect(controller: "errors", action: "handleNotFound", params: redirectParams)
                 return

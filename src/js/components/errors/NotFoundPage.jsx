@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import queryString from 'query-string';
 import { RiErrorWarningLine } from 'react-icons/ri';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { ERROR_DETAILS_API } from 'api/urls';
 import useTranslate from 'hooks/useTranslate';
@@ -17,7 +17,10 @@ const NotFoundPage = () => {
 
   const translate = useTranslate();
   const { search } = useLocation();
-  const { id } = queryString.parse(search);
+  const params = useParams();
+  // The Grails redirect passes the record id as a path segment
+  // (/errors/handleNotFound/{id}); support a query param as a fallback.
+  const id = params.id || queryString.parse(search).id;
 
   const [details, setDetails] = useState(null);
 

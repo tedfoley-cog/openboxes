@@ -1607,7 +1607,7 @@ const Router = () => {
             <MainLayoutRoute path="**/localization/create" component={AsyncLocalizationForm} />
             <MainLayoutRoute path="**/localization/edit/:localizationId" component={AsyncLocalizationForm} />
             <MainLayoutRoute path="**/jobs/show/:jobName" component={AsyncJobShow} />
-            <MainLayoutRoute path="**/errors/handleNotFound" component={AsyncNotFoundPage} />
+            <MainLayoutRoute path="**/errors/handleNotFound/:id?" component={AsyncNotFoundPage} />
             <MainLayoutRoute path="**/quartz/list" component={AsyncQuartzJobList} />
             <MainLayoutRoute path="**/migration/materializedViews" component={AsyncMaterializedViews} />
             <MainLayoutRoute path="**/migration/productAvailability" component={AsyncMigrationProductAvailability} />
