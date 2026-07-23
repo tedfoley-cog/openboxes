@@ -184,9 +184,107 @@ class UrlMappings {
             action = [POST: "update", PUT: "update", DELETE: "delete"]
         }
 
+        // Localization record details for the React localization screens;
+        // explicit mapping so it does not hit LocalizationApiController.read
+        // (which localizes a message code).
+        "/api/localizations/$id/details"(parseRequest: true) {
+            controller = { "localizationApi" }
+            action = [GET: "details"]
+        }
+
+        // Migration admin dashboard endpoints (React migration screens)
+        "/api/migration/dataMigration"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "dataMigration"]
+        }
+
+        "/api/migration/dataQuality"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "dataQuality"]
+        }
+
+        "/api/migration/receiptsWithoutTransaction"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "receiptsWithoutTransaction"]
+        }
+
+        "/api/migration/shipmentsWithoutTransactions"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "shipmentsWithoutTransactions"]
+        }
+
+        "/api/migration/stockMovementsWithoutShipmentItems"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "stockMovementsWithoutShipmentItems"]
+        }
+
+        "/api/migration/dimensionTables"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "dimensionTables"]
+        }
+
+        "/api/migration/factTables"(parseRequest: true) {
+            controller = { "migrationApi" }
+            action = [GET: "factTables"]
+        }
+
         "/api/partyRoles/$id/details"(parseRequest: true) {
             controller = { "partyRoleApi" }
             action = [GET: "details"]
+        }
+
+        // Admin endpoints for the React admin status/upgrade screens
+        "/api/admin/status"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "status"]
+        }
+
+        "/api/admin/upgrade"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "upgrade"]
+        }
+
+        "/api/admin/upgrade/download"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "upgradeDownload"]
+        }
+
+        "/api/admin/upgrade/deploy"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "upgradeDeploy"]
+        }
+
+        // Auth endpoints for the React login/signup screens
+        "/api/auth/login"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [POST: "login"]
+        }
+
+        "/api/auth/signup"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [POST: "signup"]
+        }
+
+        "/api/auth/signupConfig"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [GET: "signupConfig"]
+        }
+
+        // Data import endpoint for the React batch/importData screen
+        "/api/batch/importData"(parseRequest: false) {
+            controller = { "batchApi" }
+            action = [POST: "importData"]
+        }
+
+        // Document endpoint for the React document/create screen
+        "/api/documents"(parseRequest: false) {
+            controller = { "documentApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/documents/$id"(parseRequest: true) {
+            controller = { "documentApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
         }
 
         // Admin console endpoints for the React admin screens (Phase 2 Batch 40)
@@ -357,12 +455,12 @@ class UrlMappings {
 
         "/api/eventTypes"(parseRequest: true) {
             controller = { "eventTypeApi" }
-            action = [GET: "list"]
+            action = [GET: "list", POST: "create"]
         }
 
         "/api/eventTypes/$id"(parseRequest: true) {
             controller = { "eventTypeApi" }
-            action = [GET: "read", DELETE: "delete"]
+            action = [GET: "read", PUT: "update", POST: "update", DELETE: "delete"]
         }
 
         "/api/localizationOverrides"(parseRequest: true) {
@@ -433,6 +531,16 @@ class UrlMappings {
         "/api/documentTypeOptions" {
             controller = { "selectOptionsApi" }
             action = [GET: "documentTypeOptions"]
+        }
+
+        "/api/eventCodeOptions" {
+            controller = { "selectOptionsApi" }
+            action = [GET: "eventCodeOptions"]
+        }
+
+        "/api/documents/$id/content"(parseRequest: false) {
+            controller = { "documentApi" }
+            action = [POST: "uploadContent"]
         }
 
         "/api/productAssociationTypeCodeOptions" {
@@ -2269,6 +2377,26 @@ class UrlMappings {
         "/api/dataExports" {
             controller = "dataExportApi"
             action = [GET: "list"]
+        }
+
+        "/api/mobile/dashboard" {
+            controller = "mobileApi"
+            action = [GET: "dashboard"]
+        }
+
+        "/api/mobile/productSummaries" {
+            controller = "mobileApi"
+            action = [GET: "productSummaries"]
+        }
+
+        "/api/mobile/productSummaries/$id" {
+            controller = "mobileApi"
+            action = [GET: "productSummaryDetails"]
+        }
+
+        "/api/mobile/outboundItems" {
+            controller = "mobileApi"
+            action = [GET: "outboundItems"]
         }
 
         "/api/reports/on-order-summary" {

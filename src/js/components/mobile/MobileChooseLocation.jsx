@@ -4,17 +4,19 @@ import _ from 'lodash';
 import { useSelector } from 'react-redux';
 
 import { LOCATION_API } from 'api/urls';
+import MobileLayout from 'components/mobile/MobileLayout';
 import { DASHBOARD_URL } from 'consts/applicationUrls';
+import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import apiClient from 'utils/apiClient';
 import Translate from 'utils/Translate';
-import HeaderWrapper from 'wrappers/HeaderWrapper';
-import PageWrapper from 'wrappers/PageWrapper';
 
 const NO_ORGANIZATION = 'NO_ORGANIZATION';
 
 const MobileChooseLocation = () => {
   useTranslation('dashboard', 'default');
+
+  const translate = useTranslate();
 
   const savedLocationId = useSelector((state) => state.session.savedLocationId);
 
@@ -75,13 +77,8 @@ const MobileChooseLocation = () => {
   );
 
   return (
-    <PageWrapper>
-      <HeaderWrapper className="align-items-center h-auto py-3">
-        <span className="title">
-          <Translate id="react.dashboard.chooseLocation.label" defaultMessage="Choose Location" />
-        </span>
-      </HeaderWrapper>
-      <div className="p-3" data-testid="mobile-choose-location">
+    <MobileLayout title={translate('react.dashboard.chooseLocation.label', 'Choose Location')}>
+      <div data-testid="mobile-choose-location">
         {isLoading
           ? <Translate id="react.default.loading.label" defaultMessage="Loading..." />
           : (
@@ -105,7 +102,7 @@ const MobileChooseLocation = () => {
             </>
           )}
       </div>
-    </PageWrapper>
+    </MobileLayout>
   );
 };
 

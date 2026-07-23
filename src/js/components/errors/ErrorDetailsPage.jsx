@@ -4,15 +4,16 @@ import { useHistory } from 'react-router-dom';
 
 import { ERROR_DETAILS_API } from 'api/urls';
 import Button from 'components/form-elements/Button';
+import MobileLayout from 'components/mobile/MobileLayout';
+import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 import apiClient from 'utils/apiClient';
 import Translate from 'utils/Translate';
-import HeaderWrapper from 'wrappers/HeaderWrapper';
-import PageWrapper from 'wrappers/PageWrapper';
 
 const ErrorDetailsPage = () => {
   useTranslation('errors', 'default');
 
+  const translate = useTranslate();
   const history = useHistory();
   const [details, setDetails] = useState(null);
 
@@ -23,13 +24,8 @@ const ErrorDetailsPage = () => {
   }, []);
 
   return (
-    <PageWrapper>
-      <HeaderWrapper className="align-items-center h-auto py-3">
-        <span className="title">
-          <Translate id="react.errors.errorDetails.label" defaultMessage="Error Details" />
-        </span>
-      </HeaderWrapper>
-      <div className="p-3">
+    <MobileLayout title={translate('react.errors.errorDetails.label', 'Error Details')}>
+      <div>
         <div className="mb-3">
           <Button
             defaultLabel="Ignore error and go back"
@@ -106,7 +102,7 @@ const ErrorDetailsPage = () => {
           </>
         )}
       </div>
-    </PageWrapper>
+    </MobileLayout>
   );
 };
 
