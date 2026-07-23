@@ -395,6 +395,16 @@ class UrlMappings {
             action = [POST: "createTrigger", DELETE: "deleteTrigger"]
         }
 
+        "/api/loginLocations"(parseRequest: true) {
+            controller = { "loginLocationsApi" }
+            action = [GET: "list"]
+        }
+
+        "/api/errors/details"(parseRequest: true) {
+            controller = { "errorsApi" }
+            action = [GET: "details"]
+        }
+
         "/api/paymentTermOptions"(parseRequest: true) {
             controller = { "selectOptionsApi" }
             action = [GET: "paymentTermOptions"]

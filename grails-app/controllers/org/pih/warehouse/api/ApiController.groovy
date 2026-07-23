@@ -82,7 +82,8 @@ class ApiController {
     def getMenuConfig() {
         Location location = Location.get(session.warehouse?.id)
 
-        if (!location.supports(ActivityCode.MANAGE_INVENTORY) && location.supports(ActivityCode.SUBMIT_REQUEST)) {
+        // No menu before a location has been chosen (e.g. the location chooser screen)
+        if (!location || (!location.supports(ActivityCode.MANAGE_INVENTORY) && location.supports(ActivityCode.SUBMIT_REQUEST))) {
             render([data: [menuConfig: []]] as JSON)
             return
         }
@@ -153,8 +154,8 @@ class ApiController {
 
         User user = User.get(session?.user?.id)
         Location location = Location.get(session.warehouse?.id)
-        String highestRole = user.getHighestRole(location)
-        List currentLocationRoles = user.getRolesByCurrentLocation(location)?.roleType*.name()
+        String highestRole = location ? user.getHighestRole(location) : null
+        List currentLocationRoles = location ? user.getRolesByCurrentLocation(location)?.roleType*.name() : []
         boolean isSuperuser = userService.isSuperuser(session?.user)
         boolean isUserAdmin = userService.isUserAdmin(session?.user)
         boolean isUserApprover = userService.hasRolePurchaseApprover(session?.user)
@@ -162,7 +163,7 @@ class ApiController {
         // TODO: investigate why in isUserManager method in userService there is Assistant role included
         ArrayList<RoleType> managerRoles = [RoleType.ROLE_SUPERUSER, RoleType.ROLE_ADMIN, RoleType.ROLE_MANAGER]
         boolean isUserManager = userService.getEffectiveRoles(user).any { managerRoles.contains(it.roleType) }
-        def supportedActivities = location.supportedActivities ?: location.locationType.supportedActivities
+        def supportedActivities = location ? (location.supportedActivities ?: location.locationType.supportedActivities) : []
         boolean isImpersonated = session.impersonateUserId ? true : false
         def buildNumber = gitProperties.shortCommitId
         def buildDate = grailsApplication.metadata.getProperty('build.time') ?: messageSource.getMessage('application.realTimeBuild.label', null, currentLocale)

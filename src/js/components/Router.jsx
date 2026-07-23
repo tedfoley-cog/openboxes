@@ -1233,6 +1233,31 @@ const AsyncRequisitionPick = Loadable({
   loading: Loading,
 });
 
+const AsyncChooseLocationPage = Loadable({
+  loader: () => import('components/chooseLocation/ChooseLocationPage'),
+  loading: Loading,
+});
+
+const AsyncErrorPage = Loadable({
+  loader: () => import('components/errors/ErrorPage'),
+  loading: Loading,
+});
+
+const AsyncAccessDeniedPage = Loadable({
+  loader: () => import('components/errors/AccessDeniedPage'),
+  loading: Loading,
+});
+
+const AsyncDataAccessErrorPage = Loadable({
+  loader: () => import('components/errors/DataAccessErrorPage'),
+  loading: Loading,
+});
+
+const AsyncMethodNotAllowedPage = Loadable({
+  loader: () => import('components/errors/MethodNotAllowedPage'),
+  loading: Loading,
+});
+
 const Router = () => {
   useConnectionListener();
 
@@ -1521,6 +1546,11 @@ const Router = () => {
             <MainLayoutRoute path="**/unitOfMeasureConversion/list" component={AsyncUnitOfMeasureConversionList} />
             <MainLayoutRoute path="**/unitOfMeasureConversion/create" component={AsyncUnitOfMeasureConversionForm} />
             <MainLayoutRoute path="**/unitOfMeasureConversion/edit/:unitOfMeasureConversionId" component={AsyncUnitOfMeasureConversionForm} />
+            <Route path="**/dashboard/chooseLocation" component={AsyncChooseLocationPage} />
+            <MainLayoutRoute path="**/errors/showError" component={AsyncErrorPage} />
+            <MainLayoutRoute path="**/errors/handleForbidden" component={AsyncAccessDeniedPage} />
+            <MainLayoutRoute path="**/errors/handleInvalidDataAccess" component={AsyncDataAccessErrorPage} />
+            <MainLayoutRoute path="**/errors/handleMethodNotAllowed" component={AsyncMethodNotAllowedPage} />
             <MainLayoutRoute path="**/dashboard/:configId?" component={Dashboard} />
             <MainLayoutRoute path="**/" component={Dashboard} />
           </Switch>

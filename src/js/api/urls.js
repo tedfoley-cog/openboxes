@@ -235,6 +235,12 @@ export const LOCALE_OPTIONS = `${API}/localeOptions`;
 export const JOBS_DETAILS_API = `${API}/jobs/details`;
 export const JOBS_TRIGGERS_API = `${API}/jobs/triggers`;
 
+// LOGIN LOCATIONS
+export const LOGIN_LOCATIONS_API = `${API}/loginLocations`;
+
+// ERRORS
+export const ERROR_DETAILS_API = `${API}/errors/details`;
+
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;
 
