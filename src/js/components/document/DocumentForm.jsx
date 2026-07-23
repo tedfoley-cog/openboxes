@@ -109,10 +109,7 @@ const DocumentForm = () => {
         history.push(DOCUMENT_URL.list());
       }
     } catch (error) {
-      notification(NotificationType.ERROR_OUTLINED)({
-        message: error.response?.data?.errorMessage
-          ?? translate('react.document.delete.error.label', 'Document could not be deleted'),
-      });
+      // Error feedback is surfaced by the global apiClient interceptor.
     } finally {
       dispatch(hideSpinner());
     }
@@ -158,10 +155,7 @@ const DocumentForm = () => {
         message: translate('react.document.upload.success.label', 'File has been uploaded successfully'),
       });
     } catch (error) {
-      const message = error?.response?.data?.errorMessage;
-      if (message) {
-        notification(NotificationType.ERROR_OUTLINED)({ message });
-      }
+      // Error feedback is surfaced by the global apiClient interceptor.
     } finally {
       setUploading(false);
     }
