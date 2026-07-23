@@ -256,6 +256,18 @@ class DashboardController {
             return
         }
 
+        // Surface any flash message (e.g. "location disabled") through the
+        // SPA's flash query-param mechanism (see useFlashScopeListener)
+        if (flash.message) {
+            String message = g.message(code: flash.message, default: flash.message)
+            Map redirectParams = [flash: ([message: message] as JSON).toString()]
+            if (params.targetUri) {
+                redirectParams.targetUri = params.targetUri
+            }
+            redirect(action: "chooseLocation", params: redirectParams)
+            return
+        }
+
         render(view: "/common/react")
     }
 

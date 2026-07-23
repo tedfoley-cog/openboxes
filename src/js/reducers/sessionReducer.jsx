@@ -92,7 +92,8 @@ export default function (state = initialState, action) {
     case FETCH_SESSION_INFO:
       return {
         ...state,
-        currentLocation: _.get(action, 'payload.data.data.location'),
+        // location is null before one has been chosen (location chooser screen)
+        currentLocation: _.get(action, 'payload.data.data.location') || initialState.currentLocation,
         currentLocationRoles: _.get(action, 'payload.data.data.currentLocationRoles'),
         isSuperuser: _.get(action, 'payload.data.data.isSuperuser'),
         isUserAdmin: _.get(action, 'payload.data.data.isUserAdmin'),

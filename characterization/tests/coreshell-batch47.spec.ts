@@ -30,12 +30,14 @@ test.describe('choose location react screen', () => {
     await expect(page.getByText('Choose Location').first()).toBeVisible();
     await captureStep(page, 'choose-location', 'react-choose-location');
 
-    // Same organization tabs as the API returns
+    // Same organization tabs as the API returns (plus a saved-locations tab)
     const organizations = Object.keys(body.data.loginLocations);
+    const savedTab = body.data.savedLocations.length > 0 ? 1 : 0;
     const tabs = page.getByTestId('location-organization-list').getByRole('tab');
-    await expect(tabs).toHaveCount(organizations.length);
+    await expect(tabs).toHaveCount(organizations.length + savedTab);
 
-    // The selected organization panel lists exactly its locations
+    // The first organization panel lists exactly its locations
+    await tabs.nth(savedTab).click();
     const firstOrgLocations = body.data.loginLocations[organizations[0]];
     const visiblePanel = page.locator('.react-tabs__tab-panel--selected');
     await expect(visiblePanel.locator('a.location-chooser__location-button'))
@@ -64,7 +66,7 @@ test.describe('megamenu react parity', () => {
     const menu = page.locator('.menu-wrapper');
     await expect(menu).toBeVisible();
     for (const section of sections) {
-      await expect(menu.getByText(section.label, { exact: true }).first()).toBeVisible();
+      await expect(menu.locator('a.nav-link', { hasText: section.label }).first()).toBeVisible();
     }
     await captureStep(page, 'megamenu', 'react-megamenu');
   });
