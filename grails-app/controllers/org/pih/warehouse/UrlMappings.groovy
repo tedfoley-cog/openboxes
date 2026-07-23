@@ -503,7 +503,7 @@ class UrlMappings {
             action = [GET: "list"]
         }
 
-        "/api/errors/details"(parseRequest: true) {
+        "/api/errors/lastError"(parseRequest: true) {
             controller = { "errorsApi" }
             action = [GET: "details"]
         }

@@ -12,12 +12,12 @@ spec = Spec("errors-api.yaml")
 def require_endpoint(client):
     # The pinned released image predates the errors API; only source builds
     # of this branch expose it.
-    if client.request("GET", "/api/errors/details").status_code != 200:
-        pytest.skip("app build does not expose /api/errors/details")
+    if client.request("GET", "/api/errors/lastError").status_code != 200:
+        pytest.skip("app build does not expose /api/errors/lastError")
 
 
 def test_details(client):
-    resp = check(client, spec, "GET", "/api/errors/details")
+    resp = check(client, spec, "GET", "/api/errors/lastError")
     data = resp.json()["data"]
     assert isinstance(data["mailEnabled"], bool)
     assert isinstance(data["recipients"], list)
@@ -29,7 +29,7 @@ def test_details_unauthenticated():
     # the error GSPs rendered for anonymous users too).
     anonymous = ApiClient()
     anonymous.session.headers["Accept"] = "application/json"
-    resp = check(anonymous, spec, "GET", "/api/errors/details")
+    resp = check(anonymous, spec, "GET", "/api/errors/lastError")
     data = resp.json()["data"]
     assert data["user"] is None
     assert data["error"] is None

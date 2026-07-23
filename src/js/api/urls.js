@@ -270,8 +270,8 @@ export const USER_PHOTO = (id) => `${API}/users/${id}/photo`;
 // LOGIN LOCATIONS
 export const LOGIN_LOCATIONS_API = `${API}/loginLocations`;
 
-// ERRORS
-export const ERROR_DETAILS_API = `${API}/errors/details`;
+// LAST ERROR (general error screen: error details + report-a-bug mail config)
+export const LAST_ERROR_API = `${API}/errors/lastError`;
 
 // PUTAWAY
 export const PUTAWAY_GENERATE_PDF = (id) => `/putAway/generatePdf/${id}`;

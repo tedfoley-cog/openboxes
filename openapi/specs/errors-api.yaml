@@ -3,7 +3,7 @@ info:
   title: OpenBoxes - ErrorsApiController
   description: >
     Error details endpoint handled by org.pih.warehouse.api.ErrorsApiController,
-    routed via the explicit "/api/errors/details" mapping. Added in Phase 2
+    routed via the explicit "/api/errors/lastError" mapping. Added in Phase 2
     (Batch 47) to back the React error screens (error, errors/dataAccess).
     ErrorsController stashes the last server-side error in the session before
     redirecting to the React error route; this endpoint returns that stash plus
@@ -15,7 +15,7 @@ servers:
 security:
   - cookieAuth: []
 paths:
-  /api/errors/details:
+  /api/errors/lastError:
     get:
       operationId: getErrorDetails
       summary: Get details of the last server-side error for this session

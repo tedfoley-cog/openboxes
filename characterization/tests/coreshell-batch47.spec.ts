@@ -76,8 +76,8 @@ test.describe('error react screens', () => {
   test.beforeEach(async ({ page }) => {
     resetStepCounter();
     await login(page);
-    const probe = await page.request.get(url('/api/errors/details'));
-    test.skip(probe.status() !== 200, 'app build does not expose /api/errors/details (pinned released image)');
+    const probe = await page.request.get(url('/api/errors/lastError'));
+    test.skip(probe.status() !== 200, 'app build does not expose /api/errors/lastError (pinned released image)');
   });
 
   test('access denied screen', async ({ page }) => {
