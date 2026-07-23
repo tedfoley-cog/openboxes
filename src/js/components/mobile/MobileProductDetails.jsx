@@ -73,7 +73,7 @@ const MobileProductDetails = ({ match }) => {
               <ul className="list-group">
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                   {translate('react.mobile.status.label', 'Status')}
-                  {quantityOnHand > 0
+                  {(productSummary?.quantityOnHand ?? 0) > 0
                     ? <div className="text-success">{translate('react.mobile.inStock.label', 'In Stock')}</div>
                     : <div className="text-danger">{translate('react.mobile.outOfStock.label', 'Out of Stock')}</div>}
                 </li>
