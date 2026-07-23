@@ -43,6 +43,7 @@ class RoleApiController {
         try {
             role.delete(flush: true)
         } catch (DataIntegrityViolationException ignored) {
+            transactionStatus.setRollbackOnly()
             response.status = HttpStatus.CONFLICT.value()
             render([errorCode: HttpStatus.CONFLICT.value(),
                     errorMessage: "Role ${role.name} is in use and cannot be deleted".toString()] as JSON)
