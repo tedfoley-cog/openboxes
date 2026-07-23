@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: P4.1 regression complete — full Playwright + contract suites green, API snapshots green except 18 documented source-build diffs; one real regression (getAppContext savedLocationId) fixed and merged (#77). Perf smoke OK. P4.2/P4.3 in flight.
 - 2026-07-22: Phase 4 wave spawned: P4.1 regression+perf (956f8880), P4.2 Liquibase prod-shaped (1fd81215), P4.3 GSP/dead-code removal (4f5b355b).
 - 2026-07-22: #71 (B46) merged. 49/49 Phase 2 batches done — Phase 2 COMPLETE. Launching Phase 4 (regression, Liquibase dry-run, perf smoke, GSP/dead-code removal, cutover validation).
 - 2026-07-22: #66 (B39) merged. 48/49 Phase 2 batches done. Only B46 remains.
