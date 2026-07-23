@@ -25,7 +25,7 @@ const DataAccessErrorPage = () => {
       {errorDetails && (
         <div className="error-page__details">
           <h2>
-            <Translate id="react.error.details.label" defaultMessage="Error Details" />
+            <Translate id="react.error.errorDetails.label" defaultMessage="Error Details" />
           </h2>
           <div className="error-page__details-box">
             {errorDetails.statusCode && (
