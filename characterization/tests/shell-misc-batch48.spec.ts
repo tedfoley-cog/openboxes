@@ -59,6 +59,24 @@ test.describe('batch 48 shell & misc react screens', () => {
     await captureStep(page, 'mobile', 'react-choose-location-chosen');
   });
 
+  test('mobile choose location renders before any location is selected', async ({ browser }) => {
+    // Fresh mobile login: no session location yet, so the React screen must
+    // boot (getAppContext/getMenuConfig) without a current location.
+    const context = await browser.newContext({
+      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
+    });
+    const page = await context.newPage();
+    await page.goto(url('/auth/login'));
+    await page.fill('#username', 'admin');
+    await page.fill('#password', 'password');
+    await page.click('#loginButton, button[type="submit"], form button');
+    await page.waitForURL(/mobile\/chooseLocation/);
+    await expect(page.getByText('Choose Location').first()).toBeVisible();
+    await expect(page.getByTestId('mobile-choose-location')
+      .getByRole('button', { name: 'Boston Warehouse' })).toBeVisible();
+    await context.close();
+  });
+
   test('/index redirects to the dashboard', async ({ page }) => {
     // "/index" now redirects to dashboard/index, whose canonical URL is the
     // context root (the "/" mapping) — same target as the legacy index.gsp

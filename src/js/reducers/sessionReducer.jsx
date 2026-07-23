@@ -93,7 +93,7 @@ export default function (state = initialState, action) {
     case FETCH_SESSION_INFO:
       return {
         ...state,
-        currentLocation: _.get(action, 'payload.data.data.location'),
+        currentLocation: _.get(action, 'payload.data.data.location') || state.currentLocation,
         currentLocationRoles: _.get(action, 'payload.data.data.currentLocationRoles'),
         isSuperuser: _.get(action, 'payload.data.data.isSuperuser'),
         isUserAdmin: _.get(action, 'payload.data.data.isUserAdmin'),
