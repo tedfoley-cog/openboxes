@@ -10,6 +10,7 @@
 package org.pih.warehouse.api
 
 import grails.converters.JSON
+import grails.gorm.transactions.NotTransactional
 import grails.gorm.transactions.Transactional
 
 import org.hibernate.criterion.CriteriaSpecification
@@ -204,7 +205,10 @@ class MigrationApiController {
         render([data: [locationId: location.id, count: binLocations.size()]] as JSON)
     }
 
-    @Transactional
+    // The service manages its own transactions (the all-locations refresh runs a
+    // GPars pool with per-thread persistence contexts), so no controller-level
+    // transaction should be held open around it.
+    @NotTransactional
     def refreshProductAvailability() {
         String locationId = params.locationId ?: request.JSON?.locationId
         if (locationId) {

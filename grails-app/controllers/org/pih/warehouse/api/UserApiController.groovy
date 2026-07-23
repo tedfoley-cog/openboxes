@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile
 class UserApiController {
 
     UserService userService
+    def mailService
 
     def read() {
         User user = User.get(params.id)
@@ -98,8 +99,25 @@ class UserApiController {
             return
         }
         user.photo = photo.bytes
-        user.save(flush: true)
+        if (user.hasErrors() || !user.save(flush: true)) {
+            transactionStatus.setRollbackOnly()
+            response.status = HttpStatus.BAD_REQUEST.value()
+            render([errorCode: HttpStatus.BAD_REQUEST.value(),
+                    errorMessage: "Unable to save photo for user ${user.username}".toString()] as JSON)
+            return
+        }
+        sendUserPhotoChanged(user)
         render([data: toJson(user)] as JSON)
+    }
+
+    private void sendUserPhotoChanged(User user) {
+        try {
+            String subject = g.message(code: 'email.userPhotoChanged.message', args: [user?.email])
+            String body = g.render(template: '/email/userPhotoChanged', model: [userInstance: user])
+            mailService.sendHtmlMailWithAttachment(user, subject, body, user.photo, "photo.png", "image/png")
+        } catch (Exception e) {
+            log.warn("Unable to send photo-changed email to ${user.email}: ${e.message}")
+        }
     }
 
     private static Map toJson(User user) {
