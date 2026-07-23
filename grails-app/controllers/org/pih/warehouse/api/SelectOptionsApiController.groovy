@@ -23,6 +23,7 @@ import org.pih.warehouse.core.PartyTypeCode
 import org.pih.warehouse.core.PaymentTerm
 import org.pih.warehouse.core.PreferenceType
 import org.pih.warehouse.core.RatingTypeCode
+import org.pih.warehouse.core.Role
 import org.pih.warehouse.core.RoleType
 import org.pih.warehouse.core.Tag
 import org.pih.warehouse.core.User
@@ -50,6 +51,22 @@ class SelectOptionsApiController {
     ShipmentService shipmentService
     UserService userService
     def documentService
+    def locationService
+
+    def roleOptions() {
+        List options = Role.list().sort { it.description }.collect { Role role ->
+            [id: role.id, label: role.description ?: role.roleType?.name()]
+        }
+        render([data: options] as JSON)
+    }
+
+    def loginLocationOptions() {
+        List locations = locationService.getLoginLocations(session.warehouse).sort()
+        List options = locations.collect { location ->
+            [id: location.id, label: location.name]
+        }
+        render([data: options] as JSON)
+    }
 
     def glAccountOptions() {
         List<GlAccount> glAccounts = glAccountService.getGlAccounts(params)
