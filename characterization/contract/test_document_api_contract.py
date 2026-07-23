@@ -129,3 +129,24 @@ def test_delete(client):
                  path=f"/api/documents/{docs[0]['id']}")
     assert resp.status_code == 204
     assert client.get_json("/api/documents?q=zzcontractdelete")["totalCount"] == 0
+
+
+def test_create_document(client):
+    resp = check(
+        client, spec, "POST", "/api/documents",
+        files={"fileContents": ("zz-contract-document.txt", b"contract test file",
+                                "text/plain")},
+    )
+    assert resp.status_code == 200
+    data = resp.json()["data"]
+    assert data["name"] == "zz-contract-document.txt"
+    assert data["filename"] == "zz-contract-document.txt"
+    assert data["extension"] == "txt"
+    client.request("DELETE", f"/api/documents/{data['id']}")
+
+
+def test_create_document_requires_file(client):
+    resp = check(client, spec, "POST", "/api/documents", files={
+        "fileContents": ("empty.txt", b"", "text/plain"),
+    })
+    assert resp.status_code == 400

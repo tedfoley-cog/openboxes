@@ -189,6 +189,60 @@ class UrlMappings {
             action = [GET: "details"]
         }
 
+        // Admin endpoints for the React admin status/upgrade screens
+        "/api/admin/status"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "status"]
+        }
+
+        "/api/admin/upgrade"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [GET: "upgrade"]
+        }
+
+        "/api/admin/upgrade/download"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "upgradeDownload"]
+        }
+
+        "/api/admin/upgrade/deploy"(parseRequest: true) {
+            controller = { "adminApi" }
+            action = [POST: "upgradeDeploy"]
+        }
+
+        // Auth endpoints for the React login/signup screens
+        "/api/auth/login"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [POST: "login"]
+        }
+
+        "/api/auth/signup"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [POST: "signup"]
+        }
+
+        "/api/auth/signupConfig"(parseRequest: true) {
+            controller = { "authApi" }
+            action = [GET: "signupConfig"]
+        }
+
+        // Data import endpoint for the React batch/importData screen
+        "/api/batch/importData"(parseRequest: false) {
+            controller = { "batchApi" }
+            action = [POST: "importData"]
+        }
+
+        // Document endpoint for the React document/create screen
+        "/api/documents"(parseRequest: false) {
+            controller = { "documentApi" }
+            action = [GET: "list", POST: "create"]
+        }
+
+        "/api/documents/$id"(parseRequest: true) {
+            controller = { "documentApi" }
+            action = [GET: "read", PUT: "update", DELETE: "delete"]
+        }
+
         // Admin console endpoints for the React admin screens (Phase 2 Batch 40)
         "/api/admin/controllers"(parseRequest: true) {
             controller = { "adminApi" }
@@ -2254,6 +2308,26 @@ class UrlMappings {
         "/api/reports/inventory-transactions-summary(.$format)?" {
             controller = "inventoryTransactionSummaryApi"
             action = [GET: "getInventoryTransactionsSummary"]
+        }
+
+        "/api/reports/binLocationReport" {
+            controller = "reportApi"
+            action = [GET: "binLocationReport"]
+        }
+
+        "/api/reports/cycleCountReport" {
+            controller = "reportApi"
+            action = [GET: "cycleCountReport"]
+        }
+
+        "/api/reports/shippingReport/$id" {
+            controller = "reportApi"
+            action = [GET: "shippingReport"]
+        }
+
+        "/api/dataExports" {
+            controller = "dataExportApi"
+            action = [GET: "list"]
         }
 
         "/api/reports/on-order-summary" {

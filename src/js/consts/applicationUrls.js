@@ -16,6 +16,7 @@ const ADMIN_URL = {
   showDatabaseStatus: () => `${ADMIN_URL.base}/showDatabaseStatus`,
   showDatabaseProcessList: () => `${ADMIN_URL.base}/showDatabaseProcessList`,
   showUpgrade: () => `${ADMIN_URL.base}/showUpgrade`,
+  status: () => `${ADMIN_URL.base}/status`,
 };
 
 const DASHBOARD_URL = {
@@ -329,6 +330,14 @@ const REPORT_URL = {
   showInventoryByLocationReport: () => `${REPORT_URL.base}/showInventoryByLocationReport`,
   showPaginatedPackingListReport: () => `${REPORT_URL.base}/showPaginatedPackingListReport`,
   downloadShippingReport: () => `${REPORT_URL.base}/downloadShippingReport`,
+  showBinLocationReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showBinLocationReport`,
+    query: params,
+  }),
+  showCycleCountReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showCycleCountReport`,
+    query: params,
+  }),
 };
 
 const BUDGET_CODE_URL = {
@@ -359,6 +368,19 @@ const DOCUMENT_URL = {
   create: () => `${DOCUMENT_URL.base}/create`,
   edit: (id) => `${DOCUMENT_URL.base}/edit/${id}`,
   show: (id) => `${DOCUMENT_URL.base}/show/${id}`,
+};
+
+const AUTH_URL = {
+  base: `${CONTEXT_PATH}/auth`,
+  login: () => `${AUTH_URL.base}/login`,
+  signup: () => `${AUTH_URL.base}/signup`,
+};
+
+const BATCH_URL = {
+  base: `${CONTEXT_PATH}/batch`,
+  importData: () => `${BATCH_URL.base}/importData`,
+  downloadExcel: (type) => `${BATCH_URL.base}/downloadExcel?type=${type}`,
+  downloadTemplate: (template) => `${BATCH_URL.base}/downloadTemplate?template=${template}`,
 };
 
 const LOCATION_GROUP_URL = {
@@ -619,6 +641,14 @@ const BARCODE_URL = {
   }),
 };
 
+const DATA_EXPORT_URL = {
+  base: `${CONTEXT_PATH}/dataExport`,
+  render: (id, format) => stringifyUrl({
+    url: `${DATA_EXPORT_URL.base}/render/${id}`,
+    query: { format },
+  }),
+};
+
 const CYCLE_COUNT = {
   base: `${CONTEXT_PATH}/inventory/cycleCount`,
   list: (tab) => `${CYCLE_COUNT.base}?tab=${tab}`,
@@ -629,13 +659,16 @@ const CYCLE_COUNT = {
 export {
   ADMIN_URL,
   ATTRIBUTE_URL,
+  AUTH_URL,
   BARCODE_URL,
+  BATCH_URL,
   BUDGET_CODE_URL,
   CATEGORY_URL,
   CONSUMPTION_URL,
   CREATE_SHIPMENT_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  DATA_EXPORT_URL,
   DELIVERY_NOTE_URL,
   DOCUMENT_URL,
   EVENT_TYPE_URL,
