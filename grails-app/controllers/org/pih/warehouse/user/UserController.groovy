@@ -200,7 +200,10 @@ class UserController {
             flash.message = "${warehouse.message(code: 'default.not.found.message', args: [warehouse.message(code: 'user.label'), params.id])}"
         } else {
             userInstance.active = !userInstance.active
-            if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
+            boolean saved = User.withTransaction {
+                !userInstance.hasErrors() && userInstance.save(flush: true)
+            }
+            if (saved) {
                 flash.message = "${warehouse.message(code: 'default.updated.message', args: [warehouse.message(code: 'user.label'), userInstance.id])}"
                 sendUserStatusChanged(userInstance)
             } else {
