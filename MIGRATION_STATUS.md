@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: #66 (B39) merged. 48/49 Phase 2 batches done. Only B46 remains.
 - 2026-07-22: #75 (B47) merged. 47/49 Phase 2 batches done. B46 remains.
 - 2026-07-22: #73 (B48) merged. 46/49 Phase 2 batches done. B46/B47 remain.
 - 2026-07-22: #74 (B45) merged. 45/49 Phase 2 batches done. B46/B47/B48 remain.
