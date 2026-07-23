@@ -14,6 +14,8 @@ import useTranslate from 'hooks/useTranslate';
 import StatusIndicator from 'utils/StatusIndicator';
 import HeaderWrapper from 'wrappers/HeaderWrapper';
 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const UserDetailsHeader = ({ user }) => {
   const history = useHistory();
   const translate = useTranslate();

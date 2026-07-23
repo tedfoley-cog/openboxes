@@ -21,6 +21,8 @@ import useTranslation from 'hooks/useTranslation';
 import Translate from 'utils/Translate';
 import PageWrapper from 'wrappers/PageWrapper';
 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const toOption = (option) => ({ id: option.id, value: option.id, label: option.label });
 
 const timezoneOptions = () => {
