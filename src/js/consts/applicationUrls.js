@@ -631,6 +631,17 @@ const DATA_EXPORT_URL = {
   }),
 };
 
+const MOBILE_URL = {
+  base: `${CONTEXT_PATH}/mobile`,
+  index: () => `${MOBILE_URL.base}/index`,
+  login: () => `${MOBILE_URL.base}/login`,
+  productList: () => `${MOBILE_URL.base}/productList`,
+  productDetails: (id) => `${MOBILE_URL.base}/productDetails/${id}`,
+  outboundList: () => `${MOBILE_URL.base}/outboundList`,
+  productImage: (imageId) => `${CONTEXT_PATH}/product/renderImage/${imageId}`,
+  defaultProductImage: () => `${CONTEXT_PATH}/images/default-product.png`,
+};
+
 const CYCLE_COUNT = {
   base: `${CONTEXT_PATH}/inventory/cycleCount`,
   list: (tab) => `${CYCLE_COUNT.base}?tab=${tab}`,
@@ -667,6 +678,7 @@ export {
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
   LOCATION_URL,
+  MOBILE_URL,
   ORDER_ADJUSTMENT_TYPE_URL,
   ORDER_URL,
   ORGANIZATION_URL,
