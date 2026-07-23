@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import mobileApi from 'api/services/MobileApi';
 import { CONTEXT_PATH, MOBILE_URL } from 'consts/applicationUrls';
 
-const OPENBOXES_LOGO_URL = 'https://openboxes.com/img/logo_30.png';
-
 /**
  * Mobile login screen. Rendered without an authenticated session, so it
  * avoids translations and session state (the SPA context is unavailable
@@ -29,7 +27,7 @@ const MobileLogin = () => {
     <div className="mobile-layout" data-testid="mobile-login">
       <nav className="navbar navbar-light bg-light px-3">
         <a className="navbar-brand" href={MOBILE_URL.login()}>
-          <img src={OPENBOXES_LOGO_URL} alt="logo" height="30" />
+          <img src={MOBILE_URL.defaultLogo()} alt="logo" height="30" />
         </a>
       </nav>
       <h1 className="px-3 pt-2">Login</h1>

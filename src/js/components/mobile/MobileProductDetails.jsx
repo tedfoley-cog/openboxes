@@ -9,7 +9,7 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 
 const MobileProductDetails = ({ match }) => {
-  useTranslation('default');
+  useTranslation('mobile', 'default');
 
   const translate = useTranslate();
   const [productSummary, setProductSummary] = useState(null);

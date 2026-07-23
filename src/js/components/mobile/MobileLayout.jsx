@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 
 import { MOBILE_URL } from 'consts/applicationUrls';
 
-const OPENBOXES_LOGO_URL = 'https://openboxes.com/img/logo_30.png';
-
 /**
  * Lightweight mobile chrome mirroring the legacy layouts/mobile.gsp +
  * mobile/menu.gsp navbar (location logo when logged in, OpenBoxes logo
@@ -21,7 +19,7 @@ const MobileLayout = ({ title, children }) => {
       <nav className="navbar navbar-light bg-light px-3">
         <a className="navbar-brand" href={MOBILE_URL.index()}>
           <img
-            src={currentLocation?.id && logoUrl ? logoUrl : OPENBOXES_LOGO_URL}
+            src={currentLocation?.id && logoUrl ? logoUrl : MOBILE_URL.defaultLogo()}
             alt="logo"
             height="30"
           />

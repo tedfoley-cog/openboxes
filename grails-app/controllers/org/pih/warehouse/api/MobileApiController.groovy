@@ -80,7 +80,7 @@ class MobileApiController {
         Product product = Product.findByIdOrProductCode(params.id, params.id)
         ProductSummary productSummary = product ? ProductSummary.findByProductAndLocation(product, location) : null
         if (!productSummary) {
-            render([data: null, errorMessage: "Product ${product?.productCode ?: params.id} is not available in ${location.locationNumber}"] as JSON)
+            render([data: null, errorMessage: "Product ${product?.productCode ?: params.id} is not available in ${location.locationNumber ?: location.name}"] as JSON)
             return
         }
         Map json = toProductSummaryJson(productSummary)

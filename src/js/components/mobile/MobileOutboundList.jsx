@@ -10,7 +10,7 @@ import useTranslation from 'hooks/useTranslation';
 const PAGE_SIZE = 10;
 
 const MobileOutboundList = () => {
-  useTranslation('default');
+  useTranslation('mobile', 'default');
 
   const translate = useTranslate();
   const [stockMovements, setStockMovements] = useState([]);

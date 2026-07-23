@@ -9,7 +9,7 @@ import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
 
 const MobileDashboard = () => {
-  useTranslation('default');
+  useTranslation('mobile', 'default');
 
   const translate = useTranslate();
   const currentLocation = useSelector((state) => state.session.currentLocation);

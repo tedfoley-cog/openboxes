@@ -1282,7 +1282,7 @@ const Router = () => {
             <Route path="**/mobile/productList" component={AsyncMobileProductList} />
             <Route path="**/mobile/productDetails/:productId" component={AsyncMobileProductDetails} />
             <Route path="**/mobile/outboundList" component={AsyncMobileOutboundList} />
-            <Route path="**/mobile" component={AsyncMobileDashboard} />
+            <Route exact path="**/mobile" component={AsyncMobileDashboard} />
             <MainLayoutRoute path="**/putAway/create/:putAwayId?" component={AsyncPutAwayMainPage} />
             <MainLayoutRoute path="**/stockMovement/list" component={StockMovementList} />
             <MainLayoutRoute path="**/stockMovement/createOutbound/:stockMovementId?" component={AsyncStockMovement} />

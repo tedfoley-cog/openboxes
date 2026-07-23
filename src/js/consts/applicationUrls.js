@@ -639,7 +639,8 @@ const MOBILE_URL = {
   productDetails: (id) => `${MOBILE_URL.base}/productDetails/${id}`,
   outboundList: () => `${MOBILE_URL.base}/outboundList`,
   productImage: (imageId) => `${CONTEXT_PATH}/product/renderImage/${imageId}`,
-  defaultProductImage: () => `${CONTEXT_PATH}/images/default-product.png`,
+  defaultProductImage: () => `${CONTEXT_PATH}/static/images/default-product.png`,
+  defaultLogo: () => `${CONTEXT_PATH}/static/images/logo/logo_100.png`,
 };
 
 const CYCLE_COUNT = {

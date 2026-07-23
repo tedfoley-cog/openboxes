@@ -37,7 +37,7 @@ HandlingIcons.defaultProps = {
 };
 
 const MobileProductList = () => {
-  useTranslation('default');
+  useTranslation('mobile', 'default');
 
   const translate = useTranslate();
   const [productSummaries, setProductSummaries] = useState([]);
