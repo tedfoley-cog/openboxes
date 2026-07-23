@@ -33,7 +33,7 @@ const UserShow = () => {
     <PageWrapper>
       <UserDetailsHeader user={user} />
       <div className="p-3">
-        <Section title={{ label: 'react.user.detailsSection.label', defaultMessage: 'User' }}>
+        <Section title={{ label: 'react.user.userSection.label', defaultMessage: 'User' }}>
           <table className="table table-sm w-auto" data-testid="user-details">
             <tbody>
               <tr>

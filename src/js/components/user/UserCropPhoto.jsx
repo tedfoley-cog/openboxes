@@ -47,7 +47,7 @@ const UserCropPhoto = () => {
     try {
       await userApi.uploadPhoto(userId, formData);
       notification(NotificationType.SUCCESS)({
-        message: translate('react.user.photo.upload.success.label', 'Photo has been updated successfully'),
+        message: translate('react.user.photo.update.success.label', 'Photo has been updated successfully'),
       });
       setPhotoVersion((version) => version + 1);
       if (fileInputRef.current) {
