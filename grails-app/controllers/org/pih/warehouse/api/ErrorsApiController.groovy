@@ -24,6 +24,9 @@ class ErrorsApiController {
      */
     def details() {
         Map lastError = session.lastErrorDetails as Map ?: [:]
+        // Consume the stash so a later visit to an error screen doesn't show
+        // a stale, unrelated error
+        session.lastErrorDetails = null
         boolean mailEnabled = ConfigHelper.booleanValue(grailsApplication.config.openboxes.mail.errors.enabled)
         List recipients = ConfigHelper.listValue(grailsApplication.config.openboxes.mail.errors.recipients) as List ?: []
 

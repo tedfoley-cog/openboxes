@@ -125,6 +125,12 @@ const ErrorPage = () => {
             <input type="hidden" name="exception.message" value={error?.exceptionMessage ?? ''} />
             <input type="hidden" name="exception.class" value={error?.exceptionClass ?? ''} />
             <input type="hidden" name="exception.date" value={error?.timestamp ?? ''} />
+            <input
+              type="hidden"
+              name="absoluteTargetUri"
+              value={error?.uri ? `${window.location.origin}${error.uri}` : ''}
+            />
+            <input type="hidden" name="stacktrace" value={error?.stackTrace?.join('\n') ?? ''} />
             <table className="error-page__dialog-table">
               <tbody>
                 <tr>

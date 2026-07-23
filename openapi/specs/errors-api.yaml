@@ -27,7 +27,8 @@ paths:
           description: >
             The last stashed error (null when no error has occurred in this
             session), mail configuration and the current user (null when
-            unauthenticated).
+            unauthenticated). Reading consumes the stash: a subsequent call
+            returns error null until a new error occurs.
           content:
             application/json:
               schema:
