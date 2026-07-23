@@ -512,7 +512,32 @@ const UNIT_OF_MEASURE_CONVERSION_URL = {
 
 const USER_URL = {
   base: `${CONTEXT_PATH}/user`,
+  list: () => `${USER_URL.base}/list`,
+  create: () => `${USER_URL.base}/create`,
   show: (id) => `${USER_URL.base}/show/${id}`,
+  edit: (id) => `${USER_URL.base}/edit/${id}`,
+  changePhoto: (id) => `${USER_URL.base}/changePhoto/${id}`,
+  impersonate: (id) => `${USER_URL.base}/impersonate/${id}`,
+  viewThumb: (id) => `${USER_URL.base}/viewThumb/${id}`,
+};
+
+const ROLE_URL = {
+  base: `${CONTEXT_PATH}/role`,
+  list: () => `${ROLE_URL.base}/index`,
+  create: () => `${ROLE_URL.base}/create`,
+  show: (id) => `${ROLE_URL.base}/show/${id}`,
+  edit: (id) => `${ROLE_URL.base}/edit/${id}`,
+};
+
+const MIGRATION_URL = {
+  base: `${CONTEXT_PATH}/migration`,
+  index: () => `${MIGRATION_URL.base}/index`,
+  materializedViews: () => `${MIGRATION_URL.base}/materializedViews`,
+  productAvailability: () => `${MIGRATION_URL.base}/productAvailability`,
+  compareProductAvailability: (locationId, showAll) => stringifyUrl({
+    url: `${MIGRATION_URL.base}/compareProductAvailability`,
+    query: { 'location.id': locationId, ...(showAll ? { showAll: true } : {}) },
+  }),
 };
 
 const REQUISITION_URL = {
@@ -667,6 +692,7 @@ export {
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
   LOCATION_URL,
+  MIGRATION_URL,
   ORDER_ADJUSTMENT_TYPE_URL,
   ORDER_URL,
   ORGANIZATION_URL,
@@ -693,6 +719,7 @@ export {
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
+  ROLE_URL,
   SHIPMENT_ITEM_URL,
   SHIPMENT_SHOW_URL,
   SHIPMENT_WORKFLOW_URL,
