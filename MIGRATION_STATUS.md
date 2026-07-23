@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: Wave 8 spawned (B45-B49, final Phase 2 batches): 824c7543, 334c7a25, f8eeb499, 4cb8f7ec, 05c219ef.
 - 2026-07-22: #60 (B37) merged. 40/49 Phase 2 batches done. #64 (B44) resolving conflicts; B41/B42 in flight.
 - 2026-07-22: #69 merged — fixed batch-11 product-group flake (real flush bug in ProductGroupService + test race). B37/B42/B44 asked to rebase and re-run CI.
 - 2026-07-22: #67 (B43) merged. 39/49 Phase 2 batches done. B37/B42/B44 PRs blocked on flaky batch-11 java21 test (fix session spawned: ac3bb393).
