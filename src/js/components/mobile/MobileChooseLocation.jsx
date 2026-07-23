@@ -21,8 +21,8 @@ const MobileChooseLocation = () => {
   const savedLocationId = useSelector((state) => state.session.savedLocationId);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [locations, setLocations] = useState([]);
   const [locationGroups, setLocationGroups] = useState([]);
-  const [savedLocations, setSavedLocations] = useState([]);
 
   useEffect(() => {
     const params = {
@@ -33,9 +33,9 @@ const MobileChooseLocation = () => {
     };
     apiClient.get(LOCATION_API, { params })
       .then((response) => {
-        const locations = response?.data?.data ?? [];
+        const fetchedLocations = response?.data?.data ?? [];
         const groupedByOrganization = _.groupBy(
-          locations,
+          fetchedLocations,
           (location) => _.get(location, 'organizationName') || NO_ORGANIZATION,
         );
         const groups = Object.entries(groupedByOrganization)
@@ -48,11 +48,13 @@ const MobileChooseLocation = () => {
             if (b.organization === NO_ORGANIZATION) return -1;
             return a.organization > b.organization ? 1 : -1;
           });
+        setLocations(fetchedLocations);
         setLocationGroups(groups);
-        setSavedLocations(locations.filter((location) => location.id === savedLocationId));
       })
       .finally(() => setIsLoading(false));
-  }, [savedLocationId]);
+  }, []);
+
+  const savedLocations = locations.filter((location) => location.id === savedLocationId);
 
   const chooseLocation = (locationId) => {
     // Full page navigation: the legacy action stores the location in the session
@@ -60,9 +62,9 @@ const MobileChooseLocation = () => {
     window.location.href = DASHBOARD_URL.chooseLocation(locationId);
   };
 
-  const renderLocationList = (locations) => (
+  const renderLocationList = (locationList) => (
     <ul className="list-group list-group-flush">
-      {locations.map((location) => (
+      {locationList.map((location) => (
         <li key={location.id} className="list-group-item p-0">
           <button
             type="button"
@@ -89,14 +91,14 @@ const MobileChooseLocation = () => {
                 </div>
                 {renderLocationList(savedLocations)}
               </section>
-              {locationGroups.map(({ organization, locations }) => (
+              {locationGroups.map(({ organization, locations: orgLocations }) => (
                 <section key={organization} className="card mb-3">
                   <div className="card-header font-weight-bold">
                     {organization !== NO_ORGANIZATION
                       ? organization
                       : <Translate id="react.dashboard.noOrganization.label" defaultMessage="No organization" />}
                   </div>
-                  {renderLocationList(locations)}
+                  {renderLocationList(orgLocations)}
                 </section>
               ))}
             </>
