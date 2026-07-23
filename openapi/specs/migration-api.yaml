@@ -306,9 +306,8 @@ paths:
       responses:
         '200':
           description: >
-            One row per depot, sorted by count ascending (nulls first,
-            matching the legacy screen). Count is null for depots with no
-            product_availability rows.
+            One row per depot, in depot order (matching the legacy screen).
+            Count is null for depots with no product_availability rows.
           content:
             application/json:
               schema:
