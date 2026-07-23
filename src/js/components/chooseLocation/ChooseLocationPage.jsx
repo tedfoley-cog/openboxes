@@ -47,7 +47,9 @@ const ChooseLocationPage = () => {
   const [user, setUser] = useState(null);
 
   const { search } = useLocation();
-  const targetUri = new URLSearchParams(search).get('targetUri');
+  const searchParams = new URLSearchParams(search);
+  const targetUri = searchParams.get('targetUri');
+  const flashMessage = searchParams.get('message');
 
   useEffect(() => {
     loginLocationsApi.getLoginLocations()
@@ -166,6 +168,11 @@ const ChooseLocationPage = () => {
             <Translate id="react.dashboard.chooseLocation.label" defaultMessage="Choose Location" />
           </h2>
         </div>
+        {flashMessage && (
+          <div className="message" role="status" aria-label="message">
+            {flashMessage}
+          </div>
+        )}
         <section className="location-chooser__page__content d-flex justify-content-center">
           {renderContent()}
         </section>

@@ -256,11 +256,11 @@ class DashboardController {
             return
         }
 
-        // Surface any flash message (e.g. "location disabled") through the
-        // SPA's flash query-param mechanism (see useFlashScopeListener)
-        if (flash.message && !params.flash) {
+        // Surface any flash message (e.g. "location disabled") to the React
+        // chooser, which renders it as a neutral status banner like the old GSP
+        if (flash.message && !params.message) {
             String message = g.message(code: flash.message, default: flash.message)
-            Map redirectParams = [flash: ([message: message] as JSON).toString()]
+            Map redirectParams = [message: message]
             if (params.targetUri) {
                 redirectParams.targetUri = params.targetUri
             }
