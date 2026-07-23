@@ -258,7 +258,7 @@ class DashboardController {
 
         // Surface any flash message (e.g. "location disabled") through the
         // SPA's flash query-param mechanism (see useFlashScopeListener)
-        if (flash.message) {
+        if (flash.message && !params.flash) {
             String message = g.message(code: flash.message, default: flash.message)
             Map redirectParams = [flash: ([message: message] as JSON).toString()]
             if (params.targetUri) {

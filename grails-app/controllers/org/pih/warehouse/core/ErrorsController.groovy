@@ -95,11 +95,11 @@ class ErrorsController {
         if (RequestUtil.isAjax(request)) {
             render([errorCode: 500, errorMessage: "Illegal data access"] as JSON)
         } else {
-            stashErrorDetails()
             if (request.forwardURI?.endsWith("handleInvalidDataAccess")) {
                 render(view: "/common/react")
                 return
             }
+            stashErrorDetails()
             redirect(action: "handleInvalidDataAccess")
         }
     }

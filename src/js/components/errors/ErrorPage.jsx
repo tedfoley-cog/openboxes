@@ -61,7 +61,7 @@ const ErrorPage = () => {
         <h1 className="error-page__title">
           <Translate id="react.error.errorOccurred.label" defaultMessage="An error has occurred" />
         </h1>
-        {error?.exceptionMessage && (
+        {error?.exceptionClass && (
           <div>
             <strong>
               <Translate id="react.error.exception.label" defaultMessage="Exception" />
