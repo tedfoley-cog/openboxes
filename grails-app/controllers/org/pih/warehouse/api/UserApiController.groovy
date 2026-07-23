@@ -56,7 +56,13 @@ class UserApiController {
         if (!user) {
             throw new ObjectNotFoundException(params.id, User.class.toString())
         }
+        boolean rolesProvided = params.containsKey('roles')
         List<String> requestedRoleIds = extractRoleIds(params)
+        // An explicitly-provided empty roles list clears all roles, mirroring the
+        // legacy edit screen's "No access" option (a 'null' id that resolves to no roles).
+        if (rolesProvided && !requestedRoleIds) {
+            requestedRoleIds = ['null']
+        }
         Map updateParams = [:]
         ['username', 'firstName', 'lastName', 'email', 'locale', 'timezone'].each { key ->
             if (params.containsKey(key)) {
