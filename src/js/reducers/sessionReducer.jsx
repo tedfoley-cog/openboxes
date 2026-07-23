@@ -52,6 +52,7 @@ const initialState = {
     id: '',
     username: '',
   },
+  savedLocationId: null,
   isImpersonated: false,
   grailsVersion: '',
   appVersion: '',
@@ -93,7 +94,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         // location is null before one has been chosen (location chooser screen)
-        currentLocation: _.get(action, 'payload.data.data.location') || initialState.currentLocation,
+        currentLocation: _.get(action, 'payload.data.data.location') || state.currentLocation,
         currentLocationRoles: _.get(action, 'payload.data.data.currentLocationRoles'),
         isSuperuser: _.get(action, 'payload.data.data.isSuperuser'),
         isUserAdmin: _.get(action, 'payload.data.data.isUserAdmin'),
@@ -104,6 +105,7 @@ export default function (state = initialState, action) {
         activeLanguage: _.get(action, 'payload.data.data.activeLanguage'),
         activeLanguageTag: _.get(action, 'payload.data.data.activeLanguageTag'),
         user: _.get(action, 'payload.data.data.user'),
+        savedLocationId: _.get(action, 'payload.data.data.savedLocationId'),
         isImpersonated: _.get(action, 'payload.data.data.isImpersonated'),
         grailsVersion: _.get(action, 'payload.data.data.grailsVersion'),
         appVersion: _.get(action, 'payload.data.data.appVersion'),
