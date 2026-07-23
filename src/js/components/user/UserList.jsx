@@ -29,6 +29,8 @@ const UserList = () => {
     offset: `${offset}`,
     max: `${state.pageSize}`,
     ...sortingParams,
+    // The derived "name" column sorts by lastName, matching the legacy list
+    ...(sortingParams.sort === 'name' ? { sort: 'lastName' } : {}),
     ...(filterParams.q ? { q: filterParams.q } : {}),
     ...(filterParams.status ? { status: filterParams.status } : {}),
   });
@@ -78,7 +80,6 @@ const UserList = () => {
       accessor: 'name',
       className: 'd-flex align-items-center',
       headerClassName: 'header',
-      sortable: false,
       Cell: (row) => <TableCell {...row} link={USER_URL.show(row.original.id)} />,
     },
     {
