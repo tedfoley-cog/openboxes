@@ -38,8 +38,8 @@ const NotFoundPage = () => {
         <div className="alert alert-danger d-flex align-items-center" role="alert" data-testid="not-found-summary">
           <RiErrorWarningLine className="mr-2" size="1.5em" />
           {id
-            ? translate('react.notFound.resourceWithIdNotFound.label', 'Sorry, a resource with ID {0} could not be found.').replace('{0}', id)
-            : `${translate('react.notFound.resourceNotFound.label', 'Resource Not Found')} (404)`}
+            ? (translate('react.notFound.resourceWithIdNotFound.label', 'Sorry, a resource with ID {0} could not be found.') ?? '').replace('{0}', id)
+            : `${translate('react.notFound.resourceNotFound.label', 'Resource Not Found') ?? ''} (404)`}
         </div>
         <div data-testid="not-found-message">
           {details?.errorMessage && (

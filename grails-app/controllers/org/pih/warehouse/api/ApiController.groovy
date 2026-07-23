@@ -200,6 +200,7 @@ class ApiController {
         render([
             data: [
                 user                          : user,
+                savedLocationId               : user.warehouse?.id,
                 location                      : location,
                 currentLocationRoles          : currentLocationRoles,
                 isSuperuser                   : isSuperuser,

@@ -16,7 +16,7 @@ const NO_ORGANIZATION = 'NO_ORGANIZATION';
 const MobileChooseLocation = () => {
   useTranslation('dashboard', 'default');
 
-  const currentLocation = useSelector((state) => state.session.currentLocation);
+  const savedLocationId = useSelector((state) => state.session.savedLocationId);
 
   const [isLoading, setIsLoading] = useState(true);
   const [locationGroups, setLocationGroups] = useState([]);
@@ -47,10 +47,10 @@ const MobileChooseLocation = () => {
             return a.organization > b.organization ? 1 : -1;
           });
         setLocationGroups(groups);
-        setSavedLocations(locations.filter((location) => location.id === currentLocation?.id));
+        setSavedLocations(locations.filter((location) => location.id === savedLocationId));
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [savedLocationId]);
 
   const chooseLocation = (locationId) => {
     // Full page navigation: the legacy action stores the location in the session
