@@ -12,7 +12,6 @@ package org.pih.warehouse
 import org.pih.warehouse.api.StockMovement
 import org.pih.warehouse.api.StockMovementDirection
 import org.pih.warehouse.core.Location
-import org.pih.warehouse.core.User
 import org.pih.warehouse.inventory.StockMovementStatusCode
 import org.pih.warehouse.order.Order
 import org.pih.warehouse.order.OrderTypeCode
@@ -25,7 +24,6 @@ class MobileController {
     def userService
     def productService
     def inventoryService
-    def locationService
     def megamenuService
     def stockMovementService
 
@@ -68,10 +66,11 @@ class MobileController {
     }
 
     def chooseLocation() {
-        User user = User.get(session.user.id)
-        Location warehouse = Location.get(session.warehouse.id)
-        render (view: "/mobile/chooseLocation",
-            model: [savedLocations: user.warehouse ? [user.warehouse] : null, loginLocationsMap: locationService.getLoginLocationsMap(user, warehouse, true)])
+        render(view: "/common/react", params: params)
+    }
+
+    def error() {
+        render(view: "/common/react", params: params)
     }
 
     def productList() {

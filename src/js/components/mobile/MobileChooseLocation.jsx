@@ -1,0 +1,112 @@
+import React, { useEffect, useState } from 'react';
+
+import _ from 'lodash';
+import { useSelector } from 'react-redux';
+
+import { LOCATION_API } from 'api/urls';
+import { DASHBOARD_URL } from 'consts/applicationUrls';
+import useTranslation from 'hooks/useTranslation';
+import apiClient from 'utils/apiClient';
+import Translate from 'utils/Translate';
+import HeaderWrapper from 'wrappers/HeaderWrapper';
+import PageWrapper from 'wrappers/PageWrapper';
+
+const NO_ORGANIZATION = 'NO_ORGANIZATION';
+
+const MobileChooseLocation = () => {
+  useTranslation('dashboard', 'default');
+
+  const currentLocation = useSelector((state) => state.session.currentLocation);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [locationGroups, setLocationGroups] = useState([]);
+  const [savedLocations, setSavedLocations] = useState([]);
+
+  useEffect(() => {
+    const params = {
+      locationChooser: true,
+      applyUserFilter: true,
+      locationTypeCode: 'DEPOT',
+      activityCodes: 'MANAGE_INVENTORY',
+    };
+    apiClient.get(LOCATION_API, { params })
+      .then((response) => {
+        const locations = response?.data?.data ?? [];
+        const groupedByOrganization = _.groupBy(
+          locations,
+          (location) => _.get(location, 'organizationName') || NO_ORGANIZATION,
+        );
+        const groups = Object.entries(groupedByOrganization)
+          .map(([organization, orgLocations]) => ({
+            organization,
+            locations: _.sortBy(orgLocations, 'name'),
+          }))
+          .sort((a, b) => {
+            if (a.organization === NO_ORGANIZATION) return 1;
+            if (b.organization === NO_ORGANIZATION) return -1;
+            return a.organization > b.organization ? 1 : -1;
+          });
+        setLocationGroups(groups);
+        setSavedLocations(locations.filter((location) => location.id === currentLocation?.id));
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  const chooseLocation = (locationId) => {
+    // Full page navigation: the legacy action stores the location in the session
+    // and decides where to redirect based on the user's role and activities.
+    window.location.href = DASHBOARD_URL.chooseLocation(locationId);
+  };
+
+  const renderLocationList = (locations) => (
+    <ul className="list-group list-group-flush">
+      {locations.map((location) => (
+        <li key={location.id} className="list-group-item p-0">
+          <button
+            type="button"
+            className="btn btn-link text-left w-100"
+            onClick={() => chooseLocation(location.id)}
+          >
+            <span className="text-truncate">{location.name}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <PageWrapper>
+      <HeaderWrapper className="align-items-center h-auto py-3">
+        <span className="title">
+          <Translate id="react.dashboard.chooseLocation.label" defaultMessage="Choose Location" />
+        </span>
+      </HeaderWrapper>
+      <div className="p-3" data-testid="mobile-choose-location">
+        {isLoading
+          ? <Translate id="react.default.loading.label" defaultMessage="Loading..." />
+          : (
+            <>
+              <section className="card mb-3" data-testid="saved-locations">
+                <div className="card-header font-weight-bold">
+                  <Translate id="react.dashboard.savedLocations.label" defaultMessage="Saved locations" />
+                </div>
+                {renderLocationList(savedLocations)}
+              </section>
+              {locationGroups.map(({ organization, locations }) => (
+                <section key={organization} className="card mb-3">
+                  <div className="card-header font-weight-bold">
+                    {organization !== NO_ORGANIZATION
+                      ? organization
+                      : <Translate id="react.dashboard.noOrganization.label" defaultMessage="No organization" />}
+                  </div>
+                  {renderLocationList(locations)}
+                </section>
+              ))}
+            </>
+          )}
+      </div>
+    </PageWrapper>
+  );
+};
+
+export default MobileChooseLocation;

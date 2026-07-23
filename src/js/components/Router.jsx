@@ -423,6 +423,21 @@ const AsyncLocationGroupShow = Loadable({
   loading: Loading,
 });
 
+const AsyncNotFoundPage = Loadable({
+  loader: () => import('components/errors/NotFoundPage'),
+  loading: Loading,
+});
+
+const AsyncErrorDetailsPage = Loadable({
+  loader: () => import('components/errors/ErrorDetailsPage'),
+  loading: Loading,
+});
+
+const AsyncMobileChooseLocation = Loadable({
+  loader: () => import('components/mobile/MobileChooseLocation'),
+  loading: Loading,
+});
+
 const AsyncEventTypeList = Loadable({
   loader: () => import('components/eventType/EventTypeList'),
   loading: Loading,
@@ -1449,6 +1464,9 @@ const Router = () => {
             <MainLayoutRoute path="**/localization/create" component={AsyncLocalizationForm} />
             <MainLayoutRoute path="**/localization/edit/:localizationId" component={AsyncLocalizationForm} />
             <MainLayoutRoute path="**/jobs/show/:jobName" component={AsyncJobShow} />
+            <MainLayoutRoute path="**/errors/handleNotFound" component={AsyncNotFoundPage} />
+            <MainLayoutRoute path="**/mobile/error" component={AsyncErrorDetailsPage} />
+            <MainLayoutRoute path="**/mobile/chooseLocation" component={AsyncMobileChooseLocation} />
             <MainLayoutRoute path="**/locationType/list" component={AsyncLocationTypeList} />
             <MainLayoutRoute path="**/locationType/create" component={AsyncLocationTypeForm} />
             <MainLayoutRoute path="**/locationType/edit/:locationTypeId" component={AsyncLocationTypeForm} />
