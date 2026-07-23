@@ -58,8 +58,9 @@ class UserApiController {
         if (!user) {
             throw new ObjectNotFoundException(params.id, User.class.toString())
         }
-        boolean rolesProvided = params.containsKey('roles')
-        List<String> requestedRoleIds = extractRoleIds(params)
+        Map body = requestBody()
+        boolean rolesProvided = body.containsKey('roles')
+        List<String> requestedRoleIds = extractRoleIds(body)
         // An explicitly-provided empty roles list clears all roles, mirroring the
         // legacy edit screen's "No access" option (a 'null' id that resolves to no roles).
         if (rolesProvided && !requestedRoleIds) {
@@ -67,18 +68,18 @@ class UserApiController {
         }
         Map updateParams = [:]
         ['username', 'firstName', 'lastName', 'email', 'locale', 'timezone'].each { key ->
-            if (params.containsKey(key)) {
-                updateParams[key] = params[key]
+            if (body.containsKey(key)) {
+                updateParams[key] = body[key]
             }
         }
-        if (params.containsKey('active')) {
-            updateParams.active = params.boolean('active')
+        if (body.containsKey('active')) {
+            updateParams.active = Boolean.valueOf(body.active as String)
         }
-        if (params.containsKey('rememberLastLocation')) {
-            updateParams.rememberLastLocation = params.boolean('rememberLastLocation')
+        if (body.containsKey('rememberLastLocation')) {
+            updateParams.rememberLastLocation = Boolean.valueOf(body.rememberLastLocation as String)
         }
-        if (params.warehouse instanceof Map || params.containsKey('warehouse.id')) {
-            String warehouseId = params.warehouse instanceof Map ? params.warehouse.id : params['warehouse.id']
+        if (body.warehouse instanceof Map || body.containsKey('warehouse.id')) {
+            String warehouseId = body.warehouse instanceof Map ? body.warehouse.id : body['warehouse.id']
             updateParams.warehouse = warehouseId ? Location.get(warehouseId) : null
         }
         try {
@@ -101,8 +102,9 @@ class UserApiController {
         if (!user) {
             throw new ObjectNotFoundException(params.id, User.class.toString())
         }
+        Map body = requestBody()
         try {
-            userService.changePassword(user, params.password as String, params.passwordConfirm as String)
+            userService.changePassword(user, body.password as String, body.passwordConfirm as String)
             render([data: toDetailsJson(User.get(params.id))] as JSON)
         } catch (ValidationException e) {
             renderValidationErrors(e)
@@ -139,8 +141,9 @@ class UserApiController {
         if (!user) {
             throw new ObjectNotFoundException(params.id, User.class.toString())
         }
-        Location location = params.location instanceof Map ? Location.get(params.location.id) : Location.get(params['location.id'])
-        List<String> roleIds = extractRoleIds(params, 'role')
+        Map body = requestBody()
+        Location location = body.location instanceof Map ? Location.get(body.location.id) : Location.get(body['location.id'])
+        List<String> roleIds = extractRoleIds(body, 'role')
         List<Role> roles = roleIds.collect { Role.get(it) }.findAll { it }
         try {
             userService.saveLocationRole(location, null, roles, user, session.user.id)
@@ -217,6 +220,21 @@ class UserApiController {
                 errorMessage : errorMessages.join('; '),
                 errorMessages: errorMessages,
         ] as JSON)
+    }
+
+    /**
+     * JSON request bodies are not merged into params for PUT/POST in this
+     * Grails version, so read them explicitly (falling back to params for
+     * form-encoded requests).
+     */
+    private Map requestBody() {
+        if (request.contentType?.contains('application/json')) {
+            def json = request.JSON
+            if (json instanceof Map) {
+                return new LinkedHashMap(json)
+            }
+        }
+        return params
     }
 
     /**
