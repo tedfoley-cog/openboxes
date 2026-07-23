@@ -33,7 +33,9 @@ paths:
           required: false
           schema:
             type: string
-          description: Case-insensitive substring filter (like "%q%").
+          description: >
+            Substring filter (like "%q%"); case sensitivity follows the
+            database collation (case-insensitive on the default MySQL setup).
         - name: status
           in: query
           required: false
