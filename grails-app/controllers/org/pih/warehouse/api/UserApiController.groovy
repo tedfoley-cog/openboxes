@@ -25,6 +25,7 @@ import org.pih.warehouse.core.UserDataService
 class UserApiController {
 
     def userService
+    def mailService
     UserDataService userGormService
 
     def list() {
@@ -190,7 +191,19 @@ class UserApiController {
         }
         user.photo = photo.bytes
         user.save(flush: true)
+        sendUserPhotoChanged(user)
         render([data: toDetailsJson(user)] as JSON)
+    }
+
+    private void sendUserPhotoChanged(User user) {
+        try {
+            String subject = "${warehouse.message(code: 'email.userPhotoChanged.message', args: [user?.email])}"
+            String body = "${g.render(template: '/email/userPhotoChanged', model: [userInstance: user])}"
+            mailService.sendHtmlMailWithAttachment(user, subject, body, user.photo, "photo.png", "image/png")
+        }
+        catch (Exception e) {
+            log.warn("Unable to send photo-changed email to ${user?.email}: ${e.message}")
+        }
     }
 
     private void renderValidationErrors(ValidationException e) {
