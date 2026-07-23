@@ -478,6 +478,36 @@ const AsyncOrganizationShow = Loadable({
   loading: Loading,
 });
 
+const AsyncAdminStatus = Loadable({
+  loader: () => import('components/admin/AdminStatus'),
+  loading: Loading,
+});
+
+const AsyncAdminUpgrade = Loadable({
+  loader: () => import('components/admin/AdminUpgrade'),
+  loading: Loading,
+});
+
+const AsyncLoginPage = Loadable({
+  loader: () => import('components/auth/LoginPage'),
+  loading: Loading,
+});
+
+const AsyncSignupPage = Loadable({
+  loader: () => import('components/auth/SignupPage'),
+  loading: Loading,
+});
+
+const AsyncBatchImportData = Loadable({
+  loader: () => import('components/batch/BatchImportData'),
+  loading: Loading,
+});
+
+const AsyncDocumentCreate = Loadable({
+  loader: () => import('components/document/DocumentCreate'),
+  loading: Loading,
+});
+
 const AsyncAdminIndex = Loadable({
   loader: () => import('components/admin/AdminIndex'),
   loading: Loading,
@@ -598,6 +628,36 @@ const AsyncPartyTypeShow = Loadable({
   loading: Loading,
 });
 
+const AsyncLocalizationShow = Loadable({
+  loader: () => import('components/localization/LocalizationShow'),
+  loading: Loading,
+});
+
+const AsyncMigrationIndex = Loadable({
+  loader: () => import('components/migration/MigrationIndex'),
+  loading: Loading,
+});
+
+const AsyncMigrationDataQuality = Loadable({
+  loader: () => import('components/migration/MigrationDataQuality'),
+  loading: Loading,
+});
+
+const AsyncMigrationDataMigration = Loadable({
+  loader: () => import('components/migration/MigrationDataMigration'),
+  loading: Loading,
+});
+
+const AsyncMigrationDimensionTables = Loadable({
+  loader: () => import('components/migration/MigrationDimensionTables'),
+  loading: Loading,
+});
+
+const AsyncMigrationFactTables = Loadable({
+  loader: () => import('components/migration/MigrationFactTables'),
+  loading: Loading,
+});
+
 const AsyncBudgetCodeList = Loadable({
   loader: () => import('components/budgetCode/BudgetCodeList'),
   loading: Loading,
@@ -625,6 +685,26 @@ const AsyncGlAccountTypeList = Loadable({
 
 const AsyncGlAccountTypeForm = Loadable({
   loader: () => import('components/glAccountType/GlAccountTypeForm'),
+  loading: Loading,
+});
+
+const AsyncDocumentList = Loadable({
+  loader: () => import('components/document/DocumentList'),
+  loading: Loading,
+});
+
+const AsyncDocumentForm = Loadable({
+  loader: () => import('components/document/DocumentForm'),
+  loading: Loading,
+});
+
+const AsyncDocumentShow = Loadable({
+  loader: () => import('components/document/DocumentShow'),
+  loading: Loading,
+});
+
+const AsyncEventTypeForm = Loadable({
+  loader: () => import('components/eventType/EventTypeForm'),
   loading: Loading,
 });
 
@@ -1253,6 +1333,31 @@ const AsyncRequisitionPick = Loadable({
   loading: Loading,
 });
 
+const AsyncMobileDashboard = Loadable({
+  loader: () => import('components/mobile/MobileDashboard'),
+  loading: Loading,
+});
+
+const AsyncMobileLogin = Loadable({
+  loader: () => import('components/mobile/MobileLogin'),
+  loading: Loading,
+});
+
+const AsyncMobileProductList = Loadable({
+  loader: () => import('components/mobile/MobileProductList'),
+  loading: Loading,
+});
+
+const AsyncMobileProductDetails = Loadable({
+  loader: () => import('components/mobile/MobileProductDetails'),
+  loading: Loading,
+});
+
+const AsyncMobileOutboundList = Loadable({
+  loader: () => import('components/mobile/MobileOutboundList'),
+  loading: Loading,
+});
+
 const Router = () => {
   useConnectionListener();
 
@@ -1272,6 +1377,12 @@ const Router = () => {
       <BrowserRouter>
         <FlashScopeListenerWrapper>
           <Switch>
+            <Route path="**/mobile/login" component={AsyncMobileLogin} />
+            <Route path="**/mobile/index" component={AsyncMobileDashboard} />
+            <Route path="**/mobile/productList" component={AsyncMobileProductList} />
+            <Route path="**/mobile/productDetails/:productId" component={AsyncMobileProductDetails} />
+            <Route path="**/mobile/outboundList" component={AsyncMobileOutboundList} />
+            <Route exact path="**/mobile" component={AsyncMobileDashboard} />
             <MainLayoutRoute path="**/putAway/create/:putAwayId?" component={AsyncPutAwayMainPage} />
             <MainLayoutRoute path="**/stockMovement/list" component={StockMovementList} />
             <MainLayoutRoute path="**/stockMovement/createOutbound/:stockMovementId?" component={AsyncStockMovement} />
@@ -1477,6 +1588,12 @@ const Router = () => {
             <MainLayoutRoute path="**/organization/create" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/edit/:organizationId" component={AsyncOrganizationForm} />
             <MainLayoutRoute path="**/organization/show/:organizationId" component={AsyncOrganizationShow} />
+            <Route path="**/auth/login"><AsyncLoginPage /></Route>
+            <Route path="**/auth/signup"><AsyncSignupPage /></Route>
+            <MainLayoutRoute path="**/admin/status" component={AsyncAdminStatus} />
+            <MainLayoutRoute path="**/admin/showUpgrade" component={AsyncAdminUpgrade} />
+            <MainLayoutRoute path="**/batch/importData" component={AsyncBatchImportData} />
+            <MainLayoutRoute path="**/document/create" component={AsyncDocumentCreate} />
             <MainLayoutRoute path="**/admin/index" component={AsyncAdminIndex} />
             <MainLayoutRoute path="**/admin/controllerActions" component={AsyncAdminControllerActions} />
             <MainLayoutRoute path="**/admin/cache" component={AsyncAdminCache} />
@@ -1505,6 +1622,12 @@ const Router = () => {
             <MainLayoutRoute path="**/partyType/create" component={AsyncPartyTypeForm} />
             <MainLayoutRoute path="**/partyType/edit/:partyTypeId" component={AsyncPartyTypeForm} />
             <MainLayoutRoute path="**/partyType/show/:partyTypeId" component={AsyncPartyTypeShow} />
+            <MainLayoutRoute path="**/localization/show/:localizationId" component={AsyncLocalizationShow} />
+            <MainLayoutRoute path="**/migration/index" component={AsyncMigrationIndex} />
+            <MainLayoutRoute path="**/migration/dataQuality" component={AsyncMigrationDataQuality} />
+            <MainLayoutRoute path="**/migration/dataMigration" component={AsyncMigrationDataMigration} />
+            <MainLayoutRoute path="**/migration/dimensionTables" component={AsyncMigrationDimensionTables} />
+            <MainLayoutRoute path="**/migration/factTables" component={AsyncMigrationFactTables} />
             <MainLayoutRoute path="**/budgetCode/list" component={AsyncBudgetCodeList} />
             <MainLayoutRoute path="**/budgetCode/create" component={AsyncBudgetCodeForm} />
             <MainLayoutRoute path="**/budgetCode/edit/:budgetCodeId" component={AsyncBudgetCodeForm} />
@@ -1514,6 +1637,11 @@ const Router = () => {
             <MainLayoutRoute path="**/glAccountType/list" component={AsyncGlAccountTypeList} />
             <MainLayoutRoute path="**/glAccountType/create" component={AsyncGlAccountTypeForm} />
             <MainLayoutRoute path="**/glAccountType/edit/:glAccountTypeId" component={AsyncGlAccountTypeForm} />
+            <MainLayoutRoute path="**/document/list" component={AsyncDocumentList} />
+            <MainLayoutRoute path="**/document/edit/:documentId" component={AsyncDocumentForm} />
+            <MainLayoutRoute path="**/document/show/:documentId" component={AsyncDocumentShow} />
+            <MainLayoutRoute path="**/eventType/create" component={AsyncEventTypeForm} />
+            <MainLayoutRoute path="**/eventType/edit/:eventTypeId" component={AsyncEventTypeForm} />
             <MainLayoutRoute path="**/attribute/list" component={AsyncAttributeList} />
             <MainLayoutRoute path="**/attribute/create" component={AsyncAttributeForm} />
             <MainLayoutRoute path="**/attribute/edit/:id" component={AsyncAttributeForm} />
