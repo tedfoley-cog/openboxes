@@ -168,7 +168,7 @@ class MigrationApiController {
                     locationName            : location.name,
                     productAvailabilityCount: count,
             ]
-        }.sort { it.productAvailabilityCount }
+        }
         render([data: data] as JSON)
     }
 

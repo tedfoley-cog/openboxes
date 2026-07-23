@@ -566,7 +566,7 @@ class UrlMappings {
         }
 
         // User endpoints for the React user/create and user/changePhoto screens
-        // (Phase 2 Batch 45). GET /api/users (usersOptions) is mapped above.
+        // (Phase 2 Batch 45). GET /api/users (usersOptions) is mapped separately.
         "/api/users/create"(parseRequest: true) {
             controller = { "userApi" }
             action = [POST: "create"]

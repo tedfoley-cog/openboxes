@@ -44,10 +44,8 @@ class JobsApiController {
                 JobDetail jobDetail = quartzScheduler.getJobDetail(jobKey)
                 def triggers = quartzScheduler.getTriggersOfJob(jobKey)
                 Map json = toJson(jobDetail, triggers)
-                json.triggers = triggers.collect { Trigger trigger ->
-                    Map triggerJson = toTriggerJson(trigger)
+                [json.triggers, triggers].transpose().each { Map triggerJson, Trigger trigger ->
                     triggerJson.state = quartzScheduler.getTriggerState(trigger.key)?.name()
-                    triggerJson
                 }
                 jobs << json
             }

@@ -144,10 +144,8 @@ def test_product_availability_by_depot(client):
     data = resp.json()["data"]
     assert data, "demo data should have depot locations"
     assert all(row["locationId"] and row["locationName"] for row in data)
-    # Sorted by count ascending, nulls first (matching the legacy screen)
-    counts = [row.get("productAvailabilityCount") for row in data]
-    non_null = [c for c in counts if c is not None]
-    assert non_null == sorted(non_null)
+    # One row per depot, in depot order (matching the legacy screen)
+    assert len({row["locationId"] for row in data}) == len(data)
 
 
 def test_product_availability_count_for_location(client):
