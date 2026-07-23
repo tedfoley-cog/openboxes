@@ -67,6 +67,7 @@ Plan reference: openboxes-coordinator-plan.md (coordinator session).
 | 4.4 | Remove GSP layer + dead code | pending |
 
 ## Log
+- 2026-07-22: P4.4 final cutover validation PASSED on develop tip post-GSP-removal (API snapshots 173/191 w/ only 18 documented pre-existing source-build failures; contract 868 pass/1 documented pre-existing; full Playwright green; manual flows + legacy URLs OK; fresh DB 982/982 changesets). MIGRATION COMPLETE: Phases 0-4 all done.
 - 2026-07-22: #78 (P4.3 GSP/dead-code removal) merged — 405 files / -56,550 lines removed (351 GSPs, 71 controller actions, webflow, taglibs, legacy assets). Final cutover validation (P4.4) spawning.
 - 2026-07-22: P4.2 Liquibase validation complete — fresh DB 982/982 changesets clean; production-shaped upgrade-in-place from legacy Grails 3 schema verified; one migration fix merged (#76). P4.3 (GSP removal) in flight.
 - 2026-07-22: P4.1 regression complete — full Playwright + contract suites green, API snapshots green except 18 documented source-build diffs; one real regression (getAppContext savedLocationId) fixed and merged (#77). Perf smoke OK. P4.2/P4.3 in flight.
