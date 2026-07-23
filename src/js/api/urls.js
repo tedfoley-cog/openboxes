@@ -591,3 +591,11 @@ export const MIGRATION_SHIPMENTS_WITHOUT_TRANSACTIONS = `${MIGRATION_API}/shipme
 export const MIGRATION_STOCK_MOVEMENTS_WITHOUT_SHIPMENT_ITEMS = `${MIGRATION_API}/stockMovementsWithoutShipmentItems`;
 export const MIGRATION_DIMENSION_TABLES = `${MIGRATION_API}/dimensionTables`;
 export const MIGRATION_FACT_TABLES = `${MIGRATION_API}/factTables`;
+
+// BATCH 37 REPORTS
+export const REPORT_BIN_LOCATION = `${API}/reports/binLocationReport`;
+export const REPORT_CYCLE_COUNT = `${API}/reports/cycleCountReport`;
+export const REPORT_SHIPPING = (id) => `${API}/reports/shippingReport/${id}`;
+
+// DATA EXPORT
+export const DATA_EXPORT_API = `${API}/dataExports`;
