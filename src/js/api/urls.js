@@ -267,6 +267,23 @@ export const PARTY_TYPE_OPTIONS = `${API}/partyTypeOptions`;
 export const PARTY_TYPE_CODE_OPTIONS = `${API}/partyTypeCodeOptions`;
 export const ORGANIZATION_ROLE_TYPE_OPTIONS = `${API}/organizationRoleTypeOptions`;
 
+// ADMIN
+export const ADMIN_STATUS_API = `${API}/admin/status`;
+export const ADMIN_UPGRADE_API = `${API}/admin/upgrade`;
+export const ADMIN_UPGRADE_DOWNLOAD_API = `${ADMIN_UPGRADE_API}/download`;
+export const ADMIN_UPGRADE_DEPLOY_API = `${ADMIN_UPGRADE_API}/deploy`;
+
+// AUTH
+export const AUTH_LOGIN_API = `${API}/auth/login`;
+export const AUTH_SIGNUP_API = `${API}/auth/signup`;
+export const AUTH_SIGNUP_CONFIG_API = `${API}/auth/signupConfig`;
+
+// BATCH IMPORT
+export const BATCH_IMPORT_DATA_API = `${API}/batch/importData`;
+
+// DOCUMENTS
+export const DOCUMENT_API = `${API}/documents`;
+
 // ADMIN CONSOLE (Phase 2 Batch 40)
 export const ADMIN_API = `${API}/admin`;
 export const ADMIN_CONTROLLERS = `${ADMIN_API}/controllers`;
@@ -576,6 +593,21 @@ export const CATEGORY_OPTIONS = `${API}/categoryOptions`;
 export const CATEGORY_DETAILS = (id) => `${CATEGORY_API}/${id}/details`;
 export const CATEGORY_ASSIGNING_PARENT_TO_PRODUCT = `${CATEGORY_API}/assigningParentToProduct`;
 export const UNIT_OF_MEASURE_CLASS_OPTIONS = `${GENERIC_API}/unitOfMeasureClass/`;
+
+// LOCALIZATION RECORDS (Localization domain CRUD, not message lookup)
+export const LOCALIZATION_RECORD_API = `${API}/localizations`;
+export const LOCALIZATION_RECORD_BY_ID = (id) => `${LOCALIZATION_RECORD_API}/${id}`;
+export const LOCALIZATION_RECORD_DETAILS = (id) => `${LOCALIZATION_RECORD_API}/${id}/details`;
+
+// MIGRATION ADMIN DASHBOARD
+export const MIGRATION_API = `${API}/migration`;
+export const MIGRATION_DATA_MIGRATION = `${MIGRATION_API}/dataMigration`;
+export const MIGRATION_DATA_QUALITY = `${MIGRATION_API}/dataQuality`;
+export const MIGRATION_RECEIPTS_WITHOUT_TRANSACTION = `${MIGRATION_API}/receiptsWithoutTransaction`;
+export const MIGRATION_SHIPMENTS_WITHOUT_TRANSACTIONS = `${MIGRATION_API}/shipmentsWithoutTransactions`;
+export const MIGRATION_STOCK_MOVEMENTS_WITHOUT_SHIPMENT_ITEMS = `${MIGRATION_API}/stockMovementsWithoutShipmentItems`;
+export const MIGRATION_DIMENSION_TABLES = `${MIGRATION_API}/dimensionTables`;
+export const MIGRATION_FACT_TABLES = `${MIGRATION_API}/factTables`;
 
 // BATCH 37 REPORTS
 export const REPORT_BIN_LOCATION = `${API}/reports/binLocationReport`;
