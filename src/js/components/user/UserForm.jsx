@@ -76,9 +76,41 @@ const UserForm = () => {
 
   const detailsForm = useForm({
     mode: 'onBlur',
-    defaultValues: async () => {
-      const fetchedUser = await fetchUser();
-      return {
+    defaultValues: {
+      active: false,
+      email: '',
+      username: '',
+      firstName: '',
+      lastName: '',
+      locale: null,
+      timezone: null,
+    },
+  });
+
+  const passwordForm = useForm({
+    mode: 'onBlur',
+    defaultValues: { password: '', passwordConfirm: '' },
+  });
+
+  const authorizationForm = useForm({
+    mode: 'onBlur',
+    defaultValues: {
+      warehouse: null,
+      rememberLastLocation: false,
+      roles: [],
+    },
+  });
+
+  const locationRoleForm = useForm({
+    mode: 'onBlur',
+    defaultValues: { location: null, roles: [] },
+  });
+
+  // Fetch and reset on userId change: the route can swap users without a
+  // remount, so async defaultValues would keep showing the previous user.
+  useEffect(() => {
+    fetchUser().then((fetchedUser) => {
+      detailsForm.reset({
         active: fetchedUser?.active ?? false,
         email: fetchedUser?.email ?? '',
         username: fetchedUser?.username ?? '',
@@ -94,20 +126,8 @@ const UserForm = () => {
         timezone: fetchedUser?.timezone
           ? { id: fetchedUser.timezone, value: fetchedUser.timezone, label: fetchedUser.timezone }
           : null,
-      };
-    },
-  });
-
-  const passwordForm = useForm({
-    mode: 'onBlur',
-    defaultValues: { password: '', passwordConfirm: '' },
-  });
-
-  const authorizationForm = useForm({
-    mode: 'onBlur',
-    defaultValues: async () => {
-      const fetchedUser = await fetchUser();
-      return {
+      });
+      authorizationForm.reset({
         warehouse: fetchedUser?.warehouse
           ? {
             id: fetchedUser.warehouse.id,
@@ -121,14 +141,10 @@ const UserForm = () => {
           value: role.id,
           label: role.description,
         })) ?? [],
-      };
-    },
-  });
-
-  const locationRoleForm = useForm({
-    mode: 'onBlur',
-    defaultValues: { location: null, roles: [] },
-  });
+      });
+      passwordForm.reset();
+    });
+  }, [userId]);
 
   const onSubmitDetails = async (values) => {
     const payload = {
