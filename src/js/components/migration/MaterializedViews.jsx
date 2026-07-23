@@ -84,7 +84,7 @@ const MaterializedViews = () => {
               <td>
                 <Button
                   defaultLabel="Refresh"
-                  label="react.default.button.refresh.label"
+                  label="react.migration.refresh.label"
                   variant="primary-outline"
                   onClick={() => refresh(migrationApi.refreshProductDemand)}
                 />
@@ -103,7 +103,7 @@ const MaterializedViews = () => {
                   />
                   <Button
                     defaultLabel="Refresh"
-                    label="react.default.button.refresh.label"
+                    label="react.migration.refresh.label"
                     variant="primary-outline"
                     onClick={() => refresh(() => migrationApi.refreshProductAvailability())}
                   />

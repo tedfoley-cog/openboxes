@@ -147,7 +147,7 @@ const MigrationProductAvailability = () => {
                       </a>
                       <Button
                         defaultLabel="Refresh"
-                        label="react.default.button.refresh.label"
+                        label="react.migration.refresh.label"
                         variant="primary-outline"
                         onClick={() => refreshLocation(row.locationId)}
                       />
