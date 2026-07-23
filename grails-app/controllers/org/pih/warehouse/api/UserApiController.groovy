@@ -209,13 +209,18 @@ class UserApiController {
         }
         def photo = request.getFile("photo")
         def okcontents = ['image/png', 'image/jpeg', 'image/gif']
-        if (!photo || !okcontents.contains(photo.getContentType())) {
+        if (!photo || photo.empty) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: "A non-empty photo file is required"] as JSON)
+            return
+        }
+        if (!okcontents.contains(photo.getContentType())) {
             String message = "Photo must be one of: ${okcontents}"
             response.status = HttpStatus.BAD_REQUEST.value()
             render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)
             return
         }
-        if (photo.empty || photo.size >= 1024 * 1000) {
+        if (photo.size >= 1024 * 1000) {
             String message = "${warehouse.message(code: 'user.photoTooLarge.message', args: [warehouse.message(code: 'user.label'), user.id])}"
             response.status = HttpStatus.BAD_REQUEST.value()
             render([errorCode: HttpStatus.BAD_REQUEST.value(), errorMessage: message] as JSON)

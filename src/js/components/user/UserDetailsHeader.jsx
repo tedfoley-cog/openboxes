@@ -16,7 +16,7 @@ import HeaderWrapper from 'wrappers/HeaderWrapper';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-const UserDetailsHeader = ({ user }) => {
+const UserDetailsHeader = ({ user, photoVersion }) => {
   const history = useHistory();
   const translate = useTranslate();
   const isUserAdmin = useSelector((state) => state.session.isUserAdmin);
@@ -53,7 +53,7 @@ const UserDetailsHeader = ({ user }) => {
         <div className="d-flex align-items-center gap-8" data-testid="user-summary">
           {user && (
             <img
-              src={USER_URL.viewThumb(user.id)}
+              src={`${USER_URL.viewThumb(user.id)}?v=${photoVersion}`}
               alt={user.name ?? user.username ?? ''}
               width="24"
               height="24"
@@ -157,8 +157,10 @@ UserDetailsHeader.propTypes = {
     username: PropTypes.string,
     active: PropTypes.bool,
   }),
+  photoVersion: PropTypes.number,
 };
 
 UserDetailsHeader.defaultProps = {
   user: null,
+  photoVersion: 0,
 };

@@ -61,7 +61,7 @@ const UserCropPhoto = () => {
 
   return (
     <PageWrapper>
-      <UserDetailsHeader user={user} />
+      <UserDetailsHeader user={user} photoVersion={photoVersion} />
       <div className="p-3">
         <Section title={{ label: 'react.user.changePhoto.label', defaultMessage: 'Change photo' }}>
           <div className="d-flex flex-column gap-8">
