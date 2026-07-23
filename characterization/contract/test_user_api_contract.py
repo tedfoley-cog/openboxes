@@ -21,9 +21,15 @@ TINY_PNG = base64.b64decode(
 @pytest.fixture(scope="module", autouse=True)
 def require_endpoint(client):
     # The pinned released image predates the Batch 45 user endpoints;
-    # only source builds of this branch expose them.
-    if client.request(
-            "GET", f"/api/users/{ADMIN_USER_ID}/details").status_code not in (200, 404):
+    # only source builds of this branch expose them. On the pinned image the
+    # URL is unmapped and falls through to the HTML error page, whereas the
+    # new endpoint always answers with JSON (200 or a JSON 404 body).
+    resp = client.request("GET", f"/api/users/{ADMIN_USER_ID}/details")
+    try:
+        exposed = resp.status_code == 200 or resp.json().get("errorCode") == 404
+    except ValueError:
+        exposed = False
+    if not exposed:
         pytest.skip("app build does not expose /api/users/{id}/details")
 
 
