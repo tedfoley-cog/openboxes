@@ -374,6 +374,7 @@ const AUTH_URL = {
   base: `${CONTEXT_PATH}/auth`,
   login: () => `${AUTH_URL.base}/login`,
   signup: () => `${AUTH_URL.base}/signup`,
+  logout: () => `${AUTH_URL.base}/logout`,
 };
 
 const BATCH_URL = {
@@ -658,11 +659,6 @@ const DATA_EXPORT_URL = {
     url: `${DATA_EXPORT_URL.base}/render/${id}`,
     query: { format },
   }),
-};
-
-const AUTH_URL = {
-  base: `${CONTEXT_PATH}/auth`,
-  logout: () => `${AUTH_URL.base}/logout`,
 };
 
 const CHOOSE_LOCATION_URL = {
