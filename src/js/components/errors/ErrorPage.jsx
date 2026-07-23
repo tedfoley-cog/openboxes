@@ -38,14 +38,17 @@ const ErrorPage = () => {
     }
   };
 
-  const ignoreErrorHref = error?.uri && !error.uri.includes('/errors/')
-    ? error.uri
-    : DASHBOARD_URL.base;
+  const onIgnoreError = (event) => {
+    if (window.history.length > 1) {
+      event.preventDefault();
+      window.history.go(-1);
+    }
+  };
 
   return (
     <div className="error-page">
       <div className="error-page__actions d-flex flex-row mb-3">
-        <a className="btn btn-outline-primary mr-2" href={ignoreErrorHref}>
+        <a className="btn btn-outline-primary mr-2" href={DASHBOARD_URL.base} onClick={onIgnoreError}>
           <RiArrowGoBackLine />
           {' '}
           <Translate id="react.error.ignoreError.label" defaultMessage="Ignore Error" />
