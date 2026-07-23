@@ -55,7 +55,7 @@ class SelectOptionsApiController {
 
     def roleOptions() {
         List options = Role.list().sort { it.description }.collect { Role role ->
-            [id: role.id, label: role.description ?: role.roleType?.name()]
+            [id: role.id, label: role.toString()]
         }
         render([data: options] as JSON)
     }

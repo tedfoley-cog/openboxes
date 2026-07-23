@@ -59,7 +59,9 @@ const UserList = () => {
       maxWidth: 100,
       Cell: (row) => (
         <StatusIndicator
-          status={row.value ? 'Active' : 'Inactive'}
+          status={row.value
+            ? translate('react.user.active.label', 'Active')
+            : translate('react.user.inactive.label', 'Inactive')}
           variant={row.value ? 'success' : 'danger'}
         />
       ),
@@ -107,7 +109,7 @@ const UserList = () => {
       headerClassName: 'header',
       Cell: (row) => <span>{formatDate(row.value)}</span>,
     },
-  ], []);
+  ], [translate]);
 
   return (
     <div className="d-flex flex-column list-page-main">

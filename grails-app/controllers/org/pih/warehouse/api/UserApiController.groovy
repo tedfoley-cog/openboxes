@@ -21,6 +21,7 @@ import org.pih.warehouse.core.LocationRole
 import org.pih.warehouse.core.Role
 import org.pih.warehouse.core.User
 import org.pih.warehouse.core.UserDataService
+import util.StringUtil
 
 class UserApiController {
 
@@ -231,16 +232,17 @@ class UserApiController {
         return ids.collect { it instanceof Map ? it.id as String : it as String }.findAll { it }
     }
 
-    private static Map toListJson(User user) {
+    private Map toListJson(User user) {
+        boolean anonymize = grailsApplication.config.openboxes.anonymize.enabled
         return [
                 id           : user.id,
-                username     : user.username,
+                username     : anonymize ? StringUtil.mask(user.username) : user.username,
                 name         : user.name,
-                email        : user.email,
+                email        : anonymize ? StringUtil.mask(user.email) : user.email,
                 active       : user.active,
                 locale       : user.locale?.toString(),
                 localeDisplayName: user.locale?.displayName,
-                roles        : user.roles?.sort()?.collect { it.description ?: it.roleType?.name() }?.join(', '),
+                roles        : user.roles?.collect { it.toString() }?.sort()?.join(', '),
                 lastLoginDate: user.lastLoginDate,
         ]
     }
@@ -259,8 +261,8 @@ class UserApiController {
                 timezone            : user.timezone,
                 rememberLastLocation: user.rememberLastLocation,
                 warehouse           : user.warehouse ? [id: user.warehouse.id, name: user.warehouse.name] : null,
-                roles               : user.roles?.sort()?.collect { Role role ->
-                    [id: role.id, roleType: role.roleType?.name(), description: role.description ?: role.roleType?.name()]
+                roles               : user.roles?.sort { it.toString() }?.collect { Role role ->
+                    [id: role.id, roleType: role.roleType?.name(), description: role.toString()]
                 } ?: [],
                 locationRoles       : user.locationRoles?.sort { a, b ->
                     (a.location?.name ?: '') <=> (b.location?.name ?: '') ?: (a.role?.roleType?.sortOrder ?: 0) <=> (b.role?.roleType?.sortOrder ?: 0)
@@ -276,7 +278,7 @@ class UserApiController {
                             role         : [
                                     id         : locationRole.role?.id,
                                     roleType   : locationRole.role?.roleType?.name(),
-                                    description: locationRole.role?.description ?: locationRole.role?.roleType?.name(),
+                                    description: locationRole.role?.toString(),
                             ],
                             highestActive: locationRole?.role in locationRole?.user?.getHighestRole(locationRole.location),
                     ]
