@@ -8,6 +8,7 @@ import notification from 'components/Layout/notifications/notification';
 import Section from 'components/Layout/v2/Section';
 import UserDetailsHeader from 'components/user/UserDetailsHeader';
 import { USER_URL } from 'consts/applicationUrls';
+import ImageUrl from 'consts/imagesUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import useTranslation from 'hooks/useTranslation';
@@ -67,12 +68,16 @@ const UserCropPhoto = () => {
           <div className="d-flex flex-column gap-8">
             <div className="d-flex align-items-start gap-8">
               <img
-                src={`${USER_URL.viewThumb(userId)}?v=${photoVersion}`}
+                src={user?.hasPhoto || photoVersion > 0
+                  ? `${USER_URL.viewThumb(userId)}?v=${photoVersion}`
+                  : ImageUrl.DEFAULT_USER_AVATAR}
                 alt={translate('react.user.thumbnail.label', 'Thumbnail')}
                 data-testid="user-thumbnail"
               />
               <img
-                src={`${USER_URL.viewPhoto(userId)}?v=${photoVersion}`}
+                src={user?.hasPhoto || photoVersion > 0
+                  ? `${USER_URL.viewPhoto(userId)}?v=${photoVersion}`
+                  : ImageUrl.DEFAULT_USER_AVATAR}
                 alt={translate('react.user.photo.label', 'Photo')}
                 data-testid="user-photo"
                 style={{ maxWidth: '400px' }}

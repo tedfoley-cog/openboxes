@@ -9,6 +9,7 @@ import userApi from 'api/services/UserApi';
 import Button from 'components/form-elements/Button';
 import notification from 'components/Layout/notifications/notification';
 import { USER_URL } from 'consts/applicationUrls';
+import ImageUrl from 'consts/imagesUrls';
 import NotificationType from 'consts/notificationTypes';
 import useTranslate from 'hooks/useTranslate';
 import StatusIndicator from 'utils/StatusIndicator';
@@ -53,7 +54,9 @@ const UserDetailsHeader = ({ user, photoVersion }) => {
         <div className="d-flex align-items-center gap-8" data-testid="user-summary">
           {user && (
             <img
-              src={`${USER_URL.viewThumb(user.id)}?v=${photoVersion}`}
+              src={user.hasPhoto || photoVersion > 0
+                ? `${USER_URL.viewThumb(user.id)}?v=${photoVersion}`
+                : ImageUrl.DEFAULT_USER_AVATAR}
               alt={user.name ?? user.username ?? ''}
               width="24"
               height="24"
