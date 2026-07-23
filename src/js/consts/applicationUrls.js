@@ -5,6 +5,19 @@ import { stringifyUrl } from 'query-string';
 
 export const CONTEXT_PATH = window.CONTEXT_PATH ?? '/openboxes';
 
+const ADMIN_URL = {
+  base: `${CONTEXT_PATH}/admin`,
+  index: () => `${ADMIN_URL.base}/index`,
+  cache: () => `${ADMIN_URL.base}/cache`,
+  controllerActions: () => `${ADMIN_URL.base}/controllerActions`,
+  plugins: () => `${ADMIN_URL.base}/plugins`,
+  sendMail: () => `${ADMIN_URL.base}/sendMail`,
+  showSettings: () => `${ADMIN_URL.base}/showSettings`,
+  showDatabaseStatus: () => `${ADMIN_URL.base}/showDatabaseStatus`,
+  showDatabaseProcessList: () => `${ADMIN_URL.base}/showDatabaseProcessList`,
+  showUpgrade: () => `${ADMIN_URL.base}/showUpgrade`,
+};
+
 const DASHBOARD_URL = {
   base: `${CONTEXT_PATH}/dashboard`,
 };
@@ -96,6 +109,32 @@ const STOCK_MOVEMENT_URL = {
   importCsv: (id) => `${STOCK_MOVEMENT_URL.base}/importCsv/${id}`,
   exportCsv: (id) => `${STOCK_MOVEMENT_URL.base}/exportCsv/${id}`,
   uploadDocuments: (id) => `${STOCK_MOVEMENT_URL.base}/uploadDocuments/${id}`,
+  addComment: (id) => `${STOCK_MOVEMENT_URL.base}/addComment/${id}`,
+  addDocument: (id) => `${STOCK_MOVEMENT_URL.base}/addDocument/${id}`,
+  rollback: (id) => `${STOCK_MOVEMENT_URL.base}/rollback/${id}`,
+  remove: (id) => `${STOCK_MOVEMENT_URL.base}/remove/${id}?show=true`,
+  updateStatus: (id, status) => `${STOCK_MOVEMENT_URL.base}/updateStatus/${id}?status=${status}`,
+};
+
+const STOCK_REQUEST_URL = {
+  base: `${CONTEXT_PATH}/stockRequest`,
+  remove: (id) => `${STOCK_REQUEST_URL.base}/remove/${id}?show=true`,
+  reject: (id) => `${STOCK_REQUEST_URL.base}/reject/${id}`,
+  rollbackApproval: (id) => `${STOCK_REQUEST_URL.base}/rollbackApproval/${id}`,
+};
+
+const RECEIVING_URL = {
+  base: `${CONTEXT_PATH}/partialReceiving`,
+  createPartialReceiving: (shipmentId) => `${RECEIVING_URL.base}/create/${shipmentId}`,
+  rollbackLastReceipt: (shipmentId) => `${RECEIVING_URL.base}/rollbackLastReceipt/${shipmentId}`,
+};
+
+const SHIPMENT_WORKFLOW_URL = {
+  base: `${CONTEXT_PATH}/shipmentWorkflow`,
+  list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
+  show: (id) => `${SHIPMENT_WORKFLOW_URL.base}/show/${id}`,
+  edit: (id) => `${SHIPMENT_WORKFLOW_URL.base}/edit/${id}`,
+  create: () => `${SHIPMENT_WORKFLOW_URL.base}/create`,
 };
 
 const INVOICE_URL = {
@@ -115,6 +154,8 @@ const PUTAWAY_URL = {
 
 const STOCK_TRANSFER_URL = {
   base: `${CONTEXT_PATH}/stockTransfer`,
+  list: () => `${STOCK_TRANSFER_URL.base}/list`,
+  erase: (id) => `${STOCK_TRANSFER_URL.base}/eraseStockTransfer/${id}`,
   create: () => `${STOCK_TRANSFER_URL.base}/create`,
   createOutbound: () => `${STOCK_TRANSFER_URL.base}/createOutboundReturn`,
   createInbound: () => `${STOCK_TRANSFER_URL.base}/createInboundReturn`,
@@ -288,6 +329,14 @@ const REPORT_URL = {
   showInventoryByLocationReport: () => `${REPORT_URL.base}/showInventoryByLocationReport`,
   showPaginatedPackingListReport: () => `${REPORT_URL.base}/showPaginatedPackingListReport`,
   downloadShippingReport: () => `${REPORT_URL.base}/downloadShippingReport`,
+  showBinLocationReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showBinLocationReport`,
+    query: params,
+  }),
+  showCycleCountReport: (params = {}) => stringifyUrl({
+    url: `${REPORT_URL.base}/showCycleCountReport`,
+    query: params,
+  }),
 };
 
 const BUDGET_CODE_URL = {
@@ -322,6 +371,29 @@ const LOCATION_GROUP_URL = {
   create: () => `${LOCATION_GROUP_URL.base}/create`,
   edit: (id) => `${LOCATION_GROUP_URL.base}/edit/${id}`,
   show: (id) => `${LOCATION_GROUP_URL.base}/show/${id}`,
+};
+
+const EVENT_TYPE_URL = {
+  base: `${CONTEXT_PATH}/eventType`,
+  list: () => `${EVENT_TYPE_URL.base}/list`,
+  create: () => `${EVENT_TYPE_URL.base}/create`,
+  edit: (id) => `${EVENT_TYPE_URL.base}/edit/${id}`,
+  show: (id) => `${EVENT_TYPE_URL.base}/show/${id}`,
+};
+
+const LOCALIZATION_URL = {
+  base: `${CONTEXT_PATH}/localization`,
+  list: () => `${LOCALIZATION_URL.base}/list`,
+  create: () => `${LOCALIZATION_URL.base}/create`,
+  edit: (id) => `${LOCALIZATION_URL.base}/edit/${id}`,
+  export: (locale) => `${LOCALIZATION_URL.base}/export?locale=${locale}`,
+};
+
+const JOB_URL = {
+  base: `${CONTEXT_PATH}/jobs`,
+  show: (name) => `${JOB_URL.base}/show/${name}`,
+  quartzList: () => `${CONTEXT_PATH}/quartz/list`,
+  backgroundJobSettings: () => `${CONTEXT_PATH}/admin/showSettings#tab-5`,
 };
 
 const LOCATION_TYPE_URL = {
@@ -507,6 +579,12 @@ const SHIPMENT_SHOW_URL = {
   base: `${CONTEXT_PATH}/shipment`,
   show: (id) => `${SHIPMENT_SHOW_URL.base}/showDetails/${id}`,
   list: () => `${SHIPMENT_SHOW_URL.base}/list`,
+  addComment: (id) => `${SHIPMENT_SHOW_URL.base}/addComment/${id}`,
+  addDocument: (id) => `${SHIPMENT_SHOW_URL.base}/addDocument/${id}`,
+  deleteShipment: (id) => `${SHIPMENT_SHOW_URL.base}/deleteShipment/${id}`,
+  addEvent: (id) => `${SHIPMENT_SHOW_URL.base}/addEvent/${id}`,
+  editEvent: (eventId, shipmentId) => `${SHIPMENT_SHOW_URL.base}/editEvent/${eventId}?shipmentId=${shipmentId}`,
+  addToShipment: () => `${SHIPMENT_SHOW_URL.base}/addToShipment`,
   packingList: (id) => `${SHIPMENT_SHOW_URL.base}/showPackingList/${id}`,
   receive: (id) => `${SHIPMENT_SHOW_URL.base}/receiveShipment/${id}`,
   send: (id) => `${SHIPMENT_SHOW_URL.base}/sendShipment/${id}`,
@@ -520,12 +598,6 @@ const SHIPMENT_ITEM_URL = {
   edit: (id) => `${SHIPMENT_ITEM_URL.base}/edit/${id}`,
   pick: (id) => `${SHIPMENT_ITEM_URL.base}/pick/${id}`,
   split: (id) => `${SHIPMENT_ITEM_URL.base}/split/${id}`,
-};
-
-const SHIPMENT_WORKFLOW_URL = {
-  base: `${CONTEXT_PATH}/shipmentWorkflow`,
-  list: () => `${SHIPMENT_WORKFLOW_URL.base}/list`,
-  create: () => `${SHIPMENT_WORKFLOW_URL.base}/create`,
 };
 
 const DELIVERY_NOTE_URL = {
@@ -551,6 +623,14 @@ const BARCODE_URL = {
   }),
 };
 
+const DATA_EXPORT_URL = {
+  base: `${CONTEXT_PATH}/dataExport`,
+  render: (id, format) => stringifyUrl({
+    url: `${DATA_EXPORT_URL.base}/render/${id}`,
+    query: { format },
+  }),
+};
+
 const CYCLE_COUNT = {
   base: `${CONTEXT_PATH}/inventory/cycleCount`,
   list: (tab) => `${CYCLE_COUNT.base}?tab=${tab}`,
@@ -559,6 +639,7 @@ const CYCLE_COUNT = {
 };
 
 export {
+  ADMIN_URL,
   ATTRIBUTE_URL,
   BARCODE_URL,
   BUDGET_CODE_URL,
@@ -567,8 +648,10 @@ export {
   CREATE_SHIPMENT_URL,
   CYCLE_COUNT,
   DASHBOARD_URL,
+  DATA_EXPORT_URL,
   DELIVERY_NOTE_URL,
   DOCUMENT_URL,
+  EVENT_TYPE_URL,
   GL_ACCOUNT_TYPE_URL,
   GL_ACCOUNT_URL,
   GOODS_RECEIPT_NOTE_URL,
@@ -578,6 +661,8 @@ export {
   INVENTORY_SNAPSHOT_URL,
   INVENTORY_URL,
   INVOICE_URL,
+  JOB_URL,
+  LOCALIZATION_URL,
   LOCATION_CONFIGURATION_URL,
   LOCATION_GROUP_URL,
   LOCATION_TYPE_URL,
@@ -602,6 +687,7 @@ export {
   PURCHASE_ORDER_URL,
   PUTAWAY_URL,
   RECEIVE_ORDER_URL,
+  RECEIVING_URL,
   REPLENISHMENT_URL,
   REPORT_URL,
   REQUISITION_ITEM_URL,
@@ -611,6 +697,7 @@ export {
   SHIPMENT_SHOW_URL,
   SHIPMENT_WORKFLOW_URL,
   STOCK_MOVEMENT_URL,
+  STOCK_REQUEST_URL,
   STOCK_TRANSFER_URL,
   STOCKLIST_URL,
   SUPPLIER_URL,
