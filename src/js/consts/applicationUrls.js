@@ -16,6 +16,7 @@ const ADMIN_URL = {
   showDatabaseStatus: () => `${ADMIN_URL.base}/showDatabaseStatus`,
   showDatabaseProcessList: () => `${ADMIN_URL.base}/showDatabaseProcessList`,
   showUpgrade: () => `${ADMIN_URL.base}/showUpgrade`,
+  status: () => `${ADMIN_URL.base}/status`,
 };
 
 const DASHBOARD_URL = {
@@ -358,12 +359,6 @@ const DOCUMENT_URL = {
   list: () => `${DOCUMENT_URL.base}/list`,
   create: () => `${DOCUMENT_URL.base}/create`,
   edit: (id) => `${DOCUMENT_URL.base}/edit/${id}`,
-};
-
-const ADMIN_URL = {
-  base: `${CONTEXT_PATH}/admin`,
-  status: () => `${ADMIN_URL.base}/status`,
-  showUpgrade: () => `${ADMIN_URL.base}/showUpgrade`,
 };
 
 const AUTH_URL = {
