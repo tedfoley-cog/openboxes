@@ -10,12 +10,14 @@
 package org.pih.warehouse.api
 
 import grails.converters.JSON
+import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
 import org.apache.http.auth.AuthenticationException
 import org.hibernate.ObjectNotFoundException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 
+import org.pih.warehouse.LocalizationUtil
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.core.LocationRole
 import org.pih.warehouse.core.Role
@@ -50,6 +52,32 @@ class UserApiController {
         if (!user) {
             throw new ObjectNotFoundException(params.id, User.class.toString())
         }
+        render([data: toDetailsJson(user)] as JSON)
+    }
+
+    @Transactional
+    def create() {
+        def jsonObject = request.JSON
+        User user = new User(
+                username: jsonObject.username ?: null,
+                firstName: jsonObject.firstName ?: null,
+                lastName: jsonObject.lastName ?: null,
+                email: jsonObject.email ?: null,
+                locale: jsonObject.locale ? LocalizationUtil.getLocale(jsonObject.locale as String) : null,
+        )
+        // Person defaults active=true; new users must start inactive,
+        // matching the legacy UserController.save behavior.
+        user.active = false
+        user.password = jsonObject.password ? (jsonObject.password as String).encodeAsPassword() : null
+        user.passwordConfirm = user.password
+        try {
+            userService.saveUser(user, session.user.id as String, [])
+        } catch (ValidationException e) {
+            transactionStatus.setRollbackOnly()
+            renderValidationErrors(e)
+            return
+        }
+        response.status = HttpStatus.CREATED.value()
         render([data: toDetailsJson(user)] as JSON)
     }
 
@@ -280,6 +308,7 @@ class UserApiController {
                 localeDisplayName   : user.locale?.displayName,
                 timezone            : user.timezone,
                 rememberLastLocation: user.rememberLastLocation,
+                hasPhoto            : user.photo != null,
                 warehouse           : user.warehouse ? [id: user.warehouse.id, name: user.warehouse.name] : null,
                 roles               : user.roles?.sort { it.toString() }?.collect { Role role ->
                     [id: role.id, roleType: role.roleType?.name(), description: role.toString()]

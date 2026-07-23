@@ -482,6 +482,12 @@ const MIGRATION_URL = {
   dimensionTables: () => `${MIGRATION_URL.base}/dimensionTables`,
   factTables: () => `${MIGRATION_URL.base}/factTables`,
   legacy: () => `${MIGRATION_URL.base}/legacy`,
+  materializedViews: () => `${MIGRATION_URL.base}/materializedViews`,
+  productAvailability: () => `${MIGRATION_URL.base}/productAvailability`,
+  compareProductAvailability: (locationId, showAll) => stringifyUrl({
+    url: `${MIGRATION_URL.base}/compareProductAvailability`,
+    query: { 'location.id': locationId, ...(showAll ? { showAll: true } : {}) },
+  }),
 };
 
 const PARTY_TYPE_URL = {
@@ -552,6 +558,14 @@ const USER_URL = {
   impersonate: (id) => `${USER_URL.base}/impersonate/${id}`,
   toggleActivation: (id) => `${USER_URL.base}/toggleActivation/${id}`,
   sendTestEmail: (id) => `${USER_URL.base}/sendTestEmail/${id}`,
+};
+
+const ROLE_URL = {
+  base: `${CONTEXT_PATH}/role`,
+  list: () => `${ROLE_URL.base}/index`,
+  create: () => `${ROLE_URL.base}/create`,
+  show: (id) => `${ROLE_URL.base}/show/${id}`,
+  edit: (id) => `${ROLE_URL.base}/edit/${id}`,
 };
 
 const REQUISITION_URL = {
@@ -748,6 +762,7 @@ export {
   REQUISITION_ITEM_URL,
   REQUISITION_TEMPLATE_URL,
   REQUISITION_URL,
+  ROLE_URL,
   SHIPMENT_ITEM_URL,
   SHIPMENT_SHOW_URL,
   SHIPMENT_WORKFLOW_URL,
