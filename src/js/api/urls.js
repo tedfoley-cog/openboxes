@@ -622,4 +622,3 @@ export const MOBILE_DASHBOARD = `${API}/mobile/dashboard`;
 export const MOBILE_PRODUCT_SUMMARIES = `${API}/mobile/productSummaries`;
 export const MOBILE_PRODUCT_SUMMARY_BY_ID = (id) => `${MOBILE_PRODUCT_SUMMARIES}/${id}`;
 export const MOBILE_OUTBOUND_ITEMS = `${API}/mobile/outboundItems`;
-export const LOGIN_API = `${API}/login`;

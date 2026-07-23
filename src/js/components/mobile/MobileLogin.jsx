@@ -16,8 +16,11 @@ const MobileLogin = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await mobileApi.login({ username, password });
-      window.location.assign(`${CONTEXT_PATH}/dashboard/index`);
+      const response = await mobileApi.login({ username, password });
+      const redirectUrl = response?.data?.data?.redirectUrl || '/dashboard/index';
+      window.location.assign(redirectUrl.startsWith(CONTEXT_PATH)
+        ? redirectUrl
+        : `${CONTEXT_PATH}${redirectUrl}`);
     } catch (error) {
       setErrorMessage('Unable to authenticate user. Please verify your username and password and try again.');
     }

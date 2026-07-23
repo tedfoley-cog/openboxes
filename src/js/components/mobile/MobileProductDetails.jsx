@@ -85,10 +85,10 @@ const MobileProductDetails = ({ match }) => {
                     {product.unitOfMeasure || 'EA'}
                   </span>
                 </li>
-                {(product.attributes ?? []).map((attribute) => (
+                {(product.attributes ?? []).map((attribute, index) => (
                   <li
                     className="list-group-item d-flex justify-content-between align-items-center"
-                    key={attribute.name}
+                    key={attribute.name ?? index}
                   >
                     {attribute.name}
                     <span className="badge badge-primary badge-pill text-secondary">

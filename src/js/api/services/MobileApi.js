@@ -1,5 +1,5 @@
 import {
-  LOGIN_API,
+  AUTH_LOGIN_API,
   MOBILE_DASHBOARD,
   MOBILE_OUTBOUND_ITEMS,
   MOBILE_PRODUCT_SUMMARIES,
@@ -12,5 +12,5 @@ export default {
   getProductSummaries: (config) => apiClient.get(MOBILE_PRODUCT_SUMMARIES, config),
   getProductSummary: (id) => apiClient.get(MOBILE_PRODUCT_SUMMARY_BY_ID(id)),
   getOutboundItems: (config) => apiClient.get(MOBILE_OUTBOUND_ITEMS, config),
-  login: (payload) => apiClientCustomResponseHandler.post(LOGIN_API, payload),
+  login: (payload) => apiClientCustomResponseHandler.post(AUTH_LOGIN_API, payload),
 };
