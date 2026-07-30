@@ -122,26 +122,47 @@ class IndicatorDataService {
         return graphData.toJson()
     }
 
+    /**
+     * Builds the optional category filter applied to the native fill rate queries.
+     *
+     * The selected category ids come from the request and are bound as named parameters instead of being
+     * interpolated into the SQL text.
+     *
+     * @return a map holding the SQL fragment to splice in (extraCondition), the keyword introducing the
+     *         remaining conditions (conditionStarter) and the parameters to bind (queryParams)
+     */
+    protected static Map buildCategoryFilter(def params) {
+        List listFiltersSelected = params.list('listFiltersSelected').toList()
+        List listValues = params.list('value').toList()
+
+        if (!listFiltersSelected.contains('category') || listValues.isEmpty()) {
+            return [extraCondition: '', conditionStarter: 'where', queryParams: [:]]
+        }
+
+        Map queryParams = [:]
+        List placeholders = []
+        listValues.eachWithIndex { value, int index ->
+            String parameterName = "categoryId${index}"
+            queryParams[parameterName] = value?.toString()
+            placeholders << ":${parameterName}"
+        }
+
+        String extraCondition = """
+            join product as p on fr.product_id = p.id
+            join category as c on p.category_id = c.id
+            where c.id in (${placeholders.join(', ')})
+            """
+
+        return [extraCondition: extraCondition, conditionStarter: 'and', queryParams: queryParams]
+    }
+
     @Cacheable(value = "dashboardCache", key = { "getFillRate-${location?.id}${destination?.id}${params?.querySize}${params?.listFiltersSelected}${params?.value}" })
     Map getFillRate(Location location, Location destination, def params) {
         Integer querySize = params.querySize ? params.querySize.toInteger() : 6
-        List listFiltersSelected = params.list('listFiltersSelected').toList()
-        List listValues = params.list('value').toList()
-        String extraCondition = ''
-        String conditionStarter = 'where'
-
-        if( listFiltersSelected.contains('category') && listValues.size() > 0) {
-            extraCondition = """
-            join product as p on fr.product_id = p.id 
-            join category as c on p.category_id = c.id
-            where (
-            """
-            for(int i = 0; i < listValues.size(); i ++) {
-                extraCondition = "${extraCondition} c.id = '${listValues[i]}'"
-                extraCondition = i<listValues.size() - 1 ? "${extraCondition} or" : extraCondition
-            }
-            conditionStarter = ') and'
-        }
+        Map categoryFilter = buildCategoryFilter(params)
+        String extraCondition = categoryFilter.extraCondition
+        String conditionStarter = categoryFilter.conditionStarter
+        Map categoryParams = categoryFilter.queryParams
 
         List listLabels = []
 
@@ -177,7 +198,7 @@ class IndicatorDataService {
                 'monthBegin'  : monthBegin,
                 'destination' : destination?.id,
                 'origin'      : location.id,
-            ]);
+            ] + categoryParams);
 
             averageFillRate[0] == null ? averageFillRateResult.push(0) : averageFillRateResult.push(averageFillRate[0][0])
 
@@ -195,7 +216,7 @@ class IndicatorDataService {
                 'monthBegin'  : monthBegin,
                 'destination' : destination?.id,
                 'origin'      : location.id,
-            ]);
+            ] + categoryParams);
 
             requestLinesSubmitted[0] == null ? requestLinesSubmittedResult.push(0) : requestLinesSubmittedResult.push(requestLinesSubmitted[0][0])
 
@@ -213,7 +234,7 @@ class IndicatorDataService {
                 'monthBegin'  : monthBegin,
                 'destination' : destination?.id,
                 'origin'      : location.id,
-            ]);
+            ] + categoryParams);
 
             linesCancelledStockout[0] == null ? linesCancelledStockoutResult.push(0) : linesCancelledStockoutResult.push(linesCancelledStockout[0][0])
         }
@@ -245,27 +266,14 @@ class IndicatorDataService {
 
     @Cacheable(value = "dashboardCache", key = { "getFillRateSnapshot-${origin?.id}${params?.listFiltersSelected}${params?.value}" })
     Map getFillRateSnapshot(Location origin, def params) {
-        String listFiltersSelected = params.list('listFiltersSelected').toList()
-        List listValues = params.list('value').toList()
         List averageFillRateResult = []
         List listLabels = []
         Date today = new Date()
         today.clearTime()
-        String extraCondition = ''
-        String conditionStarter = 'where'
-
-        if( listFiltersSelected.contains('category') && listValues.size() > 0) {
-            extraCondition = """
-            join product as p on fr.product_id = p.id 
-            join category as c on p.category_id = c.id
-            where (
-            """
-            for(int i = 0; i < listValues.size(); i ++) {
-                extraCondition = "${extraCondition} c.id = '${listValues[i]}'"
-                extraCondition = i<listValues.size() - 1 ? "${extraCondition} or" : extraCondition
-            }
-            conditionStarter = ') and'
-        }
+        Map categoryFilter = buildCategoryFilter(params)
+        String extraCondition = categoryFilter.extraCondition
+        String conditionStarter = categoryFilter.conditionStarter
+        Map categoryParams = categoryFilter.queryParams
 
         for (int i = 12; i > 0; i--) {
             def monthBegin = today.clone()
@@ -288,8 +296,7 @@ class IndicatorDataService {
                 'monthBegin'  : monthBegin,
                 'monthEnd'    : monthEnd,
                 'origin'      : origin.id,
-                'listValues'  : listValues,
-            ]);
+            ] + categoryParams);
 
             averageFillRate[0] == null ? averageFillRateResult.push(0) : averageFillRateResult.push(averageFillRate[0][0])
         }
