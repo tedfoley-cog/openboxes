@@ -47,6 +47,17 @@ class DataService {
         return new Sql(dataSource).rows(query)
     }
 
+    /**
+     * Executes a query that comes from data rather than from code (e.g. the SQL stored in a
+     * data export document). Anything that is not a single read-only statement is rejected.
+     */
+    List executeReadOnlyQuery(String query) {
+        if (!DataExportQueryValidator.isReadOnlyQuery(query)) {
+            throw new IllegalArgumentException("Only a single read-only SELECT statement can be executed")
+        }
+        return executeQuery(query)
+    }
+
     List executeQuery(String query, Map params) {
         return new Sql(dataSource).rows(query, params)
     }

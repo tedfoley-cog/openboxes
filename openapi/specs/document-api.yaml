@@ -24,7 +24,9 @@ paths:
         Multipart form post with the file in "fileContents" and an optional
         "documentType.id". Responds 400 when the file is missing/empty or
         when domain validation fails (e.g. files >= 10MB skip the metadata
-        assignment, so fileContents is null and validation rejects it).
+        assignment, so fileContents is null and validation rejects it), and
+        403 for a DATA_EXPORT document type when the caller is not a
+        superuser (the contents of those documents are run as a query).
       requestBody:
         required: true
         content:
@@ -79,6 +81,8 @@ paths:
           $ref: '../components/common.yaml#/components/responses/ValidationError'
         '401':
           $ref: '../components/common.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/DocumentTypeForbidden'
     get:
       operationId: listDocuments
       summary: List documents
@@ -181,6 +185,8 @@ paths:
                     $ref: '#/components/schemas/Document'
         '400':
           $ref: '../components/common.yaml#/components/responses/ValidationError'
+        '403':
+          $ref: '#/components/responses/DocumentTypeForbidden'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
     delete:
@@ -216,7 +222,9 @@ paths:
         Multipart replacement of the stored file, mirroring the legacy
         document/upload action (empty-file check, 10MB size limit,
         Document.isAllowedFile validation; the document name follows the new
-        filename only when it still equals the old filename).
+        filename only when it still equals the old filename). Requires
+        ROLE_MANAGER, and ROLE_SUPERUSER for DATA_EXPORT documents (the
+        contents of those documents are run as a query).
       requestBody:
         required: true
         content:
@@ -247,9 +255,19 @@ paths:
             application/json:
               schema:
                 $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/DocumentTypeForbidden'
         '404':
           $ref: '../components/common.yaml#/components/responses/NotFound'
 components:
+  responses:
+    DocumentTypeForbidden:
+      description: >
+        The caller is not allowed to create or modify a document of this type.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
   schemas:
     Document:
       type: object

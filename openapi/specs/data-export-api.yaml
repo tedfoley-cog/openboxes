@@ -20,7 +20,9 @@ paths:
       summary: List custom data export documents
       description: >
         Documents whose document type has the DATA_EXPORT document code,
-        mirroring the legacy DataExportController.index model.
+        mirroring the legacy DataExportController.index model. Data exports
+        run a query stored in the document, so the endpoint requires
+        ROLE_SUPERUSER.
       responses:
         '200':
           description: Data export documents, in a "data" envelope.
