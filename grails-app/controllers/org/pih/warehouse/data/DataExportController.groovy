@@ -10,9 +10,10 @@
 package org.pih.warehouse.data
 
 import grails.converters.JSON
+import org.springframework.http.HttpStatus
+
 import org.pih.warehouse.core.Document
 import org.pih.warehouse.core.DocumentCode
-import org.pih.warehouse.core.DocumentType
 
 import java.nio.charset.Charset
 
@@ -23,18 +24,38 @@ class DataExportController {
         render(view: "/common/react")
     }
 
+    /**
+     * Runs the query stored in a data export document. The document must be a data export
+     * (the contents of any other document are never executed) and the query must be a single
+     * read-only statement.
+     */
     def render() {
         Document document = Document.get(params.id)
-        String query = new String(document.fileContents, Charset.defaultCharset());
-        if (query) {
-            def data = dataService.executeQuery(query)
+        if (!document || document.documentType?.documentCode != DocumentCode.DATA_EXPORT) {
+            response.status = HttpStatus.NOT_FOUND.value()
+            render([errorCode   : HttpStatus.NOT_FOUND.value(),
+                    errorMessage: g.message(code: 'dataExport.notFound.message')] as JSON)
+            return
+        }
+        String query = document.fileContents ? new String(document.fileContents, Charset.defaultCharset()) : null
+        if (query?.trim()) {
+            List data
+            try {
+                data = dataService.executeReadOnlyQuery(query)
+            } catch (IllegalArgumentException e) {
+                log.error("Refusing to run data export ${document.id}: ${e.message}")
+                response.status = HttpStatus.FORBIDDEN.value()
+                render([errorCode   : HttpStatus.FORBIDDEN.value(),
+                        errorMessage: g.message(code: 'dataExport.queryNotAllowed.message')] as JSON)
+                return
+            }
             if (params.format == "csv") {
                 String csv = dataService.generateCsv(data)
                 response.setHeader("Content-disposition", "attachment; filename=\"${document.name}.csv\"")
                 render(contentType: "text/csv", text: csv.toString(), encoding: "UTF-8")
                 return
             }
-            render dataService.executeQuery(query) as JSON
+            render data as JSON
             return
         }
         render document as JSON

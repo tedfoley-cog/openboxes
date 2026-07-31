@@ -44,6 +44,7 @@ class DocumentController {
     BeanPropertyTemplateService beanPropertyTemplateService
     StockMovementService stockMovementService
     OutboundStockMovementService outboundStockMovementService
+    UserService userService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -63,6 +64,11 @@ class DocumentController {
 
         log.info "Params " + params
         def documentInstance = new Document(params)
+        if (isRestrictedDocumentType(documentInstance.documentType)) {
+            flash.message = "${warehouse.message(code: 'document.documentTypeNotAllowed.message')}"
+            redirect(action: "create")
+            return
+        }
 
         def file = request.getFile("fileContents")
         // file must not be empty and must be less than 10MB
@@ -113,7 +119,18 @@ class DocumentController {
 
         def documentInstance = Document.get(params.id)
         if (documentInstance) {
+            if (isRestrictedDocumentType(documentInstance.documentType)) {
+                flash.message = "${warehouse.message(code: 'document.documentTypeNotAllowed.message')}"
+                redirect(action: "list")
+                return
+            }
             documentInstance.properties = params
+            if (isRestrictedDocumentType(documentInstance.documentType)) {
+                documentInstance.discard()
+                flash.message = "${warehouse.message(code: 'document.documentTypeNotAllowed.message')}"
+                redirect(action: "list")
+                return
+            }
 
             if (!documentInstance.hasErrors() && documentInstance.save(flush: true)) {
                 flash.message = "${warehouse.message(code: 'default.updated.message', args: [warehouse.message(code: 'document.label', default: 'Document'), documentInstance.id])}"
@@ -449,12 +466,20 @@ class DocumentController {
             throw new RuntimeException("Unable to retrieve document " + params.documentId)
         }
 
+        DocumentType requestedDocumentType = DocumentType.get(command.typeId)
+        if (isRestrictedDocumentType(documentInstance.documentType) || isRestrictedDocumentType(requestedDocumentType)) {
+            documentInstance.discard()
+            flash.message = "${warehouse.message(code: 'document.documentTypeNotAllowed.message')}"
+            redirect(action: "list")
+            return
+        }
+
         // bind the command object to the document object ignoring the shipmentId and fileContents params (which can't change after creation)
         //bindData(documentInstance, command, ['shipmentId','orderId'])
         // manually update the document type
         documentInstance.name = command.name
         documentInstance.documentNumber = command.documentNumber
-        documentInstance.documentType = DocumentType.get(command.typeId)
+        documentInstance.documentType = requestedDocumentType
 
         // If a new file is passed we should update all of the read-only properties
         def file = command.fileContents
@@ -572,6 +597,14 @@ class DocumentController {
             throw new IllegalArgumentException("Only documents of type ZEBRA_TEMPLATE can be rendered as Zebra templates")
         }
         return document
+    }
+
+    /**
+     * The contents of a data export document are run as a query by DataExportController.render,
+     * so only a superuser is allowed to create one or to change an existing one.
+     */
+    private boolean isRestrictedDocumentType(DocumentType documentType) {
+        return documentType?.documentCode == DocumentCode.DATA_EXPORT && !userService.isSuperuser(session.user)
     }
 
 }

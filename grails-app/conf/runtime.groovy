@@ -121,6 +121,10 @@ openboxes.security.rbac.rules = [
     [controller: 'user', actions: ['changePassword'], accessRules: [ minimumRequiredRole: RoleType.ROLE_AUTHENTICATED]],
     [controller: 'userApi', actions: ['changePassword'], accessRules: [ minimumRequiredRole: RoleType.ROLE_AUTHENTICATED]],
     [controller: 'adminApi', actions: ['upgrade', 'upgradeDownload', 'upgradeDeploy'], accessRules: [ minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
+    // Custom data exports run the query stored in a document against the database
+    [controller: 'dataExport', actions: ['index', 'render'], accessRules: [ minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
+    [controller: 'dataExportApi', actions: ['list'], accessRules: [ minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
+    [controller: 'documentApi', actions: ['uploadContent'], accessRules: [ minimumRequiredRole: RoleType.ROLE_MANAGER]],
     // Other controller actions that might need explicit rules
     //[controller: 'putawayItemApi', actions: ['removingItem'], access: [RoleType.ROLE_MANAGER]],
 ]
@@ -348,7 +352,7 @@ openboxes {
                         [label: "export.requisitions.label", defaultLabel: "Export requisitions", href: "/requisition/export"],
                         [label: "export.binLocations.label", defaultLabel: "Export bin locations", href: "/report/exportBinLocation?downloadFormat=csv"],
                         [label: "export.productDemand.label", defaultLabel: "Export product demand", href: "/report/exportDemandReport?downloadFormat=csv"],
-                        [label: "export.custom.label", defaultLabel: "Custom data exports", href: "/dataExport/index"]
+                        [label: "export.custom.label", defaultLabel: "Custom data exports", href: "/dataExport/index", minimumRequiredRole: RoleType.ROLE_SUPERUSER]
                     ]
                 ]
             ]

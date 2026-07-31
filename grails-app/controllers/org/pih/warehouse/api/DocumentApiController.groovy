@@ -21,14 +21,18 @@ import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
 import org.pih.warehouse.core.Document
+import org.pih.warehouse.core.DocumentCode
 import org.pih.warehouse.core.DocumentFilterCommand
 import org.pih.warehouse.core.DocumentService
 import org.pih.warehouse.core.DocumentType
+import org.pih.warehouse.core.UserService
 import util.FileUtil
 
 class DocumentApiController {
 
     DocumentService documentService
+
+    UserService userService
 
     def messageSource
 
@@ -40,6 +44,10 @@ class DocumentApiController {
     def create() {
         Document documentInstance = new Document()
         documentInstance.documentType = params["documentType.id"] ? DocumentType.get(params["documentType.id"]) : null
+        if (isRestrictedDocumentType(documentInstance.documentType)) {
+            renderDocumentTypeForbidden()
+            return
+        }
 
         def file = request.getFile("fileContents")
         if (!file || file?.isEmpty()) {
@@ -96,7 +104,16 @@ class DocumentApiController {
         if (!document) {
             throw new ObjectNotFoundException(params.id, Document.class.toString())
         }
+        if (isRestrictedDocumentType(document.documentType)) {
+            renderDocumentTypeForbidden()
+            return
+        }
         bindDocument(document, request.JSON)
+        if (isRestrictedDocumentType(document.documentType)) {
+            transactionStatus.setRollbackOnly()
+            renderDocumentTypeForbidden()
+            return
+        }
         if (document.hasErrors() || !document.save(flush: true)) {
             throw new ValidationException("Invalid document", document.errors)
         }
@@ -131,6 +148,10 @@ class DocumentApiController {
         if (!document) {
             throw new ObjectNotFoundException(params.id, Document.class.toString())
         }
+        if (isRestrictedDocumentType(document.documentType)) {
+            renderDocumentTypeForbidden()
+            return
+        }
         MultipartFile file = request instanceof MultipartHttpServletRequest ? request.getFile("fileContents") : null
         if (!file || file.isEmpty()) {
             response.status = HttpStatus.BAD_REQUEST.value()
@@ -160,6 +181,20 @@ class DocumentApiController {
             throw new ValidationException("Invalid document", document.errors)
         }
         render([data: toJson(document)] as JSON)
+    }
+
+    /**
+     * The contents of a data export document are run as a query by DataExportController.render,
+     * so only a superuser is allowed to create one or to change an existing one.
+     */
+    private boolean isRestrictedDocumentType(DocumentType documentType) {
+        return documentType?.documentCode == DocumentCode.DATA_EXPORT && !userService.isSuperuser(session.user)
+    }
+
+    private void renderDocumentTypeForbidden() {
+        response.status = HttpStatus.FORBIDDEN.value()
+        render([errorCode   : HttpStatus.FORBIDDEN.value(),
+                errorMessage: warehouse.message(code: 'document.documentTypeNotAllowed.message')] as JSON)
     }
 
     private void bindDocument(Document document, jsonObject) {
