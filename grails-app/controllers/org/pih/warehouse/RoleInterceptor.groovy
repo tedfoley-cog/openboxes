@@ -112,8 +112,12 @@ class RoleInterceptor {
     boolean before() {
 
         def rules = grailsApplication.config.openboxes.security.rbac.rules
-        def rule = rules.find { it.controller == controllerName && it.actions.contains(actionName) ||
-            it.controller == controllerName && it.actions.contains("*") ||
+        // A rule naming the controller always wins over a wildcard controller rule, whatever the
+        // order the rules are declared in. Wildcard controller rules only apply to wildcard action
+        // lists, so an action that needs its own requirement needs an explicit rule per controller.
+        def rule = rules.find {
+            it.controller == controllerName && (it.actions.contains(actionName) || it.actions.contains("*"))
+        } ?: rules.find {
             it.controller == "*" && it.actions.contains("*")
         }
 
