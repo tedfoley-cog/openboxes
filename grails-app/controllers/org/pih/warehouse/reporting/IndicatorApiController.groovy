@@ -15,22 +15,6 @@ class IndicatorApiController {
 
     ReportService reportService
 
-    static scaffold = Indicator
-
-    // Proof of concept to see if we could evalute a string of code
-    // Could be used to create dynamic indicators for the dashboard
-    def evaluate() {
-
-        String code = """
-            import Product;
-            def products = Product.list();
-            return products.size()
-        """
-
-        // String code, boolean captureStdout, request
-        render consoleService.eval(code, true, request)
-    }
-
     def getProductsInventoried(IndicatorApiCommand command) {
         Map data = reportService.getProductsInventoried(command)
         render([data: data] as JSON)

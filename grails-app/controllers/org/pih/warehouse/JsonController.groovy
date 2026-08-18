@@ -48,7 +48,6 @@ import org.pih.warehouse.product.ProductPackage
 import org.pih.warehouse.product.ProductSupplier
 import org.pih.warehouse.product.ProductSupplierPreference
 import org.pih.warehouse.product.ProductType
-import org.pih.warehouse.reporting.Indicator
 import org.pih.warehouse.reporting.TransactionFact
 import org.pih.warehouse.requisition.Requisition
 import org.pih.warehouse.requisition.RequisitionItem
@@ -73,23 +72,12 @@ class JsonController {
     def shipmentService
     def reportService
     def messageSource
-    def consoleService
     def userService
     def inventorySnapshotService
     def productAvailabilityService
     def forecastingService
     def translationService
     def orderService
-
-    def evaluateIndicator() {
-        def indicator = Indicator.get(params.id)
-        if (indicator) {
-            def results = consoleService.eval(indicator.expression, true, request)
-            render results.result
-        } else {
-            render "error"
-        }
-    }
 
     def calculateQuantityOnHand() {
         def location = Location.load(params.locationId)
