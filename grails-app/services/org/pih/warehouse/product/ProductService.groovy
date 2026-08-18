@@ -1356,8 +1356,32 @@ class ProductService {
         return results
     }
 
+    /**
+     * Escapes the wildcard characters of a LIKE pattern so that a search term is matched literally.
+     */
+    private static String escapeLikeWildcards(String term) {
+        return term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    }
+
+    private static String buildStartsWithCondition(String column, int termCount) {
+        return (0..<termCount).collect { "lower(${column}) like :startsWith${it}" }.join(" or ")
+    }
+
     def searchProductDtos(String[] terms) {
         String locale = LocalizationUtil.localizationService.getCurrentLocale().toString()
+
+        List<String> searchTerms = terms?.findAll { it } ?: []
+
+        Map queryParams = [
+            exactMatchTerm : searchTerms.join(" "),
+            synonymTypeCode: SynonymTypeCode.DISPLAY_NAME.name(),
+            locale         : locale,
+        ]
+        searchTerms.eachWithIndex { String term, int index ->
+            String escapedTerm = escapeLikeWildcards(term)
+            queryParams["startsWith" + index] = escapedTerm + "%"
+            queryParams["contains" + index] = "%" + escapedTerm + "%"
+        }
 
         def query = """
             select distinct
@@ -1373,11 +1397,11 @@ class ProductService {
             product.lot_and_expiry_control as lotAndExpiryControl,
             # Return whether search term returns an exact match
             ifnull(
-                product.product_code = '${terms.join(" ")}' or 
-                product.upc = '${terms.join(" ")}' or 
-                product.ndc = '${terms.join(" ")}' or 
-                product_supplier.supplier_code = '${terms.join(" ")}' or
-                product_supplier.manufacturer_code = '${terms.join(" ")}', false
+                product.product_code = :exactMatchTerm or 
+                product.upc = :exactMatchTerm or 
+                product.ndc = :exactMatchTerm or 
+                product_supplier.supplier_code = :exactMatchTerm or
+                product_supplier.manufacturer_code = :exactMatchTerm, false
             ) as exactMatch,
             (
                 select max(pc.color) 
@@ -1389,13 +1413,13 @@ class ProductService {
             (
                 select s.name from synonym s
                 where s.product_id = product.id
-                and s.synonym_type_code = '${SynonymTypeCode.DISPLAY_NAME}'
-                and s.locale = '${locale}'
+                and s.synonym_type_code = :synonymTypeCode
+                and s.locale = :locale
                 limit 1
             ) as displayName
             from product """
 
-        if (terms && terms.size() > 0) {
+        if (searchTerms) {
             query += """
             left outer join product_supplier 
                 on product.id = product_supplier.product_id
@@ -1403,32 +1427,32 @@ class ProductService {
                 on product.id = synonym.product_id
             left outer join party manufacturer 
                 on product_supplier.manufacturer_id = manufacturer.id 
-                and (${terms.collect { "lower(manufacturer.name) like '${it}%'" }.join(" or ")}) # adding the conditions to join will allow MySQL to optimize the query
+                and (${buildStartsWithCondition("manufacturer.name", searchTerms.size())}) # adding the conditions to join will allow MySQL to optimize the query
             left outer join party supplier 
                 on product_supplier.supplier_id = supplier.id 
-                and (${terms.collect { "lower(supplier.name) like '${it}%'" }.join(" or ")})
+                and (${buildStartsWithCondition("supplier.name", searchTerms.size())})
             left outer join inventory_item 
                 on product.id = inventory_item.product_id 
-                and (${terms.collect { "lower(inventory_item.lot_number) like '${it}%'" }.join(" or ")})
-            where product.active = 1 and (${terms.collect {"""
-                lower(product.name) like '%${it}%' 
-                or lower(product.product_code) like '${it}%' 
-                or (synonym.synonym_type_code = '${SynonymTypeCode.DISPLAY_NAME}' and synonym.name like '%${it}%')
-                or lower(product.description) like '%${it}%'
-                or lower(product.brand_name) like '${it}%' 
-                or lower(product.manufacturer_code) like '${it}%' 
-                or lower(product.vendor_code) like '${it}%'
-                or lower(product.upc) like '${it}%' 
-                or lower(product.ndc) like '${it}%'
-                or lower(product.unit_of_measure) like '${it}%' 
-                or lower(product_supplier.name) like '%${it}%' 
-                or lower(product_supplier.code) like '${it}%'
-                or lower(product_supplier.product_code) like '${it}%' 
-                or lower(product_supplier.brand_name) like '${it}%'
-                or lower(product_supplier.manufacturer_code) like '${it}%'
-                or lower(product_supplier.manufacturer_name) like '${it}%' 
-                or lower(product_supplier.supplier_code) like '${it}%'
-                or lower(product_supplier.supplier_name) like '${it}%'""" }.join(" or ")}
+                and (${buildStartsWithCondition("inventory_item.lot_number", searchTerms.size())})
+            where product.active = 1 and (${(0..<searchTerms.size()).collect { i -> """
+                lower(product.name) like :contains${i} 
+                or lower(product.product_code) like :startsWith${i} 
+                or (synonym.synonym_type_code = :synonymTypeCode and synonym.name like :contains${i})
+                or lower(product.description) like :contains${i}
+                or lower(product.brand_name) like :startsWith${i} 
+                or lower(product.manufacturer_code) like :startsWith${i} 
+                or lower(product.vendor_code) like :startsWith${i}
+                or lower(product.upc) like :startsWith${i} 
+                or lower(product.ndc) like :startsWith${i}
+                or lower(product.unit_of_measure) like :startsWith${i} 
+                or lower(product_supplier.name) like :contains${i} 
+                or lower(product_supplier.code) like :startsWith${i}
+                or lower(product_supplier.product_code) like :startsWith${i} 
+                or lower(product_supplier.brand_name) like :startsWith${i}
+                or lower(product_supplier.manufacturer_code) like :startsWith${i}
+                or lower(product_supplier.manufacturer_name) like :startsWith${i} 
+                or lower(product_supplier.supplier_code) like :startsWith${i}
+                or lower(product_supplier.supplier_name) like :startsWith${i}""" }.join(" or ")}
                 # when the condition is added to the join, we still need to check if there were any results
                 or manufacturer.id is not null  
                 or supplier.id is not null
@@ -1438,7 +1462,7 @@ class ProductService {
             query += " where product.active = 1 "
         }
 
-        def results = dataService.executeQuery(query)
+        def results = dataService.executeQuery(query, queryParams)
 
         return results.collect { new ProductSearchDto(it) }
     }

@@ -142,7 +142,7 @@ class ProductApiController extends BaseDomainApiController {
             return
         }
 
-        String[] terms = params?.name?.replaceAll("'", "\\\\'")?.split(",| ")?.findAll { it }
+        String[] terms = params?.name?.split(",| ")?.findAll { it }
         def products, availableItems = []
         if(params.availableItems) {
             Location location = Location.get(session.warehouse.id)
