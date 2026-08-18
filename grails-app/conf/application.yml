@@ -35,7 +35,9 @@ grails:
             - ~/.grails/openboxes.yml
     plugin:
         console:
-            enabled: true  # https://github.com/sheehan/grails-console#security
+            # The console executes arbitrary Groovy on the server, so it is only enabled
+            # for development. https://github.com/sheehan/grails-console#security
+            enabled: false
 
         # Grails Liquibase database migration support. https://grails.github.io/grails-database-migration/latest/
         # Automatic migrations are disabled by default. We run them manually in BootStrap.groovy
@@ -290,6 +292,10 @@ dataSource:
 
 environments:
     development:
+        grails:
+            plugin:
+                console:
+                    enabled: true
         dataSource:
             dumpQueriesOnException: true
             logAbandoned: true

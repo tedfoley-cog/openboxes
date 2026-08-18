@@ -6,9 +6,7 @@ info:
     org.pih.warehouse.reporting.IndicatorApiController, routed via the
     explicit "/api/reports/indicators/productsInventoried",
     "/api/reports/indicators/inventoryAccuracy" and
-    "/api/reports/indicators/inventoryShrinkage" mappings (GET only). The
-    controller also declares an evaluate() action, but no URL mapping routes
-    to it, so it is not specified here.
+    "/api/reports/indicators/inventoryShrinkage" mappings (GET only).
   version: 0.1.0
 servers:
   - url: http://localhost:8080/openboxes

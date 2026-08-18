@@ -25,7 +25,7 @@ Legend: ✅ snapshotted · ➖ skipped/not directly routable.
 | FulfillmentApiController | validate, save | ➖ both | POST-only; payloads are packing lists bound to an existing outbound shipment — no shipment fixtures in demo data. Cover in Phase 0.3b alongside shipment/stock-movement flows. |
 | GenericApiController | list, search, read, create, update, delete | ✅ all 6 | Exercised via the small, stable `locationType` domain: list/search/read plus a dedicated create → update → delete record. `delete` also exercised via organization cleanup. |
 | HelpScoutApiController | configuration | ✅ 1 | |
-| IndicatorApiController | getProductsInventoried, getInventoryAccuracy, getInventoryShrinkage, evaluate | ✅ 3 / ➖ 1 | `evaluate` skipped: dev-only proof-of-concept referencing an undefined `consoleService` bean (always 500) and has no `/api/reports` route. |
+| IndicatorApiController | getProductsInventoried, getInventoryAccuracy, getInventoryShrinkage | ✅ all 3 | |
 | InternalLocationApiController | list, search, listReceiving, read | ✅ all 4 | |
 | InventoryApiController | importCsv, getReorderReport, getExpirationHistoryReport | ✅ 2 / ➖ 1 | `importCsv` skipped (mutating multipart CSV import). `expirationHistoryReport` uses a fixed historic date range (required params). |
 | InventoryLevelApiController | list | ✅ 1 | JSON variant snapshotted; `.csv`/`.xls` format variants are file-download renditions of the same data (not snapshotted). |
