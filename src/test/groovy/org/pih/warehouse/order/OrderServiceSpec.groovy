@@ -4,6 +4,7 @@ import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import grails.validation.ValidationException
 import org.pih.warehouse.LocalizationUtil
+import org.pih.warehouse.core.ActivityCode
 import org.pih.warehouse.core.BudgetCode
 import org.pih.warehouse.core.Constants
 import org.pih.warehouse.core.Location
@@ -386,5 +387,50 @@ class OrderServiceSpec extends Specification implements DataTest, ServiceUnitTes
 
         cleanup:
         OrderItem.metaClass.getQuantityInShipments = null
+    }
+
+    void 'isOrderVisibleAtLocation should only allow orders belonging to the current location'() {
+        given: 'two locations belonging to different organizations'
+        Organization organization = new Organization(name: "Organization A").save(validate: false)
+        Organization otherOrganization = new Organization(name: "Organization B").save(validate: false)
+        Location currentLocation = new Location(name: "Warehouse A", organization: organization).save(validate: false)
+        Location otherLocation = new Location(name: "Warehouse B", organization: otherOrganization).save(validate: false)
+        Location supplier = new Location(name: "Supplier").save(validate: false)
+
+        and: 'an order placed by the other location'
+        Order foreignOrder = new Order(origin: supplier, destination: otherLocation,
+                destinationParty: otherOrganization).save(validate: false)
+
+        and: 'an order placed by the current location'
+        Order ownOrder = new Order(origin: supplier, destination: currentLocation,
+                destinationParty: organization).save(validate: false)
+
+        expect:
+        service.isOrderVisibleAtLocation(ownOrder, currentLocation)
+        !service.isOrderVisibleAtLocation(foreignOrder, currentLocation)
+        !service.isOrderVisibleAtLocation(null, currentLocation)
+        !service.isOrderVisibleAtLocation(ownOrder, null)
+    }
+
+    void 'isOrderVisibleAtLocation should allow orders of the organization when central purchasing is enabled'() {
+        given: 'a location with central purchasing enabled'
+        Organization organization = new Organization(name: "Organization A").save(validate: false)
+        Organization otherOrganization = new Organization(name: "Organization B").save(validate: false)
+        Location currentLocation = new Location(name: "Warehouse A", organization: organization,
+                supportedActivities: [ActivityCode.ENABLE_CENTRAL_PURCHASING.id]).save(validate: false)
+        Location otherLocation = new Location(name: "Warehouse B", organization: otherOrganization).save(validate: false)
+        Location supplier = new Location(name: "Supplier").save(validate: false)
+
+        and: 'an order placed on behalf of the same organization but shipped to another location'
+        Order organizationOrder = new Order(origin: supplier, destination: otherLocation,
+                destinationParty: organization).save(validate: false)
+
+        and: 'an order placed on behalf of another organization'
+        Order foreignOrder = new Order(origin: supplier, destination: otherLocation,
+                destinationParty: otherOrganization).save(validate: false)
+
+        expect:
+        service.isOrderVisibleAtLocation(organizationOrder, currentLocation)
+        !service.isOrderVisibleAtLocation(foreignOrder, currentLocation)
     }
 }

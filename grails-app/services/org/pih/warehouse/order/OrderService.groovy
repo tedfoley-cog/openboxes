@@ -20,6 +20,7 @@ import org.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import grails.plugins.csv.CSVMapReader
 import org.hibernate.criterion.CriteriaSpecification
 import org.pih.warehouse.LocalizationUtil
+import org.pih.warehouse.core.ActivityCode
 import org.pih.warehouse.core.BudgetCode
 import org.pih.warehouse.core.Constants
 import org.pih.warehouse.core.Event
@@ -205,6 +206,25 @@ class OrderService {
             order("dateOrdered", "desc")
         }
         return orders
+    }
+
+    /**
+     * Whether an order can be viewed from the given location. Mirrors the scoping applied to the
+     * order list: a location sees its own inbound/outbound orders, and, when central purchasing is
+     * enabled, all of the orders placed on behalf of its organization.
+     */
+    boolean isOrderVisibleAtLocation(Order order, Location currentLocation) {
+        if (!order || !currentLocation) {
+            return false
+        }
+        if (order.destination?.id == currentLocation.id || order.origin?.id == currentLocation.id) {
+            return true
+        }
+        if (currentLocation.supports(ActivityCode.ENABLE_CENTRAL_PURCHASING)) {
+            String organizationId = currentLocation.organization?.id
+            return organizationId != null && order.destinationParty?.id == organizationId
+        }
+        return false
     }
 
     Order createNewPurchaseOrder(Location currentLocation, User user, Boolean isCentralPurchasingEnabled) {

@@ -114,6 +114,7 @@ openboxes.security.rbac.rules = [
     [controller: 'glAccountType', actions: ['delete'], accessRules: [minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
     [controller: 'preferenceType', actions: ['delete'], accessRules: [minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
     [controller: 'purchaseOrderApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_ASSISTANT]],
+    [controller: 'purchaseOrderApi', actions: ['read'], accessRules: [ minimumRequiredRole: RoleType.ROLE_BROWSER]],
     [controller: 'purchaseOrderApi', actions: ['rollback'], accessRules: [ supplementalRoles: [RoleType.ROLE_PURCHASE_APPROVER]]],
     [controller: 'stockTransferApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_MANAGER]],
     [controller: 'stockMovementApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_ASSISTANT]],

@@ -10,6 +10,9 @@
 package org.pih.warehouse.api
 
 import grails.converters.JSON
+import org.pih.warehouse.core.Location
+import org.pih.warehouse.core.User
+import org.pih.warehouse.core.UserService
 import org.pih.warehouse.importer.CSVUtils
 import org.pih.warehouse.order.Order
 import org.pih.warehouse.order.OrderItem
@@ -26,6 +29,7 @@ class PurchaseOrderApiController {
 
     OrderService orderService
     OrderSummaryService orderSummaryService
+    UserService userService
 
     def list() {
         List<OrderSummary> purchaseOrders = orderService.getPurchaseOrders(params)
@@ -47,12 +51,26 @@ class PurchaseOrderApiController {
 
     def read() {
         Order order = Order.get(params.id)
+        // An order that is not visible from the current location is indistinguishable from one that
+        // does not exist, so that order ids cannot be enumerated across locations.
+        if (order && !isOrderVisibleToCurrentUser(order)) {
+            order = null
+        }
         if (!order) {
             def message = "${warehouse.message(code: 'default.not.found.message',args:[warehouse.message(code: 'order.label', default: 'order'), params.id])}"
             render(status: 404, text: message)
         }
 
         render([data: order] as JSON)
+    }
+
+    private boolean isOrderVisibleToCurrentUser(Order order) {
+        User currentUser = User.get(session.user?.id)
+        if (userService.isSuperuser(currentUser)) {
+            return true
+        }
+        Location currentLocation = Location.get(session.warehouse?.id)
+        return orderService.isOrderVisibleAtLocation(order, currentLocation)
     }
 
     def delete() {
