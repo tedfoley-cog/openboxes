@@ -6,6 +6,9 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.pih.warehouse.LocalizationUtil
+import org.pih.warehouse.core.LocalizationService
+import org.pih.warehouse.data.DataService
 import org.pih.warehouse.product.Product
 import org.pih.warehouse.product.ProductIdentifierService
 import org.pih.warehouse.product.ProductService
@@ -44,6 +47,46 @@ class ProductServiceSpec extends Specification implements DataTest {
         ['2']           || 1
         ['3']           || 0
         ['1', '2', '3'] || 2
+    }
+
+    void 'searchProductDtos binds search terms as query parameters'() {
+        given:
+        GroovyMock(LocalizationUtil, global: true)
+        LocalizationUtil.localizationService >> Stub(LocalizationService) {
+            getCurrentLocale() >> Locale.ENGLISH
+        }
+
+        and: 'a data service that captures the query and its bound parameters'
+        String capturedQuery = null
+        Map capturedParams = null
+        service.dataService = Stub(DataService) {
+            executeQuery(_ as String, _ as Map) >> { String query, Map queryParams ->
+                capturedQuery = query
+                capturedParams = queryParams
+                return []
+            }
+        }
+
+        when:
+        service.searchProductDtos(terms as String[])
+
+        then: 'the terms are never interpolated into the query, so it contains no string literals at all'
+        !capturedQuery.contains("'")
+
+        and: 'every term is bound as a parameter'
+        capturedParams.exactMatchTerm == expectedExactMatch
+        capturedParams.locale == 'en'
+        expectedBoundTerms.every { term -> capturedParams.values().contains(term) }
+
+        where:
+        terms                      || expectedExactMatch         | expectedBoundTerms
+        null                       || ''                         | []
+        []                         || ''                         | []
+        ['aspirin']                || 'aspirin'                  | ['aspirin%', '%aspirin%']
+        ['aspirin', '100mg']       || 'aspirin 100mg'            | ['100mg%', '%100mg%']
+        ["x' union select 1 #"]    || "x' union select 1 #"      | ["x' union select 1 #%"]
+        ['50%_off']                || '50%_off'                  | ['50\\%\\_off%', '%50\\%\\_off%']
+        ['a\\b']                   || 'a\\b'                     | ['a\\\\b%', '%a\\\\b%']
     }
 
     @Ignore('The executeQuery in ProductService.validateProductIdentifier cannot be stubbed easily. It should be moved to a static method in the Domain class.')
