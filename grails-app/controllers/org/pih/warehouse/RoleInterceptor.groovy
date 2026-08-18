@@ -55,7 +55,7 @@ class RoleInterceptor {
         'productSupplier': ['create', 'delete', 'edit']
     ]
 
-    def static superuserControllers = []
+    def static superuserControllers = ['dataExport', 'dataExportApi']
     def static superuserActions = [
         'console'                   : ['index', 'execute'],
         'inventory'                 : ['createInboundTransfer', 'createConsumed', 'editTransaction', 'deleteTransaction', 'saveTransaction'],

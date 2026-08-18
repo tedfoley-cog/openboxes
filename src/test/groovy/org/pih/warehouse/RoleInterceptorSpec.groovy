@@ -148,5 +148,7 @@ class RoleInterceptorSpec extends Specification {
         'createProductFromTemplate' | 'admin'   || 'requires'
         'createProductFromTemplate' | 'manager' || 'requires'
         'createProductFromTemplate' | 'invoice' || 'does not require'
+        'dataExport'                | 'superuser' || 'requires'
+        'dataExportApi'             | 'superuser' || 'requires'
     }
 }

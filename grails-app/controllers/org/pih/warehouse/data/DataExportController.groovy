@@ -25,20 +25,43 @@ class DataExportController {
 
     def render() {
         Document document = Document.get(params.id)
-        String query = new String(document.fileContents, Charset.defaultCharset());
-        if (query) {
-            def data = dataService.executeQuery(query)
-            if (params.format == "csv") {
-                String csv = dataService.generateCsv(data)
-                response.setHeader("Content-disposition", "attachment; filename=\"${document.name}.csv\"")
-                render(contentType: "text/csv", text: csv.toString(), encoding: "UTF-8")
-                return
-            }
-            render dataService.executeQuery(query) as JSON
+        if (!document || !isDataExportDocument(document)) {
+            response.sendError(404, "Data export not found")
             return
         }
-        render document as JSON
 
+        String query = document.fileContents ? new String(document.fileContents, Charset.defaultCharset()) : null
+        if (!query?.trim()) {
+            render document as JSON
+            return
+        }
+
+        List data
+        try {
+            data = dataService.executeReadOnlyQuery(query)
+        } catch (IllegalArgumentException e) {
+            log.error("Refusing to run data export ${document.id}: ${e.message}")
+            response.sendError(400, e.message)
+            return
+        }
+
+        if (params.format == "csv") {
+            String csv = dataService.generateCsv(data)
+            response.setHeader("Content-disposition", "attachment; filename=\"${document.name}.csv\"")
+            render(contentType: "text/csv", text: csv.toString(), encoding: "UTF-8")
+            return
+        }
+        render data as JSON
+    }
+
+    /**
+     * A document is only executable as a data export if it was filed under a document type
+     * with the DATA_EXPORT document code. Documents uploaded through the generic document
+     * endpoints (product manuals, shipping documents, etc.) must never be executed.
+     */
+    private static boolean isDataExportDocument(Document document) {
+        DocumentType documentType = document.documentType
+        return documentType?.documentCode == DocumentCode.DATA_EXPORT
     }
 
 }
