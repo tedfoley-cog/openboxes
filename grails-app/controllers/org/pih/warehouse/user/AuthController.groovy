@@ -172,9 +172,24 @@ class AuthController {
      */
     @Transactional
     def handleSignup() {
+        Boolean signupEnabled = grailsApplication.config.openboxes.signup.enabled?:false
+        if (!signupEnabled) {
+            flash.message = "Apologies, but the signup feature is disabled on your system. " +
+                    "Please contact a system administrator for access."
+            redirect(controller: "auth", action: "login")
+            return
+        }
+
         def userInstance = new User()
         if ("POST".equalsIgnoreCase(request.getMethod())) {
-            userInstance.properties = params
+            // Bind an explicit allow-list of fields. Binding the whole params map would let an
+            // unauthenticated caller attach arbitrary associations (roles, locationRoles, manager)
+            // to the new account, bypassing the role checks in UserService.
+            userInstance.firstName = params.firstName
+            userInstance.lastName = params.lastName
+            userInstance.email = params.email
+            userInstance.locale = params.locale ? new Locale(params.locale as String) : null
+            userInstance.timezone = params.timezone ?: null
 
             if (params.password) {
                 userInstance.password = params.password.encodeAsPassword()
