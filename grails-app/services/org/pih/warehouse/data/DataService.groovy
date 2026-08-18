@@ -36,6 +36,7 @@ import org.pih.warehouse.product.ProductPackage
 import org.pih.warehouse.product.ProductType
 import org.pih.warehouse.product.ProductTypeCode
 
+import java.sql.Connection
 import java.text.SimpleDateFormat
 
 @Transactional
@@ -49,6 +50,50 @@ class DataService {
 
     List executeQuery(String query, Map params) {
         return new Sql(dataSource).rows(query, params)
+    }
+
+    /**
+     * Executes a stored data export query on a read-only connection.
+     *
+     * Only a single read-only statement (SELECT or WITH) is accepted, so that a stored query
+     * cannot be used to modify data or to chain additional statements.
+     *
+     * @throws IllegalArgumentException if the query is not a single read-only statement
+     */
+    List executeReadOnlyQuery(String query) {
+        String readOnlyQuery = validateReadOnlyQuery(query)
+        Connection connection = dataSource.connection
+        Boolean readOnly = connection.readOnly
+        try {
+            connection.readOnly = true
+            return new Sql(connection).rows(readOnlyQuery)
+        } finally {
+            try {
+                connection.readOnly = readOnly
+            } finally {
+                connection.close()
+            }
+        }
+    }
+
+    static String validateReadOnlyQuery(String query) {
+        String trimmedQuery = query?.trim()
+        while (trimmedQuery?.endsWith(";")) {
+            trimmedQuery = trimmedQuery.substring(0, trimmedQuery.length() - 1).trim()
+        }
+        if (!trimmedQuery) {
+            throw new IllegalArgumentException("Query must not be empty")
+        }
+        if (trimmedQuery.contains(";")) {
+            throw new IllegalArgumentException("Query must consist of a single statement")
+        }
+        if (!(trimmedQuery ==~ /(?is)\A(select|with)\s.*/)) {
+            throw new IllegalArgumentException("Query must be a read-only SELECT statement")
+        }
+        if (trimmedQuery ==~ /(?is).*\binto\s+(outfile|dumpfile)\b.*/) {
+            throw new IllegalArgumentException("Query must not write to a file")
+        }
+        return trimmedQuery
     }
 
     void executeStatement(String statement, Boolean logStatement = true) {

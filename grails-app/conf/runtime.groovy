@@ -348,7 +348,7 @@ openboxes {
                         [label: "export.requisitions.label", defaultLabel: "Export requisitions", href: "/requisition/export"],
                         [label: "export.binLocations.label", defaultLabel: "Export bin locations", href: "/report/exportBinLocation?downloadFormat=csv"],
                         [label: "export.productDemand.label", defaultLabel: "Export product demand", href: "/report/exportDemandReport?downloadFormat=csv"],
-                        [label: "export.custom.label", defaultLabel: "Custom data exports", href: "/dataExport/index"]
+                        [label: "export.custom.label", defaultLabel: "Custom data exports", href: "/dataExport/index", minimumRequiredRole: RoleType.ROLE_SUPERUSER]
                     ]
                 ]
             ]
