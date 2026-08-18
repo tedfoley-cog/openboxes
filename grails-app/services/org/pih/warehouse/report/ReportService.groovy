@@ -65,6 +65,7 @@ import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.xhtmlrenderer.pdf.ITextRenderer
 import util.InventoryUtil
+import util.RequestParamsUtil
 
 import java.text.NumberFormat
 
@@ -808,6 +809,18 @@ class ReportService implements ApplicationContextAware {
         return data
     }
 
+    /**
+     * Groovy SQL does not expand a list into an IN clause, so each value is bound to its own
+     * named placeholder (:name0, :name1, ...) and the placeholder list is returned.
+     */
+    private static String bindListParameter(Map queryParams, String name, List values) {
+        return values.withIndex().collect { value, index ->
+            String placeholder = "${name}${index}"
+            queryParams.put(placeholder, value)
+            return ":${placeholder}"
+        }.join(",")
+    }
+
     def getForecastReport(Map params) {
         List data = []
         boolean forecastingEnabled = grailsApplication.config.openboxes.forecasting.enabled ?: false
@@ -819,22 +832,32 @@ class ReportService implements ApplicationContextAware {
             FROM product_demand_details pdd
             """
 
+            List destinations = params.locations && params.locations != "null" ?
+                    RequestParamsUtil.asList(params.locations) : []
+            List tags = params.tags && params.tags != "null" ? RequestParamsUtil.asList(params.tags) : []
+            List catalogs = params.catalogs && params.catalogs != "null" ?
+                    RequestParamsUtil.asList(params.catalogs) : []
+
             if (params.category && params.category != "null") {
                 query += " JOIN product ON product.id = pdd.product_id"
             }
-            if (params.tags && params.tags != "null") {
+            if (tags) {
                 query += " LEFT JOIN product_tag ON product_tag.product_id = pdd.product_id"
             }
-            if (params.catalogs && params.catalogs != "null") {
+            if (catalogs) {
                 query += " LEFT JOIN product_catalog_item ON product_catalog_item.product_id = pdd.product_id"
             }
 
             query += " WHERE date_issued BETWEEN :startDate AND :endDate AND pdd.origin_id = :originId"
 
-            if (params.locations && params.locations != "null") {
-                def destinations = []
-                params.locations.getClass().isArray() ? params.locations.each { destinations << it } : destinations << params.locations
-                query += " AND pdd.destination_id in (${destinations.collect { "'$it'" }.join(',')})"
+            Map queryParams = [
+                    startDate: params.startDate,
+                    endDate  : params.endDate,
+                    originId : params.originId,
+            ]
+
+            if (destinations) {
+                query += " AND pdd.destination_id in (${bindListParameter(queryParams, 'destinationId', destinations)})"
             }
 
             if (params.category && params.category != "null") {
@@ -856,22 +879,18 @@ class ReportService implements ApplicationContextAware {
                 }
 
                 categories = categories.unique()
-                query += " AND product.category_id in (${categories.collect { "'$it.id'" }.join(',')})"
+                query += " AND product.category_id in (${bindListParameter(queryParams, 'categoryId', categories.id)})"
             }
 
-            if (params.tags && params.tags != "null") {
-                def tags = []
-                params.tags.getClass().isArray() ? params.tags.each { tags << it } : tags << params.tags
-                query += " AND product_tag.tag_id in (${tags.collect { "'$it'" }.join(',')})"
+            if (tags) {
+                query += " AND product_tag.tag_id in (${bindListParameter(queryParams, 'tagId', tags)})"
             }
 
-            if (params.catalogs && params.catalogs != "null") {
-                def catalogs = []
-                params.catalogs.getClass().isArray() ? params.catalogs.each { catalogs << it } : catalogs << params.catalogs
-                query += " AND product_catalog_item.product_catalog_id in (${catalogs.collect { "'$it'" }.join(',')})"
+            if (catalogs) {
+                query += " AND product_catalog_item.product_catalog_id in (${bindListParameter(queryParams, 'catalogId', catalogs)})"
             }
 
-            def results = dataService.executeQuery(query, params)
+            def results = dataService.executeQuery(query, queryParams)
             if (results) {
                 def onOrderData = getOnOrderData(params.originId, results.collect{it.product_id}.unique())
                 def monthsInPeriod = (params.endDate - params.startDate) / 30
