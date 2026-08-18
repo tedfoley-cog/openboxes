@@ -241,6 +241,8 @@ paths:
       description: >
         Responds 200 with the updated parent stock transfer. The URL mapping
         is declared with a trailing slash but matches with or without one.
+        Requires the manager role and a parent order whose origin or
+        destination is the location the caller is signed into.
       parameters:
         - name: id
           in: path
@@ -251,18 +253,25 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/StockTransferOk'
+        '403':
+          $ref: '#/components/responses/StockTransferForbidden'
         '500':
           $ref: '../components/common.yaml#/components/responses/ServerError'
   /api/stockTransfers/{id}/removeAllItems:
     delete:
       operationId: removeAllStockTransferItems
       summary: Remove all items from a stock transfer
-      description: Responds 200 with the emptied stock transfer.
+      description: >
+        Responds 200 with the emptied stock transfer. Requires the manager
+        role and an order whose origin or destination is the location the
+        caller is signed into.
       parameters:
         - $ref: '#/components/parameters/stockTransferId'
       responses:
         '200':
           $ref: '#/components/responses/StockTransferOk'
+        '403':
+          $ref: '#/components/responses/StockTransferForbidden'
         '500':
           $ref: '../components/common.yaml#/components/responses/ServerError'
   /api/stockTransfers/{id}/sendShipment:
@@ -271,12 +280,16 @@ paths:
       summary: Send the shipment for a (return) stock transfer order
       description: >
         Responds 200 with an empty body on success. Orders without a shipment
-        (plain transfer orders) throw IllegalArgumentException (500).
+        (plain transfer orders) throw IllegalArgumentException (500). Requires
+        the manager role and an order whose origin or destination is the
+        location the caller is signed into.
       parameters:
         - $ref: '#/components/parameters/stockTransferId'
       responses:
         '200':
           description: Shipment sent (empty body).
+        '403':
+          $ref: '#/components/responses/StockTransferForbidden'
         '500':
           $ref: '../components/common.yaml#/components/responses/ServerError'
   /api/stockTransfers/{id}/rollback:
@@ -285,12 +298,16 @@ paths:
       summary: Roll back a return order
       description: >
         Responds 200 with an empty body on success. Orders without shipments
-        throw NoSuchElementException (500).
+        throw NoSuchElementException (500). Requires the manager role and an
+        order whose origin or destination is the location the caller is signed
+        into.
       parameters:
         - $ref: '#/components/parameters/stockTransferId'
       responses:
         '200':
           description: Order rolled back (empty body).
+        '403':
+          $ref: '#/components/responses/StockTransferForbidden'
         '500':
           $ref: '../components/common.yaml#/components/responses/ServerError'
   /api/stockTransfers/{id}/details:
@@ -437,6 +454,15 @@ components:
             properties:
               data:
                 $ref: '#/components/schemas/StockTransfer'
+    StockTransferForbidden:
+      description: >
+        The order is not associated with the location the caller is signed
+        into (RoleInterceptor renders the same status when the caller is not
+        a manager).
+      content:
+        application/json:
+          schema:
+            $ref: '../components/common.yaml#/components/schemas/ErrorResponse'
     StockTransferItemList:
       description: Stock transfer candidate items.
       content:

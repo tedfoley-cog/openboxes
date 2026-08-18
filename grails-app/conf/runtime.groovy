@@ -115,7 +115,9 @@ openboxes.security.rbac.rules = [
     [controller: 'preferenceType', actions: ['delete'], accessRules: [minimumRequiredRole: RoleType.ROLE_SUPERUSER]],
     [controller: 'purchaseOrderApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_ASSISTANT]],
     [controller: 'purchaseOrderApi', actions: ['rollback'], accessRules: [ supplementalRoles: [RoleType.ROLE_PURCHASE_APPROVER]]],
-    [controller: 'stockTransferApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_MANAGER]],
+    // None of these action names is covered by RoleInterceptor.changeActions, so without an
+    // explicit rule they would only require the default authenticated + browse access.
+    [controller: 'stockTransferApi', actions: ['delete', 'removeItem', 'removeAllItems', 'sendShipment', 'rollback'], accessRules: [ minimumRequiredRole: RoleType.ROLE_MANAGER]],
     [controller: 'stockMovementApi', actions: ['delete'], accessRules: [ minimumRequiredRole: RoleType.ROLE_ASSISTANT]],
     [controller: 'product', actions: ['merge'], accessRules: [ minimumRequiredRole: RoleType.ROLE_ADMIN]],
     [controller: 'user', actions: ['changePassword'], accessRules: [ minimumRequiredRole: RoleType.ROLE_AUTHENTICATED]],

@@ -229,6 +229,16 @@ class StockTransferApiController {
     }
 
     def removeItem() {
+        OrderItem orderItem = OrderItem.get(params.id)
+        if (!orderItem) {
+            throw new IllegalArgumentException("No stockTransfer item found with ID ${params.id}")
+        }
+
+        if (!isCurrentLocationInvolved(orderItem.order)) {
+            renderForbidden()
+            return
+        }
+
         Order order = stockTransferService.deleteStockTransferItem(params.id)
         StockTransfer stockTransfer = StockTransfer.createFromOrder(order)
         stockTransferService.setQuantityOnHand(stockTransfer)
@@ -236,6 +246,11 @@ class StockTransferApiController {
     }
 
     def removeAllItems() {
+        if (!isCurrentLocationInvolved(Order.get(params.id))) {
+            renderForbidden()
+            return
+        }
+
         Order order = stockTransferService.deleteAllStockTransferItems(params.id)
         render([data: StockTransfer.createFromOrder(order)?.toJson()] as JSON)
     }
@@ -246,6 +261,11 @@ class StockTransferApiController {
             throw new IllegalArgumentException("Can't find order with given id: ${params.id}")
         }
 
+        if (!isCurrentLocationInvolved(order)) {
+            renderForbidden()
+            return
+        }
+
         shipmentService.sendShipment(order)
         render status: 200
     }
@@ -253,8 +273,32 @@ class StockTransferApiController {
     def rollback() {
         Location currentLocation = Location.get(session.warehouse.id)
 
+        if (!isCurrentLocationInvolved(Order.get(params.id))) {
+            renderForbidden()
+            return
+        }
+
         stockTransferService.rollbackReturnOrder(params.id as String, currentLocation)
         render status: 200
+    }
+
+    /**
+     * Mutating actions identify the transfer order through the request, so the order has to be
+     * scoped to the location the user is currently signed into (the location their roles are
+     * evaluated against) instead of being taken at face value.
+     */
+    private Boolean isCurrentLocationInvolved(Order order) {
+        Location currentLocation = Location.get(session?.warehouse?.id)
+        if (!currentLocation || !order) {
+            return false
+        }
+        return order.origin?.id == currentLocation.id || order.destination?.id == currentLocation.id
+    }
+
+    private void renderForbidden() {
+        response.status = HttpStatus.FORBIDDEN.value()
+        render([errorCode  : HttpStatus.FORBIDDEN.value(),
+                errorMessage: "You are not authorized to modify this stock transfer"] as JSON)
     }
 
     def delete() {
