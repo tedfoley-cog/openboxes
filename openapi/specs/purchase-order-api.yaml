@@ -84,6 +84,11 @@ paths:
     get:
       operationId: readPurchaseOrder
       summary: Read a purchase order
+      description: >
+        Only orders visible from the current location (its own inbound or
+        outbound orders, or, when central purchasing is enabled, the orders
+        of its organization) can be read; superusers can read any order.
+        Orders belonging to another location are reported as not found.
       parameters:
         - name: id
           in: path
@@ -107,7 +112,8 @@ paths:
             Parity quirk - the not-found branch does not return, so both
             renders execute: a text/html body containing the localized
             not-found message immediately followed by the JSON fallback,
-            e.g. 'Order not found with id abc{"data":null}'.
+            e.g. 'Order not found with id abc{"data":null}'. Also returned
+            for orders that are not visible from the current location.
           content:
             text/html:
               schema:
