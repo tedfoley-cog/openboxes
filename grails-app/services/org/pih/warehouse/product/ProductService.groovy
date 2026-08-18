@@ -28,6 +28,7 @@ import org.pih.warehouse.auth.AuthService
 import org.pih.warehouse.core.ApiException
 import org.pih.warehouse.core.ConfigService
 import org.pih.warehouse.core.Constants
+import org.pih.warehouse.core.Document
 import org.pih.warehouse.core.GlAccount
 import org.pih.warehouse.core.Location
 import org.pih.warehouse.core.Synonym
@@ -273,6 +274,26 @@ class ProductService {
             }
         }
         return products
+    }
+
+    /**
+     * Get a document by identifier, but only if it is attached to a product.
+     *
+     * Documents are stored in a single global table that is shared by shipments, orders, invoices,
+     * etc., so the product document endpoints must never serve a document that does not belong to
+     * a product.
+     *
+     * @param documentId
+     * @return the document attached to a product or null if there is no such document
+     */
+    Document getProductDocument(String documentId) {
+        if (!documentId) {
+            return null
+        }
+        List<Document> documents = Product.executeQuery(
+                "select document from Product as product join product.documents as document where document.id = :documentId",
+                [documentId: documentId], [max: 1])
+        return documents ? documents.first() : null
     }
 
     /**

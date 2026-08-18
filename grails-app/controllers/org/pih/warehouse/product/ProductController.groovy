@@ -29,11 +29,14 @@ import org.pih.warehouse.core.Synonym
 import org.pih.warehouse.core.Tag
 import org.pih.warehouse.core.UploadService
 import org.pih.warehouse.core.User
+import org.pih.warehouse.core.http.ContentType
 import org.pih.warehouse.importer.CSVUtils
 import org.pih.warehouse.importer.ImportDataCommand
 import org.pih.warehouse.importer.ProductSynonymExcelImporter
 import org.pih.warehouse.inventory.InventoryItem
 import org.pih.warehouse.inventory.InventoryLevel
+import org.springframework.http.InvalidMediaTypeException
+import org.springframework.http.MediaType
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
@@ -57,6 +60,15 @@ class ProductController {
     boolean createMissingCategories
 
     static allowedMethods = [save: "POST", update: "POST"]
+
+    // Content types that we are willing to serve inline from a product document
+    private static final List<ContentType> RENDERABLE_IMAGE_CONTENT_TYPES = [
+            ContentType.GIF,
+            ContentType.JPEG,
+            ContentType.JPG,
+            ContentType.PNG,
+            ContentType.WEBP,
+    ].asImmutable()
 
 
     def index() {
@@ -220,9 +232,14 @@ class ProductController {
 
 
     def renderImage() {
-        def documentInstance = Document.get(params.id)
-        if (documentInstance) {
+        Document documentInstance = productService.getProductDocument(params.id as String)
+        ContentType contentType = parseRenderableImageContentType(documentInstance?.contentType)
+        if (contentType) {
+            response.contentType = contentType.mediaType.toString()
+            response.setHeader "X-Content-Type-Options", "nosniff"
+            response.setHeader "Content-disposition", "inline"
             response.outputStream << documentInstance.fileContents
+            response.outputStream.flush()
         } else {
             response.sendError(404)
         }
@@ -230,18 +247,49 @@ class ProductController {
 
     def downloadDocument() {
         log.info 'downloadDocument: {}', params
-        def documentInstance = Document.get(params.id)
+        Document documentInstance = productService.getProductDocument(params.id as String)
         if (documentInstance) {
-            response.setHeader "Content-disposition", "attachment;filename=\"${documentInstance.filename}\""
-            response.contentType = documentInstance.contentType
+            // Never reflect the stored content type of an uploaded file back to the browser.
+            response.setHeader "Content-disposition", "attachment;filename=\"${sanitizeFilename(documentInstance.filename)}\""
+            response.contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE
+            response.setHeader "X-Content-Type-Options", "nosniff"
             response.outputStream << documentInstance.fileContents
             response.outputStream.flush()
+        } else {
+            response.sendError(404)
         }
+    }
+
+    /**
+     * Resolve the given content type to one of the image types we are willing to serve inline.
+     *
+     * @return the matching content type or null if the given content type is not a renderable image
+     */
+    private ContentType parseRenderableImageContentType(String contentType) {
+        if (!contentType) {
+            return null
+        }
+        try {
+            MediaType mediaType = MediaType.parseMediaType(contentType)
+            return RENDERABLE_IMAGE_CONTENT_TYPES.find { it.mediaType.equalsTypeAndSubtype(mediaType) }
+        } catch (InvalidMediaTypeException e) {
+            log.warn("Refusing to render document with invalid content type ${contentType}", e)
+            return null
+        }
+    }
+
+    /**
+     * Strip anything that could be used to break out of the Content-Disposition header
+     * (or of the download directory) from a stored filename.
+     */
+    private static String sanitizeFilename(String filename) {
+        String sanitized = FilenameUtils.getName(filename ?: "")?.replaceAll(/[^A-Za-z0-9._ ()\[\]-]/, "_")
+        return sanitized ?: "download"
     }
 
     def viewThumbnail() {
         log.info 'viewThumbnail: {}', params
-        def documentInstance = Document.get(params.id)
+        Document documentInstance = productService.getProductDocument(params.id as String)
         if (documentInstance) {
             if (documentInstance.isImage()) {
                 documentService.scaleImage(documentInstance, response.outputStream, 200, 200)
