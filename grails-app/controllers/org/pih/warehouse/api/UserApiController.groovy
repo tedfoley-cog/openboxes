@@ -68,8 +68,8 @@ class UserApiController {
         // Person defaults active=true; new users must start inactive,
         // matching the legacy UserController.save behavior.
         user.active = false
-        user.password = jsonObject.password ? (jsonObject.password as String).encodeAsPassword() : null
-        user.passwordConfirm = user.password
+        String password = jsonObject.password ? jsonObject.password as String : null
+        userService.assignPassword(user, password, password)
         try {
             userService.saveUser(user, session.user.id as String, [])
         } catch (ValidationException e) {

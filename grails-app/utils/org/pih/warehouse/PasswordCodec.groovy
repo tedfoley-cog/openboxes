@@ -9,14 +9,15 @@
  **/
 package org.pih.warehouse
 
-import org.apache.commons.codec.binary.Base64
+import org.pih.warehouse.core.PasswordHasher
 
-import java.security.MessageDigest
-
+/**
+ * Hashes a password for storage. Every call salts the password anew, so the
+ * result must be verified with {@link PasswordHasher#matches} instead of being
+ * compared for equality.
+ */
 class PasswordCodec {
     static encode = { String str ->
-        MessageDigest md = MessageDigest.getInstance('SHA')
-        md.update(str.getBytes('UTF-8'))
-        return new String(Base64.encodeBase64(md.digest()))
+        return PasswordHasher.hash(str)
     }
 }

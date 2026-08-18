@@ -382,6 +382,14 @@ openboxes:
     bom:
         enabled: false
 
+    # Login throttling: lock an account (or a source IP) out for lockoutDuration
+    # milliseconds once the number of consecutive failed logins is reached.
+    login:
+        throttle:
+            maxAttemptsPerUsername: 10
+            maxAttemptsPerIpAddress: 50
+            lockoutDuration: 900000
+
     # User signup
     signup:
         enabled: true

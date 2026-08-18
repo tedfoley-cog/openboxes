@@ -41,7 +41,7 @@ class ApiController {
     def login() {
         def username = request.JSON.username
         def password = request.JSON.password
-        if (userService.authenticate(username, password)) {
+        if (userService.authenticate(username, password, request.remoteAddr)) {
             session.user = User.findByUsernameOrEmail(username, username)
             if (request.JSON.location) {
                 session.warehouse = Location.get(request.JSON.location)

@@ -26,6 +26,7 @@ class UserService {
 
     def authService
     def dataSource
+    LoginAttemptService loginAttemptService
     GrailsApplication grailsApplication
     MessageLocalizer messageLocalizer
 
@@ -90,11 +91,14 @@ class UserService {
             validateAndApplyLocationRoleChanges(requestingUser, userInstance, params)
         }
 
-        // Password in the db is different from the one specified
-        // so the user must have changed the password.  We need
-        // to compare the password with confirm password before
-        // setting the new password in the database
-        userInstance.properties = params
+        // Passwords are never bound from the update payload: they would be stored
+        // as submitted (i.e. in cleartext). Password changes go through
+        // {@link #changePassword}, which hashes them and checks permissions.
+        Map bindableParams = new LinkedHashMap(params)
+        bindableParams.remove("password")
+        bindableParams.remove("passwordConfirm")
+
+        userInstance.properties = bindableParams
         // Needed to bypass the password == passwordConfirm validation
         userInstance.passwordConfirm = userInstance.password
         // Do not allow user to set his/her locale to translation mode locale
@@ -113,11 +117,21 @@ class UserService {
             throw new AuthenticationException(errorMessage)
         }
 
-        if (user.password != password) {
-            user.password = password?.encodeAsPassword()
-            user.passwordConfirm = passwordConfirm?.encodeAsPassword()
-            user.save(failOnError: true)
-        }
+        assignPassword(user, password, passwordConfirm)
+        user.save(failOnError: true)
+    }
+
+    /**
+     * Hash a cleartext password onto a user.
+     *
+     * The password and its confirmation are compared in cleartext because every
+     * hash is salted: hashing the same password twice yields different values,
+     * so the domain's `passwordConfirm == password` check is only meaningful
+     * when both fields hold the same hash.
+     */
+    void assignPassword(User user, String password, String passwordConfirm) {
+        user.password = PasswordHasher.hash(password)
+        user.passwordConfirm = (password == passwordConfirm) ? user.password : passwordConfirm
     }
 
     void assignDefaultRoles(User userInstance) {
@@ -593,27 +607,63 @@ class UserService {
     }
 
     /**
+     * Verify a set of credentials, throttling repeated failures.
      *
-     * @param username
-     * @param password
-     * @return
+     * @param username the submitted username or email address
+     * @param password the submitted cleartext password
+     * @param ipAddress the address the attempt came from, used for throttling
+     * @return true if the credentials are valid and the account is not locked out
      */
-    def authenticate(username, password) {
-        return authenticateUsingDatabase(username, password)
+    def authenticate(username, password, String ipAddress = null) {
+        String submittedUsername = username as String
+        if (loginAttemptService.isLockedOut(submittedUsername, ipAddress)) {
+            log.warn("Rejecting login attempt for '${submittedUsername}' because of too many recent failures")
+            return false
+        }
+
+        boolean authenticated = authenticateUsingDatabase(submittedUsername, password as String)
+        if (authenticated) {
+            loginAttemptService.recordSuccess(submittedUsername, ipAddress)
+        } else {
+            loginAttemptService.recordFailure(submittedUsername, ipAddress)
+        }
+        return authenticated
     }
 
     /**
+     * Compare the submitted cleartext password against the stored password hash.
      *
-     * @param username
-     * @param password
-     * @return
+     * The stored value is never accepted as a credential in its own right, so
+     * reading the password column does not allow anyone to log in. Passwords
+     * still stored with the legacy unsalted digest are upgraded here, the one
+     * moment where the cleartext password is known.
+     *
+     * @param username the submitted username or email address
+     * @param password the submitted cleartext password
+     * @return true if the password matches the stored hash
      */
-    def authenticateUsingDatabase(username, password) {
-        def userInstance = User.findByUsernameOrEmail(username, username)
-        if (userInstance) {
-            return (userInstance.password == password.encodeAsPassword() || userInstance.password == password)
+    boolean authenticateUsingDatabase(String username, String password) {
+        User userInstance = User.findByUsernameOrEmail(username, username)
+        if (!userInstance) {
+            return false
         }
-        return false
+        if (!PasswordHasher.matches(password, userInstance.password)) {
+            return false
+        }
+        if (PasswordHasher.needsRehash(userInstance.password)) {
+            rehashPassword(userInstance, password)
+        }
+        return true
+    }
+
+    private void rehashPassword(User userInstance, String password) {
+        try {
+            userInstance.password = PasswordHasher.hash(password)
+            userInstance.passwordConfirm = userInstance.password
+            userInstance.save(flush: true)
+        } catch (Exception e) {
+            log.error("Unable to upgrade the stored password for user ${userInstance.username}: ${e.message}", e)
+        }
     }
 
     def getDashboardConfig(User user, String id) {

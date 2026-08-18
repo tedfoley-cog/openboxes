@@ -25,7 +25,7 @@ class AuthController {
     def recaptchaService
     def userAgentIdentService
 
-    static allowedMethods = [login: "GET", doLogin: "POST", logout: "GET"]
+    static allowedMethods = [login: "GET", doLogin: "POST", handleLogin: "POST", logout: "GET"]
 
     /**
      * Show index page - just a redirect to the list page.
@@ -67,65 +67,53 @@ class AuthController {
      * Performs the authentication logic.
      */
     def handleLogin() {
-        def userInstance = User.findByUsernameOrEmail(params.username, params.username)
-        if (userInstance) {
-
-            // FIXME Handle setting timezone based on configuration
-            TimeZone userTimezone = TimeZone.getTimeZone("America/New_York")
-            // Check for user's preferred timezone
-            if (userInstance.timezone) {
-                userTimezone = TimeZone.getTimeZone(userInstance.timezone)
-            }
-            // If there's no user preference timezone, use the browser timezone (login page sets parameter)
-            else {
-                String browserTimezone = request.getParameter("browserTimezone")
-                if (browserTimezone != null) {
-                    userTimezone = TimeZone.getTimeZone(browserTimezone)
-                }
-            }
-            session.timezone = userTimezone
-
-            // Check if user is active -- redirect back to login page
-            if (!userInstance?.active) {
-                flash.message = "${warehouse.message(code: 'auth.accountRequestUnderReview.message')}"
-                redirect(controller: 'auth', action: 'login')
-                return
-            }
-
-            // Passwords match
-            // Compare encoded/hashed password as well as in cleartext (support existing cleartext passwords)
-            //if (userInstance.password == params.password.encodeAsPassword() || userInstance.password == params.password) {
-            if (userService.authenticate(params.username, params.password)) {
-                // Need to fetch the manager and roles in order to avoid
-                // Hibernate error ("could not initialize proxy - no Session")
-                // def warehouse = userInstance?.warehouse?.name;
-                // def managerUsername = userInstance?.manager?.username;
-                // def roles = userInstance?.roles;
-
-                session.user = userInstance
-                session.userName = userInstance?.username
-
-                // PIMS-782 Force the user to select a warehouse each time
-                if (userInstance?.warehouse && userInstance?.rememberLastLocation) {
-                    session.warehouse = userInstance.warehouse
-                }
-
-                if (session?.targetUri) {
-                    redirect(uri: session.targetUri)
-                    session.targetUri = null
-                    return
-                }
-
-                redirect(controller: 'dashboard', action: 'index')
-            } else {
-                // Invalid password
-                flash.message = "${warehouse.message(code: 'auth.incorrectPassword.label', args: [params.username])}"
-                redirect(action: 'login', params: [username: params.username])
-            }
-        } else {
-            flash.message = "${warehouse.message(code: 'auth.userNotFound.message', args: [params.username])}"
-            redirect(action: 'login')
+        // An unknown username and a wrong password give the same answer, so that the
+        // login form cannot be used to find out which accounts exist.
+        if (!userService.authenticate(params.username, params.password, request.remoteAddr)) {
+            flash.message = "${warehouse.message(code: 'auth.unableToAuthenticateUser.message')}"
+            redirect(action: 'login', params: [username: params.username])
+            return
         }
+
+        User userInstance = User.findByUsernameOrEmail(params.username, params.username)
+
+        // Check if user is active -- redirect back to login page
+        if (!userInstance?.active) {
+            flash.message = "${warehouse.message(code: 'auth.accountRequestUnderReview.message')}"
+            redirect(controller: 'auth', action: 'login')
+            return
+        }
+
+        // FIXME Handle setting timezone based on configuration
+        TimeZone userTimezone = TimeZone.getTimeZone("America/New_York")
+        // Check for user's preferred timezone
+        if (userInstance.timezone) {
+            userTimezone = TimeZone.getTimeZone(userInstance.timezone)
+        }
+        // If there's no user preference timezone, use the browser timezone (login page sets parameter)
+        else {
+            String browserTimezone = request.getParameter("browserTimezone")
+            if (browserTimezone != null) {
+                userTimezone = TimeZone.getTimeZone(browserTimezone)
+            }
+        }
+        session.timezone = userTimezone
+
+        session.user = userInstance
+        session.userName = userInstance?.username
+
+        // PIMS-782 Force the user to select a warehouse each time
+        if (userInstance?.warehouse && userInstance?.rememberLastLocation) {
+            session.warehouse = userInstance.warehouse
+        }
+
+        if (session?.targetUri) {
+            redirect(uri: session.targetUri)
+            session.targetUri = null
+            return
+        }
+
+        redirect(controller: 'dashboard', action: 'index')
     }
 
 
@@ -177,8 +165,7 @@ class AuthController {
             userInstance.properties = params
 
             if (params.password) {
-                userInstance.password = params.password.encodeAsPassword()
-                userInstance.passwordConfirm = params.passwordConfirm.encodeAsPassword()
+                userService.assignPassword(userInstance, params.password as String, params.passwordConfirm as String)
             }
             userInstance.active = Boolean.FALSE
 

@@ -139,8 +139,7 @@ class UserController {
             userInstance.active = false
         }
 
-        userInstance.password = params?.password?.encodeAsPassword()
-        userInstance.passwordConfirm = params?.passwordConfirm?.encodeAsPassword()
+        userService.assignPassword(userInstance, params?.password as String, params?.passwordConfirm as String)
 
         try {
             userService.saveUser(userInstance, session.user.id, requestedRoles)

@@ -30,10 +30,19 @@ class AuthApiController {
     def login() {
         String username = request.JSON.username
         String password = request.JSON.password
-        User userInstance = User.findByUsernameOrEmail(username, username)
-        if (!userInstance) {
+
+        // An unknown username and a wrong password give the same answer, so that the
+        // login endpoint cannot be used to find out which accounts exist.
+        if (!userService.authenticate(username, password, request.remoteAddr)) {
             response.status = 401
-            render([errorCode: 401, errorMessage: warehouse.message(code: 'auth.userNotFound.message', args: [username])] as JSON)
+            render([errorCode: 401, errorMessage: warehouse.message(code: 'auth.unableToAuthenticateUser.message')] as JSON)
+            return
+        }
+
+        User userInstance = User.findByUsernameOrEmail(username, username)
+        if (!userInstance.active) {
+            response.status = 401
+            render([errorCode: 401, errorMessage: warehouse.message(code: 'auth.accountRequestUnderReview.message')] as JSON)
             return
         }
 
@@ -47,34 +56,22 @@ class AuthApiController {
         }
         session.timezone = userTimezone
 
-        if (!userInstance.active) {
-            response.status = 401
-            render([errorCode: 401, errorMessage: warehouse.message(code: 'auth.accountRequestUnderReview.message')] as JSON)
-            return
+        session.user = userInstance
+        session.userName = userInstance.username
+
+        // PIMS-782 Force the user to select a warehouse each time
+        if (userInstance.warehouse && userInstance.rememberLastLocation) {
+            session.warehouse = userInstance.warehouse
         }
 
-        if (userService.authenticate(username, password)) {
-            session.user = userInstance
-            session.userName = userInstance.username
-
-            // PIMS-782 Force the user to select a warehouse each time
-            if (userInstance.warehouse && userInstance.rememberLastLocation) {
-                session.warehouse = userInstance.warehouse
-            }
-
-            String redirectUrl = "/dashboard/index"
-            if (session.targetUri) {
-                redirectUrl = session.targetUri
-                session.targetUri = null
-            } else if (request.JSON.targetUri) {
-                redirectUrl = request.JSON.targetUri
-            }
-            render([data: [redirectUrl: redirectUrl]] as JSON)
-            return
+        String redirectUrl = "/dashboard/index"
+        if (session.targetUri) {
+            redirectUrl = session.targetUri
+            session.targetUri = null
+        } else if (request.JSON.targetUri) {
+            redirectUrl = request.JSON.targetUri
         }
-
-        response.status = 401
-        render([errorCode: 401, errorMessage: warehouse.message(code: 'auth.incorrectPassword.label', args: [username])] as JSON)
+        render([data: [redirectUrl: redirectUrl]] as JSON)
     }
 
     def signupConfig() {
@@ -120,8 +117,7 @@ class AuthApiController {
         userInstance.lastName = json.lastName
         userInstance.email = json.email
         if (json.password) {
-            userInstance.password = (json.password as String).encodeAsPassword()
-            userInstance.passwordConfirm = (json.passwordConfirm as String).encodeAsPassword()
+            userService.assignPassword(userInstance, json.password as String, json.passwordConfirm as String)
         }
         userInstance.locale = json.locale ? new Locale(json.locale as String) : null
         userInstance.timezone = json.timezone ?: null
